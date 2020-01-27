@@ -11,6 +11,8 @@
 |
 */
 
+// DES03: Página Index - ADC
+// Página principal
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
