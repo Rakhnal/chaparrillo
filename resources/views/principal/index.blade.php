@@ -2,7 +2,7 @@
 
 use App\Clases\conexion;
 ?>
-@extends('general/base')
+@extends('../general/base')
 
 @section('titulo')
 Inicio
