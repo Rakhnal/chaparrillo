@@ -16,3 +16,7 @@
 Route::get('/', function () {
     return view('principal/index');
 });
+
+Route::get('index', function () {
+    return view('principal/index');
+});

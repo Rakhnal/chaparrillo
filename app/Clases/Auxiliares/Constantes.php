@@ -10,7 +10,10 @@ namespace App\Clases\Auxiliares;
 class Constantes {
     // Conexión a BBDD
     const IP = "localhost";
-    const USUARIO = "admin";
-    const CONTRASENA = "admin";
+    const USUARIO = "chaparrillo";
+    const CONTRASENA = "pistacho123";
     const BBDD = "chaparrillo";
+    
+    // Páginas del proyecto
+    const INDEX = "index";
 }

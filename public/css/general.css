@@ -8,3 +8,106 @@ and open the template in the editor.
     Author     : adonoso
 */
 
+* {
+    background-color: #93C572;
+    color: white;
+}
+
+.imgLogo {
+    vertical-align: middle;
+    margin-left: 75px;
+    width: 100px;
+    height: 100px;
+}
+
+.navbar {
+    padding: 1%;
+    width: 100% !important;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.form-control {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid white !important;
+    border-radius: 0px;
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: transparent !important;
+    color: white;
+}
+
+.btn:focus,.btn:active, .form-control:focus, .form-control:active {
+    outline: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-menu {
+    border-color: white;
+    background-color: #93C572;
+    border-radius: 0;
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+}
+
+.menu-text {
+    font-size: 1em;
+    color: #FFF;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.menu-text:after {
+    transition: all ease-in-out .2s;
+    background: none repeat scroll 0 0 #ffffff;
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+}
+.menu-text:hover:after {
+    width: 100%;
+}
+
+.footer {
+    height: 175px;
+    background-color: black;
+}
+
+#searchButton {
+    border: none;
+    border-radius: 0;
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/icons/search.png);
+    background-size: cover;
+
+    transition: 0.3s ease all;
+}
+
+#searchButton:hover {
+    background-color: transparent;
+    transform: scale(1.05);
+}
