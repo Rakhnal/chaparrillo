@@ -8,14 +8,14 @@ use App\Clases\Auxiliares\Constantes;
     <head>
         <title> @yield('titulo') </title>
 
-        <script src="scripts/general/jquery-3.4.1.min.js"></script>
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.css" />
+        <script type="text/javascript" src="{{ URL::asset('scripts/general/jquery-3.4.1.min.js') }}"></script>
+        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script src="scripts/general/parallax.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+        
         <link rel="stylesheet" href="css/general.css" />
     </head>
     <body>
@@ -41,7 +41,7 @@ use App\Clases\Auxiliares\Constantes;
 
                             <form class="form-inline my-2 my-lg-0">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar en la página" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="searchButton"></button>
+                                <button class="btn btn-outline-success my-2 my-sm-0 margin-right" type="submit" id="searchButton"></button>
                             </form>
 
                             <li class="nav-item">
@@ -119,44 +119,11 @@ use App\Clases\Auxiliares\Constantes;
                 @yield('contenido')
             </div>
 
-            <footer class="page-footer font-small blue pt-4 fixed-bottom">
+            <div class="row footer font-small blue pt-4">
+                
+                FOOTER
 
-                <div class="container-fluid text-center text-md-left">
-
-                    <div class="row">
-
-                        <div class="col-md-9 mt-md-0 mt-3">
-                            <h5 class="text-uppercase">Footer Content</h5>
-                            <p>Here you can use rows and columns to organize your footer content.</p>
-
-                        </div>
-                        <hr class="clearfix w-100 d-md-none pb-3">
-
-                        <div class="col-md-3 mb-md-0 mb-3">
-                            <h5 class="text-uppercase">Links</h5>
-
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#!">Link 1</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Link 2</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Link 3</a>
-                                </li>
-                                <li>
-                                    <a href="#!">Link 4</a>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </footer>
+            </div>
         </div>
     </body>
 </html>
