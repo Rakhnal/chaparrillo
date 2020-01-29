@@ -9,19 +9,36 @@ and open the template in the editor.
 */
 
 * {
-    background-color: #93C572;
     color: white;
+}
+
+html {
+    width: 100% !important;
+    height: 100%;
+    background-color: #93C572;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.container-fluid {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .imgLogo {
     vertical-align: middle;
     margin-left: 75px;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
 }
 
 .navbar {
-    padding: 1%;
+    padding: 0.5%;
     width: 100% !important;
 }
 
@@ -92,8 +109,20 @@ and open the template in the editor.
 }
 
 .footer {
-    height: 175px;
+    width: 100%;
+    height: 100px;
     background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.margin-right {
+    margin-right: 30px;
+}
+
+.col {
+    width: 100% !important;
+    background-color: blue;
 }
 
 #searchButton {
@@ -110,4 +139,19 @@ and open the template in the editor.
 #searchButton:hover {
     background-color: transparent;
     transform: scale(1.05);
+}
+
+#main {
+    width: 100%;
+    min-height: calc(100% - 200px);
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    width: 100%;
+    min-height: 100px;
+    margin: 0;
+    padding: 0;
 }
