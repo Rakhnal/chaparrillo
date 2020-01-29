@@ -15,12 +15,12 @@ and open the template in the editor.
 html {
     width: 100% !important;
     height: 100%;
-    background-color: #93C572;
 }
 
 body {
     width: 100%;
     height: 100%;
+    background-color: #93C572;
 }
 
 .container-fluid {
