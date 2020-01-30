@@ -154,3 +154,13 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/*---------------------- ESTILOS MODALES ------------------------ */
+
+ modal-open {
+    filter: blur(5px);
+}
+
+.modal-content{
+    background: transparent;
+}
