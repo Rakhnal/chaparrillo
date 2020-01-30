@@ -45,7 +45,7 @@ use App\Clases\Auxiliares\Constantes;
                             </form>
 
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudUsuarios">Inicio</a>
+                                <a class="nav-link menu-text" href="index">Inicio</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link menu-text" href="crudCoches">Proyecto</a>
