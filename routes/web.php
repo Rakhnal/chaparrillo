@@ -21,6 +21,12 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
+// DES18: Página Administrar Eventos - RAUS
+// Página Administración
+Route::get('admin_event', function () {
+    return view('administracion/admin_eventos');
+    
+});
 Route::get('adminDocument', function () {
     return view('administracion/adminDocument');
 });
