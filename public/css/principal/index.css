@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : adonoso
 */
 
+html {
+    overflow-x: hidden;
+}
+
 #pistacho01, #pistacho02 {
     width: 200px;
     height: 100px;
@@ -24,6 +28,9 @@ and open the template in the editor.
 }
 
 .principal-container {
+    padding-left: 1.5%;
+    margin-top: -50px;
+    width: 100%;
     height: 700px;
 }
 
@@ -31,4 +38,13 @@ and open the template in the editor.
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+#logomovil {
+    margin-left: 39%;
+    margin-right: 39%;
+    width: 325px;
+    height: 320px;
+    position: absolute;
+    z-index: 10;
 }

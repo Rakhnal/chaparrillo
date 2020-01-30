@@ -38,12 +38,19 @@ body {
 }
 
 .navbar {
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 15;
+    position: fixed;
     padding: 0.5%;
     width: 100% !important;
 }
 
 .nav-link {
     color: white !important;
+}
+
+.nav-item {
+    padding-top: 1%;
 }
 
 .form-control {
@@ -73,6 +80,7 @@ body {
 }
 
 .dropdown-container {
+    padding-top: 1%;
     position: relative;
 }
 
@@ -122,7 +130,6 @@ body {
 
 .col {
     width: 100% !important;
-    background-color: blue;
 }
 
 #searchButton {
