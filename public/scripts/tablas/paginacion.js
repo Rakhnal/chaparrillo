@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-$('#validateTable').DataTable({
+$('#events').DataTable({
     "paging": true,
     "pagingType": "numbers",
     "language": {
