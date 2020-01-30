@@ -25,4 +25,5 @@ Route::get('index', function () {
 // Página Administración
 Route::get('admin_event', function () {
     return view('administracion/admin_eventos');
+    
 });
