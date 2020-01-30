@@ -1,15 +1,15 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+  |--------------------------------------------------------------------------
+  | Web Routes
+  |--------------------------------------------------------------------------
+  |
+  | Here is where you can register web routes for your application. These
+  | routes are loaded by the RouteServiceProvider within a group which
+  | contains the "web" middleware group. Now create something great!
+  |
+ */
 
 // DES03: Página Index - ADC
 // Página principal
@@ -21,6 +21,12 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
+// DES18: Página Administrar Eventos - RAUS
+// Página Administración
+Route::get('admin_event', function () {
+    return view('administracion/admin_eventos');
+    
+});
 Route::get('adminDocument', function () {
     return view('administracion/adminDocument');
 });

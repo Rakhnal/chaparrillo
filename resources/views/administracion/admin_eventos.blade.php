@@ -15,8 +15,12 @@ AdminEventos
 @section('contenido')
 
 <link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
-<link href="scripts/tablas/paginacion.js" type="text/javascript">
+<link href="scripts/tablas/paginacion.js">
+<?php
 
+include 'auxiliarphp/modales.php';
+
+?>
 <div class="col">
     <div class="row">
         <div class="col-3">
@@ -56,7 +60,7 @@ AdminEventos
                         <td><input type="text" value="Puertollano"></td>
                         <td><input type="text" value="2020-01-29"></td>
                         <td><input type="text" value="2020-01-31"></td>
-                        <td><input class="btn btn-warning" type="button" value="Mapa"></td>
+                        <td><input class="btn btn-warning" type="button" data-toggle="modal" data-target="#ventana-mapa" value="Mapa"></td>
                         <td><input class="btn btn-primary" type="button" value="Guardar"></td>
                         <td><input class="btn btn-primary" type="button" value="Modificar"></td>
                         <td><input class="btn btn-danger" type="button" value="Borrar"></td>
