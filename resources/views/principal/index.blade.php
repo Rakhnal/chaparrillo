@@ -14,14 +14,38 @@ Inicio
 @section('contenido')
 
 <link rel="stylesheet" href="css/principal/index.css" />
+<script type="text/javascript" src="scripts/principal/index.js"></script>
+
+<img src="images/logo.svg" alt="Logo Principal" id="logomovil"/>
 
 <div class="col">
     <div class="row">
         <div class="col justify-content-center principal-container">
             <div class="row" id="principal">
-                <!--div class="col-6 layer" data-depth="0.2"><img src="images/chaparrillo/elegidas/pistachos01.jpg" id="pistacho01" alt="Imagen Pistacho 01" /></div>
-                <div class="col-6 layer" data-depth="0.2"><img src="images/chaparrillo/elegidas/pistachos02.jpg" id="pistacho02" alt="Imagen Pistacho 02" /></div-->
+                <div class="col layer" data-depth="0.00"><img src="images/parallax/titulo.png" id="titulopar" alt="Pistachos Ecologicos" /></div>
+                <div class="col layer" data-depth="0.1"><img src="images/parallax/capa01.png" id="capa01" alt="Imagen Pistacho 01" /></div>
+                <div class="col layer" data-depth="0.2"><img src="images/parallax/capa02.png" id="capa02" alt="Imagen Pistacho 02" /></div>
+                <div class="col layer" data-depth="0.4"><img src="images/parallax/capa03.png" id="capa03" alt="Imagen Pistacho 03" /></div>
+                <div class="col layer" data-depth="0.3"><img src="images/parallax/capa04.png" id="capa04" alt="Imagen Pistacho 04" /></div>
             </div>
+        </div>
+    </div>
+    
+    <div class="row" id="plagas-container">
+        <div class="col justify-content-center">
+            
+        </div>
+        
+        <div class="col justify-content-center">
+            
+        </div>
+        
+        <div class="col justify-content-center">
+            
+        </div>
+        
+        <div class="col justify-content-center">
+            
         </div>
     </div>
 </div>
