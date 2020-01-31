@@ -17,4 +17,5 @@ class Constantes {
     // Páginas del proyecto
     const INDEX = "index";
     const AD_EVENTOS = "admin_eventos";
+    const AD_DOCUMENTOS = "adminDocument";
 }

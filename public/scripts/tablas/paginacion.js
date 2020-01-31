@@ -17,3 +17,18 @@ $('#events').DataTable({
     }
 });
 $('.dataTables_length').addClass('bs-select');
+
+$('#tablaAdminDocument').DataTable({
+    "paging": true,
+    "pagingType": "numbers",
+    "language": {
+        "lengthMenu": "Mostrando _MENU_ filas por página",
+        "zeroRecords": "Nada encontrado - Lo sentimos",
+        "info": "Mostrando la página _PAGE_ de _PAGES_",
+        "infoEmpty": "No se han encontrado registros",
+        "infoFiltered": "(filtrado con _MAX_ registros totales)",
+        "search": "Buscar:"
+    }
+});
+
+$('.dataTables_length').addClass('bs-select');
