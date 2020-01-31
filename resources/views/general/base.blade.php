@@ -11,6 +11,7 @@ use App\Clases\Auxiliares\Constantes;
         <script type="text/javascript" src="{{ URL::asset('scripts/general/jquery-3.4.1.min.js') }}"></script>
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="scripts/general/modales.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -30,8 +31,12 @@ use App\Clases\Auxiliares\Constantes;
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
             <?php
         }
+            
+            include 'auxiliarphp/modales.php';
+
+
         ?>
-        <div class="container-fluid">
+        <div id="blur" class="container-fluid">
 
             <div class = "row" id = "header">
 

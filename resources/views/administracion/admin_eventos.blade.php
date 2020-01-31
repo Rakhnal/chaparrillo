@@ -9,18 +9,16 @@ session()->put("actPage", Constantes::AD_EVENTOS);
 @extends('../general/base')
 
 @section('titulo')
-AdminEventos
+Administrar Eventos
 @endsection
 
 @section('contenido')
 
 <link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
-<link href="scripts/tablas/paginacion.js">
-<?php
+<script src="scripts/tablas/paginacion.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 
-include 'auxiliarphp/modales.php';
-
-?>
 <div class="col">
     <div class="row">
         <div class="col-3">
@@ -31,12 +29,8 @@ include 'auxiliarphp/modales.php';
                 </div>
             </nav>
         </div>
-
-        <div class="col-6">
-            <h1 class="text-center">Administrar Eventos</h1>
-        </div>
-
-        <div class="col-3">
+        
+        <div class="col-9">
 
         </div>
     </div>
@@ -51,7 +45,7 @@ include 'auxiliarphp/modales.php';
                         <th>Fecha fin</th>
                         <th>Mapa</th>
                         <th>Guardar</th>
-                        <th>Modificar</th>
+                        <th>Portada</th>
                         <th>Borrar</th>
                     </tr>
                 </thead>
@@ -60,7 +54,7 @@ include 'auxiliarphp/modales.php';
                         <td><input type="text" value="Puertollano"></td>
                         <td><input type="text" value="2020-01-29"></td>
                         <td><input type="text" value="2020-01-31"></td>
-                        <td><input class="btn btn-warning" type="button" data-toggle="modal" data-target="#ventana-mapa" value="Mapa"></td>
+                        <td><input class="btn btn-warning" type="button" id="b-mapa" data-toggle="modal" data-target="#ventana-mapa" value="Mapa"></td>
                         <td><input class="btn btn-primary" type="button" value="Guardar"></td>
                         <td><input class="btn btn-primary" type="button" value="Modificar"></td>
                         <td><input class="btn btn-danger" type="button" value="Borrar"></td>
