@@ -14,8 +14,9 @@ Inicio
 @section('contenido')
 
 <link rel="stylesheet" href="css/principal/index.css" />
+<script type="text/javascript" src="scripts/principal/index.js"></script>
 
-<img src="images/logo.png" alt="Logo Principal" id="logomovil"/>
+<img src="images/logo.svg" alt="Logo Principal" id="logomovil"/>
 
 <div class="col">
     <div class="row">
@@ -27,6 +28,24 @@ Inicio
                 <div class="col layer" data-depth="0.4"><img src="images/parallax/capa03.png" id="capa03" alt="Imagen Pistacho 03" /></div>
                 <div class="col layer" data-depth="0.3"><img src="images/parallax/capa04.png" id="capa04" alt="Imagen Pistacho 04" /></div>
             </div>
+        </div>
+    </div>
+    
+    <div class="row" id="plagas-container">
+        <div class="col justify-content-center">
+            
+        </div>
+        
+        <div class="col justify-content-center">
+            
+        </div>
+        
+        <div class="col justify-content-center">
+            
+        </div>
+        
+        <div class="col justify-content-center">
+            
         </div>
     </div>
 </div>

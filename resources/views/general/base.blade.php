@@ -15,11 +15,22 @@ use App\Clases\Auxiliares\Constantes;
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-        
+
         <link rel="stylesheet" href="css/general.css" />
     </head>
     <body>
 
+        <?php
+        if (session()->get("actPage") == Constantes::INDEX) {
+            ?>
+            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
+            <?php
+        } else {
+            ?>
+            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
+            <?php
+        }
+        ?>
         <div class="container-fluid">
 
             <div class = "row" id = "header">
@@ -27,11 +38,11 @@ use App\Clases\Auxiliares\Constantes;
                 <nav class="navbar navbar-expand-lg">
                     <?php
                     // En el index el logo estará posicionado por defecto en otro sitio
-                    //if (session()->get("actPage") != Constantes::INDEX) {
-                    ?>
-                    <a class="navbar-brand" href="index"><img src="images/logo.png" class="imgLogo" alt="Logo principal"/></a>
-                    <?php
-                    //}
+                    if (session()->get("actPage") != Constantes::INDEX) {
+                        ?>
+                        <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo" id="imgLogo" alt="Logo principal"/></a>
+                        <?php
+                    }
                     ?>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -83,13 +94,13 @@ use App\Clases\Auxiliares\Constantes;
 
                             <div class="dropdown-container">
                                 <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="images/icons/login.png" alt="Logearse"/>
+                                    <img src="images/icons/login.png" alt="Logearse" id="btnUser"/>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
                                     <a class="dropdown-item menu-text" href="#">Perfil</a>
                                     <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
                                     <a class="dropdown-item menu-text" href="#">Administrar Documentación</a>
-                                    <a class="dropdown-item menu-text" href="#">Administrar Eventos</a>
+                                    <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
                                     <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
                                     <a class="dropdown-item menu-text" href="#">Mensajes</a>
                                     <a class="dropdown-item menu-text" href="#">Cerrar Sesión</a>
@@ -120,7 +131,7 @@ use App\Clases\Auxiliares\Constantes;
             </div>
 
             <div class="row footer font-small blue pt-4">
-                
+
                 FOOTER
 
             </div>
