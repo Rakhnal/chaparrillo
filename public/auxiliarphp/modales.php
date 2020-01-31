@@ -13,10 +13,14 @@
                 <div class="modal-title">
                     Pinche su ubicación
                 </div>
-                <span data-dismiss="modal">X</span>
+                <span data-dismiss="modal"><button id="salir" class="btn btn-danger">X</button></span>
             </div>
             <div class="modal-body">
-                asdf
+                
+                <div class="map">
+                    
+                </div>
+                
             </div>
             <div class="modal-footer">
                 Pie de la ventana
