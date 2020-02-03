@@ -29,6 +29,47 @@
     </div>
 </div>
 
+</div>
+
+<!------------- Pantalla modal del login-->
+<div id="login" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Iniciar Sesión</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form name="logForm" action="login" method="POST">
+                    <div class="row justify-content-center">
+                        <div class="name-form">
+                            <input type="email" name="correo" id="correo" value="" required/>
+                            <label for="correo" class = "label-name">
+                                <span class = "content-name">
+                                    Correo
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="name-form">
+                            <input type="password" name="pass" id="pass" value="" required/>
+                            <label for="pass" class = "label-name">
+                                <span class = "content-name">
+                                    Contraseña
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input type="submit" value = "Entrar" name = "login"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Ventana modal para subir documentación -->
 
 <section class="modal fade" id="modalSubirDocumento">
