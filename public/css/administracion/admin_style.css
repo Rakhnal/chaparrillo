@@ -8,10 +8,10 @@ and open the template in the editor.
     Author     : rafa
 */
 
-#migas{
+#migas {
     background: none;
 }
 
-#events{
+#events, #tablaAdminDocument {
     width: 100%;
 }
