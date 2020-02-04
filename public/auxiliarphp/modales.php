@@ -90,7 +90,7 @@
                         <textarea cols="40" rows="10" class="pl-2 border border-dark" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
                     </div>
                     <div class="form-group">
-                        <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
+                        <input class="p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
                     </div>
                     <label for="subirAdjuntos">
                         <span>Seleccionar adjuntos</span>
@@ -120,13 +120,13 @@
             <form name="formulario" action="" method="POST">
                 <div class="modal-body bg-light">
                     <div class="form-group">
-                        <input type="text" class="pl-2 border border-dark" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
+                        <input type="text" class="pl-2 border border-dark" id="nombreDocumento2" name="nombreDocumento2" placeholder="Nombre del documento" required>
                     </div>
                     <div class="form-group">
-                        <textarea cols="40" rows="10" class="pl-2 border border-dark" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
+                        <textarea cols="40" rows="10" class="pl-2 border border-dark" id="descDocumento2" name="descDocumento2" placeholder="Descripción de la documentación"></textarea>
                     </div>
                     <div class="form-group">
-                        <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
+                        <input class="p-0" id="editarAdjuntos" name="subirAdjuntos" type="file">
                     </div>
                     <label for="subirAdjuntos">
                         <span>Seleccionar adjuntos</span>

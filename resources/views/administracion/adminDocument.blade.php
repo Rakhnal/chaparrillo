@@ -8,10 +8,6 @@ session()->put("actPage", Constantes::INDEX);
 
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
 
-<?php
-include 'auxiliarphp/modales.php';
-?>
-
 @extends('../general/base')
 
 @section('titulo')
@@ -49,16 +45,23 @@ Inicio
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Nombre del documentito</td>
-                        <td>31/01/2020</td>
-                        <td><button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
-                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
-                    </tr>
+                    <?php
+                    foreach ($docs as $doc) {
+                        ?>
+                        <tr>
+                            <td><?= $doc->nombre ?></td>
+                            <td><?= $doc->fecha_subida ?></td>
+                            <td><button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
+                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
+    {{ $docs->links() }}
     <div class="row">
         <div class="col">
             <button class="btn btn-success float-right m-5" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Subir nueva documentación</button>

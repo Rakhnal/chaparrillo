@@ -104,7 +104,7 @@ use App\Clases\Auxiliares\Constantes;
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
                                     <a class="dropdown-item menu-text" href="#">Perfil</a>
                                     <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
-                                    <a class="dropdown-item menu-text" href="#">Administrar Documentación</a>
+                                    <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
                                     <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
                                     <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
                                     <a class="dropdown-item menu-text" href="#">Mensajes</a>
