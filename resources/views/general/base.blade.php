@@ -8,6 +8,7 @@ use App\Clases\Auxiliares\Constantes;
     <head>
         <title> @yield('titulo') </title>
 
+        <link rel="shortcut icon" type="image/jpg" href="images/logo.svg" />
         <script type="text/javascript" src="{{ URL::asset('scripts/general/jquery-3.4.1.min.js') }}"></script>
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -16,7 +17,8 @@ use App\Clases\Auxiliares\Constantes;
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-
+        <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
+        
         <link rel="stylesheet" href="css/general.css" />
     </head>
     <body>
@@ -40,13 +42,17 @@ use App\Clases\Auxiliares\Constantes;
 
             <div class = "row" id = "header">
 
-                <nav class="navbar navbar-expand-lg">
+                <nav class="navbar navbar-expand-lg" id="navHeader">
                     <?php
                     // En el index el logo estará posicionado por defecto en otro sitio
-                    if (session()->get("actPage") != Constantes::INDEX) {
+                    if (session()->get("actPage") == Constantes::INDEX) {
                         ?>
-                        <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo" id="imgLogo" alt="Logo principal"/></a>
+                        <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo hidden" id="imgLogo" alt="Logo principal"/></a>
                         <?php
+                    } else {
+                    ?>
+                        <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo" id="imgLogo" alt="Logo principal"/></a>
+                    <?php
                     }
                     ?>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
