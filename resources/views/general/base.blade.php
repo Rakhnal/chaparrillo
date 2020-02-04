@@ -17,7 +17,7 @@ use App\Clases\Auxiliares\Constantes;
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
 
-        <link rel="stylesheet" href="css/general.css" />
+        <link rel="stylesheet" href="css/general.css" />+
     </head>
     <body>
 
