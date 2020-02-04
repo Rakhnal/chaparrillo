@@ -19,6 +19,30 @@ use App\Propiedad;*/
  */
 class conexion {
 
+    
+    /*---------  Cargar eventos ------------*/
+    public static function sacarEventos(){
+        $event = Eventos::all();
+        
+        return $event;
+    }
+    
+    
+    /*---------  Agregar eventos ------------*/
+    public static function agregarEventos($loca,$lati,$longi,$fec_i,$fec_f){
+        $evento = new Evento;
+        
+        $evento->localizacion = $loca;
+        $evento->latitud = $lati;
+        $evento->longitud = $longi;
+        $evento->fecha_inicio = $fec_i;
+        $evento->fecha_fin = $fec_f;
+        
+        $evento->save();
+        
+        
+    }
+    
     /*// Buscamos a todos los usuarios en BBDD
     public static function obtenerUsuarios() {
 

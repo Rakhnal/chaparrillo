@@ -15,9 +15,11 @@ Administrar Eventos
 @section('contenido')
 
 <link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
-<script src="scripts/tablas/paginacion.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="scripts/tablas/paginacion.js"></script>
+<script type="text/javascript" src="scripts/general/gmaps.js"></script>
+<script src="scripts/general/geolocate.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 
 <div class="col">
     <div class="row">
@@ -40,24 +42,29 @@ Administrar Eventos
             <table id="events">
                 <thead>
                     <tr>
+                        <th>Portada</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
                         <th>Localización</th>
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
-                        <th>Mapa</th>
                         <th>Guardar</th>
-                        <th>Portada</th>
                         <th>Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" value="Puertollano"></td>
-                        <td><input type="text" value="2020-01-29"></td>
-                        <td><input type="text" value="2020-01-31"></td>
-                        <td><input class="btn btn-warning" type="button" id="b-mapa" data-toggle="modal" data-target="#ventana-mapa" value="Mapa"></td>
-                        <td><input class="btn btn-primary" type="button" value="Guardar"></td>
-                        <td><input class="btn btn-primary" type="button" value="Modificar"></td>
-                        <td><input class="btn btn-danger" type="button" value="Borrar"></td>
+                        <td><img src="" alt="imagen"></td>
+                        <td>dasdfidsk</td>
+                        <td>dasdfidsk</td>
+                        <td>asdfasdfsd</td>
+                        <td>asdfsdfs</td>
+                        <td>asdf</td>
+                        <td><input class="btn btn-primary blurmodal" type="button" id="b-modify" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
+                        <td><input class="btn btn-danger" id="delete" type="button" value="Borrar"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center" colspan="7"><input class="btn btn-primary blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear" value="Agregar"></td>
                     </tr>
                 </tbody>
             </table>
