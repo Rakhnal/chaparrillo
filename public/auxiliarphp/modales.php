@@ -18,7 +18,7 @@
             </div>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
-                    <div class="right">
+                     <div class="right">
                         <div class="form-group">
                             <label>Nombre:</label>
                             <input name="nomb" type="text" class="form-control" placeholder="Introduce el nombre del evento" required>
@@ -44,13 +44,13 @@
                             <input name="portada" type="file" class="form-control-file">
                         </div>
                     </div>
-
+                    
                     <div class="left">
-
+                        
                         <div class="map">
-
+                            
                         </div>
-
+                        
                     </div>
 
                 </div>
@@ -100,13 +100,13 @@
                             <input name="portada" type="file" class="form-control-file">
                         </div>
                     </div>
-
+                    
                     <div class="left">
-
+                        
                         <div class="map">
-
+                            
                         </div>
-
+                        
                     </div>
 
                 </div>
