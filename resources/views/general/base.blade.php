@@ -24,6 +24,13 @@ use App\Clases\Auxiliares\Constantes;
     <body>
 
         <?php
+        
+        $user = null;
+        
+        if (session()->exists("usrObj")) {
+            $user = session()->get("usrObj");
+        }
+        
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
@@ -33,10 +40,8 @@ use App\Clases\Auxiliares\Constantes;
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
             <?php
         }
-            
-            include 'auxiliarphp/modales.php';
-
-
+        
+        include 'auxiliarphp/modales.php';
         ?>
             
         <div class="loader-wrapper">
@@ -114,20 +119,32 @@ use App\Clases\Auxiliares\Constantes;
                                 <a class="nav-link menu-text" href="crudCoches">Agenda</a>
                             </li>
 
-                            <div class="dropdown-container">
-                                <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img src="images/icons/login.png" alt="Logearse" id="btnUser"/>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
-                                    <a class="dropdown-item menu-text" href="#">Perfil</a>
-                                    <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
-                                    <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
-                                    <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
-                                    <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
-                                    <a class="dropdown-item menu-text" href="#">Mensajes</a>
-                                    <a class="dropdown-item menu-text" href="#">Cerrar Sesión</a>
+                            <?php
+                            if ($user == null) {
+                            ?>
+                                <li class="nav-item">
+                                    <button type="button" class="blur-btn" data-toggle="modal" data-target="#login" id="btnUser"></button>
+                                </li>
+                            <?php
+                            } else {
+                            ?>
+                                <div class="dropdown-container">
+                                    <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img src="images/icons/login.png" alt="Logearse" id="imgUser"/>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
+                                        <a class="dropdown-item menu-text" href="#">Perfil</a>
+                                        <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
+                                        <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
+                                        <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
+                                        <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
+                                        <a class="dropdown-item menu-text" href="#">Mensajes</a>
+                                        <a class="dropdown-item menu-text" href="#">Cerrar Sesión</a>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php
+                            }
+                            ?>
                         </ul>
                     </div>
 
@@ -152,11 +169,21 @@ use App\Clases\Auxiliares\Constantes;
                 @yield('contenido')
             </div>
 
-            <div class="row footer font-small blue pt-4">
+            <?php
+            
+            // Agregar aquí las páginas donde no se quiera mostrar el footer
+            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS) {
+            ?>
+            
+                <div class="row footer font-small blue pt-4">
 
-                FOOTER
+                    FOOTER
 
-            </div>
+                </div>
+            
+            <?php
+            }
+            ?>
         </div>
     </body>
 </html>

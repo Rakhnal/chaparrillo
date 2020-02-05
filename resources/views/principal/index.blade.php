@@ -16,13 +16,12 @@ Inicio
 <link rel="stylesheet" href="css/principal/index.css" />
 <script type="text/javascript" src="scripts/principal/index.js"></script>
 
-<img src="images/logo.svg" alt="Logo Principal" id="logomovil"/>
-
 <div class="col">
     <div class="row">
-        <div class="col justify-content-center principal-container">
+        <div class="col justify-content-center principal-container" id="principal-container">
             <div class="row" id="principal">
-                <div class="col layer" data-depth="0.00" id="titulopar"></div>
+                <div class="col layer" id="titulopar"></div>
+                <div class="col layer" id="logogr"></div>
                 <div class="col layer" data-depth="0.1" id="capa01"></div>
                 <div class="col layer" data-depth="0.2" id="capa02"></div>
                 <div class="col layer" data-depth="0.4" id="capa03"></div>

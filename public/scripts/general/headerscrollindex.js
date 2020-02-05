@@ -8,23 +8,27 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    if (document.body.scrollTop > 70 || document.documentElement.scrollTop > 70) {
         document.getElementById("header").style.height = "25px";
         document.getElementById("navHeader").style.minHeight = "25px";
-        document.getElementById("logomovil").style.display = "none";
+        document.getElementById("logogr").style.display = "none";
         document.getElementById("imgLogo").style.display = "block";
         document.getElementById("imgLogo").style.height = "55px";
         document.getElementById("imgLogo").style.width = "55px";
         document.getElementById("btnUser").style.width = "30px";
         document.getElementById("btnUser").style.height = "30px";
+
+        $('.dropdown-menu').css('margin-top', '15px');
     } else {
         document.getElementById("header").style.height = "100px";
         document.getElementById("navHeader").style.minHeight = "100px";
-        document.getElementById("logomovil").style.display = "block";
+        document.getElementById("logogr").style.display = "block";
         document.getElementById("imgLogo").style.display = "none";
         document.getElementById("imgLogo").style.height = "75px";
         document.getElementById("imgLogo").style.width = "75px";
         document.getElementById("btnUser").style.width = "35px";
         document.getElementById("btnUser").style.height = "35px";
+
+        $('.dropdown-menu').css('margin-top', '25px');
     }
 }
