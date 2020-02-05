@@ -20,3 +20,9 @@ Route::get('/', function () {
 Route::get('index', function () {
     return view('principal/index');
 });
+
+//DES15
+//Página de editar usuario propio
+Route::get('Editar_usuario', function () {
+    return view('principal/Editar_usuario');
+});
