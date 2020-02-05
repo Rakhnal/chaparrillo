@@ -4,7 +4,6 @@ use App\Clases\conexion;
 use App\Clases\Auxiliares\Constantes;
 
 session()->put("actPage", Constantes::AD_EVENTOS);
-
 ?>
 @extends('../general/base')
 
@@ -22,17 +21,13 @@ Administrar Eventos
 
 <div class="col">
     <div class="row">
-        <div class="col-3">
+        <div class="col">
             <nav>
                 <div class="breadcrumb" id="migas">
                     <div class="breadcrumb-item">Usuario</div>
                     <div class="breadcrumb-item active">Administrar Eventos</div>
                 </div>
             </nav>
-        </div>
-        
-        <div class="col-9">
-
         </div>
     </div>
 
@@ -68,7 +63,11 @@ Administrar Eventos
                 </tbody>
             </table>
         </div>
-
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            {{ $events->links() }}
+        </div>
     </div>
 </div>
 

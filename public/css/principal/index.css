@@ -114,40 +114,48 @@ a:link, a:visited, a:active {
 
 #titulopar {
     z-index: 100;
+    background-size: contain;
     background-image: url("../../images/parallax/titulo.png");
 }
 
 #capa01 {
     z-index: 10;
+    background-size: contain;
     background-image: url("../../images/parallax/capa01.png");
 }
 
 #capa02 {
     z-index: 1;
+    background-size: contain;
     background-image: url("../../images/parallax/capa02.png");
 }
 
 #capa03 {
     z-index: 10;
+    background-size: contain;
     background-image: url("../../images/parallax/capa03.png");
 }
 
 #capa04 {
     z-index: 1;
+    background-size: contain;
     background-image: url("../../images/parallax/capa04.png");
 }
 
 #capa05 {
     z-index: 10;
+    background-size: contain;
     background-image: url("../../images/parallax/capa05.png");
 }
 
 #circle01 {
     z-index: 2;
+    background-size: contain;
     background-image: url("../../images/parallax/circle01.png");
 }
 
 #circle02 {
     z-index: 2;
+    background-size: contain;
     background-image: url("../../images/parallax/circle02.png");
 }

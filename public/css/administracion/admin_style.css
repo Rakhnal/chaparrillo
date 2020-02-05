@@ -15,3 +15,7 @@ and open the template in the editor.
 #events, #tablaAdminDocument {
     width: 100%;
 }
+
+input {
+    color: black;
+}

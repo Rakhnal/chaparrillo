@@ -3,22 +3,23 @@
 use App\Clases\conexion;
 use App\Clases\Auxiliares\Constantes;
 
-session()->put("actPage", Constantes::INDEX);
+session()->put("actPage", Constantes::AD_DOCUMENTOS);
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
+<script type="text/javascript" src="scripts/general/modales.js"></script>
 
 @extends('../general/base')
 
 @section('titulo')
-Inicio
+Administrar Documentación
 @endsection
 
 @section('contenido')
 
 <div class="col">
     <div class="row">
-        <div class="col-3">
+        <div class="col">
             <nav>
                 <div class="breadcrumb" id="migas">
                     <div class="breadcrumb-item">Usuario</div>
@@ -26,16 +27,10 @@ Inicio
                 </div>
             </nav>
         </div>
-        <div class="col-6 text-center">
-            <h1>Administrar Documentación</h1>
-        </div>
-        <div class="col-3">
-
-        </div>
     </div>
     <div class="row">
         <div class="col table-responsive">
-            <table class="mt-5 mb-5 mr-2 ml-2" id="tablaAdminDocument">
+            <table id="tablaAdminDocument">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -52,7 +47,7 @@ Inicio
                             <td><?= $doc->nombre ?></td>
                             <td><?= $doc->fecha_subida ?></td>
                             <td><button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
-                            <td><button class="btn btn-primary" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                            <td><button class="btn btn-primary blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
                         </tr>
                         <?php
                     }
@@ -61,10 +56,12 @@ Inicio
             </table>
         </div>
     </div>
-    {{ $docs->links() }}
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-success float-right m-5" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Subir nueva documentación</button>
+    <div class="row mt-3">  
+        <div class="col-6">
+            {{ $docs->links() }}
+        </div>
+        <div class="col-6">
+            <button class="btn btn-success blurmodal float-right" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Subir nueva documentación</button>
         </div>
     </div>
 </div>

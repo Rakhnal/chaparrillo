@@ -1,0 +1,123 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29-ene-2020, 13:19:11
+    Author     : daw205
+*/
+
+.img{
+    width: 300px;
+    height: 300px;
+    border:3px white dashed;
+
+    border-radius: 10px;
+}
+.text_black{
+    color:black;
+}
+.form_base{
+    color:white;
+    display: block;
+    font-size: 1rem;
+    background-clip: padding-box;
+    background-color: rgba(143, 126, 79, 0.5) !important;
+    border: none !important;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px 0px black;
+
+}
+.form_control{
+    border: none !important;
+    border-bottom-color: white;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-bottom: 1px solid white !important;
+    border-radius: 0px;
+    color: white;
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: transparent !important;
+    background-clip: padding-box;
+}
+.form_control_no_border{
+    border: none !important;
+    border-bottom-color: white;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-radius: 0px;
+    color: black;
+    display: block;
+    width: 100%;
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: transparent !important;
+    background-clip: padding-box;
+}
+.icon_p{
+    width: 30px;
+    height: 30px;
+}
+
+.article {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    margin: 50px auto;
+    width: 70%;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#mapa{
+    height: 200px;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+#change-profile .preview {
+
+}
+
+.priview-wraper{
+    width: 100px;
+    height:100px;
+    position: absolute;
+    top: 25%;
+    right: 10%;
+    overflow: hidden;
+    border-radius: 100%;
+
+
+}
+
+.priview-wraper-origal{
+    width: 100px;
+    height:100px;
+    overflow: hidden;
+    border-radius: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
+.img-circle{
+    border-radius: 100%;
+    width: 50% !important;
+    height: 50% !important;
+    min-height: 200px !important;
+    min-width: 200px !important;
+}
