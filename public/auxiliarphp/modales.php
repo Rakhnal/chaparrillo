@@ -62,15 +62,13 @@
     </div>
 </div>
 
-</div>
-
 <!------------- Pantalla modal del login-->
-<div id="login" class="modal fade" role="dialog" data-backdrop="static">
+<div id="login" class="modal fade" role="dialog" data-backdrop = "static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Iniciar Sesión</h4>
-                <button type="button" class="salir" data-dismiss="modal">&times;</button>
+                <button type="button" class="close clear white-color" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form name="logForm" action="login" method="POST">
@@ -95,9 +93,30 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <input type="submit" value = "Entrar" name = "login"/>
+                        <input type="submit" class="btn-input add-top-margin" value = "Entrar" name = "login"/>
                     </div>
                 </form>
+            </div>
+            <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn-input" data-toggle="modal" data-target="#register" data-dismiss="modal" id="btnRegister">Registrarse</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------- Pantalla modal del registro-->
+<div id="register" class="modal fade" role="dialog" data-backdrop = "static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Registrar Usuario</h4>
+                <button type="button" class="close clear" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                Pruebaaa
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="blur-btn" data-toggle="modal" data-target="#register"></button>
             </div>
         </div>
     </div>
@@ -229,4 +248,3 @@
         </div>
     </div>
 </div>
-
