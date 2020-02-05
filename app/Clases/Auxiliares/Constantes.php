@@ -22,4 +22,5 @@ class Constantes {
     const AGENDA = "agenda";
     const AD_EVENTOS = "admin_eventos";
     const AD_DOCUMENTOS = "adminDocument";
+    const ED_USUARIO = "Editar_usuario";
 }
