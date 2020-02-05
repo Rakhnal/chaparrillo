@@ -21,6 +21,11 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
+//DES15
+//Página de editar usuario propio
+Route::get('Editar_usuario', function () {
+    return view('principal/Editar_usuario');
+});
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
 Route::get('admin_event', 'controlador_tablas@listarEventos');
