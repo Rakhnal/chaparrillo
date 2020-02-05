@@ -69,17 +69,6 @@ a:link, a:visited, a:active {
     padding: 0;
 }
 
-#logomovil {
-    margin-left: 39%;
-    margin-right: 39%;
-    width: 325px;
-    height: 320px;
-    position: absolute;
-    z-index: 10;
-
-    transition: 0.8s ease all;
-}
-
 /* Parte de plagas */
 
 #plagas-container {
@@ -104,7 +93,7 @@ a:link, a:visited, a:active {
 .fade-left.showing{left:-0px;opacity:1;}
 .fade-right.showing{right:-0px;opacity:1;}
 
-#titulopar,#capa01,#capa02,#capa03,#capa04,#capa05,#circle01,#circle02 {
+#titulopar,#capa01,#capa02,#capa03,#capa04,#capa05,#circle01,#circle02,#logogr {
     width: 100%;
     height: 100%;
 
@@ -158,4 +147,10 @@ a:link, a:visited, a:active {
     z-index: 2;
     background-size: contain;
     background-image: url("../../images/parallax/circle02.png");
+}
+
+#logogr {
+    z-index: 100;
+    background-size: contain;
+    background-image: url("../../images/parallax/logogr.png");
 }
