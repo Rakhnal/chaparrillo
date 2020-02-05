@@ -8,7 +8,7 @@ use App\Clases\Auxiliares\Constantes;
     <head>
         <title> @yield('titulo') </title>
 
-        <link rel="shortcut icon" type="image/jpg" href="images/logo.svg" />
+        <link rel="shortcut icon" type="image/jpg" href="images/logo.png" />
         <script type="text/javascript" src="{{ URL::asset('scripts/general/jquery-3.4.1.min.js') }}"></script>
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -38,6 +38,17 @@ use App\Clases\Auxiliares\Constantes;
 
 
         ?>
+            
+        <div class="loader-wrapper">
+            <span class="loader"><span class="loader-inner"></span></span>
+        </div>
+        
+        <script>
+            $(window).on("load",function(){
+              $(".loader-wrapper").fadeOut("slow");
+            });
+        </script>
+            
         <div id="blur" class="container-fluid">
 
             <div class = "row" id = "header">

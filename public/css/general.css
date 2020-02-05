@@ -24,7 +24,7 @@ body {
     width: 100%;
     height: 100%;
     background-color: #93C572;
-    
+
     transition: 1s ease-in all;
 }
 
@@ -236,4 +236,64 @@ body {
 #salir{
     background: red;
     border-radius: 5px;
+}
+
+/* Pantalla de carga */
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+}
+
+.loader-wrapper {
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #93C572;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    
+    background-image: url('../images/logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    background-color: rgba(143, 126, 79, 0.5);
+    animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+    0% { transform: rotate(0deg);}
+    25% { transform: rotate(180deg);}
+    50% { transform: rotate(180deg);}
+    75% { transform: rotate(360deg);}
+    100% { transform: rotate(360deg);}
+}
+
+@keyframes loader-inner {
+    0% { height: 0%;}
+    25% { height: 0%;}
+    50% { height: 100%;}
+    75% { height: 100%;}
+    100% { height: 0%;}
 }

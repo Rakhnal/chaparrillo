@@ -5,7 +5,7 @@
  */
 
 $(document).mousemove(function (event) {
-    if (event.pageX > 750) {
+    if (event.pageX > (window.screen.availWidth / 2)) {
         document.body.style.backgroundColor = "#E9D985";
     } else {
         document.body.style.backgroundColor = "#93C572";
