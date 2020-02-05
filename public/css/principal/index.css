@@ -12,6 +12,14 @@ html {
     overflow-x: hidden;
 }
 
+a {
+    cursor: pointer;
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+}
+
 #pistacho01, #pistacho02 {
     width: 200px;
     height: 100px;
@@ -29,14 +37,34 @@ html {
 }
 
 .principal-container {
-    padding-left: 1.5%;
     margin-top: -50px;
     width: 100%;
-    height: 700px;
+    height: 800px;
+}
+
+.plaga-div {
+    width: 100%;
+    height: 100%;
+}
+
+.plaga-img {
+    width: 150px;
+    height: 150px;
+    
+    border-radius: 50%;
+}
+
+.add-padding {
+    padding: 15px;
+}
+
+.justify-text {
+    text-align: justify;
 }
 
 #principal {
     width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -48,14 +76,78 @@ html {
     height: 320px;
     position: absolute;
     z-index: 10;
-    
+
     transition: 0.8s ease all;
 }
 
+/* Parte de plagas */
+
 #plagas-container {
-    margin: 0;
+    margin: 100px 0 100px 0;
     padding: 0;
-    height: 400px;
     width: 100%;
-    background-color: red;
+    
+    transition:all ease-out .5s 0s;
+}
+
+#plagas-container:nth-child(even){color:#fff;}
+.fade-ani{opacity:0;position:relative;}
+.fade-up{bottom:-50px;}
+.fade-down{top:-50px;}
+.fade-left{left:-50px;}
+.fade-right{right:-50px;}
+
+.fade-ani.showing{}
+.fade-in.showing{opacity:1;}
+.fade-up.showing{bottom:0px;opacity:1;}
+.fade-down.showing{top:-0px;opacity:1;}
+.fade-left.showing{left:-0px;opacity:1;}
+.fade-right.showing{right:-0px;opacity:1;}
+
+#titulopar,#capa01,#capa02,#capa03,#capa04,#capa05,#circle01,#circle02 {
+    width: 100%;
+    height: 100%;
+
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#titulopar {
+    z-index: 100;
+    background-image: url("../../images/parallax/titulo.png");
+}
+
+#capa01 {
+    z-index: 10;
+    background-image: url("../../images/parallax/capa01.png");
+}
+
+#capa02 {
+    z-index: 1;
+    background-image: url("../../images/parallax/capa02.png");
+}
+
+#capa03 {
+    z-index: 10;
+    background-image: url("../../images/parallax/capa03.png");
+}
+
+#capa04 {
+    z-index: 1;
+    background-image: url("../../images/parallax/capa04.png");
+}
+
+#capa05 {
+    z-index: 10;
+    background-image: url("../../images/parallax/capa05.png");
+}
+
+#circle01 {
+    z-index: 2;
+    background-image: url("../../images/parallax/circle01.png");
+}
+
+#circle02 {
+    z-index: 2;
+    background-image: url("../../images/parallax/circle02.png");
 }

@@ -14,7 +14,7 @@
                 <div class="modal-title">
                     Registro de Eventos
                 </div>
-                <span data-dismiss="modal"><button class="btn btn-danger salir">X</button></span>
+                <span data-dismiss="modal"><button class="btn btn-danger salir">&times;</button></span>
             </div>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -44,10 +44,10 @@
                             <input name="portada" type="file" class="form-control-file">
                         </div>
                     </div>
-                    
+                                 
                     <div class="left">
                         
-                        <div class="map">
+                        <div id="map" class="mapa">
                             
                         </div>
                         
@@ -62,6 +62,47 @@
     </div>
 </div>
 
+</div>
+
+<!------------- Pantalla modal del login-->
+<div id="login" class="modal fade" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Iniciar Sesión</h4>
+                <button type="button" class="salir" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form name="logForm" action="login" method="POST">
+                    <div class="row justify-content-center">
+                        <div class="name-form">
+                            <input type="email" name="correo" id="correo" value="" required/>
+                            <label for="correo" class = "label-name">
+                                <span class = "content-name">
+                                    Correo
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="name-form">
+                            <input type="password" name="pass" id="pass" value="" required/>
+                            <label for="pass" class = "label-name">
+                                <span class = "content-name">
+                                    Contraseña
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input type="submit" value = "Entrar" name = "login"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- *************** Ventana Modificar Evento ******************** -->
 <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
@@ -70,7 +111,7 @@
                 <div class="modal-title">
                     Modificar Eventos
                 </div>
-                <span data-dismiss="modal"><button class="btn btn-danger salir">X</button></span>
+                <span data-dismiss="modal"><button class="btn btn-danger salir">&times;</button></span>
             </div>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
@@ -103,7 +144,7 @@
                     
                     <div class="left">
                         
-                        <div class="map">
+                        <div id="map" class="mapa">
                             
                         </div>
                         
@@ -119,14 +160,14 @@
 </div>
 <!-- Ventana modal para subir documentación -->
 
-<section class="modal fade" id="modalSubirDocumento">
+<div class="modal fade" id="modalSubirDocumento" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-transparent">
             <div class="modal-header bg-dark text-white">
                 <div class="modal-title">
                     Subir documentación
                 </div>
-                <span class="btn btn-danger" data-dismiss="modal">X</span>
+                <span class="btn btn-danger salir" data-dismiss="modal">&times;</span>
             </div>
             <form name="formulario" action="" method="POST">
                 <div class="modal-body bg-light">
@@ -151,18 +192,18 @@
             </form>
         </div>
     </div>
-</section>
+</div>
 
 <!-- Ventana modal para editar documentación -->
 
-<section class="modal fade" id="modalEditarDocumento">
+<div class="modal fade" id="modalEditarDocumento" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-transparent">
             <div class="modal-header bg-dark text-white">
                 <div class="modal-title">
                     Editar documentación
                 </div>
-                <span class="btn btn-danger" data-dismiss="modal">X</span>
+                <span class="btn btn-danger salir" data-dismiss="modal">&times;</span>
             </div>
             <form name="formulario" action="" method="POST">
                 <div class="modal-body bg-light">
@@ -187,5 +228,5 @@
             </form>
         </div>
     </div>
-</section>
+</div>
 

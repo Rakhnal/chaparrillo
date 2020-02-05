@@ -1,49 +1,33 @@
 $(document).ready(function () {
 
-    function geolocalizar() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(Sacalugar, nofunciona);
+        } else {
+            alert("En este navegador no rula la geolocalización");
+        }
 
-        GMaps.geolocate({
+        function Sacalugar(position) {
+            var latitud = position.coords.latitude;
+            var longitud = position.coords.longitude;
+            var mapa = new google.maps.LatLng(latitud, longitud);
 
-            success: function (position) {
+            var ColocaMapa = {
+                zoom: 15,
+                center: mapa,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
-                lat = position.coords.latitude;
-                lng = position.coords.longitude;
+            var PintaMapa = new google.maps.Map(document.getElementById("map"), ColocaMapa);
+            // var vercalle = new google.maps.StreetViewPanorama(document.getElementById("map"), calle);
 
-                map = new GMaps({
-                    el: '.map',
-                    lat: lat,
-                    lng: lng
-                });
-
-                map.addMarker({
-                    lat: lat,
-                    lng: lng,
-                    label: 'You',
-                    icon: {
-                        path: google.maps.SymbolPath.CIRCLE,
-                        scale: 20,
-                        strokeColor: '#008B8B',
-                        fillColor: '#008B8B',
-                        fillOpacity: 0.4
-                    }
-                });
-            },
-
-            error: function (error) {
-
-                alert('Error geolocalización: ' + error.message);
-
-            },
-
-            not_supported: function () {
-
-                alert("La geolocalización no es soportada en este navegador");
-
-            }
-
-        });
-    }
-    
-    $('.eventos').load(geolocalizar);
-    $('.map').html("");
+            var marca = new google.maps.Marker({
+                position: mapa,
+                map: PintaMapa
+            });
+        }
+        
+        function nofunciona(position) {
+            alert("Aqui no funciona na");
+        };
+        
 });

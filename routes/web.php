@@ -30,3 +30,4 @@ Route::get('admin_event', function () {
 Route::get('adminDocument', function () {
     return view('administracion/adminDocument');
 });
+Route::get('adminDocument', 'controlador_tablas@listar');

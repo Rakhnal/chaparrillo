@@ -10,23 +10,21 @@ window.onscroll = function () {
 function scrollFunction() {
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
         document.getElementById("header").style.height = "25px";
-        document.getElementById("logomovil").style.width = "75px";
-        document.getElementById("logomovil").style.height = "60px";
-        document.getElementById("btnUser").style.width = "25px";
-        document.getElementById("btnUser").style.height = "25px";
-        document.getElementById("logomovil").style.zIndex = "10";
-        document.getElementById("logomovil").style.marginLeft = "45px";
-        document.getElementById("logomovil").style.marginTop = "-95px";
-        document.getElementById("logomovil").style.position = "fixed";
+        document.getElementById("navHeader").style.minHeight = "25px";
+        document.getElementById("logomovil").style.display = "none";
+        document.getElementById("imgLogo").style.display = "block";
+        document.getElementById("imgLogo").style.height = "55px";
+        document.getElementById("imgLogo").style.width = "55px";
+        document.getElementById("btnUser").style.width = "30px";
+        document.getElementById("btnUser").style.height = "30px";
     } else {
         document.getElementById("header").style.height = "100px";
-        document.getElementById("logomovil").style.width = "325px";
-        document.getElementById("logomovil").style.height = "325px";
+        document.getElementById("navHeader").style.minHeight = "100px";
+        document.getElementById("logomovil").style.display = "block";
+        document.getElementById("imgLogo").style.display = "none";
+        document.getElementById("imgLogo").style.height = "75px";
+        document.getElementById("imgLogo").style.width = "75px";
         document.getElementById("btnUser").style.width = "35px";
         document.getElementById("btnUser").style.height = "35px";
-        document.getElementById("logomovil").style.zIndex = "15";
-        document.getElementById("logomovil").style.marginLeft = "38%";
-        document.getElementById("logomovil").style.marginTop = "0px";
-        document.getElementById("logomovil").style.position = "absolute";
     }
 }

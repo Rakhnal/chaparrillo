@@ -8,8 +8,11 @@ and open the template in the editor.
     Author     : adonoso
 */
 
+@import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
+
 * {
     color: white;
+    font-family: 'Karla', sans-serif;
 }
 
 html {
@@ -21,6 +24,8 @@ body {
     width: 100%;
     height: 100%;
     background-color: #93C572;
+    
+    transition: 1s ease-in all;
 }
 
 .container-fluid {
@@ -32,13 +37,13 @@ body {
 
 .imgLogo {
     vertical-align: middle;
-    margin-left: 75px;
     width: 75px;
     height: 75px;
 }
 
 .navbar {
     background-color: rgba(255, 255, 255, 0.2);
+    min-height: 100px;
     z-index: 1000;
     position: fixed;
     padding: 0.5%;
@@ -76,8 +81,9 @@ body {
 }
 
 .dropdown-menu {
+    margin-top: 20px;
     border-color: white;
-    background-color: rgba(124, 255, 98, 0.3);
+    background-color: rgba(143, 126, 79, 0.5);
     border-radius: 0;
 }
 
@@ -134,6 +140,10 @@ body {
     width: 100% !important;
 }
 
+.hidden {
+    display: none;
+}
+
 #searchButton {
     border: none;
     border-radius: 0;
@@ -176,8 +186,71 @@ body {
 .modal-content{
     background: transparent;
 }
+
+/*Estilos para los formularios*/
+
+.modal form .label-name {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    pointer-events: none;
+    color: #bababa;
+}
+
+.modal .content-name {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.modal .name-form {
+    width: 85%;
+    position: relative;
+    margin: 5% 0% 0% 0%;
+}
+
+.modal input:focus + .label-name .content-name,
+.modal input:valid + .label-name .content-name{
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: black;
+}
+
+.modal input[type=text], .modal input[type=password], .modal input[type=email] {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    border: none;
+    border-bottom: 1px solid black;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.navbar-collapse {
+    text-align: center;
+}
+
 /* Estilo provisional */
 #salir{
     background: red;
     border-radius: 5px;
+}
+
+.right{
+    width: 50%;
+}
+
+.left{
+    width: 50%;
+}
+
+.mapa{
+    width: 100%;
+    height: 100%;
+}
+
+.modal-dialog{
+    width: 80vw;
 }
