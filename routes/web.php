@@ -23,8 +23,8 @@ Route::get('index', function () {
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
-Route::get('admin_event', function () {
-    return view('administracion/admin_eventos');
-    
-});
-Route::get('adminDocument', 'controlador_tablas@listar');
+Route::get('admin_event', 'controlador_tablas@listarEventos');
+
+// DES17: Página Administrar Documentos - NLO
+// Página Administración
+Route::get('adminDocument', 'controlador_tablas@listarDocumentos');

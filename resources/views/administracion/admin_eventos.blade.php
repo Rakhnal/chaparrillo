@@ -4,7 +4,6 @@ use App\Clases\conexion;
 use App\Clases\Auxiliares\Constantes;
 
 session()->put("actPage", Constantes::AD_EVENTOS);
-
 ?>
 @extends('../general/base')
 
@@ -21,17 +20,13 @@ Administrar Eventos
 
 <div class="col">
     <div class="row">
-        <div class="col-3">
+        <div class="col">
             <nav>
                 <div class="breadcrumb" id="migas">
                     <div class="breadcrumb-item">Usuario</div>
                     <div class="breadcrumb-item active">Administrar Eventos</div>
                 </div>
             </nav>
-        </div>
-        
-        <div class="col-9">
-
         </div>
     </div>
 
@@ -44,25 +39,35 @@ Administrar Eventos
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
                         <th>Mapa</th>
-                        <th>Guardar</th>
+                        <th>Datos</th>
                         <th>Portada</th>
-                        <th>Borrar</th>
+                        <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="text" value="Puertollano"></td>
-                        <td><input type="text" value="2020-01-29"></td>
-                        <td><input type="text" value="2020-01-31"></td>
-                        <td><input class="btn btn-warning" type="button" id="b-mapa" data-toggle="modal" data-target="#ventana-mapa" value="Mapa"></td>
-                        <td><input class="btn btn-primary" type="button" value="Guardar"></td>
-                        <td><input class="btn btn-primary" type="button" value="Modificar"></td>
-                        <td><input class="btn btn-danger" type="button" value="Borrar"></td>
-                    </tr>
+                    <?php
+                    foreach ($events as $event) {
+                        ?>
+                        <tr>
+                            <td><input type="text" value="<?= $event->nombre ?>"></td>
+                            <td><input type="date" value="<?= $event->fecha_inicio ?>"></td>
+                            <td><input type="date" value="<?= $event->fecha_fin ?>"></td>
+                            <td><input class="btn btn-warning" type="button" id="b-mapa" data-toggle="modal" data-target="#ventana-mapa" value="Mapa"></td>
+                            <td><input class="btn btn-primary" type="button" value="Guardar"></td>
+                            <td><input class="btn btn-primary" type="button" value="Modificar"></td>
+                            <td><input class="btn btn-danger" type="button" value="Eliminar"></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
-
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            {{ $events->links() }}
+        </div>
     </div>
 </div>
 
