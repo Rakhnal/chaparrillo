@@ -57,11 +57,14 @@ Administrar Documentación
         </div>
     </div>
     <div class="row mt-3">  
-        <div class="col-6">
+        <div class="col-4">
             {{ $docs->links() }}
         </div>
-        <div class="col-6">
-            <button class="btn btn-success blurmodal float-right" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Subir nueva documentación</button>
+        <div class="col-4 d-flex justify-content-center">
+            <button class="btn btn-success blurmodal" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
+        </div>
+        <div class="col-4">
+
         </div>
     </div>
 </div>

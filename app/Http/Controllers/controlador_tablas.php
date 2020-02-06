@@ -10,7 +10,7 @@ class controlador_tablas extends Controller {
     public function listarDocumentos() {
         $documentos = DB::table('documentos')
                         ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                        ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida')
+                        ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible')
                         ->paginate(8);
 
         return view('administracion/adminDocument', ['docs' => $documentos]);
@@ -19,7 +19,7 @@ class controlador_tablas extends Controller {
     public function listarEventos() {
         $eventos = DB::table('eventos')
                         ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                        ->select('eventos.id_evento', 'nombre', 'descripcion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                        ->select('eventos.id_evento', 'nombre', 'fecha_subida', 'fecha_inicio', 'fecha_fin', 'localizacion')
                         ->paginate(8);
 
         return view('administracion/admin_eventos', ['events' => $eventos]);
