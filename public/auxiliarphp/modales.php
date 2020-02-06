@@ -18,7 +18,7 @@
             </div>
             <form action="" method="POST" enctype="multipart/form-data">
                 <div class="modal-body">
-                     <div class="right">
+                    <div class="right">
                         <div class="form-group">
                             <label>Nombre:</label>
                             <input name="nomb" type="text" class="form-control" placeholder="Introduce el nombre del evento" required>
@@ -44,13 +44,13 @@
                             <input name="portada" type="file" class="form-control-file">
                         </div>
                     </div>
-                                 
+
                     <div class="left">
-                        
+
                         <div id="map" class="mapa">
-                            
+
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -98,7 +98,7 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn-input" data-toggle="modal" data-target="#register" data-dismiss="modal" id="btnRegister">Registrarse</button>
+                <button type="button" class="btn-input" data-toggle="modal" data-target="#register" data-dismiss="modal" id="btnRegister">Registrarse</button>
             </div>
         </div>
     </div>
@@ -160,13 +160,13 @@
                             <input name="portada" type="file" class="form-control-file">
                         </div>
                     </div>
-                    
+
                     <div class="left">
-                        
+
                         <div id="map" class="mapa">
-                            
+
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -181,31 +181,31 @@
 
 <div class="modal fade" id="modalSubirDocumento" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-transparent">
-            <div class="modal-header bg-dark text-white">
+        <div class="modal-content">
+            <div class="modal-header">
                 <div class="modal-title">
                     Subir documentación
                 </div>
-                <span class="btn btn-danger salir" data-dismiss="modal">&times;</span>
+                <span class="btn salir" data-dismiss="modal">&times;</span>
             </div>
-            <form name="formulario" action="" method="POST">
-                <div class="modal-body bg-light">
+            <form name="formSubDoc" class="formDocs" action="" method="POST">
+                <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="pl-2 border border-dark" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
+                        <input type="text" class="pl-2" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
                     </div>
                     <div class="form-group">
-                        <textarea cols="40" rows="10" class="pl-2 border border-dark" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
+                        <textarea cols="40" rows="10" class="pl-2" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
                     </div>
                     <div class="form-group">
                         <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
                     </div>
                     <label for="subirAdjuntos">
-                        <span>Seleccionar adjuntos</span>
+                        <span>Adjuntar archivos</span>
                     </label>
                 </div>
-                <div class="modal-footer bg-light">
+                <div class="modal-footer">
                     <div class="text-right">
-                        <input type="submit" class="btn border border-dark" id="subirDocumento" name="subirDocumento" value="Subir documentación">
+                        <input type="submit" class="btn" id="subirDocumento" name="subirDocumento" value="Subir documentación">
                     </div>
                 </div>
             </form>
@@ -217,31 +217,39 @@
 
 <div class="modal fade" id="modalEditarDocumento" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-transparent">
-            <div class="modal-header bg-dark text-white">
+        <div class="modal-content">
+            <div class="modal-header">
                 <div class="modal-title">
                     Editar documentación
                 </div>
-                <span class="btn btn-danger salir" data-dismiss="modal">&times;</span>
+                <span class="btn salir" data-dismiss="modal">&times;</span>
             </div>
-            <form name="formulario" action="" method="POST">
-                <div class="modal-body bg-light">
+            <form name="formEditDoc" class="formDocs" action="" method="POST">
+                <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="pl-2 border border-dark" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
+                        <input type="text" class="pl-2" id="nombreDocumento2" name="nombreDocumento2" placeholder="Nombre del documento" required>
                     </div>
                     <div class="form-group">
-                        <textarea cols="40" rows="10" class="pl-2 border border-dark" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
+                        <textarea cols="40" rows="10" class="pl-2" id="descDocumento2" name="descDocumento2" placeholder="Descripción de la documentación"></textarea>
                     </div>
-                    <div class="form-group">
-                        <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
+                    <div class="form-group form-inline">
+                        <div>
+                            <input class="btn p-0" id="editarAdjuntos" name="editarAdjuntos" type="file">
+                        </div>
+                        <label for="editarAdjuntos">
+                            <span>Adjuntar archivos</span>
+                        </label>
+                        <div class="ml-5">
+                            <select id="selectVisible" name="selectVisible">
+                                <option value="0">No visible</option>
+                                <option value="1">Visible</option>
+                            </select>
+                        </div>
                     </div>
-                    <label for="subirAdjuntos">
-                        <span>Seleccionar adjuntos</span>
-                    </label>
                 </div>
-                <div class="modal-footer bg-light">
+                <div class="modal-footer">
                     <div class="text-right">
-                        <input type="submit" class="btn border border-dark" id="editarDocumento" name="editarDocumento" value="Confirmar cambios">
+                        <input type="submit" class="btn" id="editarDocumento" name="editarDocumento" value="Confirmar cambios">
                     </div>
                 </div>
             </form>
