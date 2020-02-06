@@ -38,7 +38,6 @@ Administrar Eventos
                     <tr>
                         <th>Portada</th>
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>Localización</th>
                         <th>Fecha inicio</th>
                         <th>Fecha fin</th>
@@ -47,26 +46,31 @@ Administrar Eventos
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img src="" alt="imagen"></td>
-                        <td>dasdfidsk</td>
-                        <td>dasdfidsk</td>
-                        <td>asdfasdfsd</td>
-                        <td>asdfsdfs</td>
-                        <td>asdf</td>
-                        <td><input class="btn btn-primary blurmodal" type="button" id="b-modify" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
-                        <td><input class="btn btn-danger" id="delete" type="button" value="Borrar"></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" colspan="7"><input class="btn btn-primary blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear" value="Agregar"></td>
-                    </tr>
+                    <?php
+                    foreach ($events as $event) {
+                        ?>
+                        <tr>
+                            <td><img src="" alt="imagen"></td>
+                            <td><?= $event->nombre ?></td>
+                            <td><?= $event->localizacion ?></td>
+                            <td><?= $event->fecha_inicio ?></td>
+                            <td><?= $event->fecha_fin ?></td>
+                            <td><input class="btn btn-primary blurmodal" type="button" id="b-modify" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
+                            <td><input class="btn btn-danger" id="delete" type="button" value="Borrar"></td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col">
+        <div class="col-6">
             {{ $events->links() }}
+        </div>
+        <div class="col-6">
+            <button class="btn btn-primary blurmodal float-right" id="crear" data-toggle="modal" data-target="#ventana-crear">Agregar</button>
         </div>
     </div>
 </div>
