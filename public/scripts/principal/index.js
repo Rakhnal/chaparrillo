@@ -10,11 +10,13 @@ $(document).mousemove(function (event) {
         $('.dropdown-menu').css('background-color', 'rgba(92, 79, 43, 0.9)');
         $('.navbar').css('background-color', 'rgba(92, 79, 43, 0.9)');
         $('.modal-content').css('background-color', 'rgba(92, 79, 43, 0.9)');
+        $('.footer').css('background-color', 'rgba(92, 79, 43, 0.9)');
     } else {
         document.body.style.backgroundColor = "#78aa57";
         $('.dropdown-menu').css('background-color', 'rgba(82, 117, 59, 0.9)');
         $('.navbar').css('background-color', 'rgba(82, 117, 59, 0.9)');
         $('.modal-content').css('background-color', 'rgba(82, 117, 59, 0.9)');
+        $('.footer').css('background-color', 'rgba(82, 117, 59, 0.9)');
     }
 });
 

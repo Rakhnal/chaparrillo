@@ -123,7 +123,7 @@ use App\Clases\Auxiliares\Constantes;
                             if ($user == null) {
                             ?>
                                 <li class="nav-item">
-                                    <button type="button" class="blur-btn" data-toggle="modal" data-target="#login" id="btnUser"></button>
+                                    <button type="button" class="blurmodal" data-toggle="modal" data-target="#login" id="btnUser"></button>
                                 </li>
                             <?php
                             } else {
@@ -177,7 +177,65 @@ use App\Clases\Auxiliares\Constantes;
             
                 <div class="row footer font-small blue pt-4">
 
-                    FOOTER
+                    <div class="col">                        
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="row justify-content-end">
+                                    <img src="images/footer/logojccm.png" id="logojccm" alt="Logo de la JCCM" />
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="row justify-content-start">
+                                    <img src="images/footer/logochapa.jpg" align-middle id="logochapa" alt="Logo Chaparrillo" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <img src="images/footer/logouemapa.png" id="logouemapa" alt="Logo de la UE y del MAPA" />
+                        </div>
+                    </div>
+                    
+                    <div class="col">
+                        
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <a href="http://pistacho.chil.org/" target="_blank">
+                                        <img src="images/footer/logochil.png" id="logochil" alt="Logo Chil.Me"/>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
+                                        <img src="images/footer/logoface.svg" id="logoface" alt="Facebook del Chaparrillo"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-center almost-full-height">
+                            <div class="col">
+                                <div class="row justify-content-center align-content-center align-items-center full-height">
+                                    <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
+                                        <h5>FAQs</h5>
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="col">
+                                <div class="row justify-content-center align-content-center align-items-center full-height">
+                                    <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
+                                        <h5>Quienes Somos</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
 
                 </div>
             
