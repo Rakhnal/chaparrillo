@@ -422,6 +422,25 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover {
     background-color: #8F7E4F;
     
 }
+
+.descDocumento {
+    width: 100%;
+    min-height: 200px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.descDocumento::placeholder, .modal input[type=text]::placeholder, .modal input[type=password]::placeholder, .modal input[type=email]::placeholder {
+    color: #AFC8A0;
+}
+
+.validarDocs:hover {
+    color: #1F3013;
+}
+
 /* Footer */
 
 #logochapa {
