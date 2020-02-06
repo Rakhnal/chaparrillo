@@ -35,10 +35,6 @@ use App\Clases\Auxiliares\Constantes;
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
             <?php
-        } else {
-            ?>
-            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
-            <?php
         }
         
         include 'auxiliarphp/modales.php';
@@ -71,6 +67,7 @@ use App\Clases\Auxiliares\Constantes;
                     <?php
                     }
                     ?>
+                    
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -172,7 +169,7 @@ use App\Clases\Auxiliares\Constantes;
             <?php
             
             // Agregar aquí las páginas donde no se quiera mostrar el footer
-            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS) {
+            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO) {
             ?>
             
                 <div class="row footer font-small blue pt-4">

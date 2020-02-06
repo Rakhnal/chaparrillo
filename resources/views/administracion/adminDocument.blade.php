@@ -28,45 +28,49 @@ Administrar Documentación
             </nav>
         </div>
     </div>
-    <div class="row">
-        <div class="col table-responsive">
-            <table id="tablaAdminDocument">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Fecha de subida</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($docs as $doc) {
-                        ?>
+    <div class="row" id="mainTable">
+        <div class="col">
+            <div class="row table-responsive">
+                <table id="tablaAdminDocument">
+                    <thead>
                         <tr>
-                            <td><?= $doc->nombre ?></td>
-                            <td><?= $doc->fecha_subida ?></td>
-                            <td><button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
-                            <td><button class="btn btn-primary blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                            <th>Nombre</th>
+                            <th>Fecha de subida</th>
+                            <th></th>
+                            <th></th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row mt-3">  
-        <div class="col-4">
-            {{ $docs->links() }}
-        </div>
-        <div class="col-4 d-flex justify-content-center">
-            <button class="btn btn-success blurmodal" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
-        </div>
-        <div class="col-4">
+                        foreach ($docs as $doc) {
+                            ?>
+                            <tr>
+                                <td><?= $doc->nombre ?></td>
+                                <td><?= $doc->fecha_subida ?></td>
+                                <td><button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
+                                <td><button class="btn btn-primary blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
+            <div class="row mt-3">  
+                <div class="col-4">
+                    {{ $docs->links() }}
+                </div>
+                <div class="col-4 d-flex justify-content-center">
+                    <button class="btn btn-success blurmodal" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
+                </div>
+                <div class="col-4">
+
+                </div>
+            </div>
         </div>
     </div>
+
 </div>
 
 @endsection
