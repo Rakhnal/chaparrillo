@@ -23,4 +23,9 @@ class Constantes {
     const AD_EVENTOS = "admin_eventos";
     const AD_DOCUMENTOS = "adminDocument";
     const ED_USUARIO = "Editar_usuario";
+    
+    // Roles
+    const NORMAL = "0";
+    const ADMIN = "1";
+    const SWATS = "2";
 }
