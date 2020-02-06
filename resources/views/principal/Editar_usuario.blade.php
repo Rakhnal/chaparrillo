@@ -60,8 +60,11 @@ Inicio
                         </div>
                         <div class="col-6">
                             <label class="form_control col-12">Contraseña:</label>
-                            <input type="password" name="passw" class=" w-100 text_black" value="" required=""> 
+                            <button type="button" class="btn btn-light w-100" data-toggle="modal" data-target="#exampleModalCenter">
+                                Cambiar contraseña
+                            </button>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -74,7 +77,7 @@ Inicio
                         </div>
                     </div>
                     <div class="row">
-                        <label class="form_control">Localización:</label>
+                        <div class="col-12"><label class="form_control">Localización:</label></div>
                         <div class="col-6">
                             <input name="Pais"  type="text" class="text_black w-100" placeholder="Pais">
                         </div>
@@ -118,9 +121,31 @@ Inicio
                     </div>
                 </div>
                 <div class="col-md-12 text-center mb-3">
-                    <button type="submit" class="btn btn-primary btn">Editar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cambiar contraseña</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label class="form_control">Nueva contraseña:</label>
+                <input type="password" name="passw" class="text_black passwrd" value="" required=""> 
+                <label class="form_control">Confirmar contraseña:</label>
+                <input type="password" name="passw" class="text_black passwrd" value="" required=""> 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+            </div>
         </div>
     </div>
 </div>
