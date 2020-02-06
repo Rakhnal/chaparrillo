@@ -33,3 +33,9 @@ Route::get('admin_event', 'controlador_tablas@listarEventos');
 // DES17: Página Administrar Documentos - NLO
 // Página Administración
 Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
+
+// DES21: Login/Registro
+// Login
+Route::post('login', 'usercontroller@iniciarSesion');
+// Registro
+Route::post('registro', 'usercontroller@registrarUsuario');
