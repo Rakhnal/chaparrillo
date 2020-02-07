@@ -186,7 +186,7 @@
                 <div class="modal-title">
                     Subir documentación
                 </div>
-                <span class="btn salir" data-dismiss="modal">&times;</span>
+                <span class="btn salir" data-dismiss="modal"><button class="close clear salir white-color">&times;</button></span>
             </div>
             <form name="formSubDoc" class="formDocs m-0" action="" method="POST">
                 <div class="modal-body">
@@ -222,7 +222,7 @@
                 <div class="modal-title">
                     Editar documentación
                 </div>
-                <span class="btn salir" data-dismiss="modal">&times;</span>
+                <span class="btn salir" data-dismiss="modal"><button class="close clear salir white-color">&times;</button></span>
             </div>
             <form name="formEditDoc" class="formDocs m-0" action="" method="POST">
                 <div class="modal-body">
