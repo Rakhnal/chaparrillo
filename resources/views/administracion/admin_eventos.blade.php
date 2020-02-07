@@ -82,9 +82,6 @@ Administrar Eventos
 
             </div>
         </div>
-        <div class="col-6">
-            <button class="btn btn-primary blurmodal float-right" id="crear" data-toggle="modal" data-target="#ventana-crear">Agregar</button>
-        </div>
     </div>
 
 </div>

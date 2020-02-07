@@ -22,6 +22,7 @@ $(document).ready(function () {
 
             var marca = new google.maps.Marker({
                 position: mapa,
+                icon: "images/icons/location.svg",
                 map: PintaMapa
             });
         }

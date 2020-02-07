@@ -18,7 +18,7 @@
             </div>
             <div class="modal-body">
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <!--{{ csrf_field() }}-->
+                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
@@ -57,7 +57,7 @@
                                 <input id="imgEvento" name="portada" type="file" accept="image/*" class="form-control-file" required>
                             </div>
                             <div id="img-portada">
-                                
+
                             </div>
                             <div class="text-center mt-4">
                                 <input type="submit" name="add" class="btn btn-primary" value="Agregar">
@@ -76,12 +76,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Iniciar Sesión</h4>
-                <button type="button" class="salir close clear white-color" data-dismiss="modal">&times;</button>
+                <button type="button" class="close clear white-color" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form name="logForm" action="login" method="POST">
                     <div class="row justify-content-center">
-                        <div class="name-form form-group">
+                        <div class="name-form">
                             <input type="email" name="correo" id="correo" value="" required/>
                             <label for="correo" class = "label-name">
                                 <span class = "content-name">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="name-form form-group">
+                        <div class="name-form">
                             <input type="password" name="pass" id="pass" value="" required/>
                             <label for="pass" class = "label-name">
                                 <span class = "content-name">
@@ -118,7 +118,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Registrar Usuario</h4>
-                <button type="button" class="salir close clear white-color" data-dismiss="modal">&times;</button>
+                <button type="button" class="close clear" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 Pruebaaa
@@ -141,8 +141,8 @@
                 <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <!--{{ csrf_field() }}-->
+                <form action="formevent" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -182,13 +182,9 @@
 
                         </div>
                     </div>
-
+                    <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
                 </form>
             </div>
-            <div class="modal-footer">
-                <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
-            </div>
-
         </div>
     </div>
 </div>
@@ -201,7 +197,7 @@
                 <div class="modal-title">
                     Subir documentación
                 </div>
-                <span class="btn salir" data-dismiss="modal"><button class="close clear salir white-color">&times;</button></span>
+                <span class="btn salir" data-dismiss="modal">&times;</span>
             </div>
             <form name="formSubDoc" class="formDocs m-0" action="" method="POST">
                 <div class="modal-body">
@@ -237,7 +233,7 @@
                 <div class="modal-title">
                     Editar documentación
                 </div>
-                <span class="btn salir" data-dismiss="modal"><button class="close clear salir white-color">&times;</button></span>
+                <span class="btn salir" data-dismiss="modal">&times;</span>
             </div>
             <form name="formEditDoc" class="formDocs m-0" action="" method="POST">
                 <div class="modal-body">
@@ -268,40 +264,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-
-<!------------- Pantalla modal que muestra que el usuario ya está registrado-->
-<div id="yaexiste" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Información</h4>
-                <button type="button" class="close salir white-color" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-
-                <p>El usuario que intentas registrar ya existe, prueba a iniciar sesión</p>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!------------- Pantalla modal que muestra que el usuario no existe en BBDD-->
-<div id="noexiste" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Error</h4>
-                <button type="button" class="close salir white-color" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-
-                <p>Usuario/Contraseña incorrectos</p>
-
-            </div>
         </div>
     </div>
 </div>
