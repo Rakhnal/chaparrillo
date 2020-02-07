@@ -18,7 +18,7 @@
             </div>
             <div class="modal-body">
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <!--{{ csrf_field() }}-->
+                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
@@ -57,7 +57,7 @@
                                 <input id="imgEvento" name="portada" type="file" accept="image/*" class="form-control-file" required>
                             </div>
                             <div id="img-portada">
-                                
+
                             </div>
                             <div class="text-center mt-4">
                                 <input type="submit" name="add" class="btn btn-primary" value="Agregar">
@@ -141,8 +141,8 @@
                 <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <!--{{ csrf_field() }}-->
+                <form action="formevent" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -182,13 +182,9 @@
 
                         </div>
                     </div>
-
+                    <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
                 </form>
             </div>
-            <div class="modal-footer">
-                <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
-            </div>
-
         </div>
     </div>
 </div>

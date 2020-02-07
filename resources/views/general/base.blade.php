@@ -41,7 +41,7 @@ use App\Clases\Auxiliares\Constantes;
             <?php
         }
         
-        include 'auxiliarphp/modales.php';
+        include 'auxiliarphp/modales.blade.php';
         ?>
             
         <div class="loader-wrapper">
