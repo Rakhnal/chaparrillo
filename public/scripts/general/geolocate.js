@@ -3,7 +3,7 @@ $(document).ready(function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(Sacalugar, nofunciona);
         } else {
-            alert("En este navegador no rula la geolocalización");
+            alert("Este navegador no soporta geolocalización");
         }
 
         function Sacalugar(position) {
@@ -27,7 +27,7 @@ $(document).ready(function () {
         }
         
         function nofunciona(position) {
-            alert("Aqui no funciona na");
+            alert("Error al cargar");
         };
         
 });

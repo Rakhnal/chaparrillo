@@ -29,6 +29,7 @@ Route::get('Editar_usuario', function () {
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
 Route::get('admin_event', 'controlador_tablas@listarEventos');
+Route::post('formevent','controlador_tablas@eliminarEventos');
 
 // DES17: Página Administrar Documentos - NLO
 // Página Administración

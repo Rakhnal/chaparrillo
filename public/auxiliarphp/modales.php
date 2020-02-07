@@ -8,56 +8,64 @@
 
 <!-- *************** Ventana Agregar Evento ******************** -->
 <div class="modal fade eventos" id="ventana-crear" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
+            <div class="modal-header">
                 <div class="modal-title">
                     Registro de Eventos
                 </div>
-                <span data-dismiss="modal"><button class="btn btn-danger salir">&times;</button></span>
+                <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
             </div>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="modal-body">
-                     <div class="right">
-                        <div class="form-group">
-                            <label>Nombre:</label>
-                            <input name="nomb" type="text" class="form-control" placeholder="Introduce el nombre del evento" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Descripción:</label>
-                            <input name="desc" type="text" class="form-control" placeholder="Introduce una descripción" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Localización:</label>
-                            <input name="loca" type="text" class="form-control" placeholder="Introduce tu localización" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha inicio</label>
-                            <input name="feci" type="date" class="form-control"  required>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha fin:</label>
-                            <input name="fecf" type="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Portada de evento:</label>
-                            <input name="portada" type="file" class="form-control-file">
-                        </div>
-                    </div>
-                                 
-                    <div class="left">
-                        
-                        <div id="map" class="mapa">
-                            
-                        </div>
-                        
-                    </div>
+            <div class="modal-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <!--{{ csrf_field() }}-->
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Nombre:</label>
+                                <input name="nomb" type="text" class="form-control" placeholder="Nombre del evento" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha inicio</label>
+                                <input name="feci" type="date" class="form-control"  required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha fin:</label>
+                                <input name="fecf" type="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Descripción:</label>
+                                <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                            </div>
 
-                </div>
-                <div class="modal-footer">
-                    <input id="add-evento" name="add" type="submit" class="btn btn-primary" value="Añadir">
-                </div>
-            </form>
+                        </div>
+
+                        <div class="col-4">
+
+                            <div class="form-group">
+                                <label>Localización:</label>
+                                <input name="loca" type="text" class="form-control" placeholder="Localización" required>
+                            </div>
+
+                            <div id="map" class="mapa">
+
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Portada de evento:</label>
+                                <input id="imgEvento" name="portada" type="file" accept="image/*" class="form-control-file" required>
+                            </div>
+                            <div id="img-portada">
+                                
+                            </div>
+                            <div class="text-center mt-4">
+                                <input type="submit" name="add" class="btn btn-primary" value="Agregar">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -98,7 +106,7 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn-input" data-toggle="modal" data-target="#register" data-dismiss="modal" id="btnRegister">Registrarse</button>
+                <button type="button" class="btn-input" data-toggle="modal" data-target="#register" data-dismiss="modal" id="btnRegister">Registrarse</button>
             </div>
         </div>
     </div>
@@ -124,56 +132,63 @@
 
 <!-- *************** Ventana Modificar Evento ******************** -->
 <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-dark text-white">
+            <div class="modal-header">
                 <div class="modal-title">
                     Modificar Eventos
                 </div>
-                <span data-dismiss="modal"><button class="btn btn-danger salir">&times;</button></span>
+                <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
             </div>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <div class="modal-body">
-                    <div class="right">
-                        <div class="form-group">
-                            <label>Nombre:</label>
-                            <input name="nomb" type="text" class="form-control" placeholder="Introduce el nombre del evento" required>
+            <div class="modal-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    <!--{{ csrf_field() }}-->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Nombre:</label>
+                                <input name="nomb" type="text" class="form-control" value="" placeholder="Nombre del evento" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha inicio</label>
+                                <input name="feci" type="date" class="form-control"  required>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha fin:</label>
+                                <input name="fecf" type="date" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Descripción:</label>
+                                <textarea id="ta-event" rows="5" cols="30" placeholder="Escribe una descripción"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="por-event">Portada de evento:</label>
+                                <input id="por-event" accept="image/*" name="portada" type="file" class="form-control-file">
+                            </div>
+                            <div id="response-container"></div>
                         </div>
-                        <div class="form-group">
-                            <label>Descripción:</label>
-                            <input name="desc" type="text" class="form-control" placeholder="Introduce una descripción" required>
+
+                        <div class="col-6">
+
+                            <div class="form-group">
+                                <label>Localización:</label>
+                                <input name="loca" type="text" class="form-control" placeholder="Localización" required>
+                            </div>
+
+                            <div id="map" class="mapa ml-3">
+
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <label>Localización:</label>
-                            <input name="loca" type="text" class="form-control" placeholder="Introduce tu localización" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha inicio</label>
-                            <input name="feci" type="date" class="form-control"  required>
-                        </div>
-                        <div class="form-group">
-                            <label>Fecha fin:</label>
-                            <input name="fecf" type="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Portada de evento:</label>
-                            <input name="portada" type="file" class="form-control-file">
-                        </div>
-                    </div>
-                    
-                    <div class="left">
-                        
-                        <div id="map" class="mapa">
-                            
-                        </div>
-                        
                     </div>
 
-                </div>
-                <div class="modal-footer">
-                    <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
+            </div>
+
         </div>
     </div>
 </div>
