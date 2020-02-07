@@ -396,6 +396,13 @@ textarea{
     border: solid 1px #fff;
 }
 
+.descDocumento {
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
 input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos {
     width: 0.1px;
     height: 0.1px;
@@ -405,7 +412,7 @@ input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos {
     z-index: -1;
 }
 
-label[for="subirAdjuntos"], label[for="editarAdjuntos"] {
+label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs {
     font-size: 11pt;
     font-weight: bold;
     background-color: #78aa57;
@@ -420,7 +427,7 @@ label[for="subirAdjuntos"], label[for="editarAdjuntos"] {
     transition: all .3s ease-in-out;
 }
 
-label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover {
+label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDocs:hover {
     background-color: #8F7E4F;
 }
 
@@ -432,6 +439,11 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover {
     background-color: #8F7E4F;
     
 }
+
+.modal input[type=text]::placeholder, .modal input[type=password]::placeholder, .modal input[type=email]::placeholder, .descDocumento::placeholder {
+    color: #9EC485;
+}
+
 /* Footer */
 
 #logochapa {
