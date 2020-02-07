@@ -18,7 +18,7 @@
             </div>
             <div class="modal-body">
                 <form action="" method="POST" enctype="multipart/form-data">
-                    <!--{{ csrf_field() }}-->
+                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
@@ -57,7 +57,7 @@
                                 <input id="imgEvento" name="portada" type="file" accept="image/*" class="form-control-file" required>
                             </div>
                             <div id="img-portada">
-                                
+
                             </div>
                             <div class="text-center mt-4">
                                 <input type="submit" name="add" class="btn btn-primary" value="Agregar">
@@ -76,12 +76,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Iniciar Sesión</h4>
-                <button type="button" class="salir close clear white-color" data-dismiss="modal">&times;</button>
+                <button type="button" class="close clear white-color" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form name="logForm" action="login" method="POST">
                     <div class="row justify-content-center">
-                        <div class="name-form form-group">
+                        <div class="name-form">
                             <input type="email" name="correo" id="correo" value="" required/>
                             <label for="correo" class = "label-name">
                                 <span class = "content-name">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="name-form form-group">
+                        <div class="name-form">
                             <input type="password" name="pass" id="pass" value="" required/>
                             <label for="pass" class = "label-name">
                                 <span class = "content-name">
@@ -118,7 +118,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Registrar Usuario</h4>
-                <button type="button" class="salir close clear white-color" data-dismiss="modal">&times;</button>
+                <button type="button" class="close clear" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 Pruebaaa
@@ -141,8 +141,8 @@
                 <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <!--{{ csrf_field() }}-->
+                <form action="formevent" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
@@ -182,13 +182,9 @@
 
                         </div>
                     </div>
-
+                    <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
                 </form>
             </div>
-            <div class="modal-footer">
-                <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
-            </div>
-
         </div>
     </div>
 </div>
@@ -196,31 +192,31 @@
 
 <div class="modal fade" id="modalSubirDocumento" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content bg-transparent">
+            <div class="modal-header bg-dark text-white">
                 <div class="modal-title">
                     Subir documentación
                 </div>
-                <span class="btn salir" data-dismiss="modal">&times;</span>
+                <span class="btn btn-danger salir" data-dismiss="modal">&times;</span>
             </div>
-            <form name="formSubDoc" class="formDocs" action="" method="POST">
-                <div class="modal-body">
+            <form name="formulario" action="" method="POST">
+                <div class="modal-body bg-light">
                     <div class="form-group">
-                        <input type="text" class="pl-2" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
+                        <input type="text" class="pl-2 border border-dark" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
                     </div>
                     <div class="form-group">
-                        <textarea cols="40" rows="10" class="pl-2" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
+                        <textarea cols="40" rows="10" class="pl-2 border border-dark" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
                     </div>
                     <div class="form-group">
                         <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
                     </div>
                     <label for="subirAdjuntos">
-                        <span>Adjuntar archivos</span>
+                        <span>Seleccionar adjuntos</span>
                     </label>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <div class="text-right">
-                        <input type="submit" class="btn" id="subirDocumento" name="subirDocumento" value="Subir documentación">
+                        <input type="submit" class="btn border border-dark" id="subirDocumento" name="subirDocumento" value="Subir documentación">
                     </div>
                 </div>
             </form>
@@ -232,76 +228,34 @@
 
 <div class="modal fade" id="modalEditarDocumento" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content bg-transparent">
+            <div class="modal-header bg-dark text-white">
                 <div class="modal-title">
                     Editar documentación
                 </div>
-                <span class="btn salir" data-dismiss="modal">&times;</span>
+                <span class="btn btn-danger salir" data-dismiss="modal">&times;</span>
             </div>
-            <form name="formEditDoc" class="formDocs" action="" method="POST">
-                <div class="modal-body">
+            <form name="formulario" action="" method="POST">
+                <div class="modal-body bg-light">
                     <div class="form-group">
-                        <input type="text" class="pl-2" id="nombreDocumento2" name="nombreDocumento2" placeholder="Nombre del documento" required>
+                        <input type="text" class="pl-2 border border-dark" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
                     </div>
                     <div class="form-group">
-                        <textarea cols="40" rows="10" class="pl-2" id="descDocumento2" name="descDocumento2" placeholder="Descripción de la documentación"></textarea>
+                        <textarea cols="40" rows="10" class="pl-2 border border-dark" id="descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
                     </div>
-                    <div class="form-group form-inline">
-                        <div>
-                            <input class="btn p-0" id="editarAdjuntos" name="editarAdjuntos" type="file">
-                        </div>
-                        <label for="editarAdjuntos">
-                            <span>Adjuntar archivos</span>
-                        </label>
-                        <div class="ml-5">
-                            <select id="selectVisible" name="selectVisible">
-                                <option value="0">No visible</option>
-                                <option value="1">Visible</option>
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
                     </div>
+                    <label for="subirAdjuntos">
+                        <span>Seleccionar adjuntos</span>
+                    </label>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-light">
                     <div class="text-right">
-                        <input type="submit" class="btn" id="editarDocumento" name="editarDocumento" value="Confirmar cambios">
+                        <input type="submit" class="btn border border-dark" id="editarDocumento" name="editarDocumento" value="Confirmar cambios">
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-
-<!------------- Pantalla modal que muestra que el usuario ya está registrado-->
-<div id="yaexiste" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Información</h4>
-                <button type="button" class="close salir white-color" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-
-                <p>El usuario que intentas registrar ya existe, prueba a iniciar sesión</p>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<!------------- Pantalla modal que muestra que el usuario no existe en BBDD-->
-<div id="noexiste" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Error</h4>
-                <button type="button" class="close salir white-color" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-
-                <p>Usuario/Contraseña incorrectos</p>
-
-            </div>
         </div>
     </div>
 </div>
