@@ -34,28 +34,7 @@ and open the template in the editor.
 }
 .form_control{
     border: none !important;
-    border-bottom-color: white;
-    border-bottom-style: none;
-    border-bottom-width: medium;
-    border-bottom: 1px solid white !important;
-    border-radius: 0px;
     color: white;
-    display: block;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    background-color: transparent !important;
-    background-clip: padding-box;
-}
-.form_control_no_border{
-    border: none !important;
-    border-bottom-color: white;
-    border-bottom-style: none;
-    border-bottom-width: medium;
-    border-radius: 0px;
-    color: black;
     display: block;
     width: 100%;
     height: calc(2.25rem + 2px);
@@ -127,4 +106,24 @@ and open the template in the editor.
     width: 100%!important;
     height: 18% !important;
     padding-top: 0px !important;
+}
+.input:disabled{
+    background-color: rgb(135, 160, 120);
+    background-image: url(../../images/icons/contrasenawhite.png);
+    background-size: 26px;
+    background-repeat: no-repeat;
+    background-position: right;
+    border: 1px solid white;
+    color: white;
+    padding: 6px;
+}
+
+.input {
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 2px;
+    padding: 6px;
+}
+.bwr-transparent{
+    background-color: transparent !important;
 }
