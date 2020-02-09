@@ -383,6 +383,493 @@ select:-webkit-autofill:focus {
     height: 300px;
 
 }
+
+.thumb{
+     width: 230px; 
+     height: 300px;
+     border: 1px solid #fff;
+     margin: 10px 5px 0 0;
+}
+
+textarea{
+    background-color: transparent !important;
+    border: solid 1px #fff;
+}
+
+.descDocumento {
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 50;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs {
+    font-size: 11pt;
+    font-weight: bold;
+    background-color: #78aa57;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 16px !important;
+    width: fit-content;
+    text-align: center;
+    max-width: 100%;
+    margin: 0px;
+    transition: all .3s ease-in-out;
+}
+
+label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDocs:hover {
+    background-color: #8F7E4F;
+}
+
+#selectVisible {
+    width: 150px;
+    color: white;
+    height: 35px;
+    border: 1px solid white;
+    background-color: #8F7E4F;
+    
+}
+
+.modal input[type=text]::placeholder, .modal input[type=password]::placeholder, .modal input[type=email]::placeholder, .descDocumento::placeholder {
+    color: #9EC485;
+}
+
+/* Footer */
+
+#logochapa {
+    width: 60%;
+}
+
+#logouemapa {
+    width: 60%;
+}
+
+#logojccm {
+    
+    margin-right: 18%;
+    
+    width: 25%;
+    height: 100%;
+}
+
+#logochil {
+    width: 70%;
+}
+
+#logoface {
+    width: 15%;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.almost-full-height {
+    height: 60%;
+}
+
+.full-height {
+    height: 100%;
+}
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27-ene-2020, 13:01:55
+    Author     : adonoso
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
+
+* {
+    color: white;
+    font-family: 'Karla', sans-serif !important;
+}
+
+html {
+    width: 100% !important;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #78aa57;
+
+    transition: 1s ease-in all;
+}
+
+input {
+    background-color: transparent;
+}
+
+a {
+    color: white;
+    text-align: center;
+}
+
+a:hover {
+    color: #E9D985;
+}
+
+.container-fluid {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.imgLogo {
+    vertical-align: middle;
+    width: 75px;
+    height: 75px;
+}
+
+.navbar {
+    background-color: rgba(82, 117, 59, 0.98);
+    border-bottom: 1px solid white;
+    min-height: 100px;
+    z-index: 1000;
+    position: fixed;
+    padding: 0.5%;
+    width: 100% !important;
+
+    transition: 1s ease all;
+}
+
+.nav-link {
+    color: white !important;
+}
+
+.nav-item {
+    padding-top: 1%;
+}
+
+.form-control {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid white !important;
+    border-radius: 0px;
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: transparent !important;
+    color: white;
+}
+
+.btn:focus,.btn:active, .form-control:focus, .form-control:active {
+    outline: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-menu {
+    margin-top: 25px;
+    border-color: white;
+    background-color: rgba(82, 117, 59, 0.98);
+    border-radius: 0;
+    
+    transition: 0.6s ease-in all;
+}
+
+.dropdown-container {
+    padding-top: 1%;
+    position: relative;
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: white;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: white;
+}
+
+.menu-text {
+    font-size: 1em;
+    color: #FFF;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+.menu-text:after {
+    transition: all ease-in-out .2s;
+    background: none repeat scroll 0 0 #ffffff;
+    content: "";
+    display: block;
+    height: 2px;
+    width: 0;
+}
+.menu-text:hover:after {
+    width: 100%;
+}
+
+.footer {
+    width: 100%;
+    height: fit-content;
+    background-color: rgba(82, 117, 59, 0.98);
+    margin: 0;
+    padding: 0 15px 20px 0;
+    
+    transition: 1s ease-in all;
+}
+
+.margin-right {
+    margin-right: 30px;
+}
+
+.add-top-margin {
+    margin-top: 25px;
+}
+
+.white-color {
+    color: white;
+}
+
+.col {
+    width: 100% !important;
+}
+
+.hidden {
+    display: none;
+}
+
+.btn-input {
+    
+    cursor: pointer;
+    
+    background: transparent;
+    border: 1px solid white;
+    border-radius: 15px;
+    
+    padding: 10px;
+}
+
+#searchButton {
+    border: none;
+    border-radius: 0;
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/icons/search.png);
+    background-size: cover;
+
+    transition: 0.3s ease all;
+}
+
+#searchButton:hover {
+    background-color: transparent;
+    transform: scale(1.05);
+}
+
+#main {
+    width: 100%;
+    min-height: calc(100% - 100px);
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    width: 100%;
+    min-height: 100px;
+    margin: 0;
+    padding: 0;
+}
+
+#btnUser {
+    cursor: pointer;
+    
+    vertical-align: middle;
+    background: transparent;
+    border: none;
+    
+    background-image: url('../images/icons/login.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+    width: 35px;
+    height: 35px;
+
+    transition: 1s ease all;
+}
+
+
+#imgUser {
+    width: 35px;
+    height: 35px;
+
+    transition: 1s ease all;
+}
+
+/*---------------------- ESTILOS MODALES ------------------------ */
+
+.modal-content{
+    border: 1px solid white;
+    background: rgba(82, 117, 59, 0.8);
+    
+    transition: 1.5s ease all;
+}
+
+/*Estilos para los formularios*/
+
+.modal form .label-name {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    pointer-events: none;
+    color: #bababa;
+}
+
+.modal .content-name {
+    position: absolute;
+    bottom: 5px;
+    left: 0px;
+    transition: all 0.3s ease;
+}
+
+.modal .name-form {
+    width: 85%;
+    position: relative;
+    margin: 5% 0% 0% 0%;
+}
+
+.modal input:focus + .label-name .content-name,
+.modal input:valid + .label-name .content-name{
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: white;
+    background-color: transparent !important;
+}
+
+.modal input[type=text], .modal input[type=password], .modal input[type=email] {
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    border: none;
+    border-bottom: 1px solid white;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.navbar-collapse {
+    text-align: center;
+}
+
+/* Cambiar los estilos al autocompletar el Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: none;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: transparent;
+}
+
+/* Estilo provisional */
+#salir{
+    background: red;
+    border-radius: 5px;
+}
+
+/* Pantalla de carga */
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    height:100%;
+}
+
+.loader-wrapper {
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #93C572;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    
+    background-image: url('../images/logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    animation: loader 2s infinite ease;
+}
+
+.loader-inner {
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    background-color: rgba(143, 126, 79, 0.5);
+    animation: loader-inner 2s infinite ease-in;
+}
+
+@keyframes loader {
+    0% { transform: rotate(0deg);}
+    25% { transform: rotate(180deg);}
+    50% { transform: rotate(180deg);}
+    75% { transform: rotate(360deg);}
+    100% { transform: rotate(360deg);}
+}
+
+@keyframes loader-inner {
+    0% { height: 0%;}
+    25% { height: 0%;}
+    50% { height: 100%;}
+    75% { height: 100%;}
+    100% { height: 0%;}
+}
+
+.mapa{
+    width: 100%;
+    height: 340px;
+}
+
+#img-portada{
+    width: 230px;
+    height: 300px;
+
+}
 #img-portada2{
     width: 230px;
     height: 300px;

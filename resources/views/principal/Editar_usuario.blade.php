@@ -46,7 +46,7 @@ Inicio
                     </div>
                     <div>
                         <form enctype="multipart/form-data">
-                            <input type="file" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo...">
+                            <input type="file" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo..." class="bwr-transparent">
                         </form>
                     </div>
                 </div>
@@ -56,30 +56,30 @@ Inicio
                     <div class="row">
                         <div class="col-6">
                             <label class="form_control col-12">Email:</label>
-                            <input type="email" name="email" class=" w-100 text_black" value="COMEME" required="" id="email">
+                            <input type="email" name="email" class=" w-100 text_black input" value="hola" required="" id="email">
                         </div>
                         <div class="col-6">
                             <label class="form_control col-12">Contraseña:</label>
-                            <input type="button" class="btn btn-light w-100" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña" disabled="true" > 
+                            <input type="button" class="btn btn-light w-100 input" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña" disabled="true" > 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <label class="form_control col-12">Nombre:</label>
-                            <input type="text" name="nombre" class="w-100 text_black" value="LOS" id="nombre">
+                            <input type="text" name="nombre" class="w-100 text_black input" value="sadasd" id="nombre">
                         </div>
                         <div class="col-6">
                             <label class="form_control col-12">Apellidos:</label>
-                            <input type="text" name="apellidos" class=" w-100 text_black" value="" id="apell">
+                            <input type="text" name="apellidos" class=" w-100 text_black input" value="asdasd" id="apell">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12"><label class="form_control">Localización:</label></div>
                         <div class="col-6">
-                            <input name="Pais"  type="text" class="text_black w-100" placeholder="Pais" value="HUEVOS" id="pais">
+                            <input name="Pais"  type="text" class="text_black w-100 input" placeholder="Pais" value="" id="pais">
                         </div>
                         <div class="col-6">
-                            <input name="localidad" type="text" class="text_black w-100" placeholder="Localidad" id="local">
+                            <input name="localidad" type="text" class="text_black w-100 input" placeholder="Localidad" id="local">
                         </div>
                     </div>
                     <div class="row">
@@ -94,6 +94,7 @@ Inicio
                                     document.getElementById("apell").disabled = true;
                                     document.getElementById("password").disabled = true;   
                                     document.getElementById("ajusteimagen").disabled = true;  
+                                    document.getElementById("profile-file-input").disabled = true;
                                 }
                                 function desblok() {
                                     document.getElementById("email").disabled = false;
@@ -102,6 +103,7 @@ Inicio
                                     document.getElementById("nombre").disabled = false;
                                     document.getElementById("apell").disabled = false;
                                     document.getElementById("password").disabled = false; 
+                                    document.getElementById("profile-file-input").disabled = false;
                                 }
                                 function initMap() {
                                     // Creamos un objeto mapa y especificamos el elemento DOM donde se va a mostrar.
