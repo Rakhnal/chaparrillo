@@ -31,7 +31,8 @@ Route::get('Editar_usuario', function () {
 // Página Administración
 Route::get('admin_event', 'controlador_tablas@listarEventos');
 Route::post('formevent','controlador_tablas@eliminarEventos');
-
+Route::post('agregarEvento','controlador_tablas@agregarEventos');
+Route::post('modificarEvento','ctrlAjax@modificarEventos');
 // DES17: Página Administrar Documentos - NLO
 // Página Administración
 Route::get('adminDocument', 'controlador_tablas@listarDocumentos');

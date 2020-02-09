@@ -17,7 +17,7 @@
                 <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="agregarEvento" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
                         <div class="col-4">
@@ -141,13 +141,13 @@
                 <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
             </div>
             <div class="modal-body">
-                <form action="formevent" method="POST" enctype="multipart/form-data">
+                 <form action="modificarEvento" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input name="nomb" type="text" class="form-control" value="" placeholder="Nombre del evento" required>
+                                <input name="nomb" type="text" class="form-control" placeholder="Nombre del evento" required>
                             </div>
                             <div class="form-group">
                                 <label>Fecha inicio</label>
@@ -159,30 +159,35 @@
                             </div>
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="ta-event" rows="5" cols="30" placeholder="Escribe una descripción"></textarea>
+                                <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="por-event">Portada de evento:</label>
-                                <input id="por-event" accept="image/*" name="portada" type="file" class="form-control-file">
-                            </div>
-                            <div id="response-container"></div>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
 
                             <div class="form-group">
                                 <label>Localización:</label>
                                 <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                             </div>
 
-                            <div id="map" class="mapa ml-3">
+                            <div id="map2" class="mapa">
 
                             </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Portada de evento:</label>
+                                <input id="imgEvento2" name="portada" type="file" accept="image/*" class="form-control-file" required>
+                            </div>
+                            <div id="img-portada2">
 
+                            </div>
+                            <div class="text-center mt-4">
+                                <input type="submit" name="add" class="btn btn-primary" value="Guardar">
+                            </div>
                         </div>
                     </div>
-                    <input id="mod-evento" name="save" type="submit" class="btn btn-primary" value="Guardar">
                 </form>
             </div>
         </div>
