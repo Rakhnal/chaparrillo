@@ -15,7 +15,7 @@ class Constantes {
     const BBDD = "chaparrillo";
     
     // Páginas del proyecto
-    const INDEX = "index";
+    const INDEX = "principal/index";
     const INFO = "infoPage";
     const FORO = "foro";
     const DOCUMENTACION = "documentacion";

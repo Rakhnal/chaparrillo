@@ -76,11 +76,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Iniciar Sesión</h4>
-                <button type="button" class="close clear white-color" data-dismiss="modal">&times;</button>
+                <button type="button" class="close salir clear white-color" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <form name="logForm" action="login" method="POST">
-                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
+                    <input type="hidden" name="_token" value="bZZElfKz0EwY6czibB7HfVV95MIJkzTA4yU2Qoyf">
                     <div class="row justify-content-center">
                         <div class="name-form">
                             <input type="email" name="correo" id="correo" value="" required/>
@@ -115,17 +115,159 @@
 
 <!------------- Pantalla modal del registro-->
 <div id="register" class="modal fade" role="dialog" data-backdrop = "static">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Registrar Usuario</h4>
-                <button type="button" class="close clear" data-dismiss="modal">&times;</button>
+                <button type="button" class="close salir clear" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                Pruebaaa
+                <form name="regForm" onsubmit="return samePasswords()" action="registro" method="POST">
+                    <input type="hidden" name="_token" value="bZZElfKz0EwY6czibB7HfVV95MIJkzTA4yU2Qoyf">
+                    <div class="row">
+                        <div class="col">
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="email" name="correo" id="correo" value="" required/>
+                                    <label for="correo" class = "label-name">
+                                        <span class = "content-name">
+                                            Correo
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="password" name="pass" id="passPpal" value="" required/>
+                                    <label for="passPpal" class = "label-name">
+                                        <span class = "content-name">
+                                            Contraseña
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="password" name="passVal" id="passVal" value="" required/>
+                                    <label for="passVal" class = "label-name">
+                                        <span class = "content-name">
+                                            Repita la contraseña
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="text" name="name" id="name" value="" required/>
+                                    <label for="name" class = "label-name">
+                                        <span class = "content-name">
+                                            Nombre
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="text" name="apellidos" id="apellidos" value="" required/>
+                                    <label for="apellidos" class = "label-name">
+                                        <span class = "content-name">
+                                            Apellidos
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="text" name="localidad" id="localidad" value="" required/>
+                                    <label for="localidad" class = "label-name">
+                                        <span class = "content-name">
+                                            Localidad
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="text" name="pais" id="pais" value="" required/>
+                                    <label for="pais" class = "label-name">
+                                        <span class = "content-name">
+                                            País
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row justify-content-center">
+                                <div class="name-form">
+                                    <input type="text" name="cp" id="cp" value="" required/>
+                                    <label for="cp" class = "label-name">
+                                        <span class = "content-name">
+                                            Código Postal
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="mapaRegistro">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <input type="submit" class="btn-input add-top-margin" value = "Registrarse" name = "regBtn"/>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="blur-btn" data-toggle="modal" data-target="#register"></button>
+        </div>
+    </div>
+</div>
+
+<!------------- Pantalla modal que muestra que el usuario ya está registrado-->
+<div id="yaexiste" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Información</h4>
+                <button type="button" class="close salir white-color" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <p>El usuario que intentas registrar ya existe, prueba a iniciar sesión</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------- Pantalla modal que muestra que el usuario tiene datos erroneos-->
+<div id="noexiste" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Error</h4>
+                <button type="button" class="close salir white-color" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <p>Usuario/Contraseña incorrectos</p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!------------- Pantalla modal que muestra que se ha registrado correctamente -->
+<div id="okregistro" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">¡Bienvenid@!</h4>
+                <button type="button" class="close salir white-color" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <p>Ha sido registrado correctamente</p>
+
             </div>
         </div>
     </div>
@@ -273,3 +415,24 @@
         </div>
     </div>
 </div>
+
+
+<?php
+if (isset($_GET['yaexiste'])) {
+    ?>
+    <script>$('#yaexiste').modal('show');</script>
+    <?php
+}
+
+if (isset($_GET['noexiste'])) {
+    ?>
+    <script>$('#noexiste').modal('show');</script>
+    <?php
+}
+
+if (isset($_GET['okregistro'])) {
+    ?>
+    <script>$('#okregistro').modal('show');</script>
+    <?php
+}
+?>
