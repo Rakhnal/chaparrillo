@@ -18,6 +18,7 @@ $(document).ready(function () {
             };
 
             var PintaMapa = new google.maps.Map(document.getElementById("map"), ColocaMapa);
+            var PintaMapa = new google.maps.Map(document.getElementById("mapaRegistro"), ColocaMapa);
             // var vercalle = new google.maps.StreetViewPanorama(document.getElementById("map"), calle);
 
             var marca = new google.maps.Marker({

@@ -18,38 +18,44 @@ use App\Clases\Auxiliares\Constantes;
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
-        
+
+        <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="scripts/general/gmaps.js"></script>
+        <script src="scripts/general/geolocate.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
+
+        <script src="scripts/principal/formValidations.js"></script>
+
         <link rel="stylesheet" href="css/general.css" />
     </head>
     <body>
 
         <?php
-        
         $user = null;
-        
+
         if (session()->exists("usrObj")) {
             $user = session()->get("usrObj");
         }
-        
+
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
             <?php
         }
-        
+
         include 'auxiliarphp/modales.blade.php';
         ?>
-            
+
         <div class="loader-wrapper">
             <span class="loader"><span class="loader-inner"></span></span>
         </div>
-        
+
         <script>
-            $(window).on("load",function(){
-              $(".loader-wrapper").fadeOut("slow");
+            $(window).on("load", function(){
+            $(".loader-wrapper").fadeOut("slow");
             });
         </script>
-            
+
         <div id="blur" class="container-fluid">
 
             <div class = "row" id = "header">
@@ -62,12 +68,12 @@ use App\Clases\Auxiliares\Constantes;
                         <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo hidden" id="imgLogo" alt="Logo principal"/></a>
                         <?php
                     } else {
-                    ?>
+                        ?>
                         <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo" id="imgLogo" alt="Logo principal"/></a>
-                    <?php
+                        <?php
                     }
                     ?>
-                    
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -118,13 +124,13 @@ use App\Clases\Auxiliares\Constantes;
 
                             <?php
                             if ($user == null) {
-                            ?>
+                                ?>
                                 <li class="nav-item">
                                     <button type="button" class="blurmodal" data-toggle="modal" data-target="#login" id="btnUser"></button>
                                 </li>
-                            <?php
+                                <?php
                             } else {
-                            ?>
+                                ?>
                                 <div class="dropdown-container">
                                     <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img src="images/icons/login.png" alt="Logearse" id="imgUser"/>
@@ -139,7 +145,7 @@ use App\Clases\Auxiliares\Constantes;
                                         <a class="dropdown-item menu-text" href="#">Cerrar Sesión</a>
                                     </div>
                                 </div>
-                            <?php
+                                <?php
                             }
                             ?>
                         </ul>
@@ -167,11 +173,10 @@ use App\Clases\Auxiliares\Constantes;
             </div>
 
             <?php
-            
             // Agregar aquí las páginas donde no se quiera mostrar el footer
             if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO) {
-            ?>
-            
+                ?>
+
                 <div class="row footer font-small blue pt-4">
 
                     <div class="col">                        
@@ -181,21 +186,21 @@ use App\Clases\Auxiliares\Constantes;
                                     <img src="images/footer/logojccm.png" id="logojccm" alt="Logo de la JCCM" />
                                 </div>
                             </div>
-                            
+
                             <div class="col">
                                 <div class="row justify-content-start">
                                     <img src="images/footer/logochapa.jpg" align-middle id="logochapa" alt="Logo Chaparrillo" />
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row justify-content-center">
                             <img src="images/footer/logouemapa.png" id="logouemapa" alt="Logo de la UE y del MAPA" />
                         </div>
                     </div>
-                    
+
                     <div class="col">
-                        
+
                         <div class="row justify-content-center">
                             <div class="col">
                                 <div class="row justify-content-center">
@@ -204,7 +209,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </a>
                                 </div>
                             </div>
-                            
+
                             <div class="col">
                                 <div class="row justify-content-center">
                                     <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
@@ -213,7 +218,7 @@ use App\Clases\Auxiliares\Constantes;
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row justify-content-center almost-full-height">
                             <div class="col">
                                 <div class="row justify-content-center align-content-center align-items-center full-height">
@@ -222,7 +227,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </a>
                                 </div>
                             </div>
-                            
+
                             <div class="col">
                                 <div class="row justify-content-center align-content-center align-items-center full-height">
                                     <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
@@ -231,12 +236,12 @@ use App\Clases\Auxiliares\Constantes;
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>
-            
-            <?php
+
+                <?php
             }
             ?>
         </div>
