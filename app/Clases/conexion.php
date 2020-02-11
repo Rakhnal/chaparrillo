@@ -2,6 +2,8 @@
 
 namespace App\Clases;
 
+use App\Clases\Auxiliares\Constantes;
+
 /*use App\Usuario;
 use App\Coche;
 use App\Propiedad;*/
@@ -18,17 +20,25 @@ use App\Propiedad;*/
  * @author adonoso
  */
 class conexion {
-
     
-    /*---------  Cargar eventos ------------*/
+    /**
+     * Cargar eventos
+     * @return type
+     */
     public static function sacarEventos(){
         $event = Eventos::all();
         
         return $event;
     }
     
-    
-    /*---------  Agregar eventos ------------*/
+    /**
+     * Agregar eventos
+     * @param type $loca
+     * @param type $lati
+     * @param type $longi
+     * @param type $fec_i
+     * @param type $fec_f
+     */
     public static function agregarEventos($loca,$lati,$longi,$fec_i,$fec_f){
         $evento = new Evento;
         
@@ -39,8 +49,54 @@ class conexion {
         $evento->fecha_fin = $fec_f;
         
         $evento->save();
+    }
+    
+    /**
+     * Login del usuario
+     * @param type $correo
+     * @param type $pass
+     * @return type
+     */
+    public static function existeUsuarioPass($correo, $pass) {
+
+        $user = Usuario::where('correo', $correo)
+                ->first();
         
+        if ($user != null) {
+            if (password_verify($pass, $user->password)) {
+                return $user;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
         
+    }
+    
+    /**
+     * Registro del usuario en base de datos
+     * @param type $correo
+     * @param type $pass
+     * @param type $apellidos
+     * @param type $nombre
+     * @param type $localidad
+     * @param type $pais
+     * @param type $cp
+     */
+    public static function addUser($correo, $pass, $apellidos, $nombre, $localidad, $pais, $cp) {
+
+        $user = new Usuario;
+
+        $user->correo = $correo;
+        $user->pass = $pass;
+        $user->rol = Constantes::NORMAL;
+        $user->apellidos = $apellidos;
+        $user->nombre = $nombre;
+        $user->localidad = $localidad;
+        $user->pais = $pais;
+
+        $user->save();
     }
     
     /*// Buscamos a todos los usuarios en BBDD
