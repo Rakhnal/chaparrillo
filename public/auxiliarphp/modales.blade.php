@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                <textarea name="desevento" id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                             </div>
 
                         </div>
@@ -143,24 +143,24 @@
             </div>
             <div class="modal-body">
                  <form action="modificarEvento" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
+
                     <div class="row">
                         <div class="col-4">
                             <div class="form-group">
                                 <label>Nombre:</label>
-                                <input name="nomb" type="text" class="form-control" placeholder="Nombre del evento" required>
+                                <input name="nomb" value="" type="text" class="form-control" placeholder="Nombre del evento" required>
                             </div>
                             <div class="form-group">
                                 <label>Fecha inicio</label>
-                                <input name="feci" type="date" class="form-control"  required>
+                                <input name="feci" type="date" value="" class="form-control"  required>
                             </div>
                             <div class="form-group">
                                 <label>Fecha fin:</label>
-                                <input name="fecf" type="date" class="form-control" required>
+                                <input name="fecf" type="date" value="" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Descripción:</label>
-                                <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                <textarea id="taa-event" value="" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                             </div>
 
                         </div>
@@ -169,7 +169,7 @@
 
                             <div class="form-group">
                                 <label>Localización:</label>
-                                <input name="loca" type="text" class="form-control" placeholder="Localización" required>
+                                <input name="loca" type="text" value="" class="form-control" placeholder="Localización" required>
                             </div>
 
                             <div id="map2" class="mapa">
@@ -179,7 +179,7 @@
                         <div class="col-4">
                             <div class="form-group">
                                 <label>Portada de evento:</label>
-                                <input id="imgEvento2" name="portada" type="file" accept="image/*" class="form-control-file" required>
+                                <input id="imgEvento2" name="portada" value="" type="file" accept="image/*" class="form-control-file" required>
                             </div>
                             <div id="img-portada2">
 

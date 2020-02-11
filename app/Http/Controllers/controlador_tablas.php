@@ -42,4 +42,28 @@ class controlador_tablas extends Controller {
         return view('administracion/admin_eventos', ['events' => $eventos]);
     }
 
+    
+    public function agregarEventos(Request $req) {
+        
+            $nombre = $req->get('nomb');
+            $fec_in = $req->get('feci');
+            $fec_fi = $req->get('fecf');
+            $descri = $req->get('desevento');
+            $locali = $req->get('loca');
+            $latitu = $req->get('');
+            $longit = $req->get('');
+            $portad = $req->get('portada');
+
+            $event = new Evento($nombre,$fec_in,$fec_fi,$descri,$locali,$longit,$latitu,$portad);
+            
+            $event->save();
+
+
+       $eventos = DB::table('eventos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                ->select('eventos.id_evento', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                ->paginate(8);
+
+        return view('administracion/admin_eventos', ['events' => $eventos]);
+    }
 }

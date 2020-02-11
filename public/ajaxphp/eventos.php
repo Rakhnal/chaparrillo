@@ -9,10 +9,10 @@ if( isset($_GET['id']) ) {
 function get_eventos( $id ) {
     
     //Cambia por los detalles de tu base datos
-    $dbserver = "localhost";;
-    $dbuser = "chaparrillo";;
-    $password = "pistacho123";;
-    $dbname = "chaparrillo";;
+    $dbserver = "localhost";
+    $dbuser = "chaparrillo";
+    $password = "pistacho123";
+    $dbname = "chaparrillo";
     
     $database = new mysqli($dbserver, $dbuser, $password, $dbname);
     

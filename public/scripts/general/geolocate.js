@@ -26,6 +26,12 @@ $(document).ready(function () {
                 icon: "images/icons/location.svg",
                 map: PintaMapa
             });
+            
+            var marca2 = new google.maps.Marker({
+                position: mapa,
+                icon: "images/icons/location.svg",
+                map: PintaMapa2
+            });
         }
         
         function nofunciona(position) {
