@@ -65,7 +65,7 @@ Administrar Documentación
                     <button class="btn blurmodal btnAdd" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
                 </div>
                 <div class="col-4">
-
+                    
                 </div>
             </div>
         </div>
