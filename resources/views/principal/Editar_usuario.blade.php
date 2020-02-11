@@ -1,8 +1,6 @@
 <?php
-
 use App\Clases\conexion;
 use App\Clases\Auxiliares\Constantes;
-
 session()->put("actPage", Constantes::ED_USUARIO);
 ?>
 
@@ -19,7 +17,7 @@ Inicio
 <div class="col-12 ml-3">
     <div class="row col-12 form_base">
         <div class="col-12 text-center mt-2">
-            <h2>Editar perfil</h2>
+            <h1>Perfil</h1>
         </div>
         <div class="row col-12"><!--cambiar-->
             <div class=" col-4" >
@@ -34,12 +32,13 @@ Inicio
                 <script type="text/javascript" src="{{ URL::asset('scripts/general/main.js') }}"></script>
                 <script type="text/javascript" src="{{ URL::asset('scripts/general/cropper.min.js') }}"></script>
                 <!--        boostrap model change profile pic-->
-                <div class="col-12" id="ajusteimagen">
+                <div class="col-12" id="ajusteimagen" style="display:none;">
                     <div class="ajax-response" id="loading"></div>
                     <h4 class="m-t-5 m-b-5 ellipsis text-center">Ajustar imagen</h4>                    
                     <div class="profile-pic-wraper">
                         <?php if (file_exists('images/profile-pic/' . $seesion_user . '.jpg')): ?>
                             <img src="<?php echo 'images/profile-pic/' . $seesion_user . '.jpg'; ?>" alt="" id="change-profile-pic" class="col-12">
+                            <script>alert(<?php= 'images/profile-pic/' . $seesion_user . '.jpg';?>)</script>
                         <?php else: ?>
                             <img src="images/profile-pic/default.png" alt="" id="change-profile-pic" class="col-12" >    
                         <?php endif; ?>
@@ -86,25 +85,82 @@ Inicio
                         <div class="col-12">
                             <label class="form_control">Posición:</label>
                             <script>
-                                function blok() {
+                                function block() {
                                     document.getElementById("email").disabled = true;
                                     document.getElementById("pais").disabled = true;
                                     document.getElementById("local").disabled = true;
                                     document.getElementById("nombre").disabled = true;
                                     document.getElementById("apell").disabled = true;
-                                    document.getElementById("password").disabled = true;   
-                                    document.getElementById("ajusteimagen").disabled = true;  
+                                    document.getElementById("password").disabled = true;
                                     document.getElementById("profile-file-input").disabled = true;
+                                    DesActivarCampo();
                                 }
                                 function desblok() {
-                                    document.getElementById("email").disabled = false;
-                                    document.getElementById("pais").disabled = false;
-                                    document.getElementById("local").disabled = false;
-                                    document.getElementById("nombre").disabled = false;
-                                    document.getElementById("apell").disabled = false;
-                                    document.getElementById("password").disabled = false; 
-                                    document.getElementById("profile-file-input").disabled = false;
+                                    if (document.getElementById("email").disabled === true) {
+                                        document.getElementById("email").disabled = false;
+                                        document.getElementById("pais").disabled = false;
+                                        document.getElementById("local").disabled = false;
+                                        document.getElementById("nombre").disabled = false;
+                                        document.getElementById("apell").disabled = false;
+                                        document.getElementById("password").disabled = false;
+                                        document.getElementById("profile-file-input").disabled = false;
+                                        ActivarCampo();
+                                    } else {
+                                        if (document.getElementById("email").disabled === false) {
+                                            alert();
+                                        }
+                                        document.getElementById("email").disabled = true;
+                                        document.getElementById("pais").disabled = true;
+                                        document.getElementById("local").disabled = true;
+                                        document.getElementById("nombre").disabled = true;
+                                        document.getElementById("apell").disabled = true;
+                                        document.getElementById("password").disabled = true;
+                                        document.getElementById("ajusteimagen").disabled = true;
+                                        document.getElementById("profile-file-input").disabled = true;
+                                        DesActivarCampo();
+                                    }
                                 }
+
+                                function alertDGC() {
+                                    var dgcTiempo = 1;
+                                    var ventanaCS = '<div class="alert alert-success alert-dismissible fade show"  role="alert">Datos actualizados<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                                    $('body').append(ventanaCS);
+                                    var alVentana = $('.dgcVentana').height();
+                                    var alNav = $(window).height();
+                                    var supNav = $(window).scrollTop();
+                                    $('.dgcAlert').css('height', $(document).height());
+                                    $('.dgcVentana').css('top', ((alNav - alVentana) / 2 + supNav - 100) + 'px');
+                                    $('.dgcAlert').css('display', 'block');
+                                    $('.dgcAlert').animate({opacity: 1}, dgcTiempo);
+                                    $('.dgcCerrar,.dgcAceptar').click(function (e) {
+                                        $('.dgcAlert').animate({opacity: 0}, dgcTiempo);
+                                        setTimeout("$('.dgcAlert').remove()", dgcTiempo);
+                                    });
+
+                                    window.setTimeout(function () {
+                                        $(".alert").slideUp(300, function () {
+                                            $(this).remove();
+                                        });
+                                        setTimeout(function () {
+                                            $(".alert").close();
+                                        }, 2000);
+                                    }, 1000);
+                                }
+
+                                window.alert = function (message) {
+                                    alertDGC(message);
+                                };
+                                function ActivarCampo() {
+                                    var contenedor = document.getElementById("ajusteimagen");
+                                    contenedor.style.display = "block";
+                                    return true;
+                                }
+                                function DesActivarCampo() {
+                                    var contenedor = document.getElementById("ajusteimagen");
+                                    contenedor.style.display = "none";
+                                    return true;
+                                }
+                                
                                 function initMap() {
                                     // Creamos un objeto mapa y especificamos el elemento DOM donde se va a mostrar.
                                     var map = new google.maps.Map(document.getElementById('mapa'), {
@@ -132,7 +188,8 @@ Inicio
                                 }
                             </script>
                             <div id="mapa" class="col-12"> </div>
-                            <script>initMap(); blok();</script>
+                            <script>initMap();
+                                block();</script>
                         </div>
                     </div>
                 </div>
