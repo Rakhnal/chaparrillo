@@ -9,6 +9,9 @@ window.onscroll = function () {
 
 function scrollFunction() {
     if (document.body.scrollTop > 70 || document.documentElement.scrollTop > 70) {
+        
+        $('.dropdown-menu').css('margin-top', '15px');
+        
         document.getElementById("header").style.height = "25px";
         document.getElementById("navHeader").style.minHeight = "25px";
         document.getElementById("logogr").style.display = "none";
@@ -17,9 +20,10 @@ function scrollFunction() {
         document.getElementById("imgLogo").style.width = "55px";
         document.getElementById("btnUser").style.width = "30px";
         document.getElementById("btnUser").style.height = "30px";
-
-        $('.dropdown-menu').css('margin-top', '15px');
     } else {
+        
+        $('.dropdown-menu').css('margin-top', '25px');
+        
         document.getElementById("header").style.height = "100px";
         document.getElementById("navHeader").style.minHeight = "100px";
         document.getElementById("logogr").style.display = "block";
@@ -28,7 +32,5 @@ function scrollFunction() {
         document.getElementById("imgLogo").style.width = "75px";
         document.getElementById("btnUser").style.width = "35px";
         document.getElementById("btnUser").style.height = "35px";
-
-        $('.dropdown-menu').css('margin-top', '25px');
     }
 }
