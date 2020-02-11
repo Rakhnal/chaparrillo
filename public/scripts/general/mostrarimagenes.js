@@ -15,6 +15,7 @@ function archivo(evt) {
                return function(e) {
                // Creamos la imagen.
                       document.getElementById("img-portada").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                      document.getElementById("img-portada2").innerHTML = ['<img class="thumb" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
                };
            })(f);
  
@@ -23,3 +24,4 @@ function archivo(evt) {
 }
              
       document.getElementById('imgEvento').addEventListener('change', archivo, false);
+      document.getElementById('imgEvento2').addEventListener('change', archivo, false);
