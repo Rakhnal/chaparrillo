@@ -20,17 +20,25 @@ use App\Propiedad;*/
  * @author adonoso
  */
 class conexion {
-
     
-    /*---------  Cargar eventos ------------*/
+    /**
+     * Cargar eventos
+     * @return type
+     */
     public static function sacarEventos(){
         $event = Eventos::all();
         
         return $event;
     }
     
-    
-    /*---------  Agregar eventos ------------*/
+    /**
+     * Agregar eventos
+     * @param type $loca
+     * @param type $lati
+     * @param type $longi
+     * @param type $fec_i
+     * @param type $fec_f
+     */
     public static function agregarEventos($loca,$lati,$longi,$fec_i,$fec_f){
         $evento = new Evento;
         

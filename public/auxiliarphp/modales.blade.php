@@ -80,7 +80,7 @@
             </div>
             <div class="modal-body">
                 <form name="logForm" action="login" method="POST">
-                    <input type="hidden" name="_token" value="bZZElfKz0EwY6czibB7HfVV95MIJkzTA4yU2Qoyf">
+                    <input type="hidden" name="_token" value="3vGAstlVVxbUVJMF906ktiE7fX65erb2avVkULTq">
                     <div class="row justify-content-center">
                         <div class="name-form">
                             <input type="email" name="correo" id="correo" value="" required/>
@@ -123,7 +123,7 @@
             </div>
             <div class="modal-body">
                 <form name="regForm" onsubmit="return samePasswords()" action="registro" method="POST">
-                    <input type="hidden" name="_token" value="bZZElfKz0EwY6czibB7HfVV95MIJkzTA4yU2Qoyf">
+                    <input type="hidden" name="_token" value="3vGAstlVVxbUVJMF906ktiE7fX65erb2avVkULTq">
                     <div class="row">
                         <div class="col">
                             <div class="row justify-content-center">
