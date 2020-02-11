@@ -18,7 +18,7 @@ function scrollFunction() {
         document.getElementById("btnUser").style.width = "30px";
         document.getElementById("btnUser").style.height = "30px";
 
-        $('.dropdown-menu').css('margin-top', '15px');
+        $('.dropdown-menu').css('margin-top', '10px');
     } else {
         document.getElementById("header").style.height = "100px";
         document.getElementById("navHeader").style.minHeight = "100px";
@@ -29,6 +29,6 @@ function scrollFunction() {
         document.getElementById("btnUser").style.width = "35px";
         document.getElementById("btnUser").style.height = "35px";
 
-        $('.dropdown-menu').css('margin-top', '25px');
+        $('.dropdown-menu').css('margin-top', '20px');
     }
 }

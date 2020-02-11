@@ -41,6 +41,14 @@ a:hover {
     color: #E9D985;
 }
 
+ul {
+    display: inline-table !important;
+}
+
+li {
+    display: table-cell;
+}
+
 .container-fluid {
     width: 100%;
     height: 100%;
@@ -95,7 +103,7 @@ a:hover {
 }
 
 .dropdown-menu {
-    margin-top: 25px;
+    margin-top: 20px;
     border-color: white;
     background-color: rgba(82, 117, 59, 0.98);
     border-radius: 0;
@@ -239,8 +247,11 @@ a:hover {
 
 
 #imgUser {
-    width: 35px;
-    height: 35px;
+    
+    border-radius: 50%;
+    
+    width: 40px;
+    height: 40px;
 
     transition: 1s ease all;
 }
