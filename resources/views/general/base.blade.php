@@ -562,12 +562,25 @@ use App\Clases\Auxiliares\Constantes;
                                             ?>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
+
                                             <a class="dropdown-item menu-text" href="#">Perfil</a>
-                                            <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
-                                            <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
-                                            <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
-                                            <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
-                                            <a class="dropdown-item menu-text" href="#">Mensajes</a>
+                                            <?php
+                                            if ($user->rol == Constantes::ADMIN) {
+                                                ?>
+                                                <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
+                                                <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
+                                                <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
+                                                <?php
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($user->rol == Constantes::ADMIN || $user->rol == Constantes::SWATS) {
+                                                ?>
+                                                <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
+                                                <?php
+                                            }
+                                            ?>
+                                            <!--a class="dropdown-item menu-text" href="#">Mensajes</a-->
                                             <a class="dropdown-item menu-text" href="logout">Cerrar Sesión</a>
                                         </div>
                                     </div>
