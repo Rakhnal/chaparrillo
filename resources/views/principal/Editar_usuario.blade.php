@@ -1,6 +1,8 @@
 <?php
+
 use App\Clases\conexion;
 use App\Clases\Auxiliares\Constantes;
+
 session()->put("actPage", Constantes::ED_USUARIO);
 ?>
 
@@ -38,7 +40,6 @@ Inicio
                     <div class="profile-pic-wraper">
                         <?php if (file_exists('images/profile-pic/' . $seesion_user . '.jpg')): ?>
                             <img src="<?php echo 'images/profile-pic/' . $seesion_user . '.jpg'; ?>" alt="" id="change-profile-pic" class="col-12">
-                            <script>alert(<?php= 'images/profile-pic/' . $seesion_user . '.jpg';?>)</script>
                         <?php else: ?>
                             <img src="images/profile-pic/default.png" alt="" id="change-profile-pic" class="col-12" >    
                         <?php endif; ?>
@@ -75,7 +76,7 @@ Inicio
                     <div class="row">
                         <div class="col-12"><label class="form_control">Localización:</label></div>
                         <div class="col-6">
-                            <input name="Pais"  type="text" class="text_black w-100 input" placeholder="Pais" value="" id="pais">
+                            <input name="Pais" type="text" class="text_black w-100 input" placeholder="Pais" id="paise">
                         </div>
                         <div class="col-6">
                             <input name="localidad" type="text" class="text_black w-100 input" placeholder="Localidad" id="local">
@@ -85,9 +86,72 @@ Inicio
                         <div class="col-12">
                             <label class="form_control">Posición:</label>
                             <script>
+
+                                $(document).ready(function () {
+                                    $("#editarUsuario").click(function () {
+                                        if (document.getElementById("email").disabled === false) {
+                                            alert();
+                                        }
+                                        desblok();
+                                        function desblok() {
+                                            if (document.getElementById("email").disabled === true) {
+                                                document.getElementById("email").disabled = false;
+                                                document.getElementById("paise").disabled = false;
+                                                document.getElementById("local").disabled = false;
+                                                document.getElementById("nombre").disabled = false;
+                                                document.getElementById("apell").disabled = false;
+                                                document.getElementById("password").disabled = false;
+                                                document.getElementById("profile-file-input").disabled = false;
+                                                ActivarCampo();
+                                            } else {
+                                                document.getElementById("email").disabled = true;
+                                                document.getElementById("paise").disabled = true;
+                                                document.getElementById("local").disabled = true;
+                                                document.getElementById("nombre").disabled = true;
+                                                document.getElementById("apell").disabled = true;
+                                                document.getElementById("password").disabled = true;
+                                                document.getElementById("ajusteimagen").disabled = true;
+                                                document.getElementById("profile-file-input").disabled = true;
+                                                DesActivarCampo();
+                                            }
+                                        }
+
+                                        function alertDGC() {
+                                            var dgcTiempo = 1;
+                                            var ventanaCS = '<div class="alert alert-success alert-dismissible fade show"  role="alert">Datos actualizados<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
+                                            $('body').append(ventanaCS);
+                                            var alVentana = $('.dgcVentana').height();
+                                            var alNav = $(window).height();
+                                            var supNav = $(window).scrollTop();
+                                            $('.dgcAlert').css('height', $(document).height());
+                                            $('.dgcVentana').css('top', ((alNav - alVentana) / 2 + supNav - 100) + 'px');
+                                            $('.dgcAlert').css('display', 'block');
+                                            $('.dgcAlert').animate({opacity: 1}, dgcTiempo);
+                                            $('.dgcCerrar,.dgcAceptar').click(function (e) {
+                                                $('.dgcAlert').animate({opacity: 0}, dgcTiempo);
+                                                setTimeout("$('.dgcAlert').remove()", dgcTiempo);
+                                            });
+                                            window.setTimeout(function () {
+                                                $(".alert").slideUp(300, function () {
+                                                    $(this).remove();
+                                                });
+                                                setTimeout(function () {
+                                                    $(".alert").close();
+                                                }, 2000);
+                                            }, 1000);
+                                        }
+
+                                        window.alert = function (message) {
+                                            alertDGC(message);
+                                        };
+                                    });
+                                });
+                            </script>
+                            <script>
+
                                 function block() {
                                     document.getElementById("email").disabled = true;
-                                    document.getElementById("pais").disabled = true;
+                                    document.getElementById("paise").disabled = true;
                                     document.getElementById("local").disabled = true;
                                     document.getElementById("nombre").disabled = true;
                                     document.getElementById("apell").disabled = true;
@@ -95,61 +159,6 @@ Inicio
                                     document.getElementById("profile-file-input").disabled = true;
                                     DesActivarCampo();
                                 }
-                                function desblok() {
-                                    if (document.getElementById("email").disabled === true) {
-                                        document.getElementById("email").disabled = false;
-                                        document.getElementById("pais").disabled = false;
-                                        document.getElementById("local").disabled = false;
-                                        document.getElementById("nombre").disabled = false;
-                                        document.getElementById("apell").disabled = false;
-                                        document.getElementById("password").disabled = false;
-                                        document.getElementById("profile-file-input").disabled = false;
-                                        ActivarCampo();
-                                    } else {
-                                        if (document.getElementById("email").disabled === false) {
-                                            alert();
-                                        }
-                                        document.getElementById("email").disabled = true;
-                                        document.getElementById("pais").disabled = true;
-                                        document.getElementById("local").disabled = true;
-                                        document.getElementById("nombre").disabled = true;
-                                        document.getElementById("apell").disabled = true;
-                                        document.getElementById("password").disabled = true;
-                                        document.getElementById("ajusteimagen").disabled = true;
-                                        document.getElementById("profile-file-input").disabled = true;
-                                        DesActivarCampo();
-                                    }
-                                }
-
-                                function alertDGC() {
-                                    var dgcTiempo = 1;
-                                    var ventanaCS = '<div class="alert alert-success alert-dismissible fade show"  role="alert">Datos actualizados<button type="button" class="close" data-dismiss="alert">&times;</button></div>';
-                                    $('body').append(ventanaCS);
-                                    var alVentana = $('.dgcVentana').height();
-                                    var alNav = $(window).height();
-                                    var supNav = $(window).scrollTop();
-                                    $('.dgcAlert').css('height', $(document).height());
-                                    $('.dgcVentana').css('top', ((alNav - alVentana) / 2 + supNav - 100) + 'px');
-                                    $('.dgcAlert').css('display', 'block');
-                                    $('.dgcAlert').animate({opacity: 1}, dgcTiempo);
-                                    $('.dgcCerrar,.dgcAceptar').click(function (e) {
-                                        $('.dgcAlert').animate({opacity: 0}, dgcTiempo);
-                                        setTimeout("$('.dgcAlert').remove()", dgcTiempo);
-                                    });
-
-                                    window.setTimeout(function () {
-                                        $(".alert").slideUp(300, function () {
-                                            $(this).remove();
-                                        });
-                                        setTimeout(function () {
-                                            $(".alert").close();
-                                        }, 2000);
-                                    }, 1000);
-                                }
-
-                                window.alert = function (message) {
-                                    alertDGC(message);
-                                };
                                 function ActivarCampo() {
                                     var contenedor = document.getElementById("ajusteimagen");
                                     contenedor.style.display = "block";
@@ -160,7 +169,7 @@ Inicio
                                     contenedor.style.display = "none";
                                     return true;
                                 }
-                                
+
                                 function initMap() {
                                     // Creamos un objeto mapa y especificamos el elemento DOM donde se va a mostrar.
                                     var map = new google.maps.Map(document.getElementById('mapa'), {
@@ -194,11 +203,12 @@ Inicio
                     </div>
                 </div>
                 <div class="col-md-12 text-center mb-3">
-                    <button type="button" class="btn btn-primary" onclick="desblok()">Editar</button>
+                    <button type="button" class="btn btn-primary" id="editarUsuario">Editar</button>
                 </div>
             </form>
         </div>
     </div>
+
 </div>
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

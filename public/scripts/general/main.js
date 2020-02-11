@@ -27,7 +27,7 @@ var loadFile = function (event) {
 
             var imageData = $(this).cropper('getImageData');
             var croppedCanvas = $(this).cropper('getCroppedCanvas');
-            $('#profile-result').html('<img src="' + croppedCanvas.toDataURL() + '" class="thumb-lg img-circle">');
+            $('#profile-result').html('<img src="' + croppedCanvas.toDataURL() + '" class="thumb-lg img-circle" id="secreto">');
 
             $('#save-profile').click(function () {
                 $('#loading').show();
