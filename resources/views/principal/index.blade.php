@@ -41,11 +41,11 @@ Inicio
                         <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding justify-text">
-                        
+
                         <h2>Clitra</h2>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
                     </div>
                 </div>
@@ -58,11 +58,11 @@ Inicio
                         <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding justify-text">
-                        
+
                         <h2>Polilla de Almacén</h2>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
                     </div>
                 </div>
@@ -76,11 +76,11 @@ Inicio
                         <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding justify-text">
-                        
+
                         <h2>Psilas del Pistacho</h2>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
                     </div>
                 </div>
@@ -94,11 +94,11 @@ Inicio
                         <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding justify-text">
-                        
+
                         <h2>Chinches</h2>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-                        
+
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
                     </div>
                 </div>
