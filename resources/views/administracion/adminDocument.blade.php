@@ -47,8 +47,8 @@ Administrar Documentación
                             <tr>
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
-                                <td><button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
-                                <td><button class="btn btn-primary blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                                <td><button class="btn btnDelete" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
+                                <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
                             </tr>
                             <?php
                         }
@@ -62,7 +62,7 @@ Administrar Documentación
                     {{ $docs->links() }}
                 </div>
                 <div class="col-4 d-flex justify-content-center">
-                    <button class="btn btn-success blurmodal" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
+                    <button class="btn blurmodal btnAdd" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
                 </div>
                 <div class="col-4">
 
