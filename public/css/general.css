@@ -300,6 +300,18 @@ a:hover {
     text-align: center;
 }
 
+.modal-xxl{
+    margin-left: 15%;
+    margin-right: 15%;
+    max-width: none !important;
+    width: 70%;
+    
+}
+
+.categ{
+    background: transparent;
+}
+
 /* Cambiar los estilos del autocompletar en navegadores*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -383,7 +395,7 @@ select:-webkit-autofill:focus {
 
 .mapa{
     width: 100%;
-    height: 340px;
+    height: 300px;
 }
 
 #img-portada{

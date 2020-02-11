@@ -1,5 +1,5 @@
 $(document).ready(function () {
-alert('asdf');
+
 //Cabecera obligatoria para solventar lo del csrf de Laravel.
     $.ajaxSetup({
         headers: {
@@ -14,7 +14,7 @@ alert('asdf');
         var parametros = $(this).attr('data-user');
         
         $.ajax({
-            url: 'modificarEvento',
+            url: 'b.php',
             data:  $(this).attr('data-user'),
             dataType: "application/json",
             proccessData: false,

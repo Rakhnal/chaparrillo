@@ -58,7 +58,7 @@ Administrar Eventos
                             <td><?= $event->localizacion ?></td>
                             <td><?= $event->fecha_inicio ?></td>
                             <td><?= $event->fecha_fin ?></td>
-                            <input id="id_e" name="id_e" value="<?=$event->id_evento?>" type="hidden">
+                            <input id="id_e" name="id_e" value="<?= $event->id_evento ?>" type="hidden">
                             <td><input class="btn btn-primary blurmodal b-modify" type="button" id="b-modify" data-user="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
                             <td><input class="btn btn-danger" id="delete" type="submit" name="delete" value="Borrar"></td>
                         </form>
@@ -67,14 +67,14 @@ Administrar Eventos
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="row mt-3">
                 <div class="col-4">
                     {{ $events->links() }}
                 </div>
 
                 <div class="col-4 d-flex justify-content-center">
-                    <button class="btn btn-warning blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear">Agregar</button>
+                    <input class="btn btn-warning blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear" value="Agregar">
                 </div>
                 <div class="col-4">
 

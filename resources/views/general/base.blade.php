@@ -1,6 +1,7 @@
 <?php
 
 use App\Clases\Auxiliares\Constantes;
+use App\Clases\conexion;
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +53,7 @@ use App\Clases\Auxiliares\Constantes;
             
         <!-- *************** Ventana Agregar Evento ******************** -->
         <div class="modal fade eventos" id="ventana-crear" data-backdrop="static">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title">
@@ -62,7 +63,7 @@ use App\Clases\Auxiliares\Constantes;
                     </div>
                     <div class="modal-body">
                         <form action="agregarEvento" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -79,16 +80,26 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                        <textarea id="taa-event" name="descrip"rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                                     </div>
-
                                 </div>
-
+                                
                                 <div class="col-4">
 
                                     <div class="form-group">
                                         <label>Localización:</label>
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Categoría:</label>
+                                        <select name="catego" class="categ" multiple>
+                                            <?php 
+                                            $categoria = conexion::sacarCategorias();
+                                            foreach ($categoria as $ca){ ?>
+                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+                                            <?php }?>
+                                        </select>
                                     </div>
 
                                     <div id="map" class="mapa">
@@ -319,7 +330,7 @@ use App\Clases\Auxiliares\Constantes;
 
         <!-- *************** Ventana Modificar Evento ******************** -->
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title">
@@ -329,7 +340,7 @@ use App\Clases\Auxiliares\Constantes;
                     </div>
                     <div class="modal-body">
                         <form action="modificarEvento" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -350,7 +361,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
 
                                 </div>
-
+                                <!-- Agregar select de categorías -->
                                 <div class="col-4">
 
                                     <div class="form-group">
@@ -358,6 +369,17 @@ use App\Clases\Auxiliares\Constantes;
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
 
+                                     <div class="form-group">
+                                        <label>Categoría:</label>
+                                        <select class="categ" multiple>
+                                            <?php 
+                                            $categoria = conexion::sacarCategorias();
+                                            foreach ($categoria as $ca){ ?>
+                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                    
                                     <div id="map2" class="mapa">
 
                                     </div>
