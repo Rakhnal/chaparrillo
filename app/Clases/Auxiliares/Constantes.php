@@ -20,9 +20,10 @@ class Constantes {
     const FORO = "foro";
     const DOCUMENTACION = "documentacion";
     const AGENDA = "agenda";
-    const AD_EVENTOS = "admin_eventos";
-    const AD_DOCUMENTOS = "adminDocument";
-    const ED_USUARIO = "Editar_usuario";
+    const AD_EVENTOS = "administracion/admin_eventos";
+    const AD_DOCUMENTOS = "administracion/adminDocument";
+    const AD_INFORMES = "administracion/adminInformes";
+    const ED_USUARIO = "principal/Editar_usuario";
     
     // Roles
     const NORMAL = "0";
