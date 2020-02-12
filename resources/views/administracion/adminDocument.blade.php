@@ -45,14 +45,18 @@ Administrar Documentación
                         foreach ($docs as $doc) {
                             ?>
                             <tr>
-                                <td><?= $doc->nombre ?></td>
-                                <td><?= $doc->fecha_subida ?></td>
-                                <td><button class="btn btnDelete" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
-                                <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
-                            </tr>
-                            <?php
-                        }
-                        ?>
+                        <form name="formDelete" action="eliminarDocumento" onsubmit="return swal('¿Seguro que quieres eliminar el documento?')" method="POST">
+                            {{ csrf_field() }}
+                            <td><?= $doc->nombre ?></td>
+                            <td><?= $doc->fecha_subida ?></td>
+                            <input id="id_d" name="id_d" value="<?= $doc->id_documento ?>" type="hidden">
+                            <td><input type="submit" class="btn btnDelete" name="btnEliminar" value="Eliminar"></td>
+                            <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                        </form>
+                        </tr>
+                        <?php
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
@@ -65,7 +69,7 @@ Administrar Documentación
                     <button class="btn blurmodal btnAdd" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
                 </div>
                 <div class="col-4">
-                    
+
                 </div>
             </div>
         </div>

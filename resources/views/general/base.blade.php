@@ -27,6 +27,7 @@ use App\Clases\Auxiliares\Constantes;
         <script src="scripts/principal/formValidations.js"></script>
 
         <link rel="stylesheet" href="css/general.css" />
+        <script src="scripts/general/sweetalert.min.js"></script>
     </head>
     <body>
 

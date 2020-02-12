@@ -51,7 +51,7 @@ Administrar Eventos
                     <tbody>
                         <?php foreach ($events as $event) { ?>
                             <tr>
-                        <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres borrar el evento?')" method="POST">
+                        <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres eliminar el evento?')" method="POST">
                             {{ csrf_field() }}
                             <td><img src="" alt="imagen"></td>
                             <td><?= $event->nombre ?></td>
