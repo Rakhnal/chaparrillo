@@ -34,6 +34,7 @@ Administrar Documentación
                 <table id="tablaAdminDocument">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nombre</th>
                             <th>Fecha de subida</th>
                             <th></th>
@@ -45,18 +46,15 @@ Administrar Documentación
                         foreach ($docs as $doc) {
                             ?>
                             <tr>
-                        <form name="formDelete" action="eliminarDocumento" onsubmit="return swal('¿Seguro que quieres eliminar el documento?')" method="POST">
-                            {{ csrf_field() }}
-                            <td><?= $doc->nombre ?></td>
-                            <td><?= $doc->fecha_subida ?></td>
-                            <input id="id_d" name="id_d" value="<?= $doc->id_documento ?>" type="hidden">
-                            <td><input type="submit" class="btn btnDelete" name="btnEliminar" value="Eliminar"></td>
-                            <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
-                        </form>
-                        </tr>
-                        <?php
-                    }
-                    ?>
+                                <td><?= $doc->id_documento ?></td>
+                                <td><?= $doc->nombre ?></td>
+                                <td><?= $doc->fecha_subida ?></td>
+                                <td><button id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar">Eliminar</button></td>
+                                <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -76,5 +74,47 @@ Administrar Documentación
     </div>
 
 </div>
+
+<script>
+
+    $(document).on("click", "#eliminarDocumentos", function () {
+        var id = $(this).attr("data-id");
+        swal({
+            title: "¿Estás seguro?",
+            text: "Una vez eliminado no podrás recuperar tu documento.",
+            icon: "warning",
+            buttons: true,
+            confirmButtonText: "Sí",
+            cancelButtonText: "No",
+            dangerMode: true
+        })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        swal(eliminarDocument(id), {
+                            icon: "success",
+                        });
+                    } else {
+                        swal("Tranquilo, tu documento está a salvo ;}");
+                    }
+                });
+    });
+
+    function eliminarDocument(id) {
+        alert(id);
+        var msg = "";
+        $.ajax({
+            data: {identificador: id},
+            url: "eliminarDocumento",
+            method: "POST",
+            success: function (response) {
+                msg = "¡El documento ha sido eliminado con éxito!";
+                return response;
+            }
+        });
+        return msg;
+        alert("Puta");
+    }
+
+</script>
 
 @endsection

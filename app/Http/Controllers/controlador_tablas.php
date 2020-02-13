@@ -28,20 +28,15 @@ class controlador_tablas extends Controller {
     }
 
     public function eliminarDocumentos() {
-        $id_documento = intval($_POST['id_d']);
-
+        $id_documento = intval($_POST["identificador"]);
+        dd("Hola");
         $documento = Documento::find($id_documento);
 
         if ($documento) {
             $documento->delete();
         }
-
-        $documentos = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible')
-                ->paginate(8);
-
-        return view('administracion/adminDocument', ['docs' => $documentos]);
+        
+        controlador_tablas::listarDocumentos();
     }
 
     public function eliminarEventos() {
