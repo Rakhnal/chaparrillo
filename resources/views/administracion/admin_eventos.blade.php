@@ -33,7 +33,7 @@ Administrar Eventos
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="mainTable">
         <div class="col">
             <div class="row table-responsive" id="tab-event">
                 <table id="events">
