@@ -192,6 +192,9 @@ li {
 }
 
 .btn-eliminar {
+    
+    font-size: 0.0000000000001px;
+    
     width: 30px;
     height: 30px;
     
@@ -204,6 +207,9 @@ li {
 }
 
 .btn-guardar {
+    
+    font-size: 0.0000000000001px;
+    
     width: 30px;
     height: 30px;
     
