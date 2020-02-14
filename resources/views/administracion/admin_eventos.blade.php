@@ -83,7 +83,19 @@ Administrar Eventos
             </div>
         </div>
     </div>
-
+    <?php
+    if (isset($error)) {
+        $error = implode(',', $error);
+        ?>
+        <span id="m-error" class="alert alert-danger text-center fixed-bottom"><?php echo $error; ?></span>
+    <?php } ?>
 </div>
+<script>
+    $(document).ready(function () {
 
+        $('#m-error').hide(9000);
+        $('#m-error').hide("slow");
+
+    });
+</script>
 @endsection

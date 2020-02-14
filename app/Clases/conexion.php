@@ -3,6 +3,7 @@
 namespace App\Clases;
 
 use App\Clases\Auxiliares\Constantes;
+use App\Usuario;
 use App\Categoria;
 
 /*use App\Usuario;
@@ -70,7 +71,7 @@ class conexion {
      */
     public static function existeUsuarioPass($correo, $pass) {
 
-        $user = Usuario::where('correo', $correo)
+        $user = Usuario::where('email', $correo)
                 ->first();
         
         if ($user != null) {
@@ -95,12 +96,12 @@ class conexion {
      * @param type $pais
      * @param type $cp
      */
-    public static function addUser($correo, $pass, $apellidos, $nombre, $localidad, $pais, $cp) {
+    public static function addUser($correo, $pass, $apellidos, $nombre, $localidad, $pais) {
 
         $user = new Usuario;
 
-        $user->correo = $correo;
-        $user->pass = $pass;
+        $user->email = $correo;
+        $user->password = $pass;
         $user->rol = Constantes::NORMAL;
         $user->apellidos = $apellidos;
         $user->nombre = $nombre;

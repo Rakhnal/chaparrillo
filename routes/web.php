@@ -44,3 +44,5 @@ Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
 Route::post('login', 'usercontroller@iniciarSesion');
 // Registro
 Route::post('registro', 'usercontroller@registrarUsuario');
+// Cerrar sesión
+Route::get('logout', 'usercontroller@cerrarSesion');

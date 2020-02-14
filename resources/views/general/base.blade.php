@@ -22,7 +22,6 @@ use App\Clases\conexion;
 
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
-        <script src="scripts/general/geolocate.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 
         <script src="scripts/principal/formValidations.js"></script>
@@ -32,11 +31,7 @@ use App\Clases\conexion;
     <body>
 
         <?php
-        $user = null;
-
-        if (session()->exists("usrObj")) {
-            $user = session()->get("usrObj");
-        }
+        $user = session()->get("userObj");
 
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
@@ -50,8 +45,8 @@ use App\Clases\conexion;
         <!-- **************************** MODALES ****************************** -->
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
-            
-        <!-- *************** Ventana Agregar Evento ******************** -->
+
+        <!-- ******************** Ventana Agregar Evento *********************** -->
         <div class="modal fade eventos" id="ventana-crear" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
@@ -93,7 +88,7 @@ use App\Clases\conexion;
                                     
                                     <div class="form-group">
                                         <label>Categoría:</label>
-                                        <select name="catego" class="categ" multiple>
+                                        <select name="catego[]" class="categ" multiple>
                                             <?php 
                                             $categoria = conexion::sacarCategorias();
                                             foreach ($categoria as $ca){ ?>
@@ -486,26 +481,6 @@ use App\Clases\conexion;
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
-        
-        <?php
-        if (isset($_GET['yaexiste'])) {
-            ?>
-            <script>$('#yaexiste').modal('show');</script>
-            <?php
-        }
-
-        if (isset($_GET['noexiste'])) {
-            ?>
-            <script>$('#noexiste').modal('show');</script>
-            <?php
-        }
-
-        if (isset($_GET['okregistro'])) {
-            ?>
-            <script>$('#okregistro').modal('show');</script>
-            <?php
-        }
-        ?>
 
         <div class="loader-wrapper">
             <span class="loader"><span class="loader-inner"></span></span>
@@ -592,40 +567,50 @@ use App\Clases\conexion;
                                 <?php
                             } else {
                                 ?>
-                                <div class="dropdown-container">
-                                    <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="images/icons/login.png" alt="Logearse" id="imgUser"/>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
-                                        <a class="dropdown-item menu-text" href="#">Perfil</a>
-                                        <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
-                                        <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
-                                        <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
-                                        <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
-                                        <a class="dropdown-item menu-text" href="#">Mensajes</a>
-                                        <a class="dropdown-item menu-text" href="#">Cerrar Sesión</a>
+                                <li class="nav-item">
+                                    <div class="dropdown-container">
+                                        <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <?php
+                                            if ($user->img_user != null) {
+                                                ?>
+                                                <img src="data:image/jpeg;base64,<?php echo base64_encode($user->img_user); ?>" alt="Imagen de perfil" id="imgUser"/>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                <img src="images/icons/default.png" alt="Imagen por defecto" id="imgUser"/>
+                                                <?php
+                                            }
+                                            ?>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
+
+                                            <a class="dropdown-item menu-text" href="#">Perfil</a>
+                                            <?php
+                                            if ($user->rol == Constantes::ADMIN) {
+                                                ?>
+                                                <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
+                                                <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
+                                                <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
+                                                <?php
+                                            }
+                                            ?>
+                                            <?php
+                                            if ($user->rol == Constantes::ADMIN || $user->rol == Constantes::SWATS) {
+                                                ?>
+                                                <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
+                                                <?php
+                                            }
+                                            ?>
+                                            <!--a class="dropdown-item menu-text" href="#">Mensajes</a-->
+                                            <a class="dropdown-item menu-text" href="logout">Cerrar Sesión</a>
+                                        </div>
                                     </div>
-                                </div>
+                                </li>
                                 <?php
                             }
                             ?>
                         </ul>
                     </div>
-
-                    <?php
-                    // Si existe el usuario en sesión significa que está iniciada la sesión
-                    if (session()->exists("userObj")) {
-                        $userObj = session()->get("userObj");
-                        ?>
-                        <a id="closeSes" href="cerrarSesion">Cerrar Sesión</a>
-                        <?php
-                    } else {
-                        // No está iniciada la sesión
-                        ?>
-
-                        <?php
-                    }
-                    ?>
                 </nav>
             </div>
 
@@ -702,6 +687,24 @@ use App\Clases\conexion;
 
                 </div>
 
+                <?php
+            }
+
+            if (isset($yaexiste)) {
+                ?>
+                <script>$('#yaexiste').modal('show');</script>
+                <?php
+            }
+
+            if (isset($noexiste)) {
+                ?>
+                <script>$('#noexiste').modal('show');</script>
+                <?php
+            }
+
+            if (isset($okregistro)) {
+                ?>
+                <script>$('#okregistro').modal('show');</script>
                 <?php
             }
             ?>

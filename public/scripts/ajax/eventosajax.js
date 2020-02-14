@@ -12,10 +12,11 @@ $(document).ready(function () {
         //var parametros = {"id": this.val()};
 
         var parametros = $(this).attr('data-user');
-        
+        var token = '{{ csrf_token() }}';
+
         $.ajax({
-            url: 'b.php',
-            data:  $(this).attr('data-user'),
+            url: 'modificarEventos',
+            data: {parametros, _token: token},
             dataType: "application/json",
             proccessData: false,
             type: 'post',

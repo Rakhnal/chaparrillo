@@ -16,12 +16,12 @@ class usercontroller extends Controller
     public function iniciarSesion(Request $req) {
         
         $correo = $req->get('correo');
-        $pass = Hash::make($req->get('pass'));
+        $pass = $req->get('pass');
         
         // Comprobamos que existe el usuario y que la constraseña es correcta
         $user = conexion::existeUsuarioPass($correo, $pass);
 
-        if ($user) {
+        if ($user != null) {
             // Insertamos al usuario en sesión
             session()->put("userObj", $user);
             
@@ -36,6 +36,17 @@ class usercontroller extends Controller
         }
         
         return view(session()->get("actPage"), $datos);
+    }
+    
+    /**
+     * Cerrar la sesión del usuario actual
+     * @param Request $req
+     * @return type
+     */
+    public function cerrarSesion(Request $req) {
+        session()->forget("userObj");
+        
+        return view(session()->get("actPage"));
     }
     
     /**
@@ -57,7 +68,7 @@ class usercontroller extends Controller
         // Si no está ya registrado
         if ($user == null) {
             
-            conexion::addUser($correo, $pass, $apellidos, $name, $localidad, $pais, $cp);
+            conexion::addUser($correo, $pass, $apellidos, $name, $localidad, $pais);
             
             $datos = [
                 'okregistro' => true

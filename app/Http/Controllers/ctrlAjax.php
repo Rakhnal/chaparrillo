@@ -15,6 +15,6 @@ class ctrlAjax extends Controller
         
         $evento = Evento::find($id_evento);
                    
-        return view('administracion/admin_eventos', ['evento' => $evento]);
+        return $evento;
     }
 }

@@ -33,6 +33,12 @@ $(document).ready(function () {
                 icon: "images/icons/location.svg",
                 map: PintaMapa2
             });
+            
+            var marca3 = new google.maps.Marker({
+                position: mapa,
+                icon: "images/icons/location.svg",
+                map: PintaMapa3
+            });
         }
         
         function nofunciona(position) {
