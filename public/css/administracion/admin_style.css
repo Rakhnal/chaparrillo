@@ -8,6 +8,22 @@ and open the template in the editor.
     Author     : rafa
 */
 
+#migas {
+    background: none;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    color: white !important;
+}
+
+.breadcrumb-item.active {
+    color: #44642F !important;
+}
+
+#events, #tablaAdminDocument {
+    width: 100%;
+}
+
 th,td {
     text-align: center !important;
 }
@@ -60,15 +76,61 @@ p {
     margin-right: 2%;
     padding: 4.5%;
     border-radius: 15px;
-    
+
     height: calc(100% - 100px);
     background-color: rgba(92, 79, 43, 0.6);
 }
 
-#productName {
-    margin-left: 5px;
-    border: 1px solid white;
-    width: 70%;
-    height: 30px;
-    padding: 0;
+.btnDelete, .btnEdit, .btnAdd {
+    width: 100px;
+    height: 40px;
+    border: 1px solid white !important;
+    border-radius: 5px !important;
+    transition: all .3s ease-in-out !important;
+}
+
+.btnDelete {
+    background-color: #E38282;
+}
+
+.btnEdit {
+    background-color: #9BAAC5;
+}
+
+.btnAdd {
+    background-color: #78AA57;
+}
+
+.btnDelete:hover {
+    background-color: #D56565;
+}
+
+.btnEdit:hover {
+    background-color: #7B90B7;
+}
+
+.btnAdd:hover {
+    background-color: #8F7E4F;
+}
+
+.page-item {
+    background-color: transparent;
+}
+
+.page-link {
+    background-color: #8F7E4F !important;
+    border: 1px solid white !important;
+    color: white !important;
+}
+
+.page-link:hover {
+    background-color: #82703F !important;
+}
+
+.page-item.active .page-link {
+    background-color: #78AA57 !important;
+}
+
+.page-item.active .page-link:hover {
+    background-color: #689B46 !important;
 }
