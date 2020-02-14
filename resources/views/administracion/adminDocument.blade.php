@@ -8,6 +8,7 @@ session()->put("actPage", Constantes::AD_DOCUMENTOS);
 
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
 <script type="text/javascript" src="scripts/general/modales.js"></script>
+<meta name="csrf_token" content="{{ csrf_token() }}">
 
 @extends('../general/base')
 
@@ -49,7 +50,7 @@ Administrar Documentación
                                 <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
-                                <td><button id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar">Eliminar</button></td>
+                                <td><form name="formEliminar" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar" value="Eliminar"></form></td>
                                 <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
                             </tr>
                             <?php
@@ -75,7 +76,7 @@ Administrar Documentación
 
 </div>
 
-<script>
+<script type="text/javascript">
 
     $(document).on("click", "#eliminarDocumentos", function () {
         var id = $(this).attr("data-id");
@@ -84,15 +85,11 @@ Administrar Documentación
             text: "Una vez eliminado no podrás recuperar tu documento.",
             icon: "warning",
             buttons: true,
-            confirmButtonText: "Sí",
-            cancelButtonText: "No",
             dangerMode: true
         })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal(eliminarDocument(id), {
-                            icon: "success",
-                        });
+                        eliminarDocument(id);
                     } else {
                         swal("Tranquilo, tu documento está a salvo ;}");
                     }
@@ -100,19 +97,47 @@ Administrar Documentación
     });
 
     function eliminarDocument(id) {
-        alert(id);
-        var msg = "";
+//        alert(id);
+//        var token = '{{csrf_token()}}';
+//        $.ajax({
+//            type: "post",
+//            url: "eliminarDocumento",
+//            data: {identificador: id, _token: token},
+//            success: function (response) {
+//                alert("Success!");
+//                return response;
+//            },
+//            error: function () {
+//                alert("Me he roto");
+//            }
+//        });
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "identificador": id,
+            "_token": token
+        };
         $.ajax({
-            data: {identificador: id},
             url: "eliminarDocumento",
-            method: "POST",
+            data: parametros,
+            type: 'post',
             success: function (response) {
-                msg = "¡El documento ha sido eliminado con éxito!";
-                return response;
+                if (response === "ok") {
+                    location.reload();
+                } else {
+                    swal("Error al eliminar el documento.", {
+                        icon: "error"
+                    });
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function () {
+                alert("Me he roto");
             }
         });
-        return msg;
-        alert("Puta");
     }
 
 </script>

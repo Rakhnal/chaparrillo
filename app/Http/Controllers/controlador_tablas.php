@@ -29,14 +29,17 @@ class controlador_tablas extends Controller {
 
     public function eliminarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        dd("Hola");
-        $documento = Documento::find($id_documento);
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento);
 
         if ($documento) {
             $documento->delete();
+            $qhp = "ok";
+        } else {
+            $qhp = "fail";
         }
-        
-        controlador_tablas::listarDocumentos();
+        return $qhp;
     }
 
     public function eliminarEventos() {
@@ -54,6 +57,11 @@ class controlador_tablas extends Controller {
                 ->paginate(8);
 
         return view('administracion/admin_eventos', ['events' => $eventos]);
+    }
+
+    public function borrame() {
+        dd("Hola");
+        echo "Hola";
     }
 
 }

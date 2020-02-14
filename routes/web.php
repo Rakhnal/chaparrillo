@@ -36,7 +36,9 @@ Route::post('modificarEvento','ctrlAjax@modificarEventos');
 // DES17: Página Administrar Documentos - NLO
 // Página Administración
 Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
-Route::post('eliminarDocumento', 'controlador_tablas@eliminarDocumentos');
+//Route::post('eliminarDocumento', 'controlador_tablas@eliminarDocumentos');
+//Route::post('borrame', 'controlador_tablas@borrame');
+Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
 
 // DES21: Login/Registro
 // Login
