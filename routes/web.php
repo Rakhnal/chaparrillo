@@ -46,3 +46,8 @@ Route::post('login', 'usercontroller@iniciarSesion');
 Route::post('registro', 'usercontroller@registrarUsuario');
 // Cerrar sesión
 Route::get('logout', 'usercontroller@cerrarSesion');
+
+// DES19: Página Administrar Informes
+Route::get('adminInformes', 'controlador_tablas@listarInformes');
+Route::post('newInforme', 'controlador_tablas@agregarInforme');
+Route::post('actInforme', 'controlador_tablas@actInforme');

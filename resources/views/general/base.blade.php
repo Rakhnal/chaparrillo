@@ -133,7 +133,7 @@ use App\Clases\conexion;
                             {{ csrf_field() }}
                             <div class="row justify-content-center">
                                 <div class="name-form">
-                                    <input type="email" name="correo" id="correo" value="" required/>
+                                    <input type="email" autocomplete="off" name="correo" id="correo" value="" required/>
                                     <label for="correo" class = "label-name">
                                         <span class = "content-name">
                                             Correo
@@ -143,7 +143,7 @@ use App\Clases\conexion;
                             </div>
                             <div class="row justify-content-center">
                                 <div class="name-form">
-                                    <input type="password" name="pass" id="pass" value="" required/>
+                                    <input type="password" autocomplete="off" name="pass" id="pass" value="" required/>
                                     <label for="pass" class = "label-name">
                                         <span class = "content-name">
                                             Contraseña
@@ -178,7 +178,7 @@ use App\Clases\conexion;
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="email" name="correo" id="correo" value="" required/>
+                                            <input type="email" autocomplete="off" name="correo" id="correo" value="" required/>
                                             <label for="correo" class = "label-name">
                                                 <span class = "content-name">
                                                     Correo
@@ -188,7 +188,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="password" name="pass" id="passPpal" value="" required/>
+                                            <input type="password" autocomplete="off" name="pass" id="passPpal" value="" required/>
                                             <label for="passPpal" class = "label-name">
                                                 <span class = "content-name">
                                                     Contraseña
@@ -198,7 +198,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="password" name="passVal" id="passVal" value="" required/>
+                                            <input type="password" autocomplete="off" name="passVal" id="passVal" value="" required/>
                                             <label for="passVal" class = "label-name">
                                                 <span class = "content-name">
                                                     Repita la contraseña
@@ -208,7 +208,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="name" id="name" value="" required/>
+                                            <input type="text" autocomplete="off" name="name" id="name" value="" required/>
                                             <label for="name" class = "label-name">
                                                 <span class = "content-name">
                                                     Nombre
@@ -218,7 +218,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="apellidos" id="apellidos" value="" required/>
+                                            <input type="text" autocomplete="off" name="apellidos" id="apellidos" value="" required/>
                                             <label for="apellidos" class = "label-name">
                                                 <span class = "content-name">
                                                     Apellidos
@@ -228,7 +228,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="localidad" id="localidad" value="" required/>
+                                            <input type="text" autocomplete="off" name="localidad" id="localidad" value="" required/>
                                             <label for="localidad" class = "label-name">
                                                 <span class = "content-name">
                                                     Localidad
@@ -238,7 +238,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="pais" id="pais" value="" required/>
+                                            <input type="text" autocomplete="off" name="pais" id="pais" value="" required/>
                                             <label for="pais" class = "label-name">
                                                 <span class = "content-name">
                                                     País
@@ -249,13 +249,20 @@ use App\Clases\conexion;
                                 </div>
                                 <div class="col">
                                     <div class="row justify-content-center">
-                                        <div class="name-form">
-                                            <input type="text" name="cp" id="cp" value="" required/>
-                                            <label for="cp" class = "label-name">
-                                                <span class = "content-name">
-                                                    Código Postal
-                                                </span>
-                                            </label>
+                                        <div class="col">
+                                            <div class="row justify-content-center name-form">
+                                                <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
+                                                <label for="cp" class = "label-name">
+                                                    <span class = "content-name">
+                                                        Código Postal
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row justify-content-center align-content-center align-items-center">
+                                                <button class="btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div id="mapaRegistro">
@@ -477,6 +484,54 @@ use App\Clases\conexion;
             </div>
         </div>
 
+        <!-- Ventana modal para añadir un nuevo informe -->
+
+        <div class="modal fade" id="modalNuevoInforme" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header align-items-center">
+                        <div class="modal-title">
+                            Nuevo Informe
+                        </div>
+                        <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <form name="formNewInforme" action="newInforme" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Nombre del producto:</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="text" autocomplete="off" id="productName" name="productName" required>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Litros por hectárea:</p>
+                                        <input type="number" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Fecha Informe:</p>
+                                        <input type="date" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" class="btn btn-guardar margin-top" id="btnNewInforme" name="btnNewInforme" value="">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
@@ -597,7 +652,7 @@ use App\Clases\conexion;
                                             <?php
                                             if ($user->rol == Constantes::ADMIN || $user->rol == Constantes::SWATS) {
                                                 ?>
-                                                <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
+                                                <a class="dropdown-item menu-text" href="adminInformes">Administrar Informes</a>
                                                 <?php
                                             }
                                             ?>
@@ -620,7 +675,7 @@ use App\Clases\conexion;
 
             <?php
             // Agregar aquí las páginas donde no se quiera mostrar el footer
-            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO) {
+            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES) {
                 ?>
 
                 <div class="row footer font-small blue pt-4">
