@@ -32,12 +32,14 @@ class controlador_tablas extends Controller {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
+                    ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         }
 
@@ -70,16 +72,18 @@ class controlador_tablas extends Controller {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
+                    ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         }
 
-        return view(Constantes::AD_INFORMES, ['infs' => $informes]);
+        return redirect('adminInformes')->with('infs', $informes);
     }
 
     /**
@@ -121,16 +125,18 @@ class controlador_tablas extends Controller {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
+                    ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         }
 
-        return view(Constantes::AD_INFORMES, ['infs' => $informes]);
+        return redirect('adminInformes')->with('infs', $informes);
     }
 
     public function listarEventos() {

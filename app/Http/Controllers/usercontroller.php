@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Clases\conexion;
+use App\Clases\Auxiliares\Constantes;
 
 class usercontroller extends Controller
 {
@@ -46,7 +47,7 @@ class usercontroller extends Controller
     public function cerrarSesion(Request $req) {
         session()->forget("userObj");
         
-        return view(session()->get("actPage"));
+        return view(Constantes::INDEX);
     }
     
     /**

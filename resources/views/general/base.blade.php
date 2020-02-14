@@ -239,16 +239,20 @@ use App\Clases\Auxiliares\Constantes;
                                 </div>
                                 <div class="col">
                                     <div class="row justify-content-center">
-                                        <div class="name-form col">
-                                            <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
-                                            <label for="cp" class = "label-name">
-                                                <span class = "content-name">
-                                                    Código Postal
-                                                </span>
-                                            </label>
+                                        <div class="col">
+                                            <div class="row justify-content-center name-form">
+                                                <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
+                                                <label for="cp" class = "label-name">
+                                                    <span class = "content-name">
+                                                        Código Postal
+                                                    </span>
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="col">
-                                            <button type="button" onclick="this.resetMarker()" name="btnreset" id="btnreset">Reiniciar Marcador</button>
+                                            <div class="row justify-content-center align-content-center align-items-center">
+                                                <button class="btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div id="mapaRegistro">

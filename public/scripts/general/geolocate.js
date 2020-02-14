@@ -9,6 +9,8 @@ $(document).ready(function () {
     } else {
         alert("Este navegador no soporta geolocalización");
     }
+    
+    $('#btnreset').on('click', resetMarker);
 
     function Sacalugar(position) {
         var latitud = position.coords.latitude;
@@ -90,7 +92,7 @@ $(document).ready(function () {
     function resetMarker() {
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         
-        clearMarkers();
+        marcadorRegistro.setMap(null);
     }
 
     function nofunciona(position) {
