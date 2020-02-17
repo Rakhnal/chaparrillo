@@ -39,13 +39,13 @@ Administrar Eventos
                 <table id="events">
                     <thead>
                         <tr>
-                            <th>Portada</th>
-                            <th>Nombre</th>
-                            <th>Localización</th>
-                            <th>Fecha inicio</th>
-                            <th>Fecha fin</th>
-                            <th>Guardar</th>
-                            <th>Borrar</th>
+                            <th id="portada-e">Portada</th>
+                            <th id="nombre-e">Nombre</th>
+                            <th id="local-e">Localización</th>
+                            <th id="fi-e">Fecha inicio</th>
+                            <th id="ff-e">Fecha fin</th>
+                            <th id="guardar-e">Guardar</th>
+                            <th id="borrar-e">Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +53,7 @@ Administrar Eventos
                             <tr>
                         <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres borrar el evento?')" method="POST">
                             {{ csrf_field() }}
-                            <td><img src="" alt="imagen"></td>
+                            <td><img src="data:image/jpg;base64,<?php echo base64_encode($event->imagen); ?>" alt="Portada evento" class="img-fluid img-ev"></td>
                             <td><?= $event->nombre ?></td>
                             <td><?= $event->localizacion ?></td>
                             <td><?= $event->fecha_inicio ?></td>
@@ -85,6 +85,7 @@ Administrar Eventos
     </div>
     <?php
     if (isset($error)) {
+        
         $error = implode(',', $error);
         ?>
         <span id="m-error" class="alert alert-danger text-center fixed-bottom"><?php echo $error; ?></span>

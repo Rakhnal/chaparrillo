@@ -55,6 +55,9 @@ $(document).ready(function () {
         
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         // var vercalle = new google.maps.StreetViewPanorama(document.getElementById("map"), calle);
+        
+        localStorage.setItem('latitud', latitud);
+        localStorage.setItem('longitud', longitud);
     }
 
     function markerCoords(markerobject) {
@@ -98,6 +101,5 @@ $(document).ready(function () {
     function nofunciona(position) {
         alert("Error al cargar");
     }
-    ;
 
 });

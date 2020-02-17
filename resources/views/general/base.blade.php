@@ -78,28 +78,36 @@ use App\Clases\conexion;
                                         <textarea id="taa-event" name="descrip"rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-4">
 
                                     <div class="form-group">
                                         <label>Localización:</label>
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label>Categoría:</label>
                                         <select name="catego[]" class="categ" multiple>
-                                            <?php 
+                                            <?php
                                             $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca){ ?>
-                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php }?>
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
                                     <div id="map" class="mapa">
 
                                     </div>
+
+                                    <input id="latitud" type="hidden" name="latitud" value="">
+                                    <input id="longitud" type="hidden" name="longitud" value="">
+                                    <script>
+                                        $('#latitud').val(localStorage.getItem('latitud'));
+                                        $('#longitud').val(localStorage.getItem('longitud'));
+                                    </script>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
@@ -371,17 +379,18 @@ use App\Clases\conexion;
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label>Categoría:</label>
                                         <select class="categ" multiple>
-                                            <?php 
+                                            <?php
                                             $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca){ ?>
-                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php }?>
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+                                            <?php } ?>
                                         </select>
                                     </div>
-                                    
+
                                     <div id="map2" class="mapa">
 
                                     </div>
