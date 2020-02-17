@@ -10,19 +10,20 @@ use App\Clases\conexion;
         <title> @yield('titulo') </title>
 
         <link rel="shortcut icon" type="image/jpg" href="images/logo.png" />
-        <script type="text/javascript" src="{{ URL::asset('scripts/general/jquery-3.4.1.min.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/general/modales.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
 
+        <script src="scripts/general/geolocate.js"></script>
+        
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing"async defer></script>
 
         <script src="scripts/principal/formValidations.js"></script>
 
@@ -38,6 +39,10 @@ use App\Clases\conexion;
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
             <?php
+        } else {
+        ?>
+            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
+        <?php 
         }
         ?>
 
@@ -581,10 +586,10 @@ use App\Clases\conexion;
                                 <a class="nav-link menu-text" href="index">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Proyecto</a>
+                                <a class="nav-link menu-text" href="proyecto">Proyecto</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Cultivo en CLM</a>
+                                <a class="nav-link menu-text" href="cultivos">Cultivo en CLM</a>
                             </li>
 
                             <div class="dropdown-container">
@@ -592,26 +597,26 @@ use App\Clases\conexion;
                                     Plagas del Proyecto
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="ddListar">
-                                    <a class="dropdown-item menu-text" href="#">Clitra</a>
-                                    <a class="dropdown-item menu-text" href="#">Polilla de Almacén</a>
-                                    <a class="dropdown-item menu-text" href="#">Psilas del Pistacho</a>
-                                    <a class="dropdown-item menu-text" href="#">Chinches</a>
+                                    <a class="dropdown-item menu-text" href="clitra">Clitra</a>
+                                    <a class="dropdown-item menu-text" href="polilla">Polilla de Almacén</a>
+                                    <a class="dropdown-item menu-text" href="psilas">Psilas del Pistacho</a>
+                                    <a class="dropdown-item menu-text" href="chinches">Chinches</a>
                                 </div>
                             </div>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Lugares de Trabajo</a>
+                                <a class="nav-link menu-text" href="lugares">Lugares de Trabajo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Noticias</a>
+                                <a class="nav-link menu-text" href="noticias">Noticias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Foro</a>
+                                <a class="nav-link menu-text" href="foro">Foro</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Documentación</a>
+                                <a class="nav-link menu-text" href="documentacion">Documentación</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Agenda</a>
+                                <a class="nav-link menu-text" href="agenda">Agenda</a>
                             </li>
 
                             <?php
@@ -640,7 +645,7 @@ use App\Clases\conexion;
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
 
-                                            <a class="dropdown-item menu-text" href="#">Perfil</a>
+                                            <a class="dropdown-item menu-text" href="Editar_usuario">Perfil</a>
                                             <?php
                                             if ($user->rol == Constantes::ADMIN) {
                                                 ?>

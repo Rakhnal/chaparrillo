@@ -1,0 +1,52 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17-feb-2020, 10:51:58
+    Author     : adonoso
+*/
+
+.fondo {
+    width: 100%;
+    height: 300px;
+    
+    padding: 0;
+}
+
+.parallax {
+    width: 100%;
+    height: 100%;
+    
+    margin: 0;
+}
+
+.back-trans {
+    background: transparent;
+}
+
+.fondo02 {
+    width: 100%;
+    height: 300px;
+    
+    background-image: url(../../images/chaparrillo/elegidas/pistachos02.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.fondo03 {
+    width: 100%;
+    height: 300px;
+    
+    background-image: url(../../images/chaparrillo/elegidas/pistachos03.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.format-div {
+    font-size: 1.25em;
+    
+    text-align: justify;
+    padding: 75px 125px;
+}
