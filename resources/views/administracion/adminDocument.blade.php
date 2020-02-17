@@ -8,6 +8,7 @@ session()->put("actPage", Constantes::AD_DOCUMENTOS);
 
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
 <script type="text/javascript" src="scripts/general/modales.js"></script>
+<meta name="csrf_token" content="{{ csrf_token() }}">
 
 @extends('../general/base')
 
@@ -34,6 +35,7 @@ Administrar Documentación
                 <table id="tablaAdminDocument">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Nombre</th>
                             <th>Fecha de subida</th>
                             <th></th>
@@ -45,10 +47,11 @@ Administrar Documentación
                         foreach ($docs as $doc) {
                             ?>
                             <tr>
+                                <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
-                                <td><button class="btn btn-danger" data-toggle="modal" data-target="#modalEliminar">Eliminar</button></td>
-                                <td><button class="btn btn-primary blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                                <td><form name="formEliminar" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar" value="Eliminar"></form></td>
+                                <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
                             </tr>
                             <?php
                         }
@@ -62,7 +65,7 @@ Administrar Documentación
                     {{ $docs->links() }}
                 </div>
                 <div class="col-4 d-flex justify-content-center">
-                    <button class="btn btn-success blurmodal" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
+                    <button class="btn blurmodal btnAdd" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
                 </div>
                 <div class="col-4">
 
@@ -72,5 +75,71 @@ Administrar Documentación
     </div>
 
 </div>
+
+<script type="text/javascript">
+
+    $(document).on("click", "#eliminarDocumentos", function () {
+        var id = $(this).attr("data-id");
+        swal({
+            title: "¿Estás seguro?",
+            text: "Una vez eliminado no podrás recuperar tu documento.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        eliminarDocument(id);
+                    } else {
+                        swal("Tranquilo, tu documento está a salvo ;}");
+                    }
+                });
+    });
+
+    function eliminarDocument(id) {
+//        alert(id);
+//        var token = '{{csrf_token()}}';
+//        $.ajax({
+//            type: "post",
+//            url: "eliminarDocumento",
+//            data: {identificador: id, _token: token},
+//            success: function (response) {
+//                alert("Success!");
+//                return response;
+//            },
+//            error: function () {
+//                alert("Me he roto");
+//            }
+//        });
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "identificador": id,
+            "_token": token
+        };
+        $.ajax({
+            url: "eliminarDocumento",
+            data: parametros,
+            type: 'post',
+            success: function (response) {
+                if (response === "ok") {
+                    location.reload();
+                } else {
+                    swal("Error al eliminar el documento.", {
+                        icon: "error"
+                    });
+                }
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function () {
+                alert("Me he roto");
+            }
+        });
+    }
+
+</script>
 
 @endsection
