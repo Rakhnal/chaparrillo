@@ -51,7 +51,7 @@ Administrar Documentación
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
                                 <td><form name="formEliminar" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar" value="Eliminar"></form></td>
-                                <td><form name="formModificar" action="modificarDocumento" method="POST"><input type="button" id="modificarDocumentos" class="btn btnEdit blurmodal" data-idMod="<?= $doc->id_documento ?>" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></form></td>
+                                <td><input type="button" id="modificarDocumentos" class="btn btnEdit blurmodal" data-idMod="<?= $doc->id_documento ?>" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></td>
                             </tr>
                             <?php
                         }

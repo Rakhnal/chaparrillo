@@ -13,7 +13,9 @@ use App\Documento;
 
 class controlador_tablas extends Controller {
 
+    //************************************************************************//
     //DES17: Página para administrar documentación
+    //************************************************************************//
     /**
      * Esta función lista todos los documentos de la base de datos.
      * @return type
@@ -62,7 +64,9 @@ class controlador_tablas extends Controller {
         return $qhp;
     }
 
+    //************************************************************************//
     //DES19: Página Administrar Informes
+    //************************************************************************//
     /**
      * Mostrará los datos de la página en modo SWAT o Admin
      * @return type
@@ -182,7 +186,9 @@ class controlador_tablas extends Controller {
         return redirect('adminInformes')->with('infs', $informes);
     }
 
+    //************************************************************************//
     //DES18: Página para adminsitrar eventos
+    //************************************************************************//
     public function listarEventos() {
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
