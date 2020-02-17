@@ -17,6 +17,7 @@ class Constantes {
     // Páginas del proyecto
     const INDEX = "principal/index";
     const INFO = "infoPage";
+    const PROYECTO = "informacion/proyecto";
     const FORO = "foro";
     const DOCUMENTACION = "documentacion";
     const AGENDA = "agenda";
