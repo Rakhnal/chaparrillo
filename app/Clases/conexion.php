@@ -4,6 +4,7 @@ namespace App\Clases;
 
 use App\Clases\Auxiliares\Constantes;
 use App\Usuario;
+use App\Categoria;
 
 /*use App\Usuario;
 use App\Coche;
@@ -50,6 +51,16 @@ class conexion {
         $evento->fecha_fin = $fec_f;
         
         $evento->save();
+    }
+    /**
+     * 
+     * @return type
+     */
+    public static function sacarCategorias(){
+        
+        $categoria = Categoria::all();
+        
+        return $categoria;
     }
     
     /**

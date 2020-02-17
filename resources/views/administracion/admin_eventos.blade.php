@@ -33,7 +33,7 @@ Administrar Eventos
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="mainTable">
         <div class="col">
             <div class="row table-responsive" id="tab-event">
                 <table id="events">
@@ -67,7 +67,7 @@ Administrar Eventos
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="row mt-3">
                 <div class="col-4">
                     {{ $events->links() }}
@@ -83,7 +83,19 @@ Administrar Eventos
             </div>
         </div>
     </div>
-
+    <?php
+    if (isset($error)) {
+        $error = implode(',', $error);
+        ?>
+        <span id="m-error" class="alert alert-danger text-center fixed-bottom"><?php echo $error; ?></span>
+    <?php } ?>
 </div>
+<script>
+    $(document).ready(function () {
 
+        $('#m-error').hide(9000);
+        $('#m-error').hide("slow");
+
+    });
+</script>
 @endsection

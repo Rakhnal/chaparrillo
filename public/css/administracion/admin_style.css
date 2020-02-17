@@ -28,8 +28,47 @@ th,td {
     text-align: center !important;
 }
 
-#mainTable {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type=text], input[type=number], input[type=date] {
+    border: 1px solid white;
+}
+
+button {
+    transition: 0.3s ease-in all !important;
+}
+
+input[type=submit] {
+    transition: 0.3s ease-in all !important;
+}
+
+p {
+    margin-top: 15px !important;
+    margin-bottom: 0 !important;
+}
+
+#migas {
+    background: none;
+}
+
+#events, #tablaAdminDocument, #tablaAdminInformes {
+    width: 100%;
+}
+
+#mainTable {
     margin-left: 2%;
     margin-right: 2%;
     padding: 4.5%;

@@ -33,12 +33,18 @@ Route::get('admin_event', 'controlador_tablas@listarEventos');
 Route::post('formevent','controlador_tablas@eliminarEventos');
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
 Route::post('modificarEvento','ctrlAjax@modificarEventos');
+Route::post('categorias','controlador_tablas@sacarCategorias');
+
 // DES17: Página Administrar Documentos - NLO
-// Página Administración
+// Listar documentos
 Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
 //Route::post('eliminarDocumento', 'controlador_tablas@eliminarDocumentos');
 //Route::post('borrame', 'controlador_tablas@borrame');
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
+// Eliminar documentos
+Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
+// Modificar documentos
+Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 
 // DES21: Login/Registro
 // Login
@@ -47,3 +53,8 @@ Route::post('login', 'usercontroller@iniciarSesion');
 Route::post('registro', 'usercontroller@registrarUsuario');
 // Cerrar sesión
 Route::get('logout', 'usercontroller@cerrarSesion');
+
+// DES19: Página Administrar Informes
+Route::get('adminInformes', 'controlador_tablas@listarInformes');
+Route::post('newInforme', 'controlador_tablas@agregarInforme');
+Route::post('actInforme', 'controlador_tablas@actInforme');
