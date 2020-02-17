@@ -9,6 +9,7 @@ use App\Publicacion;
 use App\Imagen;
 use App\Informe;
 use App\Clases\Auxiliares\Constantes;
+use App\Documento;
 
 class controlador_tablas extends Controller {
 
@@ -151,13 +152,23 @@ class controlador_tablas extends Controller {
         return view(Constantes::AD_EVENTOS, ['events' => $eventos]);
     }
 
-    /**
-     * 
-     * @param Request $req
-     * @return type
-     */
-    public function eliminarEventos(Request $req) {
-        $id_evento = intval($req->get('id_e'));
+    public function eliminarDocumentos() {
+        $id_documento = intval($_POST["identificador"]);
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento);
+
+        if ($documento) {
+            $documento->delete();
+            $qhp = "ok";
+        } else {
+            $qhp = "fail";
+        }
+        return $qhp;
+    }
+
+    public function eliminarEventos() {
+        $id_evento = intval($_POST['id_e']);
 
         $event = Evento::find($id_evento);
         $publi = Publicacion::find($id_evento);
@@ -165,6 +176,9 @@ class controlador_tablas extends Controller {
 
         $catego = DB::table('asignar_categorias')->where('id_item', '=', $id_evento)->delete();
 
+        if ($event) {
+            $event->delete();
+        }
 
         $event->delete();
         $publi->delete();
@@ -256,6 +270,11 @@ class controlador_tablas extends Controller {
                
            return \Redirect::route('admin_event',['events'=>$eventos,'error'=>$error]);
         }
+    }
+
+    public function borrame() {
+        dd("Hola");
+        echo "Hola";
     }
 
 }

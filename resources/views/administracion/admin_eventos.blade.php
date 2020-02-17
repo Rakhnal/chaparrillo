@@ -51,16 +51,16 @@ Administrar Eventos
                     <tbody>
                         <?php foreach ($events as $event) { ?>
                             <tr>
-                        <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres borrar el evento?')" method="POST">
+                        <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres eliminar el evento?')" method="POST">
                             {{ csrf_field() }}
                             <td><img src="data:image/jpg;base64,<?php echo base64_encode($event->imagen); ?>" alt="Portada evento" class="img-fluid img-ev"></td>
                             <td><?= $event->nombre ?></td>
                             <td><?= $event->localizacion ?></td>
                             <td><?= $event->fecha_inicio ?></td>
                             <td><?= $event->fecha_fin ?></td>
-                            <input id="id_e" name="id_e" value="<?= $event->id_evento ?>" type="hidden">
-                            <td><input class="btn btn-primary blurmodal b-modify" type="button" id="b-modify" data-user="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
-                            <td><input class="btn btn-danger" id="delete" type="submit" name="delete" value="Borrar"></td>
+                            <input id="id_e" name="id_e" value="<?=$event->id_evento?>" type="hidden">
+                            <td><input class="btn btnDelete" id="delete" type="submit" name="delete" value="Eliminar"></td>
+                            <td><input class="btn btnEdit blurmodal" type="button" id="b-modify" data-user="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
                         </form>
                         </tr>
                     <?php } ?>
@@ -74,7 +74,7 @@ Administrar Eventos
                 </div>
 
                 <div class="col-4 d-flex justify-content-center">
-                    <input class="btn btn-warning blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear" value="Agregar">
+                    <button class="btn btnAdd blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear">Agregar</button>
                 </div>
                 <div class="col-4">
 
