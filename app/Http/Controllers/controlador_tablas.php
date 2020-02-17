@@ -45,8 +45,19 @@ class controlador_tablas extends Controller {
         }
         return $qhp;
     }
+    
+    public function buscarDocumentos() {
+        $id_documento = intval($_POST["identificador"]);
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento)
+                ->select('*')
+                ->first();
+        
+        return $documento;
+    }
 
-    public function modificarDocumentos(Request $req) {
+    public function modificarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')

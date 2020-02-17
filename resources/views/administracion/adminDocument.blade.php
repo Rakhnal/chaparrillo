@@ -50,8 +50,8 @@ Administrar Documentación
                                 <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
-                                <td><form name="formEliminar" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar" value="Eliminar"></form></td>
-                                <td><form name="formModificar" action="modificarDocumento" method="POST"><input type="button" id="modificarDocumentos" class="btn btnEdit blurmodal" data-idMod="<?= $doc->id_documento ?>" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></form></td>
+                                <td><form name="formEliminarDoc" id="formEliminarDoc" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" name="btnEliminar" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" value="Eliminar"></form></td>
+                                <td><input type="button" id="modificarDocumentos" name="btnModificar" data-idMod="<?= $doc->id_documento ?>" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></td>
                             </tr>
                             <?php
                         }
@@ -97,20 +97,6 @@ Administrar Documentación
     });
 
     function eliminarDocument(id) {
-//        alert(id);
-//        var token = '{{csrf_token()}}';
-//        $.ajax({
-//            type: "post",
-//            url: "eliminarDocumento",
-//            data: {identificador: id, _token: token},
-//            success: function (response) {
-//                alert("Success!");
-//                return response;
-//            },
-//            error: function () {
-//                alert("Me he roto");
-//            }
-//        });
         var token = '{{csrf_token()}}';
         var parametros = {
             "identificador": id,
@@ -141,36 +127,21 @@ Administrar Documentación
             }
         });
     }
-
+    
     $(document).on("click", "#modificarDocumentos", function () {
-        var id = $(this).attr("data-id");
-        .then((willDelete) => {
-            if (willDelete) {
-                modificarDocument(id);
-            } else {
-                swal("Tranquilo, tu documento está a salvo ;}");
-            }
-        });
-    });
-
-    function modificarDocument(id) {
+        var id = $(this).attr("data-idMod");
         var token = '{{csrf_token()}}';
         var parametros = {
             "identificador": id,
             "_token": token
         };
+        alert(parametros);
         $.ajax({
-            url: "eliminarDocumento",
+            url: "buscarDocumento",
             data: parametros,
             type: 'post',
             success: function (response) {
-                if (response === "ok") {
-                    alert(response);
-                } else {
-                    swal("Error al modificar el documento.", {
-                        icon: "error"
-                    });
-                }
+                alert(response);
             },
             statusCode: {
                 404: function () {
@@ -183,7 +154,7 @@ Administrar Documentación
                 });
             }
         });
-    }
+    });
 
 </script>
 

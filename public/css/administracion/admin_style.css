@@ -78,6 +78,10 @@ p {
     background-color: rgba(92, 79, 43, 0.6);
 }
 
+#formEliminarDoc {
+    margin: 0px;
+}
+
 .btnDelete, .btnEdit, .btnAdd {
     width: 100px;
     height: 40px;

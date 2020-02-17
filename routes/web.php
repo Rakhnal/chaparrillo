@@ -40,6 +40,8 @@ Route::post('categorias','controlador_tablas@sacarCategorias');
 Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
 // Eliminar documentos
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
+// Buscar documentos
+Route::post('buscarDocumento', ['as' => 'buscarDocumento', 'uses' => 'controlador_tablas@buscarDocumentos']);
 // Modificar documentos
 Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 
