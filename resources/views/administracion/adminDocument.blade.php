@@ -51,7 +51,7 @@ Administrar Documentación
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
                                 <td><form name="formEliminar" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar" value="Eliminar"></form></td>
-                                <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                                <td><form name="formModificar" action="modificarDocumento" method="POST"><input type="button" id="modificarDocumentos" class="btn btnEdit blurmodal" data-idMod="<?= $doc->id_documento ?>" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></form></td>
                             </tr>
                             <?php
                         }
@@ -131,11 +131,56 @@ Administrar Documentación
             },
             statusCode: {
                 404: function () {
-                    alert('web not found');
+                    swal('Página no encontrada.');
                 }
             },
             error: function () {
-                alert("Me he roto");
+                swal("Algo ha ido mal :/", {
+                    icon: "error"
+                });
+            }
+        });
+    }
+
+    $(document).on("click", "#modificarDocumentos", function () {
+        var id = $(this).attr("data-id");
+        .then((willDelete) => {
+            if (willDelete) {
+                modificarDocument(id);
+            } else {
+                swal("Tranquilo, tu documento está a salvo ;}");
+            }
+        });
+    });
+
+    function modificarDocument(id) {
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "identificador": id,
+            "_token": token
+        };
+        $.ajax({
+            url: "eliminarDocumento",
+            data: parametros,
+            type: 'post',
+            success: function (response) {
+                if (response === "ok") {
+                    alert(response);
+                } else {
+                    swal("Error al modificar el documento.", {
+                        icon: "error"
+                    });
+                }
+            },
+            statusCode: {
+                404: function () {
+                    swal('Página no encontrada.');
+                }
+            },
+            error: function () {
+                swal("Algo ha ido mal :/", {
+                    icon: "error"
+                });
             }
         });
     }

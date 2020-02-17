@@ -79,22 +79,23 @@ use App\Clases\conexion;
                                         <textarea id="taa-event" name="descrip"rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-4">
 
                                     <div class="form-group">
                                         <label>Localización:</label>
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label>Categoría:</label>
                                         <select name="catego[]" class="categ" multiple>
-                                            <?php 
+                                            <?php
                                             $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca){ ?>
-                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php }?>
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+<?php } ?>
                                         </select>
                                     </div>
 
@@ -372,17 +373,18 @@ use App\Clases\conexion;
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label>Categoría:</label>
                                         <select class="categ" multiple>
-                                            <?php 
+                                            <?php
                                             $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca){ ?>
-                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php }?>
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+<?php } ?>
                                         </select>
                                     </div>
-                                    
+
                                     <div id="map2" class="mapa">
 
                                     </div>
@@ -452,7 +454,8 @@ use App\Clases\conexion;
                         </div>
                         <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
-                    <form name="formEditDoc" class="formDocs m-0" action="" method="POST">
+                    <form name="formEditDoc" class="formDocs m-0" action="modificarDocumento" method="POST">
+                        {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" class="pl-2" id="nombreDocumento2" name="nombreDocumento2" placeholder="Nombre del documento" required>

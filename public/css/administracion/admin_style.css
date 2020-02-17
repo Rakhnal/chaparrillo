@@ -44,10 +44,7 @@ input[type=date]::-webkit-outer-spin-button {
 }
 
 input[type=text], input[type=number], input[type=date] {
-    width: fit-content;
-    
     border: 1px solid white;
-    text-align: center;
 }
 
 button {
