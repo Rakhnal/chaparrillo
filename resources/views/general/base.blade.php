@@ -27,6 +27,7 @@ use App\Clases\conexion;
         <script src="scripts/principal/formValidations.js"></script>
 
         <link rel="stylesheet" href="css/general.css" />
+        <script src="scripts/general/sweetalert.min.js"></script>
     </head>
     <body>
 
@@ -632,7 +633,7 @@ use App\Clases\conexion;
                                                 <?php
                                             } else {
                                                 ?>
-                                                <img src="images/icons/default.png" alt="Imagen por defecto" id="imgUser"/>
+                                                <img src="images/profile-pic/default.png" alt="Imagen por defecto" id="imgUser"/>
                                                 <?php
                                             }
                                             ?>
