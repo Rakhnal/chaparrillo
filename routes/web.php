@@ -36,13 +36,16 @@ Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador
 Route::post('categorias','controlador_tablas@sacarCategorias');
 
 // DES17: Página Administrar Documentos - NLO
-// Página Administración
+// Listar documentos
 Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
-//Route::post('eliminarDocumento', 'controlador_tablas@eliminarDocumentos');
-//Route::post('borrame', 'controlador_tablas@borrame');
+// Eliminar documentos
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
+// Buscar documentos
+Route::post('buscarDocumento', ['as' => 'buscarDocumento', 'uses' => 'controlador_tablas@buscarDocumentos']);
+// Modificar documentos
+Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 
-// DES21: Login/Registro
+// DES21: Login/Registro - ADC
 // Login
 Route::post('login', 'usercontroller@iniciarSesion');
 // Registro
@@ -50,7 +53,12 @@ Route::post('registro', 'usercontroller@registrarUsuario');
 // Cerrar sesión
 Route::get('logout', 'usercontroller@cerrarSesion');
 
-// DES19: Página Administrar Informes
+// DES19: Página Administrar Informes - ADC
 Route::get('adminInformes', 'controlador_tablas@listarInformes');
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
 Route::post('actInforme', 'controlador_tablas@actInforme');
+
+// DES04: Página Proyecto - ADC
+Route::get('proyecto', function () {
+    return view('informacion/proyecto');
+});

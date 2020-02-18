@@ -10,19 +10,20 @@ use App\Clases\conexion;
         <title> @yield('titulo') </title>
 
         <link rel="shortcut icon" type="image/jpg" href="images/logo.png" />
-        <script type="text/javascript" src="{{ URL::asset('scripts/general/jquery-3.4.1.min.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/general/modales.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
+
+        <script src="scripts/general/geolocate.js"></script>
 
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing"async defer></script>
 
         <script src="scripts/principal/formValidations.js"></script>
 
@@ -33,10 +34,14 @@ use App\Clases\conexion;
 
         <?php
         $user = session()->get("userObj");
-
+        
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
+            <?php
+        } else {
+            ?>
+            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
             <?php
         }
         ?>
@@ -257,26 +262,20 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="row justify-content-center">
-                                        <div class="col">
-                                            <div class="row justify-content-center name-form">
-                                                <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
-                                                <label for="cp" class = "label-name">
-                                                    <span class = "content-name">
-                                                        Código Postal
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="row justify-content-center align-content-center align-items-center">
-                                                <button class="btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div id="mapaRegistro">
 
                                     </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col">
+                                            <div class="row justify-content-center align-content-center align-items-center">
+                                                <button class="btn btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
+                                    
+                                    <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -433,10 +432,10 @@ use App\Clases\conexion;
                     <form name="formSubDoc" class="formDocs m-0" action="" method="POST">
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" class="pl-2" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
+                                <input type="text" class="pl-2" id="nombreSubirDoc" name="nombreSubirDoc" placeholder="Nombre del documento" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación"></textarea>
                             </div>
                             <div class="form-group">
                                 <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
@@ -466,13 +465,14 @@ use App\Clases\conexion;
                         </div>
                         <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
-                    <form name="formEditDoc" class="formDocs m-0" action="" method="POST">
+                    <form name="formEditDoc" class="formDocs m-0" action="modificarDocumento" method="POST">
+                        {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" class="pl-2" id="nombreDocumento2" name="nombreDocumento2" placeholder="Nombre del documento" required>
+                                <input type="text" class="pl-2" id="nombreEditarDoc" name="nombreEditarDoc" placeholder="Nombre del documento" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" name="descDocumento2" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación"></textarea>
                             </div>
                             <div class="form-group form-inline">
                                 <div>
@@ -519,7 +519,7 @@ use App\Clases\conexion;
                                         <p>Nombre del producto:</p>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <input type="text" autocomplete="off" id="productName" name="productName" required>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="productName" name="productName" required>
                                     </div>
                                 </div>                                
                             </div>
@@ -547,6 +547,86 @@ use App\Clases\conexion;
             </div>
         </div>
 
+        <!-- Ventana modal para mostrar información de la página -->
+
+        <div class="modal fade" id="quienessomos" data-backdrop="static">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header align-items-center">
+                        <div class="modal-title">
+                            Quienes somos
+                        </div>
+                        <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body add-padding">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>Centro "El Chaparrillo"</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p class="thinner">Adscrito al Instituto Regional de Investigación y Desarrollo Agroalimentario y Forestal de Castilla-La Mancha (IRIAF), tiene como objetivo la investigación, desarrollo e innovación en el área agraria y medio ambiental. Cuenta con más de 35 años de experiencia en la investigación y extensión agraria del cultivo del pistacho, y es referencia nacional e internacional en el cultivo.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="https://chaparrillo.castillalamancha.es/" target="_blank">chaparrillo.castillalamancha.es</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col margin-right">
+                                <div class="row justify-content-center">
+                                    <h3>ECOVALIA</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p class="thinner">Asociación sin ánimo de lucro que trabaja por y para el desarrollo de la producción y la alimentación ecológicas. Su origen se remonta a 1991. Actualmente figuran como referente a nivel nacional y su proyección internacional está en pleno crecimiento.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="https://www.ecovalia.org/" target="_blank">www.ecovalia.org</a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>SAT Ecopistacho</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p class="thinner">Ecopistacho, se funda en La Mancha el año 2010, como Sociedad Agraria de Transformación de fruto del pistachero, está formada por cultivadores de este fruto comprometidos en conciencia con un modelo de agricultura no agresiva. La SAT Ecopistacho posee las acreditaciones oficiales que certifican su condición ecológica. El objetivo que persigue este colectivo, es: ofrecer a la sociedad un producto natural de máxima calidad basado en el respeto por el medioambiente.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="http://www.ecopistacho.com/" target="_blank">www.ecopistacho.com</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col margin-right">
+                                <div class="row justify-content-center">
+                                    <h3>SAT El campo</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p class="thinner">La SAT nº516 del Campo es una sociedad agraria de transformación que se nutre las plantaciones de pistacho y de la experiencia de sus asociados. Actualmente está compuesta por 26 socios cuyas plantaciones suman alrededor de 500 hectáreas de pistacho, ubicadas en distintos municipios de la región. Cabe destacar su decidida apuesta por el pistacho ecológico que supone el 40% de su producción total.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="http://www.satdelcampo.es/" target="_blank">www.satdelcampo.es</a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>SAT Pistamancha</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p class="thinner">Pistamancha tiene en la actualidad 19 socios con una superficie plantada de pistachos de algo más de 300 Has. Estas plantaciones se encuentran en distintos estados de producción y la mayoría de ellos, en proceso de reconversión a cultivo ecológico. Los socios de Pistamancha reciben de forma gratuita los consejos y el asesoramiento de aquellos socios con plantaciones más antiguas y aprovechan su experiencia evitando errores comunes en la implantación de un nuevo pistachar.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="https://www.pistamancha.com/" target="_blank">www.pistamancha.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
@@ -557,8 +637,8 @@ use App\Clases\conexion;
         </div>
 
         <script>
-            $(window).on("load", function(){
-            $(".loader-wrapper").fadeOut("slow");
+            $(window).on("load", function () {
+                $(".loader-wrapper").fadeOut("slow");
             });
         </script>
 
@@ -595,10 +675,10 @@ use App\Clases\conexion;
                                 <a class="nav-link menu-text" href="index">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Proyecto</a>
+                                <a class="nav-link menu-text" href="proyecto">Proyecto</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Cultivo en CLM</a>
+                                <a class="nav-link menu-text" href="cultivos">Cultivo en CLM</a>
                             </li>
 
                             <div class="dropdown-container">
@@ -606,26 +686,26 @@ use App\Clases\conexion;
                                     Plagas del Proyecto
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="ddListar">
-                                    <a class="dropdown-item menu-text" href="#">Clitra</a>
-                                    <a class="dropdown-item menu-text" href="#">Polilla de Almacén</a>
-                                    <a class="dropdown-item menu-text" href="#">Psilas del Pistacho</a>
-                                    <a class="dropdown-item menu-text" href="#">Chinches</a>
+                                    <a class="dropdown-item menu-text" href="clitra">Clitra</a>
+                                    <a class="dropdown-item menu-text" href="polilla">Polilla de Almacén</a>
+                                    <a class="dropdown-item menu-text" href="psilas">Psilas del Pistacho</a>
+                                    <a class="dropdown-item menu-text" href="chinches">Chinches</a>
                                 </div>
                             </div>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Lugares de Trabajo</a>
+                                <a class="nav-link menu-text" href="lugares">Lugares de Trabajo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Noticias</a>
+                                <a class="nav-link menu-text" href="noticias">Noticias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Foro</a>
+                                <a class="nav-link menu-text" href="foro">Foro</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Documentación</a>
+                                <a class="nav-link menu-text" href="documentacion">Documentación</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Agenda</a>
+                                <a class="nav-link menu-text" href="agenda">Agenda</a>
                             </li>
 
                             <?php
@@ -654,7 +734,7 @@ use App\Clases\conexion;
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
 
-                                            <a class="dropdown-item menu-text" href="#">Perfil</a>
+                                            <a class="dropdown-item menu-text" href="Editar_usuario">Perfil</a>
                                             <?php
                                             if ($user->rol == Constantes::ADMIN) {
                                                 ?>
@@ -746,7 +826,7 @@ use App\Clases\conexion;
 
                             <div class="col">
                                 <div class="row justify-content-center align-content-center align-items-center full-height">
-                                    <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
+                                    <a href="" class="blurmodal" data-toggle="modal" data-target="#quienessomos">
                                         <h5>Quienes Somos</h5>
                                     </a>
                                 </div>

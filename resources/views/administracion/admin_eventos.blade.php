@@ -14,10 +14,6 @@ Administrar Eventos
 @section('contenido')
 
 <link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="scripts/general/gmaps.js"></script>
-<script src="scripts/general/geolocate.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 <script src="scripts/general/mostrarimagenes.js"></script>
 <meta name="csrf_token" content="{{ csrf_token() }}">
 
