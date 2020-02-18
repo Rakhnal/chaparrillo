@@ -8,19 +8,21 @@ $(document).ready(function () {
     });
 
 //Primer ejemplo. Al pulsar el botón se lanza el controlador.
-    $('#b-modify').click(function () {
+    $('.b-modify').click(function () {
+        //var parametros = {"id": this.val()};
 
-        var parametros = {
-            "id": $('#id_e').val()
-        };
+        var parametros = $(this).attr('data-user');
+        var token = '{{ csrf_token() }}';
+
         $.ajax({
-            url: 'formevent',
-            //data:{'nombre':"DAW2"},
-            data: parametros,
+            url: 'modificarEventos',
+            data: {parametros, _token: token},
+            dataType: "application/json",
+            proccessData: false,
             type: 'post',
             success: function (response) {
                 //alert(response);
-                $(".response-container").html(response);
+                var evento = JSON.stringify(response);
 
             },
             statusCode: {
@@ -34,37 +36,5 @@ $(document).ready(function () {
             }
         });
     });
-
-//Segundo ejemplo. Al ir escribiendo se lanza el controlador dos.
-//    $("#caja").on('keyup', function () {
-//
-//        //$(".respuesta").html($("#caja").val());
-//
-//        var parametros = {
-//            "nombre": "DAW2",
-//            "caj": $('#caja').val()
-//        };
-//        $.ajax({
-//            url: 'miJqueryAjax',
-//            //data:{'nombre':"DAW2"},
-//            data: parametros,
-//            type: 'post',
-//            success: function (response) {
-//                //alert(response);
-//                $(".respuesta2").html(response);
-//
-//            },
-//            statusCode: {
-//                404: function () {
-//                    alert('web not found');
-//                }
-//            },
-//            error: function (x, xs, xt) {
-//                window.open(JSON.stringify(x));
-//                //alert('error: ' + JSON.stringify(x) +"\n error string: "+ xs + "\n error throwed: " + xt);
-//            }
-//        });
-//
-//    }).keyup();
 
 });

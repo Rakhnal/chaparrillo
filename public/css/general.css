@@ -49,6 +49,10 @@ li {
     display: table-cell;
 }
 
+td {
+    padding-top: 10px;
+}
+
 .container-fluid {
     width: 100%;
     height: 100%;
@@ -57,6 +61,8 @@ li {
 }
 
 .imgLogo {
+    transition: 0.5s ease-in all;
+    
     vertical-align: middle;
     width: 75px;
     height: 75px;
@@ -182,7 +188,6 @@ li {
 }
 
 .btn-input {
-
     cursor: pointer;
 
     background: transparent;
@@ -190,6 +195,60 @@ li {
     border-radius: 15px;
 
     padding: 10px;
+}
+
+.btn-eliminar {
+    
+    font-size: 0.0000000000001px;
+    
+    width: 30px;
+    height: 30px;
+    
+    border: none;
+    background-color: transparent;
+    
+    background-image: url('../images/icons/delete.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.btn-guardar {
+    
+    font-size: 0.0000000000001px;
+    
+    width: 30px;
+    height: 30px;
+    
+    border: none;
+    background-color: transparent;
+    
+    background-image: url('../images/icons/save.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.btn-nuevo {
+    background: none;
+    border: 1px solid white !important;
+    border-radius: 0px !important;
+}
+
+.btn-eliminar:hover {
+    background-image: url('../images/icons/deletehover.png');
+    transform: scale(1.1);
+}
+
+.btn-guardar:hover {
+    background-image: url('../images/icons/savehover.png');
+    transform: scale(1.1);
+}
+
+.btn-nuevo:hover {
+    border: 2px solid white !important;
+}
+
+.margin-top {
+    margin-top: 25px;
 }
 
 #searchButton {
@@ -311,6 +370,18 @@ li {
     text-align: center;
 }
 
+.modal-xxl{
+    margin-left: 15%;
+    margin-right: 15%;
+    max-width: none !important;
+    width: 70%;
+    
+}
+
+.categ{
+    background: transparent;
+}
+
 /* Cambiar los estilos del autocompletar en navegadores*/
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -394,7 +465,7 @@ select:-webkit-autofill:focus {
 
 .mapa{
     width: 100%;
-    height: 340px;
+    height: 300px;
 }
 
 #img-portada{

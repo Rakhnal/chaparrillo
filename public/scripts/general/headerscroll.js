@@ -8,22 +8,36 @@ window.onscroll = function () {
 };
 
 function scrollFunction() {
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        document.getElementById("header").style.minHeight = "25px";
-        document.getElementById("imgLogo").style.width = "70px";
-        document.getElementById("logomovil").style.width = "70px";
+    if (document.body.scrollTop > 70 || document.documentElement.scrollTop > 70) {
 
-        if (document.getElementById("imgPerfil") !== null) {
-            document.getElementById("imgPerfil").style.width = "80px";
-            document.getElementById("imgPerfil").style.height = "50px";
+        $('.dropdown-menu').css('margin-top', '15px');
+
+        document.getElementById("header").style.height = "25px";
+        document.getElementById("navHeader").style.minHeight = "25px";
+        document.getElementById("imgLogo").style.height = "55px";
+        document.getElementById("imgLogo").style.width = "55px";
+
+        if (document.getElementById("btnUser") !== null) {
+            document.getElementById("btnUser").style.width = "30px";
+            document.getElementById("btnUser").style.height = "30px";
+        } else {
+            document.getElementById("imgUser").style.width = "30px";
+            document.getElementById("imgUser").style.height = "30px";
         }
     } else {
-        document.getElementById("header").style.minHeight = "100px";
-        document.getElementById("imgLogo").style.width = "70px";
-        document.getElementById("logomovil").style.width = "70px";
-        if (document.getElementById("imgPerfil") !== null) {
-            document.getElementById("imgPerfil").style.width = "125px";
-            document.getElementById("imgPerfil").style.height = "70px";
+
+        $('.dropdown-menu').css('margin-top', '25px');
+
+        document.getElementById("header").style.height = "100px";
+        document.getElementById("navHeader").style.minHeight = "100px";
+        document.getElementById("imgLogo").style.height = "75px";
+        document.getElementById("imgLogo").style.width = "75px";
+        if (document.getElementById("btnUser") !== null) {
+            document.getElementById("btnUser").style.width = "35px";
+            document.getElementById("btnUser").style.height = "35px";
+        } else {
+            document.getElementById("imgUser").style.width = "40px";
+            document.getElementById("imgUser").style.height = "40px";
         }
     }
 }

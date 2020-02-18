@@ -41,7 +41,7 @@ var loadFile = function (event) {
             console.log(file);
             
             
-            $('#profile-result').html('<img src="' + croppedCanvas.toDataURL() + '" class="thumb-lg img-circle" id="secreto"><input type="hidden" value="' + croppedCanvas.toDataURL() +'" name="secreto">');
+            $('#profile-result').html('<img src="' + croppedCanvas.toDataURL() + '" class="thumb-lg img-circle" id="secreto"><input type="text" value="' + croppedCanvas.toDataURL() +'" name="secreto" hidden>');
             
             localStorage.setItem('miGato', croppedCanvas.toDataURL());
             

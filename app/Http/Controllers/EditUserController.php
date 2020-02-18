@@ -13,7 +13,6 @@ class EditUserController extends Controller {
      * @return type
      */
     public function editarUsuario(Request $req) {
-
         $correo = $req->get('email');
         $pass = $req->get('passwed');
         $nombre = $req->get('nombre');
@@ -22,7 +21,7 @@ class EditUserController extends Controller {
         $pais = $req->get('pais');
         $img = $req->get('secreto');
         $pass = Hash::make($pass);
-        
+
         //password_verify($password, $hash);
 
 
@@ -35,4 +34,5 @@ class EditUserController extends Controller {
 
         return view(session()->get("actPage"), $datos);
     }
+
 }

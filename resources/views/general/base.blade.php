@@ -1,6 +1,7 @@
 <?php
 
 use App\Clases\Auxiliares\Constantes;
+use App\Clases\conexion;
 ?>
 
 <!DOCTYPE html>
@@ -9,24 +10,25 @@ use App\Clases\Auxiliares\Constantes;
         <title> @yield('titulo') </title>
 
         <link rel="shortcut icon" type="image/jpg" href="images/logo.png" />
-        <script type="text/javascript" src="{{ URL::asset('scripts/general/jquery-3.4.1.min.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="scripts/general/modales.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
 
+        <script src="scripts/general/geolocate.js"></script>
+        
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
-        <script src="scripts/general/geolocate.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing"async defer></script>
 
         <script src="scripts/principal/formValidations.js"></script>
 
         <link rel="stylesheet" href="css/general.css" />
+        <script src="scripts/general/sweetalert.min.js"></script>
     </head>
     <body>
 
@@ -37,6 +39,10 @@ use App\Clases\Auxiliares\Constantes;
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
             <?php
+        } else {
+        ?>
+            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
+        <?php 
         }
         ?>
 
@@ -48,7 +54,7 @@ use App\Clases\Auxiliares\Constantes;
 
         <!-- ******************** Ventana Agregar Evento *********************** -->
         <div class="modal fade eventos" id="ventana-crear" data-backdrop="static">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title">
@@ -58,7 +64,7 @@ use App\Clases\Auxiliares\Constantes;
                     </div>
                     <div class="modal-body">
                         <form action="agregarEvento" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -75,16 +81,26 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                        <textarea id="taa-event" name="descrip"rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                                     </div>
-
                                 </div>
-
+                                
                                 <div class="col-4">
 
                                     <div class="form-group">
                                         <label>Localización:</label>
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Categoría:</label>
+                                        <select name="catego[]" class="categ" multiple>
+                                            <?php 
+                                            $categoria = conexion::sacarCategorias();
+                                            foreach ($categoria as $ca){ ?>
+                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+                                            <?php }?>
+                                        </select>
                                     </div>
 
                                     <div id="map" class="mapa">
@@ -123,7 +139,7 @@ use App\Clases\Auxiliares\Constantes;
                             {{ csrf_field() }}
                             <div class="row justify-content-center">
                                 <div class="name-form">
-                                    <input type="email" name="correo" id="correo" value="" required/>
+                                    <input type="email" autocomplete="off" name="correo" id="correo" value="" required/>
                                     <label for="correo" class = "label-name">
                                         <span class = "content-name">
                                             Correo
@@ -133,7 +149,7 @@ use App\Clases\Auxiliares\Constantes;
                             </div>
                             <div class="row justify-content-center">
                                 <div class="name-form">
-                                    <input type="password" name="pass" id="pass" value="" required/>
+                                    <input type="password" autocomplete="off" name="pass" id="pass" value="" required/>
                                     <label for="pass" class = "label-name">
                                         <span class = "content-name">
                                             Contraseña
@@ -168,7 +184,7 @@ use App\Clases\Auxiliares\Constantes;
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="email" name="correo" id="correo" value="" required/>
+                                            <input type="email" autocomplete="off" name="correo" id="correo" value="" required/>
                                             <label for="correo" class = "label-name">
                                                 <span class = "content-name">
                                                     Correo
@@ -178,7 +194,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="password" name="pass" id="passPpal" value="" required/>
+                                            <input type="password" autocomplete="off" name="pass" id="passPpal" value="" required/>
                                             <label for="passPpal" class = "label-name">
                                                 <span class = "content-name">
                                                     Contraseña
@@ -188,7 +204,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="password" name="passVal" id="passVal" value="" required/>
+                                            <input type="password" autocomplete="off" name="passVal" id="passVal" value="" required/>
                                             <label for="passVal" class = "label-name">
                                                 <span class = "content-name">
                                                     Repita la contraseña
@@ -198,7 +214,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="name" id="name" value="" required/>
+                                            <input type="text" autocomplete="off" name="name" id="name" value="" required/>
                                             <label for="name" class = "label-name">
                                                 <span class = "content-name">
                                                     Nombre
@@ -208,7 +224,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="apellidos" id="apellidos" value="" required/>
+                                            <input type="text" autocomplete="off" name="apellidos" id="apellidos" value="" required/>
                                             <label for="apellidos" class = "label-name">
                                                 <span class = "content-name">
                                                     Apellidos
@@ -218,7 +234,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="localidad" id="localidad" value="" required/>
+                                            <input type="text" autocomplete="off" name="localidad" id="localidad" value="" required/>
                                             <label for="localidad" class = "label-name">
                                                 <span class = "content-name">
                                                     Localidad
@@ -228,7 +244,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
                                     <div class="row justify-content-center">
                                         <div class="name-form">
-                                            <input type="text" name="pais" id="pais" value="" required/>
+                                            <input type="text" autocomplete="off" name="pais" id="pais" value="" required/>
                                             <label for="pais" class = "label-name">
                                                 <span class = "content-name">
                                                     País
@@ -239,13 +255,20 @@ use App\Clases\Auxiliares\Constantes;
                                 </div>
                                 <div class="col">
                                     <div class="row justify-content-center">
-                                        <div class="name-form">
-                                            <input type="text" name="cp" id="cp" value="" required/>
-                                            <label for="cp" class = "label-name">
-                                                <span class = "content-name">
-                                                    Código Postal
-                                                </span>
-                                            </label>
+                                        <div class="col">
+                                            <div class="row justify-content-center name-form">
+                                                <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
+                                                <label for="cp" class = "label-name">
+                                                    <span class = "content-name">
+                                                        Código Postal
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row justify-content-center align-content-center align-items-center">
+                                                <button class="btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div id="mapaRegistro">
@@ -315,7 +338,7 @@ use App\Clases\Auxiliares\Constantes;
 
         <!-- *************** Ventana Modificar Evento ******************** -->
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title">
@@ -325,7 +348,7 @@ use App\Clases\Auxiliares\Constantes;
                     </div>
                     <div class="modal-body">
                         <form action="modificarEvento" method="POST" enctype="multipart/form-data">
-                            <input type="hidden" name="_token" value="cwBsSF1xj4KmGiTL8AkIKYHmiiIhD8GMNbliQgDx">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -346,7 +369,7 @@ use App\Clases\Auxiliares\Constantes;
                                     </div>
 
                                 </div>
-
+                                <!-- Agregar select de categorías -->
                                 <div class="col-4">
 
                                     <div class="form-group">
@@ -354,6 +377,17 @@ use App\Clases\Auxiliares\Constantes;
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
 
+                                     <div class="form-group">
+                                        <label>Categoría:</label>
+                                        <select class="categ" multiple>
+                                            <?php 
+                                            $categoria = conexion::sacarCategorias();
+                                            foreach ($categoria as $ca){ ?>
+                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+                                            <?php }?>
+                                        </select>
+                                    </div>
+                                    
                                     <div id="map2" class="mapa">
 
                                     </div>
@@ -456,6 +490,54 @@ use App\Clases\Auxiliares\Constantes;
             </div>
         </div>
 
+        <!-- Ventana modal para añadir un nuevo informe -->
+
+        <div class="modal fade" id="modalNuevoInforme" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header align-items-center">
+                        <div class="modal-title">
+                            Nuevo Informe
+                        </div>
+                        <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <form name="formNewInforme" action="newInforme" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Nombre del producto:</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="text" autocomplete="off" id="productName" name="productName" required>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Litros por hectárea:</p>
+                                        <input type="number" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Fecha Informe:</p>
+                                        <input type="date" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" class="btn btn-guardar margin-top" id="btnNewInforme" name="btnNewInforme" value="">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
@@ -504,10 +586,10 @@ use App\Clases\Auxiliares\Constantes;
                                 <a class="nav-link menu-text" href="index">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Proyecto</a>
+                                <a class="nav-link menu-text" href="proyecto">Proyecto</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Cultivo en CLM</a>
+                                <a class="nav-link menu-text" href="cultivos">Cultivo en CLM</a>
                             </li>
 
                             <div class="dropdown-container">
@@ -515,26 +597,26 @@ use App\Clases\Auxiliares\Constantes;
                                     Plagas del Proyecto
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="ddListar">
-                                    <a class="dropdown-item menu-text" href="#">Clitra</a>
-                                    <a class="dropdown-item menu-text" href="#">Polilla de Almacén</a>
-                                    <a class="dropdown-item menu-text" href="#">Psilas del Pistacho</a>
-                                    <a class="dropdown-item menu-text" href="#">Chinches</a>
+                                    <a class="dropdown-item menu-text" href="clitra">Clitra</a>
+                                    <a class="dropdown-item menu-text" href="polilla">Polilla de Almacén</a>
+                                    <a class="dropdown-item menu-text" href="psilas">Psilas del Pistacho</a>
+                                    <a class="dropdown-item menu-text" href="chinches">Chinches</a>
                                 </div>
                             </div>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Lugares de Trabajo</a>
+                                <a class="nav-link menu-text" href="lugares">Lugares de Trabajo</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Noticias</a>
+                                <a class="nav-link menu-text" href="noticias">Noticias</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Foro</a>
+                                <a class="nav-link menu-text" href="foro">Foro</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Documentación</a>
+                                <a class="nav-link menu-text" href="documentacion">Documentación</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="crudCoches">Agenda</a>
+                                <a class="nav-link menu-text" href="agenda">Agenda</a>
                             </li>
 
                             <?php
@@ -556,14 +638,14 @@ use App\Clases\Auxiliares\Constantes;
                                                 <?php
                                             } else {
                                                 ?>
-                                                <img src="images/icons/default.png" alt="Imagen por defecto" id="imgUser"/>
+                                                <img src="images/profile-pic/default.png" alt="Imagen por defecto" id="imgUser"/>
                                                 <?php
                                             }
                                             ?>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
 
-                                            <a class="dropdown-item menu-text" href="#">Perfil</a>
+                                            <a class="dropdown-item menu-text" href="Editar_usuario">Perfil</a>
                                             <?php
                                             if ($user->rol == Constantes::ADMIN) {
                                                 ?>
@@ -576,7 +658,7 @@ use App\Clases\Auxiliares\Constantes;
                                             <?php
                                             if ($user->rol == Constantes::ADMIN || $user->rol == Constantes::SWATS) {
                                                 ?>
-                                                <a class="dropdown-item menu-text" href="#">Administrar Informes</a>
+                                                <a class="dropdown-item menu-text" href="adminInformes">Administrar Informes</a>
                                                 <?php
                                             }
                                             ?>
@@ -599,7 +681,7 @@ use App\Clases\Auxiliares\Constantes;
 
             <?php
             // Agregar aquí las páginas donde no se quiera mostrar el footer
-            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO) {
+            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES) {
                 ?>
 
                 <div class="row footer font-small blue pt-4">

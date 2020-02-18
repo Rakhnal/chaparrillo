@@ -14,10 +14,6 @@ Administrar Eventos
 @section('contenido')
 
 <link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
-<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript" src="scripts/general/gmaps.js"></script>
-<script src="scripts/general/geolocate.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 <script src="scripts/general/mostrarimagenes.js"></script>
 <script src="scripts/ajax/eventosajax.js"></script>
 
@@ -33,7 +29,7 @@ Administrar Eventos
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" id="mainTable">
         <div class="col">
             <div class="row table-responsive" id="tab-event">
                 <table id="events">
@@ -44,14 +40,14 @@ Administrar Eventos
                             <th>Localización</th>
                             <th>Fecha inicio</th>
                             <th>Fecha fin</th>
-                            <th>Guardar</th>
-                            <th>Borrar</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($events as $event) { ?>
                             <tr>
-                        <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres borrar el evento?')" method="POST">
+                        <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres eliminar el evento?')" method="POST">
                             {{ csrf_field() }}
                             <td><img src="" alt="imagen"></td>
                             <td><?= $event->nombre ?></td>
@@ -59,22 +55,22 @@ Administrar Eventos
                             <td><?= $event->fecha_inicio ?></td>
                             <td><?= $event->fecha_fin ?></td>
                             <input id="id_e" name="id_e" value="<?=$event->id_evento?>" type="hidden">
-                            <td><input class="btn btn-primary blurmodal" type="button" id="b-modify" data-user="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
-                            <td><input class="btn btn-danger" id="delete" type="submit" name="delete" value="Borrar"></td>
+                            <td><input class="btn btnDelete" id="delete" type="submit" name="delete" value="Eliminar"></td>
+                            <td><input class="btn btnEdit blurmodal" type="button" id="b-modify" data-user="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
                         </form>
                         </tr>
                     <?php } ?>
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="row mt-3">
                 <div class="col-4">
                     {{ $events->links() }}
                 </div>
 
                 <div class="col-4 d-flex justify-content-center">
-                    <button class="btn btn-warning blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear">Agregar</button>
+                    <button class="btn btnAdd blurmodal" type="button" id="crear" data-toggle="modal" data-target="#ventana-crear">Agregar</button>
                 </div>
                 <div class="col-4">
 
@@ -83,7 +79,19 @@ Administrar Eventos
             </div>
         </div>
     </div>
-
+    <?php
+    if (isset($error)) {
+        $error = implode(',', $error);
+        ?>
+        <span id="m-error" class="alert alert-danger text-center fixed-bottom"><?php echo $error; ?></span>
+    <?php } ?>
 </div>
+<script>
+    $(document).ready(function () {
 
+        $('#m-error').hide(9000);
+        $('#m-error').hide("slow");
+
+    });
+</script>
 @endsection
