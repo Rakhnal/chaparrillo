@@ -22,10 +22,11 @@ Route::get('index', function () {
 });
 
 //DES15
-//Página de editar usuario propio
+//Página de administrar usuario propio
 Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
 });
+Route::get('edit_us', 'EditUserController@editarUsuario');
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
