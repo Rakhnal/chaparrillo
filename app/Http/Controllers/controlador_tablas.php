@@ -48,7 +48,37 @@ class controlador_tablas extends Controller {
         return $qhp;
     }
 
-    public function modificarDocumentos(Request $req) {
+    public function buscarDocumentos() {
+        $id_documento = intval($_POST["identificador"]);
+        $qhp = "ok";
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento)
+                ->select('*')
+                ->first();
+
+//        $datos = [
+//            'id_documento' => $documento->id_documento,
+//            'nombre' => $documento->nombre,
+//            'descripcion' => $documento->descripcion,
+//            'visible' => $documento->visible
+//            
+//        ];
+
+
+        if ($documento) {
+            if ($session->has('docSession')) {
+                $session->forget('docSession');
+            }
+            $session->put('docSession', $documento);
+        } else {
+            $qhp = "fail";
+        }
+
+        return $qhp;
+    }
+
+    public function modificarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
@@ -64,9 +94,7 @@ class controlador_tablas extends Controller {
         return $qhp;
     }
 
-    //************************************************************************//
     //DES19: Página Administrar Informes
-    //************************************************************************//
     /**
      * Mostrará los datos de la página en modo SWAT o Admin
      * @return type
@@ -186,9 +214,7 @@ class controlador_tablas extends Controller {
         return redirect('adminInformes')->with('infs', $informes);
     }
 
-    //************************************************************************//
     //DES18: Página para adminsitrar eventos
-    //************************************************************************//
     public function listarEventos() {
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
@@ -214,7 +240,7 @@ class controlador_tablas extends Controller {
         $event->delete();
         $publi->delete();
         $image->delete();
-        
+
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
                 ->select('eventos.id_evento', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')

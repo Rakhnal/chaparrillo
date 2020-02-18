@@ -38,15 +38,20 @@ Inicio
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
-                        <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
+                        <img src="images/chaparrillo/elegidas/clitrar.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding justify-text">
-
-                        <h2>Clitra</h2>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
+                        <div class="col">
+                            <div class="row justify-content-center"> 
+                                <h2 class="bolder">Clitra</h2>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Es un escarabajo crisomélido</p>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Provoca daños especialmente en plantaciones jóvenes donde muestra una rápida propagación y voracidad en el consumo de brotes</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,33 +60,20 @@ Inicio
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
-                        <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
+                        <img src="images/chaparrillo/elegidas/plodia.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding justify-text">
-
-                        <h2>Polilla de Almacén</h2>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-                    </div>
-                </div>
-            </div>
-        </a>
-
-        <a class="col-md-3 col-sm-12 tilted" href="index" data-tilt>
-            <div class="row justify-content-center plaga-div">
-                <div class="col">
-                    <div class="row justify-content-center align-items-center">
-                        <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
-                    </div>
-                    <div class="row justify-content-center align-items-center add-padding justify-text">
-
-                        <h2>Psilas del Pistacho</h2>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
+                        <div class="col">
+                            <div class="row justify-content-center"> 
+                                <h2 class="bolder">Polilla de Almacén</h2>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Polilla de la familia Pyralidae con hábitos nocturnos</p>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Provoca daños en el proceso de almacenaje, cuando deposita los huevos en el hueco que ella misma genera dentro del grano de pistacho</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -91,15 +83,38 @@ Inicio
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
-                        <img src="images/logo.svg" class="plaga-img" alt="Plaga 01"/>
+                        <img src="images/chaparrillo/elegidas/psilas.jpg" class="plaga-img" alt="Plaga 01"/>
+                    </div>
+                    <div class="row justify-content-center align-items-center add-padding justify-text">
+                        <div class="col">
+                            <div class="row justify-content-center"> 
+                                <h2 class="bolder">Psilas del Pistacho</h2>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Hemíptero de la familia Aphalaridae</p>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Ninfas y adultos succionan los jugos de las hojas provocando defoliaciones, caída de yemas florales y, eventualmente, parada en el crecimiento vegetativo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <a class="col-md-3 col-sm-12 tilted" href="index" data-tilt>
+            <div class="row justify-content-center plaga-div">
+                <div class="col">
+                    <div class="row justify-content-center align-items-center">
+                        <img src="images/chaparrillo/elegidas/chinche.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding justify-text">
 
-                        <h2>Chinches</h2>
+                        <h2 class="bolder">Chinches</h2>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
+                        <p>Encuadra a varios géneros y familias del Orden Hemíptera.</p>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris turpis libero, luctus non porta eget, congue vel orci. Aenean cursus fringilla magna, ut rhoncus quam gravida</p>
+                        <p>Suelen ser un problema desde la floración (finales de marzo y primera quincena de abril) hasta el endurecimiento de la cáscara (segunda quincena de mayo)</p>
                     </div>
                 </div>
             </div>

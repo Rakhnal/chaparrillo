@@ -92,6 +92,25 @@ $(document).ready(function () {
     function resetMarker() {
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         
+        $('#latitud').val(clickLat);
+        $('#longitud').val(clickLon);
+        
+        marcadorRegistro = new google.maps.Marker({
+            position: new google.maps.LatLng(clickLat, clickLon),
+            icon: "images/icons/location.svg",
+            map: MapaRegistro
+        });
+
+        google.maps.event.clearListeners(MapaRegistro, 'click');
+    }
+    
+    // Reinicia el marcador del mapa de Registro
+    function resetMarker() {
+        google.maps.event.addListener(MapaRegistro, "click", mapClick);
+        
+        $('#latitud').val(null);
+        $('#longitud').val(null);
+        
         marcadorRegistro.setMap(null);
     }
 
