@@ -45,7 +45,7 @@ class controlador_tablas extends Controller {
         }
         return $qhp;
     }
-    
+
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
         $documento = DB::table('documentos')
@@ -53,8 +53,28 @@ class controlador_tablas extends Controller {
                 ->where('documentos.id_documento', $id_documento)
                 ->select('*')
                 ->first();
+
+//        $datos = [
+//            'id_documento' => $documento->id_documento,
+//            'nombre' => $documento->nombre,
+//            'descripcion' => $documento->descripcion,
+//            'visible' => $documento->visible
+//            
+//        ];
+
+        $qhp = "ok";
         
-        return $documento;
+        if ($session->has('docSession')) {
+            
+        }
+        
+        if ($documento) {
+            $session->put('docSession', $documento);
+        } else {
+            $qhp = "fail";
+        }
+
+        return $qhp;
     }
 
     public function modificarDocumentos() {

@@ -18,8 +18,6 @@ use App\Clases\conexion;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
         <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
-
-        <script src="scripts/general/geolocate.js"></script>
         
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
@@ -426,10 +424,10 @@ use App\Clases\conexion;
                     <form name="formSubDoc" class="formDocs m-0" action="" method="POST">
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" class="pl-2" id="nombreDocumento" name="nombreDocumento" placeholder="Nombre del documento" required>
+                                <input type="text" class="pl-2" id="nombreSubirDoc" name="nombreSubirDoc" placeholder="Nombre del documento" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" name="descDocumento" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación"></textarea>
                             </div>
                             <div class="form-group">
                                 <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
@@ -463,10 +461,10 @@ use App\Clases\conexion;
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" class="pl-2" id="nombreDocumento2" name="nombreDocumento2" placeholder="Nombre del documento" required>
+                                <input type="text" class="pl-2" id="nombreEditarDoc" name="nombreEditarDoc" placeholder="Nombre del documento" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" name="descDocumento2" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación"></textarea>
                             </div>
                             <div class="form-group form-inline">
                                 <div>
