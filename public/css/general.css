@@ -92,6 +92,11 @@ td {
     font-weight: bolder;
 }
 
+.thinner {
+    text-align: center;
+    font-weight: lighter;
+}
+
 .form-control {
     background-color: transparent !important;
     border: none !important;
@@ -249,6 +254,10 @@ td {
 
 .btn-nuevo:hover {
     border: 2px solid white !important;
+}
+
+.add-padding {
+    padding: 40px;
 }
 
 .margin-top {

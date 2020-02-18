@@ -611,14 +611,14 @@ use App\Clases\conexion;
                         </div>
                         <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body add-padding">
                         <div class="row justify-content-center">
                             <div class="col">
                                 <div class="row justify-content-center">
                                     <h3>Centro "El Chaparrillo"</h3>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <p>Adscrito al Instituto Regional de Investigación y Desarrollo Agroalimentario y Forestal de Castilla-La Mancha (IRIAF), tiene como objetivo la investigación, desarrollo e innovación en el área agraria y medio ambiental. Cuenta con más de 35 años de experiencia en la investigación y extensión agraria del cultivo del pistacho, y es referencia nacional e internacional en el cultivo.</p>
+                                    <p class="thinner">Adscrito al Instituto Regional de Investigación y Desarrollo Agroalimentario y Forestal de Castilla-La Mancha (IRIAF), tiene como objetivo la investigación, desarrollo e innovación en el área agraria y medio ambiental. Cuenta con más de 35 años de experiencia en la investigación y extensión agraria del cultivo del pistacho, y es referencia nacional e internacional en el cultivo.</p>
                                 </div>
                                 <div class="row justify-content-center">
                                     <a href="https://chaparrillo.castillalamancha.es/" target="_blank">chaparrillo.castillalamancha.es</a>
@@ -627,12 +627,12 @@ use App\Clases\conexion;
                         </div>
 
                         <div class="row justify-content-center">
-                            <div class="col">
+                            <div class="col margin-right">
                                 <div class="row justify-content-center">
                                     <h3>ECOVALIA</h3>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <p>Asociación sin ánimo de lucro que trabaja por y para el desarrollo de la producción y la alimentación ecológicas. Su origen se remonta a 1991. Actualmente figuran como referente a nivel nacional y su proyección internacional está en pleno crecimiento.</p>
+                                    <p class="thinner">Asociación sin ánimo de lucro que trabaja por y para el desarrollo de la producción y la alimentación ecológicas. Su origen se remonta a 1991. Actualmente figuran como referente a nivel nacional y su proyección internacional está en pleno crecimiento.</p>
                                 </div>
                                 <div class="row justify-content-center">
                                     <a href="https://www.ecovalia.org/" target="_blank">www.ecovalia.org</a>
@@ -643,7 +643,7 @@ use App\Clases\conexion;
                                     <h3>SAT Ecopistacho</h3>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <p>Ecopistacho, se funda en La Mancha el año 2010, como Sociedad Agraria de Transformación de fruto del pistachero, está formada por cultivadores de este fruto comprometidos en conciencia con un modelo de agricultura no agresiva. La SAT Ecopistacho posee las acreditaciones oficiales que certifican su condición ecológica. El objetivo que persigue este colectivo, es: ofrecer a la sociedad un producto natural de máxima calidad basado en el respeto por el medioambiente.</p>
+                                    <p class="thinner">Ecopistacho, se funda en La Mancha el año 2010, como Sociedad Agraria de Transformación de fruto del pistachero, está formada por cultivadores de este fruto comprometidos en conciencia con un modelo de agricultura no agresiva. La SAT Ecopistacho posee las acreditaciones oficiales que certifican su condición ecológica. El objetivo que persigue este colectivo, es: ofrecer a la sociedad un producto natural de máxima calidad basado en el respeto por el medioambiente.</p>
                                 </div>
                                 <div class="row justify-content-center">
                                     <a href="http://www.ecopistacho.com/" target="_blank">www.ecopistacho.com</a>
@@ -652,12 +652,12 @@ use App\Clases\conexion;
                         </div>
 
                         <div class="row justify-content-center">
-                            <div class="col">
+                            <div class="col margin-right">
                                 <div class="row justify-content-center">
                                     <h3>SAT El campo</h3>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <p>La SAT nº516 del Campo es una sociedad agraria de transformación que se nutre las plantaciones de pistacho y de la experiencia de sus asociados. Actualmente está compuesta por 26 socios cuyas plantaciones suman alrededor de 500 hectáreas de pistacho, ubicadas en distintos municipios de la región. Cabe destacar su decidida apuesta por el pistacho ecológico que supone el 40% de su producción total.</p>
+                                    <p class="thinner">La SAT nº516 del Campo es una sociedad agraria de transformación que se nutre las plantaciones de pistacho y de la experiencia de sus asociados. Actualmente está compuesta por 26 socios cuyas plantaciones suman alrededor de 500 hectáreas de pistacho, ubicadas en distintos municipios de la región. Cabe destacar su decidida apuesta por el pistacho ecológico que supone el 40% de su producción total.</p>
                                 </div>
                                 <div class="row justify-content-center">
                                     <a href="http://www.satdelcampo.es/" target="_blank">www.satdelcampo.es</a>
@@ -668,7 +668,7 @@ use App\Clases\conexion;
                                     <h3>SAT Pistamancha</h3>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <p>Pistamancha tiene en la actualidad 19 socios con una superficie plantada de pistachos de algo más de 300 Has. Estas plantaciones se encuentran en distintos estados de producción y la mayoría de ellos, en proceso de reconversión a cultivo ecológico. Los socios de Pistamancha reciben de forma gratuita los consejos y el asesoramiento de aquellos socios con plantaciones más antiguas y aprovechan su experiencia evitando errores comunes en la implantación de un nuevo pistachar.</p>
+                                    <p class="thinner">Pistamancha tiene en la actualidad 19 socios con una superficie plantada de pistachos de algo más de 300 Has. Estas plantaciones se encuentran en distintos estados de producción y la mayoría de ellos, en proceso de reconversión a cultivo ecológico. Los socios de Pistamancha reciben de forma gratuita los consejos y el asesoramiento de aquellos socios con plantaciones más antiguas y aprovechan su experiencia evitando errores comunes en la implantación de un nuevo pistachar.</p>
                                 </div>
                                 <div class="row justify-content-center">
                                     <a href="https://www.pistamancha.com/" target="_blank">www.pistamancha.com</a>
