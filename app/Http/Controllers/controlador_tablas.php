@@ -48,6 +48,7 @@ class controlador_tablas extends Controller {
 
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
+        $qhp = "ok";
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->where('documentos.id_documento', $id_documento)
@@ -62,13 +63,11 @@ class controlador_tablas extends Controller {
 //            
 //        ];
 
-        $qhp = "ok";
-        
-        if ($session->has('docSession')) {
-            
-        }
-        
+
         if ($documento) {
+            if ($session->has('docSession')) {
+                $session->forget('docSession');
+            }
             $session->put('docSession', $documento);
         } else {
             $qhp = "fail";
