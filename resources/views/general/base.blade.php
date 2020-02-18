@@ -38,9 +38,9 @@ use App\Clases\conexion;
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
             <?php
         } else {
-        ?>
+            ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
-        <?php 
+            <?php
         }
         ?>
 
@@ -98,7 +98,7 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-<?php } ?>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
@@ -384,7 +384,7 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-<?php } ?>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
@@ -511,7 +511,7 @@ use App\Clases\conexion;
                                         <p>Nombre del producto:</p>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <input type="text" autocomplete="off" id="productName" name="productName" required>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="productName" name="productName" required>
                                     </div>
                                 </div>                                
                             </div>
@@ -539,6 +539,86 @@ use App\Clases\conexion;
             </div>
         </div>
 
+        <!-- Ventana modal para mostrar información de la página -->
+
+        <div class="modal fade" id="quienessomos" data-backdrop="static">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header align-items-center">
+                        <div class="modal-title">
+                            Quienes somos
+                        </div>
+                        <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>Centro "El Chaparrillo"</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p>Adscrito al Instituto Regional de Investigación y Desarrollo Agroalimentario y Forestal de Castilla-La Mancha (IRIAF), tiene como objetivo la investigación, desarrollo e innovación en el área agraria y medio ambiental. Cuenta con más de 35 años de experiencia en la investigación y extensión agraria del cultivo del pistacho, y es referencia nacional e internacional en el cultivo.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="https://chaparrillo.castillalamancha.es/">chaparrillo.castillalamancha.es</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>ECOVALIA</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p>Asociación sin ánimo de lucro que trabaja por y para el desarrollo de la producción y la alimentación ecológicas. Su origen se remonta a 1991. Actualmente figuran como referente a nivel nacional y su proyección internacional está en pleno crecimiento.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="https://www.ecovalia.org/">www.ecovalia.org</a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>SAT Ecopistacho</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p>Ecopistacho, se funda en La Mancha el año 2010, como Sociedad Agraria de Transformación de fruto del pistachero, está formada por cultivadores de este fruto comprometidos en conciencia con un modelo de agricultura no agresiva. La SAT Ecopistacho posee las acreditaciones oficiales que certifican su condición ecológica. El objetivo que persigue este colectivo, es: ofrecer a la sociedad un producto natural de máxima calidad basado en el respeto por el medioambiente.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="http://www.ecopistacho.com/">www.ecopistacho.com</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>SAT El campo</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p>La SAT nº516 del Campo es una sociedad agraria de transformación que se nutre las plantaciones de pistacho y de la experiencia de sus asociados. Actualmente está compuesta por 26 socios cuyas plantaciones suman alrededor de 500 hectáreas de pistacho, ubicadas en distintos municipios de la región. Cabe destacar su decidida apuesta por el pistacho ecológico que supone el 40% de su producción total.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="http://www.satdelcampo.es/">www.satdelcampo.es</a>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <h3>SAT Pistamancha</h3>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <p>Pistamancha tiene en la actualidad 19 socios con una superficie plantada de pistachos de algo más de 300 Has. Estas plantaciones se encuentran en distintos estados de producción y la mayoría de ellos, en proceso de reconversión a cultivo ecológico. Los socios de Pistamancha reciben de forma gratuita los consejos y el asesoramiento de aquellos socios con plantaciones más antiguas y aprovechan su experiencia evitando errores comunes en la implantación de un nuevo pistachar.</p>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <a href="https://www.pistamancha.com/">www.pistamancha.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
@@ -549,8 +629,8 @@ use App\Clases\conexion;
         </div>
 
         <script>
-            $(window).on("load", function(){
-            $(".loader-wrapper").fadeOut("slow");
+            $(window).on("load", function () {
+                $(".loader-wrapper").fadeOut("slow");
             });
         </script>
 
@@ -738,7 +818,7 @@ use App\Clases\conexion;
 
                             <div class="col">
                                 <div class="row justify-content-center align-content-center align-items-center full-height">
-                                    <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
+                                    <a href="" class="blurmodal" data-toggle="modal" data-target="#quienessomos">
                                         <h5>Quienes Somos</h5>
                                     </a>
                                 </div>

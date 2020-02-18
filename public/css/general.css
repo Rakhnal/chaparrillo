@@ -88,6 +88,10 @@ td {
     padding-top: 1%;
 }
 
+.bolder {
+    font-weight: bolder;
+}
+
 .form-control {
     background-color: transparent !important;
     border: none !important;

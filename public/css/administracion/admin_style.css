@@ -78,6 +78,10 @@ p {
     background-color: rgba(92, 79, 43, 0.6);
 }
 
+.cajaNormal {
+    width: 50% !important;
+    border: 1px solid white !important;
+    padding: 5px !important;
 #formEliminarDoc {
     margin: 0px;
 }
