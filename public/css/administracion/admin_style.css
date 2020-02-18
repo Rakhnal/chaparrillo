@@ -30,24 +30,21 @@ th,td {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 input[type=number] {
-  -moz-appearance:textfield;
+    -moz-appearance:textfield;
 }
 
 input[type=date]::-webkit-inner-spin-button,
 input[type=date]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
 
 input[type=text], input[type=number], input[type=date] {
-    width: fit-content;
-    
     border: 1px solid white;
-    text-align: center;
 }
 
 button {
@@ -85,6 +82,10 @@ p {
     width: 50% !important;
     border: 1px solid white !important;
     padding: 5px !important;
+}
+
+#formEliminarDoc {
+    margin: 0px;
 }
 
 .btnDelete, .btnEdit, .btnAdd {

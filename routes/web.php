@@ -36,11 +36,14 @@ Route::post('modificarEvento','ctrlAjax@modificarEventos');
 Route::post('categorias','controlador_tablas@sacarCategorias');
 
 // DES17: Página Administrar Documentos - NLO
-// Página Administración
+// Listar documentos
 Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
-//Route::post('eliminarDocumento', 'controlador_tablas@eliminarDocumentos');
-//Route::post('borrame', 'controlador_tablas@borrame');
+// Eliminar documentos
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
+// Buscar documentos
+Route::post('buscarDocumento', ['as' => 'buscarDocumento', 'uses' => 'controlador_tablas@buscarDocumentos']);
+// Modificar documentos
+Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 
 // DES21: Login/Registro - ADC
 // Login

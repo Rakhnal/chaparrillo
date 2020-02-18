@@ -13,6 +13,11 @@ use App\Documento;
 
 class controlador_tablas extends Controller {
 
+    //DES17: Página para administrar documentación
+    /**
+     * Esta función lista todos los documentos de la base de datos.
+     * @return type
+     */
     public function listarDocumentos() {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
@@ -20,6 +25,71 @@ class controlador_tablas extends Controller {
                 ->paginate(8);
 
         return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
+    }
+
+    /**
+     * Esta función permite al administrador eliminar documentos.
+     * @return string
+     */
+    public function eliminarDocumentos() {
+        $id_documento = intval($_POST["identificador"]);
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento);
+
+        if ($documento) {
+            $documento->delete();
+            $qhp = "ok";
+        } else {
+            $qhp = "fail";
+        }
+        return $qhp;
+    }
+
+    public function buscarDocumentos() {
+        $id_documento = intval($_POST["identificador"]);
+        $qhp = "ok";
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento)
+                ->select('*')
+                ->first();
+
+//        $datos = [
+//            'id_documento' => $documento->id_documento,
+//            'nombre' => $documento->nombre,
+//            'descripcion' => $documento->descripcion,
+//            'visible' => $documento->visible
+//            
+//        ];
+
+
+        if ($documento) {
+            if ($session->has('docSession')) {
+                $session->forget('docSession');
+            }
+            $session->put('docSession', $documento);
+        } else {
+            $qhp = "fail";
+        }
+
+        return $qhp;
+    }
+
+    public function modificarDocumentos() {
+        $id_documento = intval($_POST["identificador"]);
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento)
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible')
+                ->first();
+
+        if ($documento) {
+            $qhp = "ok";
+        } else {
+            $qhp = "fail";
+        }
+        return $qhp;
     }
 
     //DES19: Página Administrar Informes
@@ -99,7 +169,7 @@ class controlador_tablas extends Controller {
 
         $modInforme = $req->get('modInforme');
         $delInforme = $req->get('delInforme');
-        
+
         if (isset($modInforme)) {
 
             $idinforme = $req->get('idinforme');
@@ -142,6 +212,7 @@ class controlador_tablas extends Controller {
         return redirect('adminInformes')->with('infs', $informes);
     }
 
+    //DES18: Página para adminsitrar eventos
     public function listarEventos() {
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
@@ -149,21 +220,6 @@ class controlador_tablas extends Controller {
                 ->paginate(8);
 
         return view(Constantes::AD_EVENTOS, ['events' => $eventos]);
-    }
-
-    public function eliminarDocumentos() {
-        $id_documento = intval($_POST["identificador"]);
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento);
-
-        if ($documento) {
-            $documento->delete();
-            $qhp = "ok";
-        } else {
-            $qhp = "fail";
-        }
-        return $qhp;
     }
 
     public function eliminarEventos() {
@@ -232,7 +288,7 @@ class controlador_tablas extends Controller {
 
             for ($i = 0; $i < count($categ); $i++) {
                 $ca = $categ[$i];
-                
+
                 $categorias = DB::table('asignar_categorias')->insert(
                         ['id_item' => $publi->id_item, 'id_categoria' => $ca]
                 );
@@ -258,11 +314,6 @@ class controlador_tablas extends Controller {
 
             return view('administracion/admin_eventos', ['events' => $evento], ['error' => $error]);
         }
-    }
-
-    public function borrame() {
-        dd("Hola");
-        echo "Hola";
     }
 
 }
