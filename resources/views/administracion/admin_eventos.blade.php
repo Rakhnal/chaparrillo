@@ -19,7 +19,8 @@ Administrar Eventos
 <script src="scripts/general/geolocate.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 <script src="scripts/general/mostrarimagenes.js"></script>
-<script src="scripts/ajax/eventosajax.js"></script>
+<meta name="csrf_token" content="{{ csrf_token() }}">
+
 
 <div class="col">
     <div class="row">
@@ -44,24 +45,21 @@ Administrar Eventos
                             <th id="local-e">Localización</th>
                             <th id="fi-e">Fecha inicio</th>
                             <th id="ff-e">Fecha fin</th>
-                            <th id="guardar-e">Guardar</th>
                             <th id="borrar-e">Borrar</th>
+                            <th id="guardar-e">Guardar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($events as $event) { ?>
                             <tr>
-                        <form action="formevent" name="formu-event" onsubmit="return confirm('¿Seguro que quieres eliminar el evento?')" method="POST">
-                            {{ csrf_field() }}
-                            <td><img src="data:image/jpg;base64,<?php echo base64_encode($event->imagen); ?>" alt="Portada evento" class="img-fluid img-ev"></td>
-                            <td><?= $event->nombre ?></td>
-                            <td><?= $event->localizacion ?></td>
-                            <td><?= $event->fecha_inicio ?></td>
-                            <td><?= $event->fecha_fin ?></td>
-                            <input id="id_e" name="id_e" value="<?=$event->id_evento?>" type="hidden">
-                            <td><input class="btn btnDelete" id="delete" type="submit" name="delete" value="Eliminar"></td>
-                            <td><input class="btn btnEdit blurmodal" type="button" id="b-modify" data-user="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
-                        </form>
+                                <td><img src="data:image/jpg;base64,<?php echo base64_encode($event->imagen); ?>" alt="Portada evento" class="img-fluid img-ev"></td>
+                                <td><?= $event->nombre ?></td>
+                                <td><?= $event->localizacion ?></td>
+                                <td><?= $event->fecha_inicio ?></td>
+                                <td><?= $event->fecha_fin ?></td>
+                        <input id="id_e" name="id_e" value="<?= $event->id_evento ?>" type="hidden">
+                        <td><input class="btn btnDelete" id="delete" type="submit" name="delete" value="Eliminar"></td>
+                        <td><input class="btn btnEdit blurmodal b-modify" type="button" id="b-modify" data-id="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
                         </tr>
                     <?php } ?>
                     </tbody>
@@ -85,7 +83,7 @@ Administrar Eventos
     </div>
     <?php
     if (isset($error)) {
-        
+
         $error = implode(',', $error);
         ?>
         <span id="m-error" class="alert alert-danger text-center fixed-bottom"><?php echo $error; ?></span>
@@ -97,6 +95,34 @@ Administrar Eventos
         $('#m-error').hide(9000);
         $('#m-error').hide("slow");
 
+    });
+
+    $(document).on("click", ".b-modify", function () {
+
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "ide": $(this).attr('data-id'),
+            "_token": token
+        };
+
+        $.ajax({
+            url: "modificarEvento",
+            data: parametros,
+            type: "post",
+            success: function (response) {
+                var evento = response;
+
+            },
+            statusCode: {
+                404: function () {
+                    alert('web not found');
+                }
+            },
+            error: function (x, xs, xt) {
+//                window.open(JSON.stringify(x));
+                alert('error: ' + JSON.stringify(x) + "\n error string: " + xs + "\n error throwed: " + xt);
+            }
+        });
     });
 </script>
 @endsection

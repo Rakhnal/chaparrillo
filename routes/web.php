@@ -32,7 +32,7 @@ Route::get('Editar_usuario', function () {
 Route::get('admin_event',['uses' =>  'controlador_tablas@listarEventos', 'as' => 'admin_event']);
 Route::post('formevent','controlador_tablas@eliminarEventos');
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
-Route::post('modificarEvento','ctrlAjax@modificarEventos');
+Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
 Route::post('categorias','controlador_tablas@sacarCategorias');
 
 // DES17: Página Administrar Documentos - NLO

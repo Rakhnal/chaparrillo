@@ -167,6 +167,23 @@ class controlador_tablas extends Controller {
         return $qhp;
     }
 
+    public function modificarEventos(){
+        $id_evento = intval($_POST["ide"]);
+        
+        $eventos = DB::table('eventos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                ->where('eventos.id_eventos',$id_evento);
+        
+        
+        return json_encode($eventos);
+    }
+    
+    /**
+     * 
+     * @return type
+     */
     public function eliminarEventos() {
         $id_evento = intval($_POST['id_e']);
 
@@ -217,7 +234,7 @@ class controlador_tablas extends Controller {
             $publi->editado = 0;
             $publi->fecha_subida = date('Y-m-d');
 
-            $image->imagen = $req->file('portada');
+            $image->imagen = file_get_contents($req->file('portada'));
 
             $evento->fecha_inicio = $req->get('feci');
             $evento->fecha_fin = $req->get('fecf');
@@ -270,11 +287,6 @@ class controlador_tablas extends Controller {
                
            return \Redirect::route('admin_event',['events'=>$eventos,'error'=>$error]);
         }
-    }
-
-    public function borrame() {
-        dd("Hola");
-        echo "Hola";
     }
 
 }

@@ -11,7 +11,7 @@ class ctrlAjax extends Controller
 {
     public function modificarEventos(){
         
-        $id_evento = $_POST['id_e'];
+        $id_evento = $_POST['ide'];
         
         $evento = Evento::find($id_evento);
                    

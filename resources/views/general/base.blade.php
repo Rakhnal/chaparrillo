@@ -340,6 +340,7 @@ use App\Clases\conexion;
         </div>
 
         <!-- *************** Ventana Modificar Evento ******************** -->
+       <?php  ?>
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
@@ -356,7 +357,7 @@ use App\Clases\conexion;
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>Nombre:</label>
-                                        <input name="nomb" type="text" class="form-control" placeholder="Nombre del evento" required>
+                                        <input name="nomb" type="text" value="" class="form-control" placeholder="Nombre del evento" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha inicio</label>
@@ -369,6 +370,10 @@ use App\Clases\conexion;
                                     <div class="form-group">
                                         <label>Descripción:</label>
                                         <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                    </div>
+                                    
+                                    <div class="respuesta">
+                                        
                                     </div>
 
                                 </div>
