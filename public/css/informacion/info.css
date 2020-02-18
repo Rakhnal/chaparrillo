@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : adonoso
 */
 
+h1 {
+    font-size: 3em;
+}
+
 .fondo {
     width: 100%;
     height: 300px;

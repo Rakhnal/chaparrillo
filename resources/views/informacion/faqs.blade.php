@@ -2,7 +2,7 @@
 
 use App\Clases\Auxiliares\Constantes;
 
-session()->put("actPage", Constantes::PROYECTO);
+session()->put("actPage", Constantes::FAQS);
 ?>
 @extends('../general/base')
 
