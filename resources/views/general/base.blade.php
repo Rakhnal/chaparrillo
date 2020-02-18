@@ -32,7 +32,7 @@ use App\Clases\conexion;
 
         <?php
         $user = session()->get("userObj");
-
+        
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
@@ -253,26 +253,20 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="row justify-content-center">
-                                        <div class="col">
-                                            <div class="row justify-content-center name-form">
-                                                <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
-                                                <label for="cp" class = "label-name">
-                                                    <span class = "content-name">
-                                                        Código Postal
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="row justify-content-center align-content-center align-items-center">
-                                                <button class="btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div id="mapaRegistro">
 
                                     </div>
+                                    <div class="row justify-content-center">
+                                        <div class="col">
+                                            <div class="row justify-content-center align-content-center align-items-center">
+                                                <button class="btn btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
+                                    
+                                    <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -560,7 +554,7 @@ use App\Clases\conexion;
                                     <p>Adscrito al Instituto Regional de Investigación y Desarrollo Agroalimentario y Forestal de Castilla-La Mancha (IRIAF), tiene como objetivo la investigación, desarrollo e innovación en el área agraria y medio ambiental. Cuenta con más de 35 años de experiencia en la investigación y extensión agraria del cultivo del pistacho, y es referencia nacional e internacional en el cultivo.</p>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <a href="https://chaparrillo.castillalamancha.es/">chaparrillo.castillalamancha.es</a>
+                                    <a href="https://chaparrillo.castillalamancha.es/" target="_blank">chaparrillo.castillalamancha.es</a>
                                 </div>
                             </div>
                         </div>
@@ -574,7 +568,7 @@ use App\Clases\conexion;
                                     <p>Asociación sin ánimo de lucro que trabaja por y para el desarrollo de la producción y la alimentación ecológicas. Su origen se remonta a 1991. Actualmente figuran como referente a nivel nacional y su proyección internacional está en pleno crecimiento.</p>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <a href="https://www.ecovalia.org/">www.ecovalia.org</a>
+                                    <a href="https://www.ecovalia.org/" target="_blank">www.ecovalia.org</a>
                                 </div>
                             </div>
                             <div class="col">
@@ -585,11 +579,11 @@ use App\Clases\conexion;
                                     <p>Ecopistacho, se funda en La Mancha el año 2010, como Sociedad Agraria de Transformación de fruto del pistachero, está formada por cultivadores de este fruto comprometidos en conciencia con un modelo de agricultura no agresiva. La SAT Ecopistacho posee las acreditaciones oficiales que certifican su condición ecológica. El objetivo que persigue este colectivo, es: ofrecer a la sociedad un producto natural de máxima calidad basado en el respeto por el medioambiente.</p>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <a href="http://www.ecopistacho.com/">www.ecopistacho.com</a>
+                                    <a href="http://www.ecopistacho.com/" target="_blank">www.ecopistacho.com</a>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row justify-content-center">
                             <div class="col">
                                 <div class="row justify-content-center">
@@ -599,7 +593,7 @@ use App\Clases\conexion;
                                     <p>La SAT nº516 del Campo es una sociedad agraria de transformación que se nutre las plantaciones de pistacho y de la experiencia de sus asociados. Actualmente está compuesta por 26 socios cuyas plantaciones suman alrededor de 500 hectáreas de pistacho, ubicadas en distintos municipios de la región. Cabe destacar su decidida apuesta por el pistacho ecológico que supone el 40% de su producción total.</p>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <a href="http://www.satdelcampo.es/">www.satdelcampo.es</a>
+                                    <a href="http://www.satdelcampo.es/" target="_blank">www.satdelcampo.es</a>
                                 </div>
                             </div>
                             <div class="col">
@@ -610,7 +604,7 @@ use App\Clases\conexion;
                                     <p>Pistamancha tiene en la actualidad 19 socios con una superficie plantada de pistachos de algo más de 300 Has. Estas plantaciones se encuentran en distintos estados de producción y la mayoría de ellos, en proceso de reconversión a cultivo ecológico. Los socios de Pistamancha reciben de forma gratuita los consejos y el asesoramiento de aquellos socios con plantaciones más antiguas y aprovechan su experiencia evitando errores comunes en la implantación de un nuevo pistachar.</p>
                                 </div>
                                 <div class="row justify-content-center">
-                                    <a href="https://www.pistamancha.com/">www.pistamancha.com</a>
+                                    <a href="https://www.pistamancha.com/" target="_blank">www.pistamancha.com</a>
                                 </div>
                             </div>
                         </div>
