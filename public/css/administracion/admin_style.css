@@ -143,6 +143,11 @@ p {
 .page-item.active .page-link:hover {
     background-color: #689B46 !important;
 }
+
+.table-responsive {
+    overflow-y: hidden;
+}
+
 #productName {
     margin-left: 5px;
     border: 1px solid white;
