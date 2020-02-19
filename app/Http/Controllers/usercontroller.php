@@ -44,7 +44,7 @@ class usercontroller extends Controller {
      */
     public function cerrarSesion(Request $req) {
         session()->forget("userObj");
-
+        
         return view(Constantes::INDEX);
     }
 

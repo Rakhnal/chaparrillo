@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Documento extends Model
 {
     protected $primaryKey = 'id_documento';
+    public $incrementing = false;
     public $timestamps = false;
 }

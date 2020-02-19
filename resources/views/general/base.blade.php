@@ -26,7 +26,7 @@ use App\Clases\conexion;
         
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing"async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 
         <script src="scripts/principal/formValidations.js"></script>
 
@@ -277,6 +277,23 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                                 <div class="col">
+                                    <div class="row justify-content-center">
+                                        <div class="col">
+                                            <div class="row justify-content-center name-form">
+                                                <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
+                                                <label for="cp" class = "label-name">
+                                                    <span class = "content-name">
+                                                        Código Postal
+                                                    </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row justify-content-center align-content-center align-items-center">
+                                                <button class="btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div id="mapaRegistro">
 
                                     </div>
@@ -521,6 +538,54 @@ use App\Clases\conexion;
                                 <input type="submit" class="btn validarDocs" id="editarDocumento" name="editarDocumento" value="Guardar cambios">
                             </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventana modal para añadir un nuevo informe -->
+
+        <div class="modal fade" id="modalNuevoInforme" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header align-items-center">
+                        <div class="modal-title">
+                            Nuevo Informe
+                        </div>
+                        <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <form name="formNewInforme" action="newInforme" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Nombre del producto:</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="text" autocomplete="off" id="productName" name="productName" required>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Litros por hectárea:</p>
+                                        <input type="number" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Fecha Informe:</p>
+                                        <input type="date" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" class="btn btn-guardar margin-top" id="btnNewInforme" name="btnNewInforme" value="">
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
