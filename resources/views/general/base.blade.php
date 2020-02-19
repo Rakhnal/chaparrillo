@@ -23,9 +23,7 @@ use App\Clases\conexion;
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
         <script src="scripts/general/geolocate.js"></script>
-
-        <script src="scripts/general/geolocate.js"></script>
-
+        
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing"async defer></script>
@@ -47,7 +45,7 @@ use App\Clases\conexion;
         } else {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
-            <?php
+            <?php 
         }
         ?>
 
@@ -289,10 +287,10 @@ use App\Clases\conexion;
                                             </div>
                                         </div>
                                     </div>
-
-                                    <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
-
-                                    <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
+                                    
+                                    <input type="text" autocomplete="off" name="latitud" id="latitudInput" value="" hidden/>
+                                    
+                                    <input type="text" autocomplete="off" name="longitud" id="longitudInput" value="" hidden/>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -550,19 +548,43 @@ use App\Clases\conexion;
                                     <div class="row justify-content-center">
                                         <input type="text" class="cajaNormal" autocomplete="off" id="productName" name="productName" required>
                                     </div>
-                                </div>                                
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Plaga a tratar:</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="plagaTratar" name="plagaTratar" required>
+                                    </div>
+                                </div>
                             </div>
+                            
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Polígono y parcela:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="polParInput" name="polParInput" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Daño aproximado (%):</p>
+                                        <input type="number" class="cajaNormal" max="100" min="1" id="danioAprox" name="danioAprox" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Litros por hectárea:</p>
-                                        <input type="number" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
+                                        <input type="number" class="cajaNormal" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Fecha Informe:</p>
-                                        <input type="date" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
+                                        <input type="date" class="cajaNormal" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
                                     </div>
                                 </div>
                             </div>
