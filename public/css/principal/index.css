@@ -43,8 +43,14 @@ a:link, a:visited, a:active {
 }
 
 .plaga-div {
+    padding-top: 25px;
+    
     width: 100%;
     height: 100%;
+}
+
+.plaga-div:hover {
+    border: 1px solid white;
 }
 
 .plaga-img {

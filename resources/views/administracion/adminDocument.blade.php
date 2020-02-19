@@ -50,8 +50,8 @@ Administrar Documentación
                                 <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
-                                <td><form name="formEliminar" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" name="btnEliminar" value="Eliminar"></form></td>
-                                <td><button id="modificarDocumentos" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento">Modificar</button></td>
+                                <td><form name="formEliminarDoc" id="formEliminarDoc" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" name="btnEliminar" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" value="Eliminar"></form></td>
+                                <td><input type="button" id="modificarDocumentos" name="btnModificar" data-idMod="<?= $doc->id_documento ?>" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></td>
                             </tr>
                             <?php
                         }
@@ -97,20 +97,6 @@ Administrar Documentación
     });
 
     function eliminarDocument(id) {
-//        alert(id);
-//        var token = '{{csrf_token()}}';
-//        $.ajax({
-//            type: "post",
-//            url: "eliminarDocumento",
-//            data: {identificador: id, _token: token},
-//            success: function (response) {
-//                alert("Success!");
-//                return response;
-//            },
-//            error: function () {
-//                alert("Me he roto");
-//            }
-//        });
         var token = '{{csrf_token()}}';
         var parametros = {
             "identificador": id,
@@ -131,14 +117,44 @@ Administrar Documentación
             },
             statusCode: {
                 404: function () {
-                    alert('web not found');
+                    swal('Página no encontrada.');
                 }
             },
             error: function () {
-                alert("Me he roto");
+                swal("Algo ha ido mal :/", {
+                    icon: "error"
+                });
             }
         });
     }
+    
+    $(document).on("click", "#modificarDocumentos", function () {
+        var id = $(this).attr("data-idMod");
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "identificador": id,
+            "_token": token
+        };
+        alert(parametros);
+        $.ajax({
+            url: "buscarDocumento",
+            data: parametros,
+            type: 'post',
+            success: function (response) {
+                alert(response);
+            },
+            statusCode: {
+                404: function () {
+                    swal('Página no encontrada.');
+                }
+            },
+            error: function () {
+                swal("Algo ha ido mal :/", {
+                    icon: "error"
+                });
+            }
+        });
+    });
 
 </script>
 
