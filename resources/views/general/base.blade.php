@@ -277,23 +277,6 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="row justify-content-center">
-                                        <div class="col">
-                                            <div class="row justify-content-center name-form">
-                                                <input type="text" autocomplete="off" name="cp" id="cp" value="" required/>
-                                                <label for="cp" class = "label-name">
-                                                    <span class = "content-name">
-                                                        Código Postal
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="row justify-content-center align-content-center align-items-center">
-                                                <button class="btn-nuevo" type="button" name="btnreset" id="btnreset">Reiniciar Marcador</button>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div id="mapaRegistro">
 
                                     </div>
