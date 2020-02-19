@@ -93,6 +93,95 @@ class controlador_tablas extends Controller {
         }
         return $qhp;
     }
+    
+    public function subirDocumento(Request $req) {
+        $user = session()->get("userObj");
+
+        $nombre = $req->get('nombreSubirDoc');
+        $descripcion = $req->get('descSubirDoc');
+
+        $documento = new Documento();
+        $publicacion = new Publicacion();
+
+        $publicacion->nombre = $nombre;
+        $publicacion->descripcion = $descripcion;
+        $documento->num_descargas = 0;
+        $documento->visible = 1;
+
+        $documento->save();
+        
+        $publi = new Publicacion();
+        $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
+
+        // Si no existe la publicación.
+        if (empty($publi)) {
+
+            $publi = new Publicacion();
+            $image = new Imagen();
+            $evento = new Evento();
+
+            $publi->nombre = $req->get('nomb');
+            $publi->descripcion = $req->get('descrip');
+            $publi->id_user = 1; //se deberá sacar la id de la sesión del usuario registrado
+            $publi->likes = 0;
+            $publi->views = 0;
+            $publi->editado = 0;
+            $publi->fecha_subida = date('Y-m-d');
+
+            $image->imagen = file_get_contents($req->file('portada'));
+
+            $evento->fecha_inicio = $req->get('feci');
+            $evento->fecha_fin = $req->get('fecf');
+            $evento->localizacion = $req->get('loca');
+            $evento->longitud = $req->get('longitud');
+            $evento->latitud = $req->get('latitud');
+
+            $publi->save();
+
+            $categ = $req->get('catego');
+
+            $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
+
+            $evento->id_evento = $publi->id_item;
+            $image->id_item = $publi->id_item;
+
+            $image->save();
+            $evento->save();
+
+            for ($i = 0; $i < count($categ); $i++) {
+                $ca = $categ[$i];
+
+                $categorias = DB::table('asignar_categorias')->insert(
+                        ['id_item' => $publi->id_item, 'id_categoria' => $ca]
+                );
+            }
+
+
+            $eventos = DB::table('eventos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                    ->paginate(8);
+
+            return redirect('admin_event')->with('events', $eventos);
+        } else {
+
+            $eventos = DB::table('eventos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                    ->paginate(8);
+
+
+
+            $error = [
+                'error' => 'Error, el nombre del evento ya existe'
+            ];
+
+               
+           return \Redirect::route('admin_event',['events'=>$eventos,'error'=>$error]);
+        }
+    }
 
     //DES19: Página Administrar Informes
     /**

@@ -50,8 +50,8 @@ Administrar Documentación
                                 <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
                                 <td><?= $doc->fecha_subida ?></td>
-                                <td><form name="formEliminarDoc" id="formEliminarDoc" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" name="btnEliminar" data-id="<?= $doc->id_documento ?>" class="btn btnDelete" value="Eliminar"></form></td>
-                                <td><input type="button" id="modificarDocumentos" name="btnModificar" data-idMod="<?= $doc->id_documento ?>" class="btn btnEdit blurmodal" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></td>
+                                <td><form name="formEliminarDoc" id="formEliminarDoc" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" name="btnEliminar" data-id="<?= $doc->id_documento ?>" class="btn btn-eliminar" value="Eliminar"></form></td>
+                                <td><input type="button" id="modificarDocumentos" name="btnModificar" data-idMod="<?= $doc->id_documento ?>" class="btn btn-guardar blurmodal" data-toggle="modal" data-target="#modalEditarDocumento" value="Modificar"></td>
                             </tr>
                             <?php
                         }
@@ -65,7 +65,7 @@ Administrar Documentación
                     {{ $docs->links() }}
                 </div>
                 <div class="col-4 d-flex justify-content-center">
-                    <button class="btn blurmodal btnAdd" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento">Agregar</button>
+                    <input type="button" class="btn blurmodal btnAdd" name="subirDocument" id="subirDocument" data-toggle="modal" data-target="#modalSubirDocumento" value="Nuevo documento">
                 </div>
                 <div class="col-4">
 

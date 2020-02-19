@@ -90,32 +90,12 @@ p {
     margin: 0px;
 }
 
-.btnDelete, .btnEdit, .btnAdd {
-    width: 100px;
+.btnAdd {
     height: 40px;
+    background-color: #78AA57;
     border: 1px solid white !important;
     border-radius: 5px !important;
     transition: all .3s ease-in-out !important;
-}
-
-.btnDelete {
-    background-color: #E38282;
-}
-
-.btnEdit {
-    background-color: #9BAAC5;
-}
-
-.btnAdd {
-    background-color: #78AA57;
-}
-
-.btnDelete:hover {
-    background-color: #D56565;
-}
-
-.btnEdit:hover {
-    background-color: #7B90B7;
 }
 
 .btnAdd:hover {
