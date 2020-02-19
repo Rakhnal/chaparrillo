@@ -107,7 +107,7 @@ class conexion {
      * @param type $pais
      * @param type $cp
      */
-    public static function addUser($correo, $pass, $apellidos, $nombre, $localidad, $pais) {
+    public static function addUser($correo, $pass, $apellidos, $nombre, $localidad, $pais, $latitud, $longitud) {
 
         $user = new Usuario;
 
@@ -118,7 +118,9 @@ class conexion {
         $user->nombre = $nombre;
         $user->localidad = $localidad;
         $user->pais = $pais;
-
+        $user->latitud = $latitud;
+        $user->longitud = $longitud;
+        
         $user->save();
     }
 
