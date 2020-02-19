@@ -44,6 +44,8 @@ input[type=date]::-webkit-outer-spin-button {
 }
 
 input[type=text], input[type=number], input[type=date] {
+    width: fit-content;
+
     border: 1px solid white;
 }
 
@@ -140,4 +142,50 @@ p {
 
 .page-item.active .page-link:hover {
     background-color: #689B46 !important;
+}
+
+.table-responsive {
+    overflow-y: hidden;
+}
+
+#productName {
+    margin-left: 5px;
+    border: 1px solid white;
+    width: 70%;
+    height: 30px;
+    padding: 0;
+}
+
+/* Tamaño de las columnas de la ventana eventos */
+#portada-e{
+    width: 20%;  
+}
+
+#nombre-e{
+    width: 10%; 
+}
+
+#local-e{
+    width: 10%; 
+}
+
+#fi-e{
+    width: 10%; 
+}
+
+#ff-e{
+    width: 10%; 
+}
+
+#guardar-e{
+    width: 15%;  
+}
+
+#borrar-e{
+    width: 15%; 
+}
+
+.img-ev{
+    max-width: 150px;
+    max-height: 150px;
 }
