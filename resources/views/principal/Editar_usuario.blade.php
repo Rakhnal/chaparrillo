@@ -63,7 +63,7 @@ Inicio
                         </div>
                         <div class="col-6">
                             <label class="form_control col-12">Contraseña:</label>
-                            <input type="button" class="btn btn-light w-100 input" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña" > 
+                            <input type="button" class="btn btn-light w-100 input" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña"> 
                         </div>
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -76,9 +76,9 @@ Inicio
                                     </div>
                                     <div class="modal-body">
                                         <label class="form_control">Nueva contraseña:</label>
-                                        <input type="password" name="passwed" class="text_black passwrd" required="" id="passw" > 
+                                        <input type="password" name="passwed" class="text_black passwrd" id="passw"> 
                                         <label class="form_control">Confirmar contraseña:</label>
-                                        <input type="password" name="passwn" class="text_black passwrd" required=""> 
+                                        <input type="password" name="passwn" class="text_black passwrd"> 
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
