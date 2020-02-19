@@ -89,9 +89,9 @@ $(document).ready(function () {
         // get lat/lon of click
         var clickLat = event.latLng.lat();
         var clickLon = event.latLng.lng();
-
-        $('#latitud').val(clickLat);
-        $('#longitud').val(clickLon);
+        
+        $('#latitudInput').val(clickLat);
+        $('#longitudInput').val(clickLon);
 
         marcadorRegistro = new google.maps.Marker({
             position: new google.maps.LatLng(clickLat, clickLon),
