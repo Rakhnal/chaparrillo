@@ -100,14 +100,13 @@ Administrar Eventos
             "ide": $(this).attr('data-id'),
             "_token": token
         };
-
+        
         $.ajax({
             url: "modificarEvento",
             data: parametros,
             type: "post",
             success: function (response) {
-                var evento = response;
-
+                var respuesta = response; 
             },
             statusCode: {
                 404: function () {

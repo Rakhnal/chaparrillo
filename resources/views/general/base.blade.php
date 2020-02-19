@@ -34,7 +34,7 @@ use App\Clases\conexion;
 
         <?php
         $user = session()->get("userObj");
-        
+
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
@@ -272,9 +272,9 @@ use App\Clases\conexion;
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
-                                    
+
                                     <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
                                 </div>
                             </div>
@@ -339,7 +339,13 @@ use App\Clases\conexion;
         </div>
 
         <!-- *************** Ventana Modificar Evento ******************** -->
-       <?php  ?>
+        <?php
+        $evento = session()->get('event_select');
+        //echo $evento->nombre.'hola';
+        if(!empty($evento)){
+        session()->forget('event_select');
+        //echo $evento->nombre;
+        ?>
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
@@ -347,7 +353,7 @@ use App\Clases\conexion;
                         <div class="modal-title">
                             Modificar Eventos
                         </div>
-                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                        <span data-dismiss="modal"><button onclick="location.reload();" class="close clear white-color salir">&times;</button></span>
                     </div>
                     <div class="modal-body">
                         <form action="modificarEvento" method="POST" enctype="multipart/form-data">
@@ -356,23 +362,23 @@ use App\Clases\conexion;
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>Nombre:</label>
-                                        <input name="nomb" type="text" value="" class="form-control" placeholder="Nombre del evento" required>
+                                        <input name="nomb" type="text" value="<?php echo $evento->nombre; ?>" class="form-control" placeholder="Nombre del evento" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha inicio</label>
-                                        <input name="feci" type="date" class="form-control"  required>
+                                        <input name="feci" type="date" value="<?php echo $evento->fecha_inicio ?>" class="form-control"  required>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha fin:</label>
-                                        <input name="fecf" type="date" class="form-control" required>
+                                        <input name="fecf" type="date" value="<?php echo $evento->fecha_fin ?>" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                        <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"><?php echo $evento->descripcion  ?></textarea>
                                     </div>
-                                    
+
                                     <div class="respuesta">
-                                        
+
                                     </div>
 
                                 </div>
@@ -381,7 +387,7 @@ use App\Clases\conexion;
 
                                     <div class="form-group">
                                         <label>Localización:</label>
-                                        <input name="loca" type="text" class="form-control" placeholder="Localización" required>
+                                        <input name="loca" type="text" value="<?php echo $evento->localizacion ?>" class="form-control" placeholder="Localización" required>
                                     </div>
 
                                     <div class="form-group">
@@ -406,7 +412,9 @@ use App\Clases\conexion;
                                         <input id="imgEvento2" name="portada" type="file" accept="image/*" class="form-control-file" required>
                                     </div>
                                     <div id="img-portada2">
-
+                                        <?php if ($evento->imagen != null) { ?>
+                                            <img src="data:image/jpg;base64,<?php echo base64_encode($evento->imagen); ?>" alt="Portada evento" class="img-fluid img-ev">
+                                        <?php } ?>
                                     </div>
                                     <div class="text-center mt-4">
                                         <input type="submit" name="add" class="btn btn-primary" value="Guardar">
@@ -418,6 +426,7 @@ use App\Clases\conexion;
                 </div>
             </div>
         </div>
+        <?php } ?>
         <!-- Ventana modal para subir documentación -->
 
         <div class="modal fade" id="modalSubirDocumento" data-backdrop="static">
