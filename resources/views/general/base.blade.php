@@ -23,7 +23,7 @@ use App\Clases\conexion;
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
         <script src="scripts/general/geolocate.js"></script>
-        
+
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
@@ -45,7 +45,7 @@ use App\Clases\conexion;
         } else {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
-            <?php 
+            <?php
         }
         ?>
 
@@ -103,7 +103,7 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-<?php } ?>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
@@ -115,7 +115,7 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-<?php } ?>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
@@ -287,10 +287,10 @@ use App\Clases\conexion;
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <input type="text" autocomplete="off" name="latitud" id="latitudInput" value="" hidden/>
-                                    
-                                    <input type="text" autocomplete="off" name="longitud" id="longitudInput" value="" hidden/>
+
+                                    <input type="text" autocomplete="off" name="latitudInput" id="latitudInput" value="" hidden/>
+
+                                    <input type="text" autocomplete="off" name="longitudInput" id="longitudInput" value="" hidden/>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -354,7 +354,7 @@ use App\Clases\conexion;
         </div>
 
         <!-- *************** Ventana Modificar Evento ******************** -->
-<?php ?>
+        <?php ?>
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
@@ -407,7 +407,7 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-<?php } ?>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
@@ -419,7 +419,7 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-<?php } ?>
+                                            <?php } ?>
                                         </select>
                                     </div>
 
@@ -606,7 +606,7 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center">
@@ -621,7 +621,7 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center">

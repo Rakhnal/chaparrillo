@@ -71,3 +71,8 @@ Route::post('actInforme', 'controlador_tablas@actInforme');
 Route::get('proyecto', function () {
     return view('informacion/proyecto');
 });
+
+// DES06: Página Clitra
+Route::get('clitra', function () {
+    return view('informacion/clitra');
+});
