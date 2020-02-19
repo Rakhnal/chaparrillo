@@ -23,8 +23,6 @@ use App\Clases\conexion;
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
         <script src="scripts/general/geolocate.js"></script>
-
-        <script src="scripts/general/geolocate.js"></script>
         
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
@@ -47,11 +45,7 @@ use App\Clases\conexion;
         } else {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
-            <?php
-        } else {
-        ?>
-            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
-        <?php 
+            <?php 
         }
         ?>
 
