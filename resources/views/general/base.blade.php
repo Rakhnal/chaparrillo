@@ -276,9 +276,9 @@ use App\Clases\conexion;
                                         </div>
                                     </div>
                                     
-                                    <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
+                                    <input type="text" autocomplete="off" name="latitud" id="latitudInput" value="" hidden/>
                                     
-                                    <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
+                                    <input type="text" autocomplete="off" name="longitud" id="longitudInput" value="" hidden/>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
