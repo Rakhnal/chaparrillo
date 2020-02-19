@@ -24,7 +24,7 @@ Inicio
         </div>
         <div class="row col-12">
             <div class=" col-4" >
-                <?php $seesion_user = base64_decode($prin->img_user);?>
+                <?php $seesion_user = $prin->img_user;?>
                 
                 <script type="text/javascript" src="{{ URL::asset('scripts/general/main.js') }}"></script>
                 <script type="text/javascript" src="{{ URL::asset('scripts/general/cropper.min.js') }}"></script>
@@ -33,8 +33,8 @@ Inicio
                     <div class="ajax-response" id="loading"></div>
                     <h4 class="m-t-5 m-b-5 ellipsis text-center">Ajustar imagen</h4>                    
                     <div class="profile-pic-wraper">
-                        <?php if ($seesion_user!=0): ?>
-                            <img src="<?php echo $seesion_user; ?>?>" alt="" id="change-profile-pic" class="col-12">
+                        <?php if ($seesion_user!='0'): ?>
+                            <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" alt="" id="change-profile-pic" class="col-12">
                         <?php else: ?>
                             <img src="images/profile-pic/default.png" alt="" id="change-profile-pic" class="col-12" >    
                         <?php endif; ?>
@@ -49,8 +49,8 @@ Inicio
             <form class="col-8" name="formulario_editUser" id="formulario_editUser" action="edit_us" method="POST">
                 @csrf
                 <div id="profile-result" class="mb-2 justify-content-center d-flex row">
-                    <?php if ($seesion_user != 0): ?>
-                        <img src="<?php echo $seesion_user; ?>" class="img-circle" id="laola">  
+                    <?php if ($seesion_user != '0'): ?>
+                        <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" class="img-circle" id="laola">  
                     <?php else : ?>
                         <img src="images/profile-pic/default.png" class="img-circle">    
                     <?php endif; ?>
@@ -63,7 +63,7 @@ Inicio
                         </div>
                         <div class="col-6">
                             <label class="form_control col-12">Contraseña:</label>
-                            <input type="button" class="btn btn-light w-100 input" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña" > 
+                            <input type="button" class="btn btn-light w-100 input" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña"> 
                         </div>
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -76,9 +76,9 @@ Inicio
                                     </div>
                                     <div class="modal-body">
                                         <label class="form_control">Nueva contraseña:</label>
-                                        <input type="password" name="passwed" class="text_black passwrd" required="" id="passw" > 
+                                        <input type="password" name="passwed" class="text_black passwrd" id="passw"> 
                                         <label class="form_control">Confirmar contraseña:</label>
-                                        <input type="password" name="passwn" class="text_black passwrd" required=""> 
+                                        <input type="password" name="passwn" class="text_black passwrd"> 
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
@@ -120,7 +120,7 @@ Inicio
                 </div>
                 <div class="col-md-12 text-center mb-3">
                     <button type="button" class="btn btn-primary" id="editarUsuario" >Editar</button>
-                    <input type="submit" class="btn btn-primary" id="bd_edit" value="submit">
+                    <input type="submit" class="btn btn-success" id="bd_edit" value="Aceptar">
                 </div>
             </form>
         </div>

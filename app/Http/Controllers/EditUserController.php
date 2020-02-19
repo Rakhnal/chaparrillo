@@ -13,13 +13,18 @@ class EditUserController extends Controller {
      * @return type
      */
     public function editarUsuario(Request $req) {
+        $image_parts = $req->get('secreto');
+        $data = substr($image_parts, strpos($image_parts, ',') + 1);
         $correo = $req->get('email');
         $pass = $req->get('passwed');
         $nombre = $req->get('nombre');
         $apellidos = $req->get('apellidos');
         $localidad = $req->get('localidad');
         $pais = $req->get('pais');
-        $img = $req->get('secreto');
+        $img =  base64_decode($data);
+
+
+
         $pass = Hash::make($pass);
 
         //password_verify($password, $hash);
