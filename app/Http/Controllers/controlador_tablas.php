@@ -104,13 +104,13 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -131,11 +131,18 @@ class controlador_tablas extends Controller {
         $litrohect = $req->get('litroHectarea');
         $fechahora = $req->get('fechaInforme');
 
+        $plagaTratar = $req->get('plagaTratar');
+        $polParInput = $req->get('polParInput');
+        $danioAprox = $req->get('danioAprox');
+
         $informe = new Informe();
 
         $informe->nombre_producto = $nombre;
         $informe->litro_hectarea = $litrohect;
         $informe->fecha_hora = $fechahora;
+        $informe->aprox_dmg = $danioAprox;
+        $informe->poli_par = $polParInput;
+        $informe->plaga_tratar = $plagaTratar;
         $informe->id_user = $user->id_user;
 
         $informe->save();
@@ -144,13 +151,13 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -177,12 +184,19 @@ class controlador_tablas extends Controller {
             $litrohect = $req->get('litrohect');
             $fechahora = $req->get('fechahora');
 
+            $plagaTratar = $req->get('plagaTratar');
+            $polParInput = $req->get('polParInput');
+            $danioAprox = $req->get('danioAprox');
+
             $informe = Informe::find($idinforme);
 
             $informe->nombre_producto = $nombre;
             $informe->litro_hectarea = $litrohect;
             $informe->fecha_hora = $fechahora;
-
+            $informe->aprox_dmg = $danioAprox;
+            $informe->poli_par = $polParInput;
+            $informe->plaga_tratar = $plagaTratar;
+            
             $informe->save();
         }
 
@@ -197,13 +211,13 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -223,19 +237,19 @@ class controlador_tablas extends Controller {
         return view(Constantes::AD_EVENTOS, ['events' => $eventos]);
     }
 
-    public function modificarEventos(){
+    public function modificarEventos() {
         $id_evento = intval($_POST["ide"]);
-        
+
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
                 ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
                 ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
-                ->where('eventos.id_eventos',$id_evento);
-        
-        
+                ->where('eventos.id_eventos', $id_evento);
+
+
         return json_encode($eventos);
     }
-    
+
     /**
      * 
      * @return type
@@ -340,8 +354,8 @@ class controlador_tablas extends Controller {
                 'error' => 'Error, el nombre del evento ya existe'
             ];
 
-               
-           return \Redirect::route('admin_event',['events'=>$eventos,'error'=>$error]);
+
+            return \Redirect::route('admin_event', ['events' => $eventos, 'error' => $error]);
         }
     }
 

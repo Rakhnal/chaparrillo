@@ -34,13 +34,13 @@ Inicio
     </div>
 
     <div class="row fade-up fade-ani" id="plagas-container">
-        <a class="col-md-3 col-sm-12 tilted" href="index" data-tilt>
+        <a class="col-md-3 col-sm-12 tilted" href="clitra" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
                         <img src="images/chaparrillo/elegidas/clitrar.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
-                    <div class="row justify-content-center align-items-center add-padding justify-text">
+                    <div class="row justify-content-center align-items-center add-padding">
                         <div class="col">
                             <div class="row justify-content-center"> 
                                 <h2 class="bolder">Clitra</h2>
@@ -56,13 +56,13 @@ Inicio
                 </div>
             </div>
         </a>
-        <a class="col-md-3 col-sm-12 tilted" href="index" data-tilt>
+        <a class="col-md-3 col-sm-12 tilted" href="plodia" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
                         <img src="images/chaparrillo/elegidas/plodia.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
-                    <div class="row justify-content-center align-items-center add-padding justify-text">
+                    <div class="row justify-content-center align-items-center add-padding">
                         <div class="col">
                             <div class="row justify-content-center"> 
                                 <h2 class="bolder">Polilla de Almacén</h2>
@@ -79,13 +79,13 @@ Inicio
             </div>
         </a>
 
-        <a class="col-md-3 col-sm-12 tilted" href="index" data-tilt>
+        <a class="col-md-3 col-sm-12 tilted" href="psilas" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
                         <img src="images/chaparrillo/elegidas/psilas.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
-                    <div class="row justify-content-center align-items-center add-padding justify-text">
+                    <div class="row justify-content-center align-items-center add-padding">
                         <div class="col">
                             <div class="row justify-content-center"> 
                                 <h2 class="bolder">Psilas del Pistacho</h2>
@@ -102,13 +102,13 @@ Inicio
             </div>
         </a>
 
-        <a class="col-md-3 col-sm-12 tilted" href="index" data-tilt>
+        <a class="col-md-3 col-sm-12 tilted" href="chinche" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
                         <img src="images/chaparrillo/elegidas/chinche.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
-                    <div class="row justify-content-center align-items-center add-padding justify-text">
+                    <div class="row justify-content-center align-items-center add-padding">
 
                         <h2 class="bolder">Chinches</h2>
 
