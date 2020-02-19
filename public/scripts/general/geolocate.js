@@ -71,19 +71,6 @@ $(document).ready(function () {
         localStorage.setItem('longitud', longitud);
     }
 
-    function markerCoords(markerobject) {
-        google.maps.event.addListener(markerobject, 'dragend', function (evt) {
-            infoWindow.setOptions({
-                content: '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>'
-            });
-            infoWindow.open(map, markerobject);
-        });
-
-        google.maps.event.addListener(markerobject, 'drag', function (evt) {
-            console.log("marker is being dragged");
-        });
-    }
-
     function mapClick(event) {
 
         // get lat/lon of click
@@ -106,8 +93,8 @@ $(document).ready(function () {
     function resetMarker() {
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         
-        $('#latitud').val(null);
-        $('#longitud').val(null);
+        $('#latitudInput').val(null);
+        $('#longitudInput').val(null);
 
         marcadorRegistro.setMap(null);
     }
