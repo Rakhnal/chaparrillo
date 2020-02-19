@@ -36,6 +36,9 @@ Administrar Informes
                             <th hidden>ID</th>
                             <th>Producto</th>
                             <th>Litro por hectárea</th>
+                            <th>Plaga a tratar</th>
+                            <th>Polígono y parcela</th>
+                            <th>Daño aproximado</th>
                             <th>Fecha Informe</th>
                             <th>Usuario</th>
                             <th></th>
@@ -50,9 +53,12 @@ Administrar Informes
                         <form action="actInforme" name="infForm" onsubmit="return confirm('¿Quieres proceder con la acción?')" method="POST">
                             {{ csrf_field() }}
                             <td hidden><input type="number" name="idinforme" value="<?= $inf->id_informe ?>"/></td>
-                            <td><input type="text" name="nombre" value="<?= $inf->nombre_producto ?>"/></td>
-                            <td><input type="number" name="litrohect" value="<?= $inf->litro_hectarea ?>"/></td>
-                            <td><input type="date" name="fechahora" value="<?= $inf->fecha_hora ?>"></td>
+                            <td><input type="text" class="centered" name="nombre" value="<?= $inf->nombre_producto ?>"/></td>
+                            <td><input type="number" class="centered" name="litrohect" value="<?= $inf->litro_hectarea ?>"/></td>
+                            <td><input type="text" class="centered" name="plaga" value="<?= $inf->plaga_tratar ?>"/></td>
+                            <td><input type="text" class="centered" name="polpar" value="<?= $inf->poli_par ?>"/></td>
+                            <td><input type="text" class="centered" name="danio" value="<?= $inf->aprox_dmg ?>"/> %</td>
+                            <td><input type="date" class="centered" name="fechahora" value="<?= $inf->fecha_hora ?>"></td>
                             <td><?= $inf->nombre ?> <?= $inf->apellidos ?></td>
                             <td><input type="submit" name="delInforme" id="delInforme" class="btn btn-eliminar" value="."/></td>
                             <td><input type="submit" name="modInforme" id="modInforme" class="btn btn-guardar" value="."/></td>

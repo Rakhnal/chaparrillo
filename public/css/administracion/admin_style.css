@@ -81,7 +81,8 @@ p {
 }
 
 .cajaNormal {
-    width: 50% !important;
+    height: 30px !important;
+    width: 70% !important;
     border: 1px solid white !important;
     padding: 5px !important;
 }
@@ -126,6 +127,10 @@ p {
 
 .table-responsive {
     overflow-y: hidden;
+}
+
+.centered {
+    text-align: center;
 }
 
 #productName {
