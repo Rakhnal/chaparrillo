@@ -52,17 +52,17 @@ class conexion {
 
         $evento->save();
     }
-
     /**
      * 
      * @return type
      */
-    public static function sacarCategorias() {
-
+    public static function sacarCategorias(){
+        
         $categoria = Categoria::all();
-
+        
         return $categoria;
     }
+    
 
     /**
      * Login del usuario
@@ -86,17 +86,10 @@ class conexion {
         }
     }
 
-    /**
-     * Login del usuario
-     * @param type $correo
-     * @param type $pass
-     * @return type
-     */
     public static function existeUsuario($correo) {
 
         $user = Usuario::where('email', $correo)
                 ->first();
-
         if ($user != null) {
             return $user;
         } else {
@@ -114,7 +107,7 @@ class conexion {
      * @param type $pais
      * @param type $cp
      */
-    public static function addUser($correo, $pass, $apellidos, $nombre, $localidad, $pais, $latitud, $longitud) {
+    public static function addUser($correo, $pass, $apellidos, $nombre, $localidad, $pais) {
 
         $user = new Usuario;
 
@@ -125,13 +118,37 @@ class conexion {
         $user->nombre = $nombre;
         $user->localidad = $localidad;
         $user->pais = $pais;
-        $user->latitud = $latitud;
-        $user->longitud = $longitud;
 
         $user->save();
     }
 
-    /* // Buscamos a todos los usuarios en BBDD
+    /*
+     * Editar el usuario en base de datos
+     * @param type $nombre
+     * @param type $apellidos
+     * @param type $correo
+     * @param type $pass
+     * @param type $localidad
+     * @param type $pais
+     * @param type $img
+     */
+    public static function editUser($nombre, $apellidos, $correo, $pass, $localidad, $pais, $img) {
+
+        $user = conexion::existeUsuario($correo);
+        $user->nombre = $nombre;
+        $user->apellidos = $apellidos;
+        $user->email = $correo;
+        if ($pass != null || $pass != '') {
+            $user->password = $pass;
+        }
+        $user->localidad = $localidad;
+        $user->pais = $pais;
+        $user->img_user = $img;
+        $user->save();
+    }
+
+    /*
+     * // Buscamos a todos los usuarios en BBDD
       public static function obtenerUsuarios() {
 
       $users = Usuario::all();
@@ -219,19 +236,6 @@ class conexion {
       $user = Usuario::find($correo);
 
       $user->tipo = $typeUsr;
-
-      $user->save();
-      }
-
-      // Cambiamos los campos del usuario
-      public static function cambiarCamposUsuario($correo, $pass, $apellido, $nombre, $dni) {
-
-      $user = Usuario::find($correo);
-
-      $user->pass = base64_encode($pass);
-      $user->apellido = $apellido;
-      $user->nombre = $nombre;
-      $user->dni = $dni;
 
       $user->save();
       }

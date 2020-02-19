@@ -28,23 +28,11 @@ var loadFile = function (event) {
             var imageData = $(this).cropper('getImageData');
             var croppedCanvas = $(this).cropper('getCroppedCanvas');
             
-            function dataURLtoFile(dataurl, filename) {
-                var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-                        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-                while (n--) {
-                    u8arr[n] = bstr.charCodeAt(n);
-                }
-                return new File([u8arr], filename, {type: mime});
-            }
-
-            var file = dataURLtoFile(croppedCanvas.toDataURL(), 'a.png');
-            console.log(file);
+            
             
             
             $('#profile-result').html('<img src="' + croppedCanvas.toDataURL() + '" class="thumb-lg img-circle" id="secreto"><input type="text" value="' + croppedCanvas.toDataURL() +'" name="secreto" hidden>');
-            
-            localStorage.setItem('miGato', croppedCanvas.toDataURL());
-            
+        
             $('#save-profile').click(function () {
                 $('#loading').show();
                 $.ajax({
@@ -61,7 +49,7 @@ var loadFile = function (event) {
                             setTimeout(function () {
                                 $('#loading').hide();
                                 $('#change-profile').modal('hide');
-                            }, 2000);
+                            }, 0);
 
 
                         }
