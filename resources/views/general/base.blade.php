@@ -18,14 +18,14 @@ use App\Clases\conexion;
         <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
         <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
-        
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 
         <script src="scripts/general/geolocate.js"></script>
 
         <script src="scripts/general/geolocate.js"></script>
-        
+
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing"async defer></script>
@@ -39,7 +39,7 @@ use App\Clases\conexion;
 
         <?php
         $user = session()->get("userObj");
-        
+
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
@@ -48,10 +48,6 @@ use App\Clases\conexion;
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
             <?php
-        } else {
-        ?>
-            <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscroll.js') }}"></script>
-        <?php 
         }
         ?>
 
@@ -93,22 +89,23 @@ use App\Clases\conexion;
                                         <textarea id="taa-event" name="descrip"rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-4">
 
                                     <div class="form-group">
                                         <label>Localización:</label>
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label>Categoría:</label>
                                         <select name="catego[]" class="categ" multiple>
-                                            <?php 
+                                            <?php
                                             $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca){ ?>
-                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php }?>
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+<?php } ?>
                                         </select>
                                     </div>
 
@@ -120,7 +117,7 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php } ?>
+<?php } ?>
                                         </select>
                                     </div>
 
@@ -292,9 +289,9 @@ use App\Clases\conexion;
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
-                                    
+
                                     <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
                                 </div>
                             </div>
@@ -359,7 +356,7 @@ use App\Clases\conexion;
         </div>
 
         <!-- *************** Ventana Modificar Evento ******************** -->
-       <?php  ?>
+<?php ?>
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
@@ -390,9 +387,9 @@ use App\Clases\conexion;
                                         <label>Descripción:</label>
                                         <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
                                     </div>
-                                    
+
                                     <div class="respuesta">
-                                        
+
                                     </div>
 
                                 </div>
@@ -412,21 +409,22 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php } ?>
+<?php } ?>
                                         </select>
                                     </div>
 
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label>Categoría:</label>
                                         <select class="categ" multiple>
-                                            <?php 
+                                            <?php
                                             $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca){ ?>
-                                            <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php }?>
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+<?php } ?>
                                         </select>
                                     </div>
-                                    
+
                                     <div id="map2" class="mapa">
 
                                     </div>
