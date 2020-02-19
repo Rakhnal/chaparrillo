@@ -99,7 +99,7 @@ $(document).ready(function () {
     }
 
     function nofunciona(position) {
-        alert("Error al cargar");
+        
     }
     ;
 
