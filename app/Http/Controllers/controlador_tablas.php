@@ -216,12 +216,30 @@ class controlador_tablas extends Controller {
     public function listarEventos() {
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->select('eventos.id_evento', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
                 ->paginate(8);
 
         return view(Constantes::AD_EVENTOS, ['events' => $eventos]);
     }
 
+    public function modificarEventos(){
+        $id_evento = intval($_POST["ide"]);
+        
+        $eventos = DB::table('eventos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                ->where('eventos.id_eventos',$id_evento);
+        
+        
+        return json_encode($eventos);
+    }
+    
+    /**
+     * 
+     * @return type
+     */
     public function eliminarEventos() {
         $id_evento = intval($_POST['id_e']);
 
@@ -241,12 +259,18 @@ class controlador_tablas extends Controller {
 
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->select('eventos.id_evento', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
                 ->paginate(8);
 
-        return view(Constantes::AD_EVENTOS, ['events' => $eventos]);
+        return redirect('admin_event')->with('events', $eventos);
     }
 
+    /**
+     * 
+     * @param Request $req
+     * @return type
+     */
     public function agregarEventos(Request $req) {
         $publi = new Publicacion();
         $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
@@ -266,13 +290,13 @@ class controlador_tablas extends Controller {
             $publi->editado = 0;
             $publi->fecha_subida = date('Y-m-d');
 
-            $image->imagen = $req->file('portada');
+            $image->imagen = file_get_contents($req->file('portada'));
 
             $evento->fecha_inicio = $req->get('feci');
             $evento->fecha_fin = $req->get('fecf');
             $evento->localizacion = $req->get('loca');
-            $evento->longitud = 32165416;
-            $evento->latitud = 6516516;
+            $evento->longitud = $req->get('longitud');
+            $evento->latitud = $req->get('latitud');
 
             $publi->save();
 
@@ -295,24 +319,29 @@ class controlador_tablas extends Controller {
             }
 
 
-            $evento = DB::table('eventos')
+            $eventos = DB::table('eventos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                    ->select('eventos.id_evento', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
                     ->paginate(8);
 
-            return view('administracion/admin_eventos', ['events' => $evento]);
+            return redirect('admin_event')->with('events', $eventos);
         } else {
 
-            $evento = DB::table('eventos')
+            $eventos = DB::table('eventos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                    ->select('eventos.id_evento', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
                     ->paginate(8);
+
+
 
             $error = [
                 'error' => 'Error, el nombre del evento ya existe'
             ];
 
-            return view('administracion/admin_eventos', ['events' => $evento], ['error' => $error]);
+               
+           return \Redirect::route('admin_event',['events'=>$eventos,'error'=>$error]);
         }
     }
 

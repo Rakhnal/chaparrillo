@@ -19,6 +19,11 @@ use App\Clases\conexion;
         <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+        <script src="scripts/general/geolocate.js"></script>
+
         <script src="scripts/general/geolocate.js"></script>
 
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
@@ -34,7 +39,7 @@ use App\Clases\conexion;
 
         <?php
         $user = session()->get("userObj");
-        
+
         if (session()->get("actPage") == Constantes::INDEX) {
             ?>
             <script type="text/javascript" src="{{ URL::asset('scripts/general/headerscrollindex.js') }}"></script>
@@ -100,13 +105,32 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php } ?>
+<?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Categoría:</label>
+                                        <select name="catego[]" class="categ" multiple>
+                                            <?php
+                                            $categoria = conexion::sacarCategorias();
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+<?php } ?>
                                         </select>
                                     </div>
 
                                     <div id="map" class="mapa">
 
                                     </div>
+
+                                    <input id="latitud" type="hidden" name="latitud" value="">
+                                    <input id="longitud" type="hidden" name="longitud" value="">
+                                    <script>
+                                        $('#latitud').val(localStorage.getItem('latitud'));
+                                        $('#longitud').val(localStorage.getItem('longitud'));
+                                    </script>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
@@ -265,9 +289,9 @@ use App\Clases\conexion;
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
-                                    
+
                                     <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
                                 </div>
                             </div>
@@ -332,6 +356,7 @@ use App\Clases\conexion;
         </div>
 
         <!-- *************** Ventana Modificar Evento ******************** -->
+<?php ?>
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
@@ -348,7 +373,7 @@ use App\Clases\conexion;
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>Nombre:</label>
-                                        <input name="nomb" type="text" class="form-control" placeholder="Nombre del evento" required>
+                                        <input name="nomb" type="text" value="" class="form-control" placeholder="Nombre del evento" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha inicio</label>
@@ -361,6 +386,10 @@ use App\Clases\conexion;
                                     <div class="form-group">
                                         <label>Descripción:</label>
                                         <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                    </div>
+
+                                    <div class="respuesta">
+
                                     </div>
 
                                 </div>
@@ -380,7 +409,19 @@ use App\Clases\conexion;
                                             foreach ($categoria as $ca) {
                                                 ?>
                                                 <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php } ?>
+<?php } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Categoría:</label>
+                                        <select class="categ" multiple>
+                                            <?php
+                                            $categoria = conexion::sacarCategorias();
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+<?php } ?>
                                         </select>
                                     </div>
 
