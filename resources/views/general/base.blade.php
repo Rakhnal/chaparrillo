@@ -546,19 +546,43 @@ use App\Clases\conexion;
                                     <div class="row justify-content-center">
                                         <input type="text" class="cajaNormal" autocomplete="off" id="productName" name="productName" required>
                                     </div>
-                                </div>                                
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Plaga a tratar:</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="plagaTratar" name="plagaTratar" required>
+                                    </div>
+                                </div>
                             </div>
+                            
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Polígono y parcela:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="polParInput" name="polParInput" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Daño aproximado (%):</p>
+                                        <input type="number" class="cajaNormal" max="100" min="1" id="danioAprox" name="danioAprox" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Litros por hectárea:</p>
-                                        <input type="number" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
+                                        <input type="number" class="cajaNormal" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Fecha Informe:</p>
-                                        <input type="date" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
+                                        <input type="date" class="cajaNormal" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
                                     </div>
                                 </div>
                             </div>
