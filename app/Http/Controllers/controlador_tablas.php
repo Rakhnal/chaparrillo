@@ -11,6 +11,7 @@ use App\Informe;
 use App\Clases\Auxiliares\Constantes;
 use App\Documento;
 use Illuminate\Support\Facades\Redirect;
+use App\Adjunto;
 
 class controlador_tablas extends Controller {
 
@@ -113,6 +114,8 @@ class controlador_tablas extends Controller {
             $documento = new Documento();
             $adjunto = new Adjunto();
 
+            $file = $req->file('subirAdjuntos');
+            
             $publicacion->nombre = $req->get('nombreSubirDoc');
             $publicacion->descripcion = $req->get('descSubirDoc');
             $publicacion->id_user = $idUserLogin; // Se deberá sacar la ID de la sesión del usuario logeado.
@@ -122,8 +125,13 @@ class controlador_tablas extends Controller {
             $publicacion->fecha_subida = date('Y-m-d');
             $publicacion->tipo = Constantes::DOCUMENTO;
 
+            //dd($req->file('subirAdjuntos'));
+            
             $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
 
+            //$nombreAdjunto = $file->getClientOriginalName();
+            //\Storage::disk('')->put($nombreAdjunto, \File::get($file));
+            
             $documento->num_descargas = 0;
             $documento->visible = 1;
 
@@ -137,21 +145,25 @@ class controlador_tablas extends Controller {
             $adjunto->save();
             $documento->save();
 
-            $documentos = DB::table('documentos')
-                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
-                    ->paginate(8);
-
-            return redirect('adminDocument')->with('docs', $documentos);
+//            $documentos = DB::table('documentos')
+//                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+//                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+//                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+//                    ->paginate(8);
+//
+//            return redirect('adminDocument')->with('docs', $documentos);
+            
+            controlador_tablas::listarDocumentos();
         } else {
-            $documentos = DB::table('documentos')
-                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
-                    ->paginate(8);
-
-            return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
+//            $documentos = DB::table('documentos')
+//                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+//                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+//                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+//                    ->paginate(8);
+//
+//            return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
+            
+            controlador_tablas::listarDocumentos();
         }
     }
 

@@ -443,7 +443,8 @@ use App\Clases\conexion;
                         </div>
                         <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
-                    <form name="formSubDoc" class="formDocs m-0" action="subirDocumento" method="POST">
+                    <form name="formSubDoc" class="formDocs m-0" action="subirDocumento" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+                        {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" class="pl-2" id="nombreSubirDoc" name="nombreSubirDoc" placeholder="Nombre del documento" required>
@@ -452,7 +453,7 @@ use App\Clases\conexion;
                                 <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación"></textarea>
                             </div>
                             <div class="form-group">
-                                <input class="btn p-0" id="subirAdjuntos" name="subirAdjuntos" type="file">
+                                <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*">
                             </div>
                             <label for="subirAdjuntos">
                                 <span>Adjuntar archivos</span>

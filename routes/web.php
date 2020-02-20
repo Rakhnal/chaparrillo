@@ -35,6 +35,7 @@ Route::post('formevent','controlador_tablas@eliminarEventos');
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
 Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
 Route::post('categorias','controlador_tablas@sacarCategorias');
+Route::post('guardarEvento','controlador_tablas@guardarEventos');
 
 // DES17: Página Administrar Documentos - NLO
 // Listar documentos
@@ -43,19 +44,8 @@ Route::get('adminDocument', ['as' => 'adminDocument', 'uses' => 'controlador_tab
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
 // Modificar documentos
 Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
-Route::post('guardarEvento','controlador_tablas@guardarEventos');
 // Subir documentos
 Route::post('subirDocumento', ['as' => 'subirDocumento', 'uses' => 'controlador_tablas@subirDocumentos']);
-
-// DES17: Página Administrar Documentos - NLO
-// Listar documentos
-Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
-// Eliminar documentos
-Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
-// Buscar documentos
-Route::post('buscarDocumento', ['as' => 'buscarDocumento', 'uses' => 'controlador_tablas@buscarDocumentos']);
-// Modificar documentos
-Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 
 // DES21: Login/Registro - ADC
 // Login
