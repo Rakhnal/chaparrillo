@@ -353,10 +353,10 @@ use App\Clases\conexion;
                         <div class="modal-title">
                             Modificar Eventos
                         </div>
-                        <span data-dismiss="modal"><button onclick="location.reload();" class="close clear white-color salir">&times;</button></span>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
                     <div class="modal-body">
-                        <form action="modificarEvento" method="POST" enctype="multipart/form-data">
+                        <form action="guardarEvento" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-4">
@@ -409,7 +409,7 @@ use App\Clases\conexion;
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>Portada de evento:</label>
-                                        <input id="imgEvento2" name="portada" type="file" accept="image/*" class="form-control-file" required>
+                                        <input id="imgEvento2" name="portada" type="file" accept="image/*" class="form-control-file" >
                                     </div>
                                     <div id="img-portada2">
                                         <?php if ($evento->imagen != null) { ?>

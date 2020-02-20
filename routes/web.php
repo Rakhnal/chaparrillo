@@ -34,6 +34,7 @@ Route::post('formevent','controlador_tablas@eliminarEventos');
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
 Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
 Route::post('categorias','controlador_tablas@sacarCategorias');
+Route::post('guardarEvento','controlador_tablas@guardarEventos');
 
 // DES17: Página Administrar Documentos - NLO
 // Listar documentos

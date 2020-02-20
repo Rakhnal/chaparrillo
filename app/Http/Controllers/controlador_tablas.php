@@ -297,6 +297,7 @@ class controlador_tablas extends Controller {
             $publi->views = 0;
             $publi->editado = 0;
             $publi->fecha_subida = date('Y-m-d');
+            $publi->tipo = Constantes::EVENTO;
 
             $image->imagen = file_get_contents($req->file('portada'));
 
@@ -351,6 +352,17 @@ class controlador_tablas extends Controller {
                
            return \Redirect::route('admin_event',['events'=>$eventos,'error'=>$error]);
         }
+    }
+    
+    public function guardarEventos(Request $req){
+        
+        $eventos = DB::table('eventos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                    ->paginate(8);
+        
+        return redirect('admin_event')->with('events', $eventos);
     }
 
 }
