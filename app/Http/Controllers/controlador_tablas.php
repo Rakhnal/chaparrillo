@@ -38,11 +38,14 @@ class controlador_tablas extends Controller {
      */
     public function eliminarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
+        
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->where('documentos.id_documento', $id_documento);
 
         if ($documento) {
+            $publicacion = Publicacion::find($id_documento);
+            $publicacion->delete();
             $documento->delete();
             $qhp = "ok";
         } else {
@@ -104,7 +107,6 @@ class controlador_tablas extends Controller {
      */
     public function subirDocumentos(Request $req) {
         $user = session()->get("userObj");
-        $idUserLogin = $user->id_user;
 
         $publi = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
@@ -114,11 +116,11 @@ class controlador_tablas extends Controller {
             $documento = new Documento();
             $adjunto = new Adjunto();
 
-            $file = $req->file('subirAdjuntos');
-            
+            //dd($publicacion);
+
             $publicacion->nombre = $req->get('nombreSubirDoc');
             $publicacion->descripcion = $req->get('descSubirDoc');
-            $publicacion->id_user = $idUserLogin; // Se deberá sacar la ID de la sesión del usuario logeado.
+            $publicacion->id_user = intval($user->id_user); // Se deberá sacar la ID de la sesión del usuario logeado.
             $publicacion->likes = 0;
             $publicacion->views = 0;
             $publicacion->editado = 0;
@@ -126,12 +128,9 @@ class controlador_tablas extends Controller {
             $publicacion->tipo = Constantes::DOCUMENTO;
 
             //dd($req->file('subirAdjuntos'));
-            
+
             $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
 
-            //$nombreAdjunto = $file->getClientOriginalName();
-            //\Storage::disk('')->put($nombreAdjunto, \File::get($file));
-            
             $documento->num_descargas = 0;
             $documento->visible = 1;
 
@@ -139,31 +138,29 @@ class controlador_tablas extends Controller {
 
             $publication = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
-            $adjunto->id_documento = $publication->id_item;
+            //dd($publication->id_item);
+
             $documento->id_documento = $publication->id_item;
+            $adjunto->id_documento = $publication->id_item;
 
-            $adjunto->save();
             $documento->save();
+            $adjunto->save();
 
-//            $documentos = DB::table('documentos')
-//                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-//                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-//                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
-//                    ->paginate(8);
-//
-//            return redirect('adminDocument')->with('docs', $documentos);
-            
-            controlador_tablas::listarDocumentos();
+            $documentos = DB::table('documentos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->paginate(8);
+
+            return redirect('adminDocument')->with('docs', $documentos);
         } else {
-//            $documentos = DB::table('documentos')
-//                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-//                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-//                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
-//                    ->paginate(8);
-//
-//            return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
-            
-            controlador_tablas::listarDocumentos();
+            $documentos = DB::table('documentos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->paginate(8);
+
+            return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
         }
     }
 
@@ -314,22 +311,22 @@ class controlador_tablas extends Controller {
 
     public function modificarEventos() {
         $id_evento = intval($_POST["ide"]);
-                
+
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
                 ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('nombre','imagen','descripcion','localizacion','fecha_inicio','fecha_fin')
-                ->where('eventos.id_evento',$id_evento)
+                ->select('nombre', 'imagen', 'descripcion', 'localizacion', 'fecha_inicio', 'fecha_fin')
+                ->where('eventos.id_evento', $id_evento)
                 ->first();
-        
-        
-        if(!empty($eventos)){
-            $qhp = "ok";     
-            session()->put('event_select',$eventos);
+
+
+        if (!empty($eventos)) {
+            $qhp = "ok";
+            session()->put('event_select', $eventos);
         } else {
             $qhp = "fail";
         }
-        
+
         return $qhp;
     }
 
@@ -370,10 +367,8 @@ class controlador_tablas extends Controller {
      */
     public function agregarEventos(Request $req) {
         $user = session()->get("userObj");
-        $idUserLogin = $user->id_user;
 
         $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
-        $user = session()->get("userObj");
         //si no existe la publicación
         if (empty($publi)) {
 
@@ -381,14 +376,16 @@ class controlador_tablas extends Controller {
             $image = new Imagen();
             $evento = new Evento();
 
-            $publi->nombre = $req->get('nomb');
-            $publi->descripcion = $req->get('descrip');
-            $publi->id_user = intval($user->id_user);
-            $publi->likes = 0;
-            $publi->views = 0;
-            $publi->editado = 0;
-            $publi->fecha_subida = date('Y-m-d');
-            $publi->tipo = Constantes::EVENTO;
+            //dd($publicacion);
+
+            $publicacion->nombre = $req->get('nomb');
+            $publicacion->descripcion = $req->get('descrip');
+            $publicacion->id_user = intval($user->id_user);
+            $publicacion->likes = 0;
+            $publicacion->views = 0;
+            $publicacion->editado = 0;
+            $publicacion->fecha_subida = date('Y-m-d');
+            $publicacion->tipo = Constantes::EVENTO;
 
             $image->imagen = file_get_contents($req->file('portada'));
 
@@ -414,7 +411,7 @@ class controlador_tablas extends Controller {
                 $ca = $categ[$i];
 
                 $categorias = DB::table('asignar_categorias')->insert(
-                        ['id_item' => $publi->id_item, 'id_categoria' => $ca]
+                        ['id_item' => $publication->id_item, 'id_categoria' => $ca]
                 );
             }
 
@@ -444,15 +441,15 @@ class controlador_tablas extends Controller {
             return Redirect::route('admin_event', ['events' => $eventos, 'error' => $error]);
         }
     }
-    
-    public function guardarEventos(Request $req){
-        
+
+    public function guardarEventos(Request $req) {
+
         $eventos = DB::table('eventos')
-                    ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
-                    ->paginate(8);
-        
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                ->paginate(8);
+
         return redirect('admin_event')->with('events', $eventos);
     }
 

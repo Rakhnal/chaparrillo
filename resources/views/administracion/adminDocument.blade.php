@@ -107,6 +107,7 @@ Administrar Documentación
             data: parametros,
             type: 'post',
             success: function (response) {
+                alert(response);
                 if (response === "ok") {
                     location.reload();
                 } else {
