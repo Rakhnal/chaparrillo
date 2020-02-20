@@ -43,6 +43,7 @@ Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
 // Modificar documentos
 Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
+Route::post('guardarEvento','controlador_tablas@guardarEventos');
 
 // DES17: Página Administrar Documentos - NLO
 // Listar documentos

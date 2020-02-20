@@ -110,7 +110,7 @@ use App\Clases\conexion;
                                     <div id="map" class="mapa">
 
                                     </div>
-
+                                    
                                     <button class="btn btn-nuevo" type="button" name="btnreset2" id="btnreset2">Reiniciar Marcador</button>
                                     
                                     <input id="latitud" type="hidden" name="latitud" value="">

@@ -35,4 +35,10 @@ class Constantes {
     const NORMAL = "0";
     const ADMIN = "1";
     const SWATS = "2";
+    
+    //Tipos
+    const NOTICIA = 0;
+    const EVENTO = 1;
+    const DOCUMENTO = 2;
+    const COMENTARIOS = 3;
 }
