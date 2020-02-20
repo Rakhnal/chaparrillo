@@ -107,22 +107,12 @@ use App\Clases\conexion;
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Categoría:</label>
-                                        <select name="catego[]" class="categ" multiple>
-                                            <?php
-                                            $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca) {
-                                                ?>
-                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-
                                     <div id="map" class="mapa">
 
                                     </div>
-
+                                    
+                                    <button class="btn btn-nuevo" type="button" name="btnreset2" id="btnreset2">Reiniciar Marcador</button>
+                                    
                                     <input id="latitud" type="hidden" name="latitud" value="">
                                     <input id="longitud" type="hidden" name="longitud" value="">
                                     <script>
@@ -397,7 +387,7 @@ use App\Clases\conexion;
                                     </div>
 
                                 </div>
-                                <!-- Agregar select de categorías -->
+                                
                                 <div class="col-4">
 
                                     <div class="form-group">
