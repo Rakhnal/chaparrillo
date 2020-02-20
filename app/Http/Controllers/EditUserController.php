@@ -18,19 +18,19 @@ class EditUserController extends Controller {
         $correo = $req->get('email');
         $pass = $req->get('passwed');
         $nombre = $req->get('nombre');
+        
+        $lat = $req->get('latitudInputEU');
+        $lon = $req->get('longitudInputEU');
+        
         $apellidos = $req->get('apellidos');
         $localidad = $req->get('localidad');
         $pais = $req->get('pais');
         $img =  base64_decode($data);
-
-
-
         $pass = Hash::make($pass);
-
         //password_verify($password, $hash);
 
 
-        conexion::editUser($nombre, $apellidos, $correo, $pass, $localidad, $pais, $img);
+        conexion::editUser($nombre, $apellidos, $correo, $pass, $localidad, $pais, $img, $lat, $lon);
         $user = conexion::existeUsuario($correo);
         session()->put("userObj", $user);
         $datos = [

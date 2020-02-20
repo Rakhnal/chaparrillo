@@ -132,18 +132,24 @@ class conexion {
      * @param type $pais
      * @param type $img
      */
-    public static function editUser($nombre, $apellidos, $correo, $pass, $localidad, $pais, $img) {
-
+    public static function editUser($nombre, $apellidos, $correo, $pass, $localidad, $pais, $img, $lat, $lon) {
         $user = conexion::existeUsuario($correo);
         $user->nombre = $nombre;
         $user->apellidos = $apellidos;
         $user->email = $correo;
-        if ($pass != null || $pass != '') {
+        if ($pass != null && $pass != '') {
             $user->password = $pass;
+        }
+        if ($img != "" && $img != '' && $img != null && $img != " " && $img != ' ') {
+            $user->img_user = $img;
+        }
+        
+        if ($lat != "" && $lon != "" && $lat != null && $lon != null) {
+            $user->latitud = $lat;
+            $user->longitud = $lon;
         }
         $user->localidad = $localidad;
         $user->pais = $pais;
-        $user->img_user = $img;
         $user->save();
     }
 
