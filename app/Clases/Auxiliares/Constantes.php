@@ -21,6 +21,7 @@ class Constantes {
     const CLITRA = "informacion/clitra";
     const POLILLA = "informacion/polilla";
     const PSILAS = "informacion/psilas";
+    const CHINCHES = "informacion/chinches";
     const FAQS = "informacion/faqs";
     const FORO = "foro";
     const DOCUMENTACION = "documentacion";

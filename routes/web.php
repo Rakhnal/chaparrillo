@@ -86,3 +86,8 @@ Route::get('polilla', function () {
 Route::get('psilas', function () {
     return view('informacion/psilas');
 });
+
+// DES09: Página Chinches
+Route::get('chinches', function () {
+    return view('informacion/chinches');
+});
