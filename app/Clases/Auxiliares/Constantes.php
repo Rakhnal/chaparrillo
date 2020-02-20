@@ -19,6 +19,9 @@ class Constantes {
     const INFO = "infoPage";
     const PROYECTO = "informacion/proyecto";
     const CLITRA = "informacion/clitra";
+    const POLILLA = "informacion/polilla";
+    const PSILAS = "informacion/psilas";
+    const CHINCHES = "informacion/chinches";
     const FAQS = "informacion/faqs";
     const FORO = "foro";
     const DOCUMENTACION = "documentacion";
@@ -32,4 +35,10 @@ class Constantes {
     const NORMAL = "0";
     const ADMIN = "1";
     const SWATS = "2";
+    
+    //Tipos
+    const NOTICIA = 0;
+    const EVENTO = 1;
+    const DOCUMENTO = 2;
+    const COMENTARIOS = 3;
 }

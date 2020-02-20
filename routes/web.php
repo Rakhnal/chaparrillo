@@ -43,6 +43,7 @@ Route::get('adminDocument', ['as' => 'adminDocument', 'uses' => 'controlador_tab
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
 // Modificar documentos
 Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
+Route::post('guardarEvento','controlador_tablas@guardarEventos');
 // Subir documentos
 Route::post('subirDocumento', ['as' => 'subirDocumento', 'uses' => 'controlador_tablas@subirDocumentos']);
 
@@ -77,4 +78,19 @@ Route::get('proyecto', function () {
 // DES06: Página Clitra
 Route::get('clitra', function () {
     return view('informacion/clitra');
+});
+
+// DES07: Página Polilla
+Route::get('polilla', function () {
+    return view('informacion/polilla');
+});
+
+// DES08: Página Psilas
+Route::get('psilas', function () {
+    return view('informacion/psilas');
+});
+
+// DES09: Página Chinches
+Route::get('chinches', function () {
+    return view('informacion/chinches');
 });

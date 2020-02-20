@@ -302,15 +302,23 @@ class controlador_tablas extends Controller {
 
     public function modificarEventos() {
         $id_evento = intval($_POST["ide"]);
-
+                
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
                 ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
-                ->where('eventos.id_eventos', $id_evento);
-
-
-        return json_encode($eventos);
+                ->select('nombre','imagen','descripcion','localizacion','fecha_inicio','fecha_fin')
+                ->where('eventos.id_evento',$id_evento)
+                ->first();
+        
+        
+        if(!empty($eventos)){
+            $qhp = "ok";     
+            session()->put('event_select',$eventos);
+        } else {
+            $qhp = "fail";
+        }
+        
+        return $qhp;
     }
 
     /**
@@ -353,7 +361,7 @@ class controlador_tablas extends Controller {
         $idUserLogin = $user->id_user;
 
         $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
-
+        $user = session()->get("userObj");
         //si no existe la publicación
         if (empty($publi)) {
 
@@ -361,13 +369,14 @@ class controlador_tablas extends Controller {
             $image = new Imagen();
             $evento = new Evento();
 
-            $publicacion->nombre = $req->get('nomb');
-            $publicacion->descripcion = $req->get('descrip');
-            $publicacion->id_user = $idUserLogin; //se deberá sacar la id de la sesión del usuario registrado
-            $publicacion->likes = 0;
-            $publicacion->views = 0;
-            $publicacion->editado = 0;
-            $publicacion->fecha_subida = date('Y-m-d');
+            $publi->nombre = $req->get('nomb');
+            $publi->descripcion = $req->get('descrip');
+            $publi->id_user = intval($user->id_user);
+            $publi->likes = 0;
+            $publi->views = 0;
+            $publi->editado = 0;
+            $publi->fecha_subida = date('Y-m-d');
+            $publi->tipo = Constantes::EVENTO;
 
             $image->imagen = file_get_contents($req->file('portada'));
 
@@ -422,6 +431,17 @@ class controlador_tablas extends Controller {
 
             return Redirect::route('admin_event', ['events' => $eventos, 'error' => $error]);
         }
+    }
+    
+    public function guardarEventos(Request $req){
+        
+        $eventos = DB::table('eventos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
+                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
+                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+                    ->paginate(8);
+        
+        return redirect('admin_event')->with('events', $eventos);
     }
 
 }
