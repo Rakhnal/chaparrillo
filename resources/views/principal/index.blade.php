@@ -102,7 +102,7 @@ Inicio
             </div>
         </a>
 
-        <a class="col-md-3 col-sm-12 tilted" href="chinche" data-tilt>
+        <a class="col-md-3 col-sm-12 tilted" href="chinches" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
