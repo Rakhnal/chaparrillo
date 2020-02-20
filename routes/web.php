@@ -76,3 +76,8 @@ Route::get('proyecto', function () {
 Route::get('clitra', function () {
     return view('informacion/clitra');
 });
+
+// DES07: Página Polilla
+Route::get('polilla', function () {
+    return view('informacion/polilla');
+});
