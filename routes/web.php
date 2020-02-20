@@ -81,3 +81,8 @@ Route::get('clitra', function () {
 Route::get('polilla', function () {
     return view('informacion/polilla');
 });
+
+// DES08: Página Psilas
+Route::get('psilas', function () {
+    return view('informacion/psilas');
+});

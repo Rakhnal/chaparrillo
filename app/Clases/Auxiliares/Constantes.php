@@ -19,6 +19,8 @@ class Constantes {
     const INFO = "infoPage";
     const PROYECTO = "informacion/proyecto";
     const CLITRA = "informacion/clitra";
+    const POLILLA = "informacion/polilla";
+    const PSILAS = "informacion/psilas";
     const FAQS = "informacion/faqs";
     const FORO = "foro";
     const DOCUMENTACION = "documentacion";

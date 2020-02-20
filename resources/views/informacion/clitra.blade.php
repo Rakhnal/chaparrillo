@@ -32,7 +32,7 @@ Clitra
         </div>
         <div class="col">
             <div class="row justify-content-center marg-top">
-                <h2>Ciclo</h2>
+                <h2 class="bolder">Ciclo</h2>
             </div>
             <div class="row add-padding center">
                 <p>Aproximadamente en mayo los adultos se desplazan desde la maleza cercana a las plantaciones, permaneciendo en los árboles jóvenes</p>

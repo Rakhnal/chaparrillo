@@ -2,12 +2,12 @@
 
 use App\Clases\Auxiliares\Constantes;
 
-session()->put("actPage", Constantes::CLITRA);
+session()->put("actPage", Constantes::POLILLA);
 ?>
 @extends('../general/base')
 
 @section('titulo')
-Clitra
+Polilla de Almacen
 @endsection
 
 @section('contenido')
@@ -19,8 +19,8 @@ Clitra
     <div class="row format-div-b">
         
         <div class="col">
-            <div class="row justify-content-center marg-top h20">
-                <h2>Descripción</h2>
+            <div class="row justify-content-center align-items-center marg-top h20">
+                <h2 class="bolder">Descripción</h2>
             </div>
             <div class="row add-padding center h80">
                 <p>Polilla de la familia Pyralidae con hábitos nocturnos</p>
