@@ -38,11 +38,13 @@ Route::post('categorias','controlador_tablas@sacarCategorias');
 
 // DES17: Página Administrar Documentos - NLO
 // Listar documentos
-Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
+Route::get('adminDocument', ['as' => 'adminDocument', 'uses' => 'controlador_tablas@listarDocumentos']);
 // Eliminar documentos
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
 // Modificar documentos
 Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
+// Subir documentos
+Route::post('subirDocumento', ['as' => 'subirDocumento', 'uses' => 'controlador_tablas@subirDocumentos']);
 
 // DES17: Página Administrar Documentos - NLO
 // Listar documentos

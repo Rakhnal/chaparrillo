@@ -10,6 +10,7 @@ use App\Imagen;
 use App\Informe;
 use App\Clases\Auxiliares\Constantes;
 use App\Documento;
+use Illuminate\Support\Facades\Redirect;
 
 class controlador_tablas extends Controller {
 
@@ -23,7 +24,8 @@ class controlador_tablas extends Controller {
     public function listarDocumentos() {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible')
+                ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
                 ->paginate(8);
 
         return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
@@ -93,93 +95,63 @@ class controlador_tablas extends Controller {
         }
         return $qhp;
     }
-    
-    public function subirDocumento(Request $req) {
+
+    /**
+     * Esta función permite al administrador subir documentos.
+     * @param Request $req
+     * @return type
+     */
+    public function subirDocumentos(Request $req) {
         $user = session()->get("userObj");
+        $idUserLogin = $user->id_user;
 
-        $nombre = $req->get('nombreSubirDoc');
-        $descripcion = $req->get('descSubirDoc');
-
-        $documento = new Documento();
-        $publicacion = new Publicacion();
-
-        $publicacion->nombre = $nombre;
-        $publicacion->descripcion = $descripcion;
-        $documento->num_descargas = 0;
-        $documento->visible = 1;
-
-        $documento->save();
-        
-        $publi = new Publicacion();
-        $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
+        $publi = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
         // Si no existe la publicación.
         if (empty($publi)) {
+            $publicacion = new Publicacion();
+            $documento = new Documento();
+            $adjunto = new Adjunto();
 
-            $publi = new Publicacion();
-            $image = new Imagen();
-            $evento = new Evento();
+            $publicacion->nombre = $req->get('nombreSubirDoc');
+            $publicacion->descripcion = $req->get('descSubirDoc');
+            $publicacion->id_user = $idUserLogin; // Se deberá sacar la ID de la sesión del usuario logeado.
+            $publicacion->likes = 0;
+            $publicacion->views = 0;
+            $publicacion->editado = 0;
+            $publicacion->fecha_subida = date('Y-m-d');
+            $publicacion->tipo = Constantes::DOCUMENTO;
 
-            $publi->nombre = $req->get('nomb');
-            $publi->descripcion = $req->get('descrip');
-            $publi->id_user = 1; //se deberá sacar la id de la sesión del usuario registrado
-            $publi->likes = 0;
-            $publi->views = 0;
-            $publi->editado = 0;
-            $publi->fecha_subida = date('Y-m-d');
+            $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
 
-            $image->imagen = file_get_contents($req->file('portada'));
+            $documento->num_descargas = 0;
+            $documento->visible = 1;
 
-            $evento->fecha_inicio = $req->get('feci');
-            $evento->fecha_fin = $req->get('fecf');
-            $evento->localizacion = $req->get('loca');
-            $evento->longitud = $req->get('longitud');
-            $evento->latitud = $req->get('latitud');
+            $publicacion->save();
 
-            $publi->save();
+            $publication = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
-            $categ = $req->get('catego');
+            $adjunto->id_documento = $publication->id_item;
+            $documento->id_documento = $publication->id_item;
 
-            $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
+            $adjunto->save();
+            $documento->save();
 
-            $evento->id_evento = $publi->id_item;
-            $image->id_item = $publi->id_item;
-
-            $image->save();
-            $evento->save();
-
-            for ($i = 0; $i < count($categ); $i++) {
-                $ca = $categ[$i];
-
-                $categorias = DB::table('asignar_categorias')->insert(
-                        ['id_item' => $publi->id_item, 'id_categoria' => $ca]
-                );
-            }
-
-
-            $eventos = DB::table('eventos')
-                    ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+            $documentos = DB::table('documentos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
                     ->paginate(8);
 
-            return redirect('admin_event')->with('events', $eventos);
+            return redirect('adminDocument')->with('docs', $documentos);
         } else {
-
-            $eventos = DB::table('eventos')
-                    ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                    ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                    ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
+            $documentos = DB::table('documentos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
                     ->paginate(8);
 
-
-
-            $error = [
-                'error' => 'Error, el nombre del evento ya existe'
-            ];
-
-               
-           return \Redirect::route('admin_event',['events'=>$eventos,'error'=>$error]);
+            return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
         }
     }
 
@@ -287,7 +259,7 @@ class controlador_tablas extends Controller {
             $informe->aprox_dmg = $danioAprox;
             $informe->poli_par = $polParInput;
             $informe->plaga_tratar = $plagaTratar;
-            
+
             $informe->save();
         }
 
@@ -377,23 +349,25 @@ class controlador_tablas extends Controller {
      * @return type
      */
     public function agregarEventos(Request $req) {
-        $publi = new Publicacion();
+        $user = session()->get("userObj");
+        $idUserLogin = $user->id_user;
+
         $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
 
         //si no existe la publicación
         if (empty($publi)) {
 
-            $publi = new Publicacion();
+            $publicacion = new Publicacion();
             $image = new Imagen();
             $evento = new Evento();
 
-            $publi->nombre = $req->get('nomb');
-            $publi->descripcion = $req->get('descrip');
-            $publi->id_user = 1; //se deberá sacar la id de la sesión del usuario registrado
-            $publi->likes = 0;
-            $publi->views = 0;
-            $publi->editado = 0;
-            $publi->fecha_subida = date('Y-m-d');
+            $publicacion->nombre = $req->get('nomb');
+            $publicacion->descripcion = $req->get('descrip');
+            $publicacion->id_user = $idUserLogin; //se deberá sacar la id de la sesión del usuario registrado
+            $publicacion->likes = 0;
+            $publicacion->views = 0;
+            $publicacion->editado = 0;
+            $publicacion->fecha_subida = date('Y-m-d');
 
             $image->imagen = file_get_contents($req->file('portada'));
 
@@ -403,14 +377,14 @@ class controlador_tablas extends Controller {
             $evento->longitud = $req->get('longitud');
             $evento->latitud = $req->get('latitud');
 
-            $publi->save();
+            $publicacion->save();
 
             $categ = $req->get('catego');
 
-            $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
+            $publication = Publicacion::where('nombre', $req->get('nomb'))->first();
 
-            $evento->id_evento = $publi->id_item;
-            $image->id_item = $publi->id_item;
+            $evento->id_evento = $publication->id_item;
+            $image->id_item = $publication->id_item;
 
             $image->save();
             $evento->save();
@@ -446,7 +420,7 @@ class controlador_tablas extends Controller {
             ];
 
 
-            return \Redirect::route('admin_event', ['events' => $eventos, 'error' => $error]);
+            return Redirect::route('admin_event', ['events' => $eventos, 'error' => $error]);
         }
     }
 

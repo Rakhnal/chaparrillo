@@ -456,7 +456,7 @@ use App\Clases\conexion;
                         </div>
                         <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
-                    <form name="formSubDoc" class="formDocs m-0" action="" method="POST">
+                    <form name="formSubDoc" class="formDocs m-0" action="subirDocumento" method="POST">
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" class="pl-2" id="nombreSubirDoc" name="nombreSubirDoc" placeholder="Nombre del documento" required>
