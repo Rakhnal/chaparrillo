@@ -17,11 +17,11 @@ Clitra
 
 <div class="col">
     <div class="row format-div-b">
-        <div class="col-md-6 fondo">
+        <div class="col-md-6 no-padding">
             <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/clitrar.jpg">
                 <div class="col">
                     <div class="row middle-height justify-content-center align-items-end">
-                        <h1 class="bolder">Citra</h1>
+                        <h1 class="bolder">Clitra</h1>
                     </div>
 
                     <div class="row middle-height justify-content-center align-items-start">
@@ -31,11 +31,31 @@ Clitra
             </div>
         </div>
         <div class="col">
-            <p>El objetivo general del proyecto es poner solución a la actual falta de técnicas y productos fitosanitarios realmente eficaces para el control de las cuatro principales plagas que afectan al pistacho en Castilla La Mancha, dentro del esquema de funcionamiento de la producción ecológica amparado por el actual Reglamento (UE) 2018/848 del Parlamento Europeo y del Consejo, sobre producción ecológica y etiquetado de los productos ecológicos, mediante la ejecución de un proyecto piloto.</p>
+            <div class="row justify-content-center marg-top">
+                <h2>Ciclo</h2>
+            </div>
+            <div class="row add-padding center">
+                <p>Aproximadamente en mayo los adultos se desplazan desde la maleza cercana a las plantaciones, permaneciendo en los árboles jóvenes</p>
+
+                <p>Los árboles mayores sólo son atacados cuando no encuentran árboles jóvenes de los que alimentarse</p>
+
+                <p>Los acoplamientos tienen lugar en los mismos árboles, aunque luego se desplazan a la maleza donde realizan su puesta en hojas y ramitas en grupos de unos 10 huevos que eclosionan a los 12 días</p>
+
+                <p>Cuando salen las larvas se refugian en el suelo, hojas secas, etc.</p>
+
+                <p>Puede haber una segunda generación, aunque esta situación es poco probable para las condiciones medias de la mitad sur peninsular</p>
+            </div>
         </div>
     </div>
-    <div class="row format-div">
-        <p>El objetivo general del proyecto es poner solución a la actual falta de técnicas y productos fitosanitarios realmente eficaces para el control de las cuatro principales plagas que afectan al pistacho en Castilla La Mancha, dentro del esquema de funcionamiento de la producción ecológica amparado por el actual Reglamento (UE) 2018/848 del Parlamento Europeo y del Consejo, sobre producción ecológica y etiquetado de los productos ecológicos, mediante la ejecución de un proyecto piloto.</p>
+    <div class="row format-div-lessp">
+        <div class="col">
+            <div class="row">
+                <p>Escarabajo crisomélido</p>
+            </div>
+            <div class="row">
+                <p>Daños especialmente en plantaciones jóvenes donde muestra una rápida propagación y voracidad en el consumo de brotes</p>
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col fondo-s">
