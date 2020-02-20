@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : rafa
 */
 
+body {
+    transition: none !important;
+}
+
 #migas {
     background: none;
 }
