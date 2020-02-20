@@ -22,10 +22,11 @@ Route::get('index', function () {
 });
 
 //DES15
-//Página de editar usuario propio
+//Página de administrar usuario propio
 Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
 });
+Route::post('edit_us', 'EditUserController@editarUsuario');
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
@@ -34,6 +35,14 @@ Route::post('formevent','controlador_tablas@eliminarEventos');
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
 Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
 Route::post('categorias','controlador_tablas@sacarCategorias');
+
+// DES17: Página Administrar Documentos - NLO
+// Listar documentos
+Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
+// Eliminar documentos
+Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
+// Modificar documentos
+Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 Route::post('guardarEvento','controlador_tablas@guardarEventos');
 
 // DES17: Página Administrar Documentos - NLO
@@ -62,4 +71,9 @@ Route::post('actInforme', 'controlador_tablas@actInforme');
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {
     return view('informacion/proyecto');
+});
+
+// DES06: Página Clitra
+Route::get('clitra', function () {
+    return view('informacion/clitra');
 });

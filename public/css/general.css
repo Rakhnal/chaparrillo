@@ -244,12 +244,12 @@ td {
 
 .btn-eliminar:hover {
     background-image: url('../images/icons/deletehover.png');
-    transform: scale(1.1);
+    transform: scale(0.95);
 }
 
 .btn-guardar:hover {
     background-image: url('../images/icons/savehover.png');
-    transform: scale(1.1);
+    transform: scale(0.95);
 }
 
 .btn-nuevo:hover {

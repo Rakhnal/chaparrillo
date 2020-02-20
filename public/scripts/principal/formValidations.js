@@ -21,9 +21,8 @@ function samePasswords() {
         return false;
     }
 
-    if ($('#latitud').val() === null || $('#latitud').val() === "" || $('#longitud').val() === null || $('#longitud').val() === "") {
-        
-        alert("Falta seleccionar la ubicación en el mapa");
+    if ($('#latitudInput').val() === null || $('#latitudInput').val() === "" || $('#longitudInput').val() === null || $('#longitudInput').val() === "") {
+        toastr.error('Falta seleccionar la ubicación en el mapa', '¡Error!');
         
         return false;
         

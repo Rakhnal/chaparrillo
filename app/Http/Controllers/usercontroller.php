@@ -44,7 +44,7 @@ class usercontroller extends Controller {
      */
     public function cerrarSesion(Request $req) {
         session()->forget("userObj");
-
+        
         return view(Constantes::INDEX);
     }
 
@@ -60,8 +60,8 @@ class usercontroller extends Controller {
         $apellidos = $req->get('apellidos');
         $localidad = $req->get('localidad');
         $pais = $req->get('pais');
-        $latitud = $req->get('latitud');
-        $longitud = $req->get('longitud');
+        $latitud = $req->get('latitudInput');
+        $longitud = $req->get('longitudInput');
 
         $user = conexion::existeUsuario($correo);
 

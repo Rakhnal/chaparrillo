@@ -14,9 +14,20 @@ h1 {
 
 .fondo {
     width: 100%;
-    height: 300px;
+    height: 300px !important;
     
     padding: 0;
+}
+
+.fondo-s {
+    width: 100%;
+    height: 150px;
+    
+    padding: 0;
+}
+
+.middle-height {
+    height: 50%;
 }
 
 .parallax {
@@ -30,27 +41,22 @@ h1 {
     background: transparent;
 }
 
-.fondo02 {
-    width: 100%;
-    height: 300px;
-    
-    background-image: url(../../images/chaparrillo/elegidas/pistachos02.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-.fondo03 {
-    width: 100%;
-    height: 300px;
-    
-    background-image: url(../../images/chaparrillo/elegidas/pistachos03.jpg);
-    background-size: cover;
-    background-attachment: fixed;
-}
-
 .format-div {
     font-size: 1.25em;
     
     text-align: justify;
     padding: 75px 125px;
+}
+
+.format-div-b {
+    
+    height: 500px;
+    
+    font-size: 1.25em;
+    
+    text-align: justify;
+}
+
+.col {
+    height: 100%;
 }

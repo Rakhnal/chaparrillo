@@ -1,5 +1,16 @@
 $(document).ready(function () {
 
+    toastr.options = {
+        "debug": false,
+        "positionClass": "toast-bottom-right",
+        "onclick": null,
+        "fadeIn": 300,
+        "fadeOut": 1000,
+        "timeOut": 5000,
+        "extendedTimeOut": 1000,
+        "preventDuplicates": true
+    };
+
     var marcadorRegistro;
 
     var MapaRegistro;
@@ -7,9 +18,9 @@ $(document).ready(function () {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(Sacalugar, nofunciona);
     } else {
-        alert("Este navegador no soporta geolocalización");
+        toastr.error('Este navegador no soporta geolocalización', '¡Error!');
     }
-    
+
     $('#btnreset').on('click', resetMarker);
 
     function Sacalugar(position) {
@@ -52,25 +63,12 @@ $(document).ready(function () {
                 map: PintaMapa
             });
         }
-        
+
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         // var vercalle = new google.maps.StreetViewPanorama(document.getElementById("map"), calle);
         
         localStorage.setItem('latitud', latitud);
         localStorage.setItem('longitud', longitud);
-    }
-
-    function markerCoords(markerobject) {
-        google.maps.event.addListener(markerobject, 'dragend', function (evt) {
-            infoWindow.setOptions({
-                content: '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>'
-            });
-            infoWindow.open(map, markerobject);
-        });
-
-        google.maps.event.addListener(markerobject, 'drag', function (evt) {
-            console.log("marker is being dragged");
-        });
     }
 
     function mapClick(event) {
@@ -79,9 +77,9 @@ $(document).ready(function () {
         var clickLat = event.latLng.lat();
         var clickLon = event.latLng.lng();
         
-        $('#latitud').val(clickLat);
-        $('#longitud').val(clickLon);
-        
+        $('#latitudInput').val(clickLat);
+        $('#longitudInput').val(clickLon);
+
         marcadorRegistro = new google.maps.Marker({
             position: new google.maps.LatLng(clickLat, clickLon),
             icon: "images/icons/location.svg",
@@ -90,19 +88,19 @@ $(document).ready(function () {
 
         google.maps.event.clearListeners(MapaRegistro, 'click');
     }
-    
+
     // Reinicia el marcador del mapa de Registro
     function resetMarker() {
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         
-        $('#latitud').val(null);
-        $('#longitud').val(null);
-        
+        $('#latitudInput').val(null);
+        $('#longitudInput').val(null);
+
         marcadorRegistro.setMap(null);
     }
 
     function nofunciona(position) {
-        alert("Error al cargar");
+        toastr.error('No tienes activado la geolocalización, algunas características dejarán de funcionar', '¡Error!');
     }
 
 });

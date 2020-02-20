@@ -19,11 +19,14 @@ use App\Clases\conexion;
         <script src="https://cdn.jsdelivr.net/parallax.js/1.4.2/parallax.min.js"></script>
         <script type="text/javascript" src="{{ URL::asset('scripts/general/tilt.jquery.min.js') }}"></script>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
         <script src="scripts/general/geolocate.js"></script>
 
         <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="scripts/general/gmaps.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing"async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap"async defer></script>
 
         <script src="scripts/principal/formValidations.js"></script>
 
@@ -90,6 +93,18 @@ use App\Clases\conexion;
                                     <div class="form-group">
                                         <label>Localización:</label>
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Categoría:</label>
+                                        <select name="catego[]" class="categ" multiple>
+                                            <?php
+                                            $categoria = conexion::sacarCategorias();
+                                            foreach ($categoria as $ca) {
+                                                ?>
+                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -273,9 +288,9 @@ use App\Clases\conexion;
                                         </div>
                                     </div>
 
-                                    <input type="text" autocomplete="off" name="latitud" id="latitud" value="" hidden/>
+                                    <input type="text" autocomplete="off" name="latitudInput" id="latitudInput" value="" hidden/>
 
-                                    <input type="text" autocomplete="off" name="longitud" id="longitud" value="" hidden/>
+                                    <input type="text" autocomplete="off" name="longitudInput" id="longitudInput" value="" hidden/>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -528,7 +543,7 @@ use App\Clases\conexion;
                                         <p>Nombre del producto:</p>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <input type="text" class="cajaNormal" autocomplete="off" id="productName" name="productName" required>
+                                        <input type="text" autocomplete="off" id="productName" name="productName" required>
                                     </div>
                                 </div>                                
                             </div>
@@ -543,6 +558,78 @@ use App\Clases\conexion;
                                     <div class="row justify-content-center">
                                         <p>Fecha Informe:</p>
                                         <input type="date" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" class="btn btn-guardar margin-top" id="btnNewInforme" name="btnNewInforme" value="">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventana modal para añadir un nuevo informe -->
+
+        <div class="modal fade" id="modalNuevoInforme" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header align-items-center">
+                        <div class="modal-title">
+                            Nuevo Informe
+                        </div>
+                        <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <form name="formNewInforme" action="newInforme" method="POST">
+                        {{ csrf_field() }}
+                        <div class="modal-body">
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Nombre del producto:</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="productName" name="productName" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Plaga a tratar:</p>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="plagaTratar" name="plagaTratar" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Polígono y parcela:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="polParInput" name="polParInput" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Daño aproximado (%):</p>
+                                        <input type="number" class="cajaNormal" max="100" min="1" id="danioAprox" name="danioAprox" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Litros por hectárea:</p>
+                                        <input type="number" class="cajaNormal" autocomplete="off" id="litroHectarea" name="litroHectarea" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Fecha Informe:</p>
+                                        <input type="date" class="cajaNormal" autocomplete="off" id="fechaInforme" name="fechaInforme" required>
                                     </div>
                                 </div>
                             </div>

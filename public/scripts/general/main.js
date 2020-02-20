@@ -27,8 +27,12 @@ var loadFile = function (event) {
 
             var imageData = $(this).cropper('getImageData');
             var croppedCanvas = $(this).cropper('getCroppedCanvas');
-            $('#profile-result').html('<img src="' + croppedCanvas.toDataURL() + '" class="thumb-lg img-circle">');
-
+            
+            
+            
+            
+            $('#profile-result').html('<img src="' + croppedCanvas.toDataURL() + '" class="thumb-lg img-circle" id="secreto"><input type="text" value="' + croppedCanvas.toDataURL() +'" name="secreto" hidden>');
+        
             $('#save-profile').click(function () {
                 $('#loading').show();
                 $.ajax({
@@ -39,13 +43,13 @@ var loadFile = function (event) {
                         url: croppedCanvas.toDataURL()
                     },
                     success: function (response) {
-                        
+
                         if (response == "success") {
                             $('#loading').html("Profile picture successfully updated");
                             setTimeout(function () {
                                 $('#loading').hide();
                                 $('#change-profile').modal('hide');
-                            }, 2000);
+                            }, 0);
 
 
                         }
@@ -69,7 +73,5 @@ var loadFile = function (event) {
             });
 
         }
-
     });
-
 };
