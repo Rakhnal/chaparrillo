@@ -102,6 +102,7 @@ Administrar Documentación
             "identificador": id,
             "_token": token
         };
+        alert(id);
         $.ajax({
             url: "eliminarDocumento",
             data: parametros,
