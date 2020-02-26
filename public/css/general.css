@@ -221,6 +221,8 @@ td {
     background-image: url('../images/icons/delete.png');
     background-size: cover;
     background-repeat: no-repeat;
+    
+    transition: 0.3s ease-in all;
 }
 
 .btn-guardar {
@@ -235,6 +237,8 @@ td {
     background-image: url('../images/icons/save.png');
     background-size: cover;
     background-repeat: no-repeat;
+    
+    transition: 0.3s ease-in all;
 }
 
 .btn-modal {

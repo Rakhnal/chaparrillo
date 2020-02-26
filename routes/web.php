@@ -21,8 +21,7 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
-//DES15
-//Página de administrar usuario propio
+//DES15: Página Editar Perfil - SSC
 Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
 });

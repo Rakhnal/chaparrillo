@@ -12,6 +12,7 @@ use App\Clases\Auxiliares\Constantes;
 use App\Documento;
 use Illuminate\Support\Facades\Redirect;
 use App\Adjunto;
+use Illuminate\Support\Facades\Session;
 
 class controlador_tablas extends Controller {
 
@@ -58,32 +59,26 @@ class controlador_tablas extends Controller {
 
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        $qhp = "ok";
-        dd($id_documento);
+        
         $documento = DB::table('documentos')
-                        ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                        ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
-                        ->where('documentos.id_documento', $id_documento)
-                        ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento');
-
-//        $datos = [
-//            'id_documento' => $documento->id_documento,
-//            'nombre' => $documento->nombre,
-//            'descripcion' => $documento->descripcion,
-//            'visible' => $documento->visible
-//            
-//        ];
-        dd($documento);
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento);
+        
         if ($documento) {
-            if (session()->has('docSession')) {
-                session()->forget('docSession');
-            }
-            session()->put('docSession', $documento);
+            $qhp = "ok";
         } else {
             $qhp = "fail";
         }
+        
+        $datos = [
+            'id_documento' => $documento->id_documento,
+            'nombre' => $documento->nombre,
+            'descripcion' => $documento->descripcion,
+            'visible' => $documento->visible,
+            'qhp' => $qhp
+        ];
 
-        return $qhp;
+        return $datos;
     }
 
     public function modificarDocumentos() {
@@ -322,21 +317,21 @@ class controlador_tablas extends Controller {
         $informe = DB::table('informes')
                 ->where('id_informe', $id_informe)
                 ->first();
-        
+
         $infArray = array(
-          'id_informe' => $informe->id_informe,
-          'nombre_producto' => $informe->nombre_producto,
-          'litro_hectarea' => $informe->litro_hectarea,
-          'id_user' => $informe->id_user,
-          'aprox_dmg' => $informe->aprox_dmg,
-          'plaga_tratar' => $informe->plaga_tratar,
-          'fecha_hora' => $informe->fecha_hora,
-          'poligono' => $informe->poligono,
-          'parcela' => $informe->parcela,
-          'municipio' => $informe->municipio,
-          'comentario' => $informe->comentario,
+            'id_informe' => $informe->id_informe,
+            'nombre_producto' => $informe->nombre_producto,
+            'litro_hectarea' => $informe->litro_hectarea,
+            'id_user' => $informe->id_user,
+            'aprox_dmg' => $informe->aprox_dmg,
+            'plaga_tratar' => $informe->plaga_tratar,
+            'fecha_hora' => $informe->fecha_hora,
+            'poligono' => $informe->poligono,
+            'parcela' => $informe->parcela,
+            'municipio' => $informe->municipio,
+            'comentario' => $informe->comentario,
         );
-        
+
         return json_encode($infArray);
     }
 
