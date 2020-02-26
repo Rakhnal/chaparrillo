@@ -38,16 +38,18 @@ class controlador_tablas extends Controller {
      */
     public function eliminarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        
+
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->where('documentos.id_documento', $id_documento);
+        $qhp = "ok";
 
-        if ($documento) {
-            $publicacion = Publicacion::find($id_documento);
+        $publicacion = DB::table('publicaciones')
+                ->join('documentos', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('publicaciones.id_item', $id_documento);
+
+        if ($publicacion) {
             $publicacion->delete();
-            $documento->delete();
-            $qhp = "ok";
         } else {
             $qhp = "fail";
         }
@@ -58,9 +60,10 @@ class controlador_tablas extends Controller {
         $id_documento = intval($_POST["identificador"]);
         $qhp = "ok";
         $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento)
-                ->select('*')
+                        ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                        ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
+                        ->where('documentos.id_documento', $id_documento)
+                        ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
                 ->first();
 
 //        $datos = [
@@ -70,7 +73,6 @@ class controlador_tablas extends Controller {
 //            'visible' => $documento->visible
 //            
 //        ];
-
 
         if ($documento) {
             if ($session->has('docSession')) {
@@ -176,13 +178,13 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -204,7 +206,11 @@ class controlador_tablas extends Controller {
         $fechahora = $req->get('fechaInforme');
 
         $plagaTratar = $req->get('plagaTratar');
-        $polParInput = $req->get('polParInput');
+        $poligono = $req->get('polInput');
+        $parcela = $req->get('parInput');
+        $userProp = $req->get('userProp');
+        $municipio = $req->get('munInput');
+        $coment = $req->get('coment');
         $danioAprox = $req->get('danioAprox');
 
         $informe = new Informe();
@@ -213,9 +219,18 @@ class controlador_tablas extends Controller {
         $informe->litro_hectarea = $litrohect;
         $informe->fecha_hora = $fechahora;
         $informe->aprox_dmg = $danioAprox;
-        $informe->poli_par = $polParInput;
+        $informe->poligono = $poligono;
+        $informe->parcela = $parcela;
+        $informe->municipio = $municipio;
+        $informe->comentario = $coment;
         $informe->plaga_tratar = $plagaTratar;
-        $informe->id_user = $user->id_user;
+
+        if ($userProp != "") {
+            $informe->id_user = $userProp;
+        } else {
+            $informe->id_user = $user->id_user;
+        }
+
 
         $informe->save();
 
@@ -223,13 +238,13 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -283,19 +298,47 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         }
 
         return redirect('adminInformes')->with('infs', $informes);
+    }
+
+    /**
+     * Llamada desde Ajax para devolver los datos del informe pulsado
+     * @return string
+     */
+    public function modificarInformes() {
+        $id_informe = intval($_POST["ide"]);
+
+        $informe = DB::table('informes')
+                ->where('id_informe', $id_informe)
+                ->first();
+        
+        $infArray = array(
+          'id_informe' => $informe->id_informe,
+          'nombre_producto' => $informe->nombre_producto,
+          'litro_hectarea' => $informe->litro_hectarea,
+          'id_user' => $informe->id_user,
+          'aprox_dmg' => $informe->aprox_dmg,
+          'plaga_tratar' => $informe->plaga_tratar,
+          'fecha_hora' => $informe->fecha_hora,
+          'poligono' => $informe->poligono,
+          'parcela' => $informe->parcela,
+          'municipio' => $informe->municipio,
+          'comentario' => $informe->comentario,
+        );
+        
+        return json_encode($infArray);
     }
 
     //DES18: Página para adminsitrar eventos

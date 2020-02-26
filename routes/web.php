@@ -44,6 +44,8 @@ Route::post('guardarEvento','controlador_tablas@guardarEventos');
 Route::get('adminDocument', ['as' => 'adminDocument', 'uses' => 'controlador_tablas@listarDocumentos']);
 // Eliminar documentos
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
+// Buscar documentos
+Route::post('buscarDocumento', ['as' => 'buscarDocumento', 'uses' => 'controlador_tablas@buscarDocumentos']);
 // Modificar documentos
 Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 // Subir documentos
@@ -61,6 +63,7 @@ Route::get('logout', 'usercontroller@cerrarSesion');
 Route::get('adminInformes', 'controlador_tablas@listarInformes');
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
 Route::post('actInforme', 'controlador_tablas@actInforme');
+Route::post('modificarInforme',['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
 
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {

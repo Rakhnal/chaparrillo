@@ -107,7 +107,6 @@ Administrar Documentación
             data: parametros,
             type: 'post',
             success: function (response) {
-                alert(response);
                 if (response === "ok") {
                     location.reload();
                 } else {
@@ -129,33 +128,33 @@ Administrar Documentación
         });
     }
     
-    $(document).on("click", "#modificarDocumentos", function () {
-        var id = $(this).attr("data-idMod");
-        var token = '{{csrf_token()}}';
-        var parametros = {
-            "identificador": id,
-            "_token": token
-        };
-        alert(parametros);
-        $.ajax({
-            url: "buscarDocumento",
-            data: parametros,
-            type: 'post',
-            success: function (response) {
-                alert(response);
-            },
-            statusCode: {
-                404: function () {
-                    swal('Página no encontrada.');
-                }
-            },
-            error: function () {
-                swal("Algo ha ido mal :/", {
-                    icon: "error"
-                });
-            }
-        });
-    });
+//    $(document).on("click", "#modificarDocumentos", function () {
+//        var id = $(this).attr("data-idMod");
+//        var token = '{{csrf_token()}}';
+//        var parametros = {
+//            "identificador": id,
+//            "_token": token
+//        };
+//        alert(parametros);
+//        $.ajax({
+//            url: "buscarDocumento",
+//            data: parametros,
+//            type: 'post',
+//            success: function (response) {
+//                alert(response);
+//            },
+//            statusCode: {
+//                404: function () {
+//                    swal('Página no encontrada.');
+//                }
+//            },
+//            error: function () {
+//                swal("Algo ha ido mal :/", {
+//                    icon: "error"
+//                });
+//            }
+//        });
+//    });
 
 </script>
 
