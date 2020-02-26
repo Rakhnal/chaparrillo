@@ -98,6 +98,20 @@ class conexion {
     }
 
     /**
+     * Coge los usuarios de BBDD que son Admin o SWATS
+     * @return type
+     */
+    public static function obtenerUsuariosEspeciales() {
+        
+        $users = \DB::select('SELECT id_user, nombre, apellidos FROM usuarios WHERE rol = ? OR rol = ?', [Constantes::ADMIN, Constantes::SWATS]);
+        if ($users != null) {
+            return $users;
+        } else {
+            return null;
+        }
+    }
+    
+    /**
      * Registro del usuario en base de datos
      * @param type $correo
      * @param type $pass
