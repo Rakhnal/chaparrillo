@@ -27,6 +27,8 @@ Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
 });
 Route::post('edit_us', 'EditUserController@editarUsuario');
+Route::post('edit_pass', 'EditUserController@editarPassEU');
+
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración

@@ -12,8 +12,9 @@ $(document).ready(function () {
     };
 
     var marcadorRegistro;
-    var marcadorEvento1;
+    var marcadorEU;
 
+    var MapaEU;
     var MapaRegistro;
     var MapaEvento;
 
@@ -24,11 +25,20 @@ $(document).ready(function () {
     }
 
     $('#btnreset').on('click', resetMarker);
-    $('#btnreset2').on('click', resetMarker2);
+    $('#btnresetEU').on('click', resetMarkerEU);
 
     function Sacalugar(position) {
-        var latitud = position.coords.latitude;
-        var longitud = position.coords.longitude;
+
+        var latitud;
+        var longitud;
+        if (document.getElementById("latitudInputEU").value !== "") {
+            latitud = document.getElementById("latitudInputEU").value;
+            longitud = document.getElementById("longitudInputEU").value;
+        } else {
+            latitud = position.coords.latitude;
+            longitud = position.coords.longitude;
+        }
+
         var mapa = new google.maps.LatLng(latitud, longitud);
 
         var ColocaMapa = {
@@ -67,10 +77,23 @@ $(document).ready(function () {
             });
         }
 
+
+
+        if (document.getElementById("mapaEditUs") != null) {
+            MapaEU = new google.maps.Map(document.getElementById("mapaEditUs"), ColocaMapa);
+
+            marcadorEU = new google.maps.Marker({
+                position: mapa,
+                icon: "images/icons/location.svg",
+                map: MapaEU
+            });
+            
+        }
+
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         google.maps.event.addListener(MapaEvento, "click", mapClick2);
         // var vercalle = new google.maps.StreetViewPanorama(document.getElementById("map"), calle);
-        
+
         localStorage.setItem('latitud', latitud);
         localStorage.setItem('longitud', longitud);
     }
@@ -80,7 +103,7 @@ $(document).ready(function () {
         // get lat/lon of click
         var clickLat = event.latLng.lat();
         var clickLon = event.latLng.lng();
-        
+
         $('#latitudInput').val(clickLat);
         $('#longitudInput').val(clickLon);
 
@@ -111,10 +134,27 @@ $(document).ready(function () {
         google.maps.event.clearListeners(MapaEvento, 'click');
     }
 
+    function mapClickEU(event) {
+
+        // get lat/lon of click
+        var clickLat = event.latLng.lat();
+        var clickLon = event.latLng.lng();
+
+        $('#latitudInputEU').val(clickLat);
+        $('#longitudInputEU').val(clickLon);
+
+        marcadorEU = new google.maps.Marker({
+            position: new google.maps.LatLng(clickLat, clickLon),
+            icon: "images/icons/location.svg",
+            map: MapaEU
+        });
+
+        google.maps.event.clearListeners(MapaEU, 'click');
+    }
     // Reinicia el marcador del mapa de Registro
     function resetMarker() {
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
-        
+
         $('#latitudInput').val(null);
         $('#longitudInput').val(null);
 
@@ -128,6 +168,15 @@ $(document).ready(function () {
         $('#longitud').val(null);
 
         marcadorEvento1.setMap(null);
+    }
+
+    function resetMarkerEU() {
+        google.maps.event.addListener(MapaEU, "click", mapClickEU);
+
+        $('#latitudInputEU').val(null);
+        $('#longitudInputEU').val(null);
+
+        marcadorEU.setMap(null);
     }
 
     function nofunciona(position) {
