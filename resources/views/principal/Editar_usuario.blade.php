@@ -23,7 +23,7 @@ Inicio
             <?php $seesion_user = $prin->img_user; ?>
         </div>
         <div class="row col-12">
-            <form class="col-12 row" name="formulario_editUser" id="formulario_editUser" action="edit_us" method="POST" onsubmit="return samePasswordsEU()">
+            <form class="col-12 row" name="formulario_editUser" id="formulario_editUser" action="edit_us" method="POST">
                 @csrf
                 <div class="col-4">
                     <div class="row justify-content-center d-flex ">
@@ -65,28 +65,6 @@ Inicio
                             <label class="form_control col-12">Contraseña:</label>
                             <input type="button" class="btn btn-light w-100 input" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña"> 
                         </div>
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Cambiar contraseña</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label class="form_control">Nueva contraseña:</label>
-                                        <input type="password" name="passwed" class="text_black passwrd" id="passw"> 
-                                        <label class="form_control">Confirmar contraseña:</label>
-                                        <input type="password" name="passwed2" class="text_black passwrd" id="passw2"> 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal" value=" ">Cerrar</button>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" value=" ">Aceptar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
@@ -120,10 +98,10 @@ Inicio
                                 </div>
                             </div>
 
-                            <input type="text" autocomplete="off" id="latitudInputEU" name="latitudInputEU" value="<?php echo $prin->latitud;?>" hidden/>
+                            <input type="text" autocomplete="off" id="latitudInputEU" name="latitudInputEU" value="<?php echo $prin->latitud; ?>" hidden/>
 
-                            <input type="text" autocomplete="off" id="longitudInputEU" name="longitudInputEU" value="<?php echo $prin->longitud;?>" hidden/>
-                            
+                            <input type="text" autocomplete="off" id="longitudInputEU" name="longitudInputEU" value="<?php echo $prin->longitud; ?>" hidden/>
+
                         </div>
                     </div>
                 </div>
@@ -135,6 +113,31 @@ Inicio
             <script>
                 block();
             </script>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form name="formulario_editPass" id="formulario_editPass" action="edit_pass" method="POST" onsubmit="return samePasswordsEU()">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Cambiar contraseña</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label class="form_control">Nueva contraseña:</label>
+                                <input type="password" name="passwed" class="text_black passwrd" id="passw"> 
+                                <label class="form_control">Confirmar contraseña:</label>
+                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2"> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" value=" ">Cerrar</button>
+                                <input type="submit" class="btn btn-success" value="Aceptar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

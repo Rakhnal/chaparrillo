@@ -132,14 +132,11 @@ class conexion {
      * @param type $pais
      * @param type $img
      */
-    public static function editUser($nombre, $apellidos, $correo, $pass, $localidad, $pais, $img, $lat, $lon) {
+    public static function editUser($nombre, $apellidos, $correo, $localidad, $pais, $img, $lat, $lon) {
         $user = conexion::existeUsuario($correo);
         $user->nombre = $nombre;
         $user->apellidos = $apellidos;
         $user->email = $correo;
-        if ($pass != null && $pass != '') {
-            $user->password = $pass;
-        }
         if ($img != "" && $img != '' && $img != null && $img != " " && $img != ' ') {
             $user->img_user = $img;
         }
@@ -152,7 +149,19 @@ class conexion {
         $user->pais = $pais;
         $user->save();
     }
-
+    
+    /**
+     * Editar la contraseña del usuario
+     * @param type $correo
+     * @param type $pass
+     */
+    public static function editPass($correo, $pass) {
+        $user = conexion::existeUsuario($correo);
+        if ($pass != null && $pass != '') {
+            $user->password = $pass;
+        }
+        $user->save();
+    }
     /*
      * // Buscamos a todos los usuarios en BBDD
       public static function obtenerUsuarios() {
