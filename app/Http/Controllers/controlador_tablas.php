@@ -60,7 +60,7 @@ class controlador_tablas extends Controller {
                         ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
                         ->where('documentos.id_documento', $id_documento)
                         ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
-                ->first;
+                ->first();
 
 //        $datos = [
 //            'id_documento' => $documento->id_documento,
