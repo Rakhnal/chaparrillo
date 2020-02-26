@@ -55,12 +55,12 @@ class controlador_tablas extends Controller {
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
         $qhp = "ok";
+        dd($id_documento);
         $documento = DB::table('documentos')
                         ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                         ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
                         ->where('documentos.id_documento', $id_documento)
-                        ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
-                ->first();
+                        ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento');
 
 //        $datos = [
 //            'id_documento' => $documento->id_documento,
@@ -69,12 +69,12 @@ class controlador_tablas extends Controller {
 //            'visible' => $documento->visible
 //            
 //        ];
-
+        dd($documento);
         if ($documento) {
-            if ($session->has('docSession')) {
-                $session->forget('docSession');
+            if (session()->has('docSession')) {
+                session()->forget('docSession');
             }
-            $session->put('docSession', $documento);
+            session()->put('docSession', $documento);
         } else {
             $qhp = "fail";
         }
@@ -87,8 +87,7 @@ class controlador_tablas extends Controller {
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->where('documentos.id_documento', $id_documento)
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible')
-                ->first();
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible');
 
         if ($documento) {
             $qhp = "ok";
