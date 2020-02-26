@@ -42,8 +42,7 @@ class controlador_tablas extends Controller {
 
         $publicacion = DB::table('publicaciones')
                 ->join('documentos', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento)
-                ->first();
+                ->where('publicaciones.id_item', $id_documento);
 
         if ($publicacion) {
             $publicacion->delete();
