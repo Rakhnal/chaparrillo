@@ -61,8 +61,8 @@ $(document).ready(function () {
                 });
                 setTimeout(function () {
                     $(".alert").close();
-                }, 2000);
-            }, 1000);
+                }, 6000);
+            }, 5000);
         }
 
         window.alert = function (message) {

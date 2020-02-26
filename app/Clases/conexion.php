@@ -159,7 +159,7 @@ class conexion {
      */
     public static function editPass($correo, $pass) {
         $user = conexion::existeUsuario($correo);
-        if ($pass != null && $pass != '') {
+        if ($pass != null && $pass != '' && $pass != ' ') {
             $user->password = $pass;
         }
         $user->save();

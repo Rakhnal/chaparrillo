@@ -11,13 +11,12 @@ $prin = session()->get("userObj");
 Inicio
 @endsection
 @section('contenido')
-
 <link rel="stylesheet" type="text/css" href="css/editUsu/editarusuario.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/general/editar_usuario.js') }}"></script>
 <link href="css/editUsu/cropper.min.css" rel="stylesheet" type="text/css"/>
-<div class="col-12 ml-3">
-    <div class="row col-12 form_base">
+<div class="col-12">
+    <div class="row col-12 form_base m-auto">
         <div class="col-12 text-center mt-2">
             <h1>Perfil</h1>
             <?php $seesion_user = $prin->img_user; ?>
@@ -126,9 +125,9 @@ Inicio
                             </div>
                             <div class="modal-body">
                                 <label class="form_control">Nueva contraseña:</label>
-                                <input type="password" name="passwed" class="text_black passwrd" id="passw"> 
+                                <input type="password" name="passwed" class="text_black passwrd" id="passw" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" title="La contraseña debe tener entre 8 y 16 caracteres y al menos un dígito, una minúscula, una mayúscula y NO puede tener otros símbolos."> 
                                 <label class="form_control">Confirmar contraseña:</label>
-                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2"> 
+                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" title="La contraseña debe tener entre 8 y 16 caracteres y al menos un dígito, una minúscula, una mayúscula y NO puede tener otros símbolos."> 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal" value=" ">Cerrar</button>
