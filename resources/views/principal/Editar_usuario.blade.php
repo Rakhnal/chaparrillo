@@ -6,56 +6,56 @@ use App\Clases\Auxiliares\Constantes;
 session()->put("actPage", Constantes::ED_USUARIO);
 $prin = session()->get("userObj");
 ?>
-
 @extends('../general/base')
 @section('titulo')
 Inicio
 @endsection
 @section('contenido')
+
 <link rel="stylesheet" type="text/css" href="css/editUsu/editarusuario.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwKmL1KMaYg3Hl6ggnEnCVgCCHhtsgvEU&libraries=drawing&callback=initMap&sensor=true"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/general/editar_usuario.js') }}"></script>
 <link href="css/editUsu/cropper.min.css" rel="stylesheet" type="text/css"/>
 <div class="col-12 ml-3">
     <div class="row col-12 form_base">
         <div class="col-12 text-center mt-2">
             <h1>Perfil</h1>
+            <?php $seesion_user = $prin->img_user; ?>
         </div>
         <div class="row col-12">
-            <div class=" col-4" >
-                <?php $seesion_user = $prin->img_user;?>
-                
-                <script type="text/javascript" src="{{ URL::asset('scripts/general/main.js') }}"></script>
-                <script type="text/javascript" src="{{ URL::asset('scripts/general/cropper.min.js') }}"></script>
-                <!--        boostrap model change profile pic-->
-                <div class="col-12" id="ajusteimagen" style="display:none;">
-                    <div class="ajax-response" id="loading"></div>
-                    <h4 class="m-t-5 m-b-5 ellipsis text-center">Ajustar imagen</h4>                    
-                    <div class="profile-pic-wraper">
-                        <?php if ($seesion_user!='0'): ?>
-                            <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" alt="" id="change-profile-pic" class="col-12">
-                        <?php else: ?>
-                            <img src="images/profile-pic/default.png" alt="" id="change-profile-pic" class="col-12" >    
-                        <?php endif; ?>
-                    </div>
-                    <div>
-                        <form enctype="multipart/form-data">
-                            <input type="file" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo..." class="bwr-transparent">
-                        </form><!--data:image/png;base64,iVB-->
-                    </div>
-                </div>
-            </div>
-            <form class="col-8" name="formulario_editUser" id="formulario_editUser" action="edit_us" method="POST">
+            <form class="col-12 row" name="formulario_editUser" id="formulario_editUser" action="edit_us" method="POST">
                 @csrf
-                <div id="profile-result" class="mb-2 justify-content-center d-flex row">
-                    <?php if ($seesion_user != '0'): ?>
-                        <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" class="img-circle" id="laola">  
-                    <?php else : ?>
-                        <img src="images/profile-pic/default.png" class="img-circle">    
-                    <?php endif; ?>
+                <div class="col-4">
+                    <div class="row justify-content-center d-flex ">
+                        <div id="profile-result" class="mb-2 ">
+                            <?php if ($seesion_user != '0'): ?>
+                                <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" class="img-circle" id="laola">  
+                            <?php else : ?>
+                                <img src="images/profile-pic/default.png" class="img-circle">    
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <div class="row mt-3" >
+                        <script type="text/javascript" src="{{ URL::asset('scripts/general/main.js') }}"></script>
+                        <script type="text/javascript" src="{{ URL::asset('scripts/general/cropper.min.js') }}"></script>
+                        <!--        boostrap model change profile pic-->
+                        <div class="col-12" id="ajusteimagen" style="display:none;">
+                            <div class="ajax-response" id="loading"></div>
+                            <h4 class="m-t-5 m-b-5 ellipsis text-center">Ajustar imagen</h4>                    
+                            <div class="profile-pic-wraper">
+                                <?php if ($seesion_user != '0'): ?>
+                                    <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" alt="" id="change-profile-pic" class="col-12">
+                                <?php else: ?>
+                                    <img src="images/profile-pic/default.png" alt="" id="change-profile-pic" class="col-12" >    
+                                <?php endif; ?>
+                            </div>
+                            <div>
+                                <input type="file" enctype="multipart/form-data" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo..." class="bwr-transparent">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-12">
+                <div class="col-8">
                     <div class="row">
                         <div class="col-6">
                             <label class="form_control col-12">Email:</label>
@@ -64,28 +64,6 @@ Inicio
                         <div class="col-6">
                             <label class="form_control col-12">Contraseña:</label>
                             <input type="button" class="btn btn-light w-100 input" data-toggle="modal" data-target="#exampleModalCenter" id="password" value="Cambiar contraseña"> 
-                        </div>
-                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">Cambiar contraseña</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <label class="form_control">Nueva contraseña:</label>
-                                        <input type="password" name="passwed" class="text_black passwrd" id="passw"> 
-                                        <label class="form_control">Confirmar contraseña:</label>
-                                        <input type="password" name="passwn" class="text_black passwrd"> 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -110,19 +88,56 @@ Inicio
                     <div class="row">
                         <div class="col-12">
                             <label class="form_control">Posición:</label>
-                            <div id="mapa" class="col-12"> </div>
-                            <script>
-                                initMap();
-                                block();
-                            </script>
+
+                            <div id="mapaEditUs" class="mapaEditUs"></div>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center align-content-center align-items-center">
+                                        <button class="btn btn-nuevo" type="button" name="btnreset" id="btnresetEU">Reiniciar Marcador</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="text" autocomplete="off" id="latitudInputEU" name="latitudInputEU" value="<?php echo $prin->latitud; ?>" hidden/>
+
+                            <input type="text" autocomplete="off" id="longitudInputEU" name="longitudInputEU" value="<?php echo $prin->longitud; ?>" hidden/>
+
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 text-center mb-3">
                     <button type="button" class="btn btn-primary" id="editarUsuario" >Editar</button>
-                    <input type="submit" class="btn btn-success" id="bd_edit" value="Aceptar">
+                    <input type="submit" class="btn btn-success" id="bd_edit" value="Aceptar" disabled="">
                 </div>
             </form>
+            <script>
+                block();
+            </script>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <form name="formulario_editPass" id="formulario_editPass" action="edit_pass" method="POST" onsubmit="return samePasswordsEU()">
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Cambiar contraseña</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <label class="form_control">Nueva contraseña:</label>
+                                <input type="password" name="passwed" class="text_black passwrd" id="passw"> 
+                                <label class="form_control">Confirmar contraseña:</label>
+                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2"> 
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" value=" ">Cerrar</button>
+                                <input type="submit" class="btn btn-success" value="Aceptar">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
