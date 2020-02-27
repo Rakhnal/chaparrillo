@@ -12,6 +12,7 @@ use App\Clases\Auxiliares\Constantes;
 use App\Documento;
 use Illuminate\Support\Facades\Redirect;
 use App\Adjunto;
+use App\Categoria;
 
 class controlador_tablas extends Controller {
 
@@ -342,6 +343,11 @@ class controlador_tablas extends Controller {
     }
 
     //DES18: Página para adminsitrar eventos
+
+    /**
+     * 
+     * @return type
+     */
     public function listarEventos() {
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
@@ -352,25 +358,29 @@ class controlador_tablas extends Controller {
         return view(Constantes::AD_EVENTOS, ['events' => $eventos]);
     }
 
+    /**
+     * 
+     * @return type
+     */
     public function modificarEventos() {
         $id_evento = intval($_POST["ide"]);
 
-        $eventos = DB::table('eventos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('nombre', 'imagen', 'descripcion', 'localizacion', 'fecha_inicio', 'fecha_fin')
-                ->where('eventos.id_evento', $id_evento)
-                ->first();
+        $eventos = \DB::select('SELECT nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
+                . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+                . 'WHERE eventos.id_evento ='.$id_evento);
 
+        $evento = array(
+            'nombre' => $eventos[0]->nombre,
+            'imagen' => base64_encode($eventos[0]->imagen),
+            'descripcion' => $eventos[0]->descripcion,
+            'localizacion' => $eventos[0]->localizacion,
+            'fecha_inicio' => $eventos[0]->fecha_inicio,
+            'fecha_fin' => $eventos[0]->fecha_fin
+        );
+        
 
-        if (!empty($eventos)) {
-            $qhp = "ok";
-            session()->put('event_select', $eventos);
-        } else {
-            $qhp = "fail";
-        }
-
-        return $qhp;
+        return json_encode($evento);
     }
 
     /**
