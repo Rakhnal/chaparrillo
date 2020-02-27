@@ -27,6 +27,8 @@ Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
 });
 Route::post('edit_us', 'EditUserController@editarUsuario');
+Route::post('edit_pass', 'EditUserController@editarPassEU');
+
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
@@ -35,25 +37,19 @@ Route::post('formevent','controlador_tablas@eliminarEventos');
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
 Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
 Route::post('categorias','controlador_tablas@sacarCategorias');
-
-// DES17: Página Administrar Documentos - NLO
-// Listar documentos
-Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
-// Eliminar documentos
-Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
-// Modificar documentos
-Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
 Route::post('guardarEvento','controlador_tablas@guardarEventos');
 
 // DES17: Página Administrar Documentos - NLO
 // Listar documentos
-Route::get('adminDocument', 'controlador_tablas@listarDocumentos');
+Route::get('adminDocument', ['as' => 'adminDocument', 'uses' => 'controlador_tablas@listarDocumentos']);
 // Eliminar documentos
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
 // Buscar documentos
 Route::post('buscarDocumento', ['as' => 'buscarDocumento', 'uses' => 'controlador_tablas@buscarDocumentos']);
 // Modificar documentos
 Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'controlador_tablas@modificarDocumentos']);
+// Subir documentos
+Route::post('subirDocumento', ['as' => 'subirDocumento', 'uses' => 'controlador_tablas@subirDocumentos']);
 
 // DES21: Login/Registro - ADC
 // Login
@@ -67,6 +63,7 @@ Route::get('logout', 'usercontroller@cerrarSesion');
 Route::get('adminInformes', 'controlador_tablas@listarInformes');
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
 Route::post('actInforme', 'controlador_tablas@actInforme');
+Route::post('modificarInforme',['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
 
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {

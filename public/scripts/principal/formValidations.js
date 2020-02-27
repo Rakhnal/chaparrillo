@@ -31,3 +31,21 @@ function samePasswords() {
     return true;
 }
 
+// Comprueba si las contraseñas del formulario de editar usuario son iguales
+function samePasswordsEU() {
+
+    if ($('#passw').val() === $('#passw2').val()) {
+        
+        $('#passw').css('border', 'none');
+        $('#passw2').css('border', 'none');
+        $('#passw').css('border-bottom', '1px solid white');
+        $('#passw2').css('border-bottom', '1px solid white');
+        
+    } else {
+        $('#passw').css('border', '1px solid red');
+        $('#passw2').css('border', '1px solid red');
+
+        return false;
+    }
+    return true;
+}

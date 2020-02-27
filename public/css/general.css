@@ -26,6 +26,8 @@ body {
     background-color: #78aa57;
 
     transition: 1s ease-in all;
+    
+    overflow: hidden;
 }
 
 input {
@@ -222,7 +224,6 @@ td {
 }
 
 .btn-guardar {
-    
     font-size: 0.0000000000001px;
     
     width: 30px;
@@ -236,10 +237,29 @@ td {
     background-repeat: no-repeat;
 }
 
+.btn-modal {
+    width: 30px;
+    height: 30px;
+    
+    border: none;
+    background-color: transparent;
+    
+    background-image: url('../images/icons/modal.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    transition: 0.3s ease-in all;
+}
+
 .btn-nuevo {
     background: none;
     border: 1px solid white !important;
     border-radius: 0px !important;
+}
+
+.btn-modal:hover {
+    background-image: url('../images/icons/modalh.png');
+    transform: scale(0.95);
 }
 
 .btn-eliminar:hover {

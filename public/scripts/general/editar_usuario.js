@@ -8,7 +8,6 @@ $(document).ready(function () {
             alert('Datos actualizados');
         }
         desblok();
-
         /**
          * bloquea los campos del formulario si ya estan bloqueados los desbloquea
          * @returns {undefined}
@@ -62,8 +61,8 @@ $(document).ready(function () {
                 });
                 setTimeout(function () {
                     $(".alert").close();
-                }, 2000);
-            }, 1000);
+                }, 6000);
+            }, 5000);
         }
 
         window.alert = function (message) {
@@ -83,6 +82,8 @@ function block() {
     document.getElementById("apell").disabled = true;
     document.getElementById("password").disabled = true;
     document.getElementById("profile-file-input").disabled = true;
+    document.getElementById("bd_edit").disabled = true;
+
     DesActivarCampo();
 }
 
@@ -106,27 +107,6 @@ function DesActivarCampo() {
     return true;
 }
 
-/**
- * inicia el mapa de google
- * @returns {undefined}
- */
-function initMap() {
-    var map = new google.maps.Map(document.getElementById('mapa'), {
-        center: {lat: 38.694777119, lng: -4.1108735307},
-        scrollwheel: false,
-        zoom: 15,
-        zoomControl: true,
-        rotateControl: false,
-        mapTypeControl: true,
-        streetViewControl: false
-    });
-    var marker = new google.maps.Marker({
-        position: {lat: 38.69477711972968, lng: -4.110873530782783},
-        icon: "images/icons/location.svg",
-        draggable: false
-    });
-    marker.setMap(map);
-}
 
 function myFunction() {
     document.getElementById("formulario_editUser").submit();

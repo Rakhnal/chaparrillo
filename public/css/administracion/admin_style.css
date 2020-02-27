@@ -8,6 +8,24 @@ and open the template in the editor.
     Author     : rafa
 */
 
+body {
+    transition: none !important;
+}
+
+select {
+    width: 90% !important;
+    height: 28px;
+    
+    background: transparent;
+    border: 1px solid white;
+}
+
+select option {
+    background: white;
+    color: black;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
 #migas {
     background: none;
 }
@@ -82,9 +100,14 @@ p {
 
 .cajaNormal {
     height: 30px !important;
-    width: 70% !important;
+    width: 90% !important;
     border: 1px solid white !important;
     padding: 5px !important;
+}
+
+.textAreaInf {
+    width: 90% !important;
+    height: 100px;
 }
 
 #formEliminarDoc {
