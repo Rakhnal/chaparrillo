@@ -37,7 +37,8 @@ Administrar Documentación
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Fecha de subida</th>
+                            <th>Descripción</th>
+                            <th>Año de publicación</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -49,7 +50,8 @@ Administrar Documentación
                             <tr>
                                 <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
-                                <td><?= $doc->fecha_subida ?></td>
+                                <td><?= $doc->descripcion ?></td>
+                                <td><?= $doc->anio ?></td>
                                 <td><form name="formEliminarDoc" id="formEliminarDoc" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" name="btnEliminar" data-id="<?= $doc->id_documento ?>" class="btn btn-eliminar" value="Eliminar"></form></td>
                                 <td><input type="button" id="modificarDocumentos" name="btnModificar" data-idMod="<?= $doc->id_documento ?>" class="btn btn-modal blurmodal" data-toggle="modal" data-target="#modalEditarDocumento" value=""></td>
                             </tr>
@@ -141,7 +143,11 @@ Administrar Documentación
             data: parametros,
             type: 'post',
             success: function (response) {
-                alert(response);
+                var respuesta = JSON.parse(response);
+                alert(respuesta.qhp);
+                $('#nombreEditarDoc').val(respuesta.nombre);
+                $('#descEditarDoc').val(respuesta.descripcion);
+                $('#selectVisible').val(respuesta.visible);
             },
             statusCode: {
                 404: function () {

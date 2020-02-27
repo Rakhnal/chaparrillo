@@ -453,6 +453,18 @@ use App\Clases\conexion;
                                 <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación"></textarea>
                             </div>
                             <div class="form-group">
+                                <input type="number" class="pl-2" id="anioSubirDoc" name="anioSubirDoc" placeholder="Año de publicación">
+                            </div>
+                            <div class="form-group">
+                                <select id="selectSubirAutor">
+                                    <option value="SWAT1">SWAT 1</option>
+                                    <option value="SWAT2">SWAT 2</option>
+                                    <option value="SWAT3">SWAT 3</option>
+                                    <option value="SWAT4">SWAT 4</option>
+                                    <option value="SWAT5">SWAT 5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*">
                             </div>
                             <label for="subirAdjuntos">

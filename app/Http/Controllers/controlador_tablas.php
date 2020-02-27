@@ -27,7 +27,7 @@ class controlador_tablas extends Controller {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
                 ->paginate(8);
 
         return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
@@ -39,10 +39,6 @@ class controlador_tablas extends Controller {
      */
     public function eliminarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento);
         $qhp = "ok";
 
         $publicacion = DB::table('publicaciones')
@@ -59,26 +55,25 @@ class controlador_tablas extends Controller {
 
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        
+
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->where('documentos.id_documento', $id_documento);
-        
+
         if ($documento) {
             $qhp = "ok";
         } else {
             $qhp = "fail";
         }
-        
-        $datos = [
-            'id_documento' => $documento->id_documento,
-            'nombre' => $documento->nombre,
-            'descripcion' => $documento->descripcion,
-            'visible' => $documento->visible,
-            'qhp' => $qhp
-        ];
 
-        return $datos;
+        $datos = array(
+            'nombre' => $documento[0]->nombre,
+            'descripcion' => $documento[0]->descripcion,
+            'visible' => $documento[0]->visible,
+            'qhp' => $qhp
+        );
+
+        return json_encode($datos);
     }
 
     public function modificarDocumentos() {
@@ -128,6 +123,8 @@ class controlador_tablas extends Controller {
             $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
 
             $documento->num_descargas = 0;
+            $documento->anio = $req->get('anioSubirDoc');
+//            $documento->autor = $req->get('selectSubirAutor');
             $documento->visible = 1;
 
             $publicacion->save();
@@ -145,7 +142,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
                     ->paginate(8);
 
             return redirect('adminDocument')->with('docs', $documentos);
@@ -153,7 +150,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
                     ->paginate(8);
 
             return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
