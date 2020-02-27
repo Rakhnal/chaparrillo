@@ -55,7 +55,7 @@ Administrar Eventos
                                 <td><?= $event->fecha_fin ?></td>
                         <input id="id_e" name="id_e" value="<?= $event->id_evento ?>" type="hidden">
                         <td><input class="btn btn-eliminar" id="delete" type="submit" name="delete" value="Eliminar"></td>
-                        <td><input class="btn btn-guardar blurmodal b-modify" type="button" id="b-modify" data-id="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar" value="Modificar"></td>
+                        <td><input class="btn btn-modal blurmodal b-modify" type="button" id="b-modify" data-id="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar"></td>
                         </tr>
                     <?php } ?>
                     </tbody>
