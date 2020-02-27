@@ -544,7 +544,13 @@ use App\Clases\conexion;
                                         <p>Plaga a tratar:</p>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <input type="text" class="cajaNormal" autocomplete="off" id="plagaTratar" name="plagaTratar" required>
+                                        <select id="plagaTratar" name="plagaTratar">
+                                            <option value="0"><?= Constantes::CLITRASEL ?></option>
+                                            <option value="1"><?= Constantes::POLILLASEL ?></option>
+                                            <option value="2"><?= Constantes::PSILASSEL ?></option>
+                                            <option value="3"><?= Constantes::CHINCHESEL ?></option>
+                                            <option value="4"><?= Constantes::OTRA ?></option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -600,7 +606,7 @@ use App\Clases\conexion;
                                             <div class="row justify-content-center">
                                                 <p>Usuario Informe:</p>
 
-                                                <select name="userProp">
+                                                <select name="userProp" id="userProp">
                                                     <option value="" selected></option>
 
                                                     <?php
@@ -666,7 +672,13 @@ use App\Clases\conexion;
                                         <p>Plaga a tratar:</p>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <input type="text" class="cajaNormal" autocomplete="off" id="plagaTratar" name="plagaTratar" required>
+                                        <select id="plagaTratar" name="plagaTratar">
+                                            <option value="0"><?= Constantes::CLITRASEL ?></option>
+                                            <option value="1"><?= Constantes::POLILLASEL ?></option>
+                                            <option value="2"><?= Constantes::PSILASSEL ?></option>
+                                            <option value="3"><?= Constantes::CHINCHESEL ?></option>
+                                            <option value="4"><?= Constantes::OTRA ?></option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
