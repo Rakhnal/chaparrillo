@@ -221,6 +221,8 @@ td {
     background-image: url('../images/icons/delete.png');
     background-size: cover;
     background-repeat: no-repeat;
+    
+    transition: 0.3s ease-in all;
 }
 
 .btn-guardar {
@@ -235,6 +237,8 @@ td {
     background-image: url('../images/icons/save.png');
     background-size: cover;
     background-repeat: no-repeat;
+    
+    transition: 0.3s ease-in all;
 }
 
 .btn-modal {
@@ -390,7 +394,7 @@ td {
     background-color: transparent !important;
 }
 
-.modal input[type=text], .modal input[type=password], .modal input[type=email] {
+.modal input[type=text], .modal input[type=password], .modal input[type=email], .modal input[type=number] {
     width: 100%;
     height: 100%;
     padding-top: 20px;
@@ -560,8 +564,8 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
     background-color: #8F7E4F;
 }
 
-#selectVisible {
-    width: 150px;
+#selectVisible, #selectSubirAutor {
+    width: 150px !important;
     color: white;
     height: 35px;
     border: 1px solid white;
@@ -569,7 +573,7 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 
 }
 
-.modal input[type=text]::placeholder, .modal input[type=password]::placeholder, .modal input[type=email]::placeholder, .descDocumento::placeholder {
+.modal input[type=text]::placeholder, .modal input[type=password]::placeholder, .modal input[type=email]::placeholder, .modal input[type=number]::placeholder, .descDocumento::placeholder {
     color: #9EC485;
 }
 

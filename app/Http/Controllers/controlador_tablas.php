@@ -12,6 +12,7 @@ use App\Clases\Auxiliares\Constantes;
 use App\Documento;
 use Illuminate\Support\Facades\Redirect;
 use App\Adjunto;
+use Illuminate\Support\Facades\Session;
 use App\Categoria;
 
 class controlador_tablas extends Controller {
@@ -27,7 +28,7 @@ class controlador_tablas extends Controller {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
                 ->paginate(8);
 
         return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
@@ -39,10 +40,6 @@ class controlador_tablas extends Controller {
      */
     public function eliminarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento);
         $qhp = "ok";
 
         $publicacion = DB::table('publicaciones')
@@ -59,32 +56,25 @@ class controlador_tablas extends Controller {
 
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        $qhp = "ok";
-        $documento = DB::table('documentos')
-                        ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                        ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
-                        ->where('documentos.id_documento', $id_documento)
-                        ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
-                ->first();
 
-//        $datos = [
-//            'id_documento' => $documento->id_documento,
-//            'nombre' => $documento->nombre,
-//            'descripcion' => $documento->descripcion,
-//            'visible' => $documento->visible
-//            
-//        ];
+        $documento = DB::table('documentos')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento);
 
         if ($documento) {
-            if ($session->has('docSession')) {
-                $session->forget('docSession');
-            }
-            $session->put('docSession', $documento);
+            $qhp = "ok";
         } else {
             $qhp = "fail";
         }
 
-        return $qhp;
+        $datos = array(
+            'nombre' => $documento[0]->nombre,
+            'descripcion' => $documento[0]->descripcion,
+            'visible' => $documento[0]->visible,
+            'qhp' => $qhp
+        );
+
+        return json_encode($datos);
     }
 
     public function modificarDocumentos() {
@@ -92,8 +82,7 @@ class controlador_tablas extends Controller {
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->where('documentos.id_documento', $id_documento)
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible')
-                ->first();
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible');
 
         if ($documento) {
             $qhp = "ok";
@@ -135,6 +124,8 @@ class controlador_tablas extends Controller {
             $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
 
             $documento->num_descargas = 0;
+            $documento->anio = $req->get('anioSubirDoc');
+//            $documento->autor = $req->get('selectSubirAutor');
             $documento->visible = 1;
 
             $publicacion->save();
@@ -152,7 +143,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
                     ->paginate(8);
 
             return redirect('adminDocument')->with('docs', $documentos);
@@ -160,7 +151,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
                     ->paginate(8);
 
             return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
@@ -324,21 +315,21 @@ class controlador_tablas extends Controller {
         $informe = DB::table('informes')
                 ->where('id_informe', $id_informe)
                 ->first();
-        
+
         $infArray = array(
-          'id_informe' => $informe->id_informe,
-          'nombre_producto' => $informe->nombre_producto,
-          'litro_hectarea' => $informe->litro_hectarea,
-          'id_user' => $informe->id_user,
-          'aprox_dmg' => $informe->aprox_dmg,
-          'plaga_tratar' => $informe->plaga_tratar,
-          'fecha_hora' => $informe->fecha_hora,
-          'poligono' => $informe->poligono,
-          'parcela' => $informe->parcela,
-          'municipio' => $informe->municipio,
-          'comentario' => $informe->comentario,
+            'id_informe' => $informe->id_informe,
+            'nombre_producto' => $informe->nombre_producto,
+            'litro_hectarea' => $informe->litro_hectarea,
+            'id_user' => $informe->id_user,
+            'aprox_dmg' => $informe->aprox_dmg,
+            'plaga_tratar' => $informe->plaga_tratar,
+            'fecha_hora' => $informe->fecha_hora,
+            'poligono' => $informe->poligono,
+            'parcela' => $informe->parcela,
+            'municipio' => $informe->municipio,
+            'comentario' => $informe->comentario,
         );
-        
+
         return json_encode($infArray);
     }
 
