@@ -7,6 +7,7 @@ session()->put("actPage", Constantes::AD_INFORMES);
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
+<script src="scripts/tablas/table2CSV.js"></script>
 
 @extends('../general/base')
 
@@ -102,7 +103,6 @@ Administrar Informes
                     
                     $('#idInforme').val(respuesta.id_informe);
                     $('#productName').val(respuesta.nombre_producto);
-                    $('#plagaTratar').val(respuesta.plaga_tratar);
                     $('#polInput').val(respuesta.poligono);
                     $('#parInput').val(respuesta.parcela);
                     $('#munInput').val(respuesta.municipio);
@@ -110,6 +110,12 @@ Administrar Informes
                     $('#fechaInforme').val(respuesta.fecha_hora);
                     $('#danioAprox').val(respuesta.aprox_dmg);
                     $('#coment').val(respuesta.comentario);
+                    
+                    var selectUsers = document.getElementById('userProp');
+                    var selectPlagas = document.getElementById('plagaTratar');
+                    
+                    selectUsers.value = respuesta.id_user;
+                    selectPlagas.value = respuesta.plaga_tratar;
                 },
                 statusCode: {
                     404: function () {

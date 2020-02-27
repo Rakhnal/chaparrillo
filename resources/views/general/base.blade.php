@@ -84,7 +84,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" name="descrip" class="descDocumento" placeholder="Escribe una descripción"></textarea>
+                                        <textarea id="taa-eventA" name="descrip" class="descDocumento" placeholder="Escribe una descripción"></textarea>
                                     </div>
                                 </div>
 
@@ -395,80 +395,10 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                             </div>
-                            <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
-                        </div>
-                        <div class="modal-body">
-                            <form action="guardarEvento" method="POST" enctype="multipart/form-data">
-                                {{ csrf_field() }}
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label>Nombre:</label>
-                                            <input name="nomb" type="text" value="<?php echo $evento->nombre; ?>" class="form-control" placeholder="Nombre del evento" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha inicio</label>
-                                            <input name="feci" type="date" value="<?php echo $evento->fecha_inicio ?>" class="form-control"  required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Fecha fin:</label>
-                                            <input name="fecf" type="date" value="<?php echo $evento->fecha_fin ?>" class="form-control" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Descripción:</label>
-                                            <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"><?php echo $evento->descripcion ?></textarea>
-                                        </div>
-
-                                        <div class="respuesta">
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-4">
-
-                                        <div class="form-group">
-                                            <label>Localización:</label>
-                                            <input name="loca" type="text" value="<?php echo $evento->localizacion ?>" class="form-control" placeholder="Localización" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Categoría:</label>
-                                            <select class="categ" multiple>
-                                                <?php
-                                                $categoria = conexion::sacarCategorias();
-                                                foreach ($categoria as $ca) {
-                                                    ?>
-                                                    <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-
-                                        <div id="map2" class="mapa">
-
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label>Portada de evento:</label>
-                                            <input id="imgEvento2" name="portada" type="file" accept="image/*" class="form-control-file" >
-                                        </div>
-                                        <div id="img-portada2">
-                                            <?php if ($evento->imagen != null) { ?>
-                                                <img src="data:image/jpg;base64,<?php echo base64_encode($evento->imagen); ?>" alt="Portada evento" class="img-fluid img-ev">
-                                            <?php } ?>
-                                        </div>
-                                        <div class="text-center mt-4">
-                                            <input type="submit" name="add" class="btn btn-primary" value="Guardar">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <!-- Ventana modal para subir documentación -->
 

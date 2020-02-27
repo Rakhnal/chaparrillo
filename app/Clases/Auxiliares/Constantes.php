@@ -41,4 +41,12 @@ class Constantes {
     const EVENTO = 1;
     const DOCUMENTO = 2;
     const COMENTARIOS = 3;
+    
+    // Select de Plagas
+    const CLITRASEL = "Clitra";
+    const PSILASSEL = "Psilas del Pistacho";
+    const POLILLASEL = "Polilla de Almacen";
+    const CHINCHESEL = "Chinches";
+    const OTRA = "Otra";
+    
 }
