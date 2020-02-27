@@ -37,7 +37,7 @@ Administrar Eventos
                     <thead>
                         <tr>
                             <th id="portada-e">Portada</th>
-                            <th id="nombre-e">Nombre</th>
+                            <th id="nombre-e">Evento</th>
                             <th id="local-e">Localización</th>
                             <th id="fi-e">Fecha inicio</th>
                             <th id="ff-e">Fecha fin</th>
@@ -106,7 +106,16 @@ Administrar Eventos
             data: parametros,
             type: "post",
             success: function (response) {
-                var respuesta = response; 
+                 var respuesta = JSON.parse(response);
+                 $('#nomb-e').val(respuesta.nombre);
+                 $('#feci-e').val(respuesta.fecha_inicio);
+                 $('#fecf-e').val(respuesta.fecha_fin);
+                 $('textarea#taa-event').val(respuesta.descripcion);
+                 $('#localM-e').val(respuesta.localizacion);
+                 
+                 $('#img-eventoP').attr('src','data:image/png;base64,'+ respuesta.imagen);
+
+                 
             },
             statusCode: {
                 404: function () {
