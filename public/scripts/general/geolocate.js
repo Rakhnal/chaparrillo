@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         var latitud;
         var longitud;
-        if (document.getElementById("latitudInputEU").value !== "") {
+        if (null !== document.getElementById("latitudInputEU") && document.getElementById("latitudInputEU").value !== "") {
             latitud = document.getElementById("latitudInputEU").value;
             longitud = document.getElementById("longitudInputEU").value;
         } else {
