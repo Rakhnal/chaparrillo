@@ -28,7 +28,7 @@ class controlador_tablas extends Controller {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
                 ->paginate(8);
 
         return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
@@ -125,7 +125,7 @@ class controlador_tablas extends Controller {
 
             $documento->num_descargas = 0;
             $documento->anio = $req->get('anioSubirDoc');
-//            $documento->autor = $req->get('selectSubirAutor');
+            $documento->autores = $req->get('autoresSubirDoc');
             $documento->visible = 1;
 
             $publicacion->save();
@@ -143,7 +143,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
                     ->paginate(8);
 
             return redirect('adminDocument')->with('docs', $documentos);
@@ -151,10 +151,10 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
                     ->paginate(8);
 
-            return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
+            return Redirect::route('adminDocument', ['docs' => $documentos]);
         }
     }
 
@@ -357,9 +357,9 @@ class controlador_tablas extends Controller {
         $id_evento = intval($_POST["ide"]);
 
         $eventos = \DB::select('SELECT nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
-                . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
-                . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
-                . 'WHERE eventos.id_evento ='.$id_evento);
+                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+                        . 'WHERE eventos.id_evento =' . $id_evento);
 
         $evento = array(
             'nombre' => $eventos[0]->nombre,
@@ -369,7 +369,7 @@ class controlador_tablas extends Controller {
             'fecha_inicio' => $eventos[0]->fecha_inicio,
             'fecha_fin' => $eventos[0]->fecha_fin
         );
-        
+
 
         return json_encode($evento);
     }

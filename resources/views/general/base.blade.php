@@ -98,9 +98,9 @@ use App\Clases\conexion;
                                     <div id="map" class="mapa">
 
                                     </div>
-                                    
+
                                     <button class="btn btn-nuevo mt-2" type="button" name="btnreset2" id="btnreset2">Reiniciar Marcador</button>
-                                    
+
                                     <input id="latitud" type="hidden" name="latitud" value="">
                                     <input id="longitud" type="hidden" name="longitud" value="">
                                     <script>
@@ -368,7 +368,7 @@ use App\Clases\conexion;
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="col-4">
 
                                     <div class="form-group">
@@ -387,7 +387,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div id="img-portada2">
 
-                                            <img src="" id="img-eventoP" alt="Portada evento" class="img-fluid">
+                                        <img src="" id="img-eventoP" alt="Portada evento" class="img-fluid">
 
                                     </div>
                                     <div class="text-center mt-4">
@@ -395,10 +395,11 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 
         <!-- Ventana modal para subir documentación -->
 
@@ -418,26 +419,22 @@ use App\Clases\conexion;
                                 <input type="text" class="pl-2" id="nombreSubirDoc" name="nombreSubirDoc" placeholder="Nombre del documento" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación (opcional)"></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="number" class="pl-2" id="anioSubirDoc" name="anioSubirDoc" placeholder="Año de publicación">
+                                <input type="year" class="pl-2" id="anioSubirDoc" name="anioSubirDoc" placeholder="Año de publicación" length="4" pattern="^[0-9]{4}$" required>
                             </div>
                             <div class="form-group">
-                                <select id="selectSubirAutor">
-                                    <option value="SWAT1">SWAT 1</option>
-                                    <option value="SWAT2">SWAT 2</option>
-                                    <option value="SWAT3">SWAT 3</option>
-                                    <option value="SWAT4">SWAT 4</option>
-                                    <option value="SWAT5">SWAT 5</option>
-                                </select>
+                                <input type="text" class="pl-2" id="autoresSubirDoc" name="autoresSubirDoc" placeholder="Autores del documento" required>
                             </div>
                             <div class="form-group">
-                                <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*">
+                                <div>
+                                    <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*" required>
+                                </div>
+                                <label for="subirAdjuntos">
+                                    <span>Adjuntar archivos</span>
+                                </label>
                             </div>
-                            <label for="subirAdjuntos">
-                                <span>Adjuntar archivos</span>
-                            </label>
                         </div>
                         <div class="modal-footer">
                             <div class="text-right">
@@ -468,6 +465,12 @@ use App\Clases\conexion;
                             </div>
                             <div class="form-group">
                                 <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="pl-2" id="anioEditarDoc" name="anioEditarDoc" placeholder="Año de publicación" pattern="[0-9]{4}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="pl-2" id="autoresEditarDoc" name="autoresEditarDoc" placeholder="Autores del documento" required>
                             </div>
                             <div class="form-group form-inline">
                                 <div>
@@ -508,7 +511,7 @@ use App\Clases\conexion;
                     <form name="formNewInforme" action="newInforme" method="POST">
                         {{ csrf_field() }}
                         <input type="number" hidden id="idInforme">
-                        
+
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col">
@@ -592,7 +595,7 @@ use App\Clases\conexion;
                                                     <?php
                                                     foreach ($usuarios as $usuario) {
                                                         ?>
-                                                        <option value="<?=$usuario->id_user?>"><?=$usuario->nombre?> <?=$usuario->apellidos?></option>
+                                                        <option value="<?= $usuario->id_user ?>"><?= $usuario->nombre ?> <?= $usuario->apellidos ?></option>
                                                         <?php
                                                     }
                                                     ?>
@@ -621,7 +624,7 @@ use App\Clases\conexion;
                 </div>
             </div>
         </div>
-        
+
         <!-- Ventana modal para añadir un nuevo informe -->
 
         <div class="modal fade" id="modalNuevoInforme" data-backdrop="static">
@@ -636,7 +639,7 @@ use App\Clases\conexion;
                     <form name="formNewInforme" action="newInforme" method="POST">
                         {{ csrf_field() }}
                         <input type="number" hidden id="idInforme">
-                        
+
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col">
@@ -720,7 +723,7 @@ use App\Clases\conexion;
                                                     <?php
                                                     foreach ($usuarios as $usuario) {
                                                         ?>
-                                                        <option value="<?=$usuario->id_user?>"><?=$usuario->nombre?> <?=$usuario->apellidos?></option>
+                                                        <option value="<?= $usuario->id_user ?>"><?= $usuario->nombre ?> <?= $usuario->apellidos ?></option>
                                                         <?php
                                                     }
                                                     ?>
