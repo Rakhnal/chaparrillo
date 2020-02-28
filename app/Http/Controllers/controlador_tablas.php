@@ -376,7 +376,9 @@ class controlador_tablas extends Controller {
             'descripcion' => $eventos[0]->descripcion,
             'localizacion' => $eventos[0]->localizacion,
             'fecha_inicio' => $eventos[0]->fecha_inicio,
-            'fecha_fin' => $eventos[0]->fecha_fin
+            'fecha_fin' => $eventos[0]->fecha_fin,
+            'latitud' => $eventos[0]->latitud,
+            'longitud' => $eventos[0]->longitud
         );
         
 
@@ -459,15 +461,6 @@ class controlador_tablas extends Controller {
 
             $image->save();
             $evento->save();
-
-            for ($i = 0; $i < count($categ); $i++) {
-                $ca = $categ[$i];
-
-                $categorias = DB::table('asignar_categorias')->insert(
-                        ['id_item' => $publication->id_item, 'id_categoria' => $ca]
-                );
-            }
-
 
             $eventos = DB::table('eventos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')

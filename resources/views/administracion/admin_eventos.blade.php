@@ -112,7 +112,8 @@ Administrar Eventos
                  $('#fecf-e').val(respuesta.fecha_fin);
                  $('textarea#taa-event').val(respuesta.descripcion);
                  $('#localM-e').val(respuesta.localizacion);
-                 
+                 $('#latitudEvent').val(respuesta.latitud);
+                 $('#longitudEvent').val(respuesta.longitud);
                  $('#img-eventoP').attr('src','data:image/png;base64,'+ respuesta.imagen);
 
                  

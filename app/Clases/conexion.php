@@ -5,6 +5,7 @@ namespace App\Clases;
 use App\Clases\Auxiliares\Constantes;
 use App\Usuario;
 use App\Categoria;
+use App\Evento;
 
 /* use App\Usuario;
   use App\Coche;
@@ -61,6 +62,13 @@ class conexion {
         $categoria = Categoria::all();
         
         return $categoria;
+    }
+    
+    public static function sacarEvento($id_evento){
+        
+        $evento = Evento::where('id_evento',$id_evento)->first();
+        
+        return $evento;
     }
     
 

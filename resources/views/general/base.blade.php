@@ -98,9 +98,9 @@ use App\Clases\conexion;
                                     <div id="map" class="mapa">
 
                                     </div>
-                                    
+
                                     <button class="btn btn-nuevo mt-2" type="button" name="btnreset2" id="btnreset2">Reiniciar Marcador</button>
-                                    
+
                                     <input id="latitud" type="hidden" name="latitud" value="">
                                     <input id="longitud" type="hidden" name="longitud" value="">
                                     <script>
@@ -368,7 +368,7 @@ use App\Clases\conexion;
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="col-4">
 
                                     <div class="form-group">
@@ -379,6 +379,12 @@ use App\Clases\conexion;
                                     <div id="map2" class="mapa">
 
                                     </div>
+
+                                    <input type="hidden" name="latitudEvent" id="latitudEvent" value="">
+                                    <input type="hidden" name="longitudEvent" id="longitudEvent" value="">
+
+                                    <button class="btn btn-nuevo mt-2" type="button" name="btnreset3" id="btnreset3">Reiniciar Marcador</button>
+
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
@@ -387,7 +393,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div id="img-portada2">
 
-                                            <img src="" id="img-eventoP" alt="Portada evento" class="img-fluid">
+                                        <img src="" id="img-eventoP" alt="Portada evento" class="img-fluid">
 
                                     </div>
                                     <div class="text-center mt-4">
@@ -395,10 +401,11 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 
         <!-- Ventana modal para subir documentación -->
 
@@ -496,7 +503,7 @@ use App\Clases\conexion;
                     <form name="formNewInforme" action="newInforme" method="POST">
                         {{ csrf_field() }}
                         <input type="number" hidden id="idInforme">
-                        
+
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col">
@@ -580,7 +587,7 @@ use App\Clases\conexion;
                                                     <?php
                                                     foreach ($usuarios as $usuario) {
                                                         ?>
-                                                        <option value="<?=$usuario->id_user?>"><?=$usuario->nombre?> <?=$usuario->apellidos?></option>
+                                                        <option value="<?= $usuario->id_user ?>"><?= $usuario->nombre ?> <?= $usuario->apellidos ?></option>
                                                         <?php
                                                     }
                                                     ?>
@@ -609,7 +616,7 @@ use App\Clases\conexion;
                 </div>
             </div>
         </div>
-        
+
         <!-- Ventana modal para añadir un nuevo informe -->
 
         <div class="modal fade" id="modalNuevoInforme" data-backdrop="static">
@@ -624,7 +631,7 @@ use App\Clases\conexion;
                     <form name="formNewInforme" action="newInforme" method="POST">
                         {{ csrf_field() }}
                         <input type="number" hidden id="idInforme">
-                        
+
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col">
@@ -708,7 +715,7 @@ use App\Clases\conexion;
                                                     <?php
                                                     foreach ($usuarios as $usuario) {
                                                         ?>
-                                                        <option value="<?=$usuario->id_user?>"><?=$usuario->nombre?> <?=$usuario->apellidos?></option>
+                                                        <option value="<?= $usuario->id_user ?>"><?= $usuario->nombre ?> <?= $usuario->apellidos ?></option>
                                                         <?php
                                                     }
                                                     ?>
