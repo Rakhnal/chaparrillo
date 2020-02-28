@@ -44,7 +44,7 @@ class EditUserController extends Controller {
         $u = session()->get('userObj');
         $correo = $u->email;
         $pass = $req->get('passwed');
-        if (password_verify($pass, PASSWORD_DEFAULT)) {
+        if ($pass != null) {
             $pass = Hash::make($pass);
             conexion::editPass($correo, $pass);
             $user = conexion::existeUsuario($correo);

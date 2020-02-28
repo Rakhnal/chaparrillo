@@ -29,6 +29,9 @@ Route::get('Editar_usuario', function () {
 Route::post('edit_us', 'EditUserController@editarUsuario');
 Route::post('edit_pass', 'EditUserController@editarPassEU');
 
+//DES16
+//Página de administrar usuarios
+Route::get('admin_usuarios',['uses' =>  'controlador_usuarios@listarUsuarios', 'as' => 'admin_usuarios']);
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración

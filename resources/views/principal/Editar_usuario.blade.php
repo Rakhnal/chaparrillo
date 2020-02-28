@@ -92,7 +92,7 @@ Inicio
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center align-content-center align-items-center">
-                                        <button class="btn btn-nuevo" type="button" name="btnreset" id="btnresetEU">Reiniciar Marcador</button>
+                                        <button class="btn btn-nuevo" type="button" name="btnresetEU" id="btnresetEU" >Reiniciar Marcador</button>
                                     </div>
                                 </div>
                             </div>
