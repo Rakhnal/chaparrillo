@@ -29,6 +29,7 @@ class Constantes {
     const AD_EVENTOS = "administracion/admin_eventos";
     const AD_DOCUMENTOS = "administracion/adminDocument";
     const AD_INFORMES = "administracion/adminInformes";
+    const AD_USUARIOS = "administracion/admin_usuarios";
     const ED_USUARIO = "principal/Editar_usuario";
     
     // Roles
