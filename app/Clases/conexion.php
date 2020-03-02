@@ -4,6 +4,7 @@ namespace App\Clases;
 
 use App\Clases\Auxiliares\Constantes;
 use App\Usuario;
+use App\Plaga;
 use App\Categoria;
 
 /* use App\Usuario;
@@ -61,6 +62,17 @@ class conexion {
         $categoria = Categoria::all();
         
         return $categoria;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public static function sacarPlagas(){
+        
+        $plagas = Plaga::all();
+        
+        return $plagas;
     }
     
 

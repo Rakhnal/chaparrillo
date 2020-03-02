@@ -27,6 +27,11 @@ Administrar Informes
                 </div>
             </nav>
         </div>
+        <div class="col">
+            <div class="row justify-content-end">
+                <input class="btn btn-nuevo blurmodal b-modify margin-top-less margin-right-por" type="button" id="b-modify" data-toggle="modal" data-target="#modalPlagas" value="Administrar Plagas">
+            </div>
+        </div>
     </div>
     <div class="row" id="mainTable">
         <div class="col">
@@ -52,7 +57,7 @@ Administrar Informes
                             {{ csrf_field() }}
                             <td hidden><input type="number" name="idinforme" value="<?= $inf->id_informe ?>"/></td>
                             <td><?= $inf->nombre_producto ?></td>
-                            <td><?= $inf->plaga_tratar ?></td>
+                            <td><?= $inf->nombre_plaga ?></td>
                             <td><?= $inf->fecha_hora ?></td>
                             <td><?= $inf->nombre ?> <?= $inf->apellidos ?></td>
                             <td><input type="submit" name="delInforme" id="delInforme" class="btn btn-eliminar" value="."/></td>
@@ -100,7 +105,7 @@ Administrar Informes
                 type: "post",
                 success: function (response) {
                     var respuesta = JSON.parse(response);
-                    
+
                     $('#idInforme').val(respuesta.id_informe);
                     $('#productName').val(respuesta.nombre_producto);
                     $('#polInput').val(respuesta.poligono);
@@ -110,12 +115,12 @@ Administrar Informes
                     $('#fechaInforme').val(respuesta.fecha_hora);
                     $('#danioAprox').val(respuesta.aprox_dmg);
                     $('#coment').val(respuesta.comentario);
-                    
+
                     var selectUsers = document.getElementById('userProp');
                     var selectPlagas = document.getElementById('plagaTratar');
-                    
+
                     selectUsers.value = respuesta.id_user;
-                    selectPlagas.value = respuesta.plaga_tratar;
+                    selectPlagas.value = respuesta.id_plaga;
                 },
                 statusCode: {
                     404: function () {

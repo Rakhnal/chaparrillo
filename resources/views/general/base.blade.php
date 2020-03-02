@@ -590,11 +590,15 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <select id="plagaTratar" name="plagaTratar">
-                                            <option value="0"><?= Constantes::CLITRASEL ?></option>
-                                            <option value="1"><?= Constantes::POLILLASEL ?></option>
-                                            <option value="2"><?= Constantes::PSILASSEL ?></option>
-                                            <option value="3"><?= Constantes::CHINCHESEL ?></option>
-                                            <option value="4"><?= Constantes::OTRA ?></option>
+                                            <?php
+                                            $plagas = conexion::sacarPlagas();
+
+                                            foreach ($plagas as $plaga) {
+                                                ?>
+                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -718,11 +722,15 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <select id="plagaTratar" name="plagaTratar">
-                                            <option value="0"><?= Constantes::CLITRASEL ?></option>
-                                            <option value="1"><?= Constantes::POLILLASEL ?></option>
-                                            <option value="2"><?= Constantes::PSILASSEL ?></option>
-                                            <option value="3"><?= Constantes::CHINCHESEL ?></option>
-                                            <option value="4"><?= Constantes::OTRA ?></option>
+                                            <?php
+                                            $plagasTWO = conexion::sacarPlagas();
+
+                                            foreach ($plagasTWO as $plaga) {
+                                                ?>
+                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -929,13 +937,13 @@ use App\Clases\conexion;
                     }
                     ?>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                    <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"><div class="animated-icon2"><span></span><span></span><span></span><span></span></div></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">                        
                         <ul class="nav navbar-nav ml-auto">
 
-                            <form class="form-inline my-2 my-lg-0">
+                            <form class="row form-inline my-2 my-lg-0 justify-content-center">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar en la página" aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0 margin-right" type="submit" id="searchButton"></button>
                             </form>

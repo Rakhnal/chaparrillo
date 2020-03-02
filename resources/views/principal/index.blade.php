@@ -17,7 +17,7 @@ Inicio
 <script type="text/javascript" src="scripts/principal/index.js"></script>
 
 <div class="col">
-    <div class="row">
+    <div class="row mob-height">
         <div class="col justify-content-center principal-container" id="principal-container">
             <div class="row" id="principal">
                 <div class="col layer" id="titulopar"></div>
@@ -34,7 +34,7 @@ Inicio
     </div>
 
     <div class="row fade-up fade-ani" id="plagas-container">
-        <a class="col-md-3 col-sm-12 tilted" href="clitra" data-tilt>
+        <a class="col-xl-3  col-md-12 tilted" href="clitra" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
@@ -56,7 +56,7 @@ Inicio
                 </div>
             </div>
         </a>
-        <a class="col-md-3 col-sm-12 tilted" href="plodia" data-tilt>
+        <a class="col-xl-3 col-md-12 tilted" href="plodia" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
@@ -79,7 +79,7 @@ Inicio
             </div>
         </a>
 
-        <a class="col-md-3 col-sm-12 tilted" href="psilas" data-tilt>
+        <a class="col-xl-3 col-md-12 tilted" href="psilas" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">
@@ -102,7 +102,7 @@ Inicio
             </div>
         </a>
 
-        <a class="col-md-3 col-sm-12 tilted" href="chinches" data-tilt>
+        <a class="col-xl-3 col-md-12 tilted" href="chinches" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">

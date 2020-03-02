@@ -44,7 +44,7 @@ a:link, a:visited, a:active {
 
 .plaga-div {
     padding-top: 25px;
-    
+
     width: 100%;
     height: 100%;
 }
@@ -56,7 +56,7 @@ a:link, a:visited, a:active {
 .plaga-img {
     width: 150px;
     height: 150px;
-    
+
     border-radius: 50%;
 }
 
@@ -81,7 +81,7 @@ a:link, a:visited, a:active {
     margin: 50px 0 100px 0;
     padding: 0;
     width: 100%;
-    
+
     transition:all ease-out .5s 0s;
 }
 
@@ -104,7 +104,7 @@ a:link, a:visited, a:active {
     height: 100%;
 
     transform: translateZ(0);
-    
+
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -161,4 +161,143 @@ a:link, a:visited, a:active {
     z-index: 100;
     background-size: contain;
     background-image: url("../../images/parallax/logogr.png");
+}
+
+@media
+only screen 
+and (max-device-width: 1025px) {
+
+    .mob-height {
+        height: 1200px;
+    }
+
+    .principal-container {
+        height: 1200px;
+    }
+
+    #titulopar {
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/titulotablet.png");
+    }
+
+    #capa01 {
+        z-index: 10;
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/capa01tablet.png");
+    }
+
+    #capa02 {
+        z-index: 1;
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/capa03tablet.png");
+    }
+
+    #capa03 {
+        z-index: 10;
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/capa02tablet.png");
+    }
+
+    #capa04 {
+        z-index: 1;
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/capa04tablet.png");
+    }
+
+    #capa05 {
+        z-index: 10;
+        background-size: cover;
+        background-image: none;
+    }
+
+    #circle01 {
+        z-index: 2;
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/circle01tablet.png");
+    }
+
+    #circle02 {
+        z-index: 2;
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/circle02tablet.png");
+    }
+
+    #logogr {
+        z-index: 100;
+        background-size: cover;
+        background-image: url("../../images/parallax/tablet/logotablet.png");
+    }
+
+}
+
+
+@media
+only screen 
+and (max-device-width: 740px) {
+
+    .plaga-img {
+        width: 350px;
+        height: 350px;
+    }
+
+    .mob-height {
+        height: 1600px;
+    }
+
+    .principal-container {
+        height: 1600px;
+    }
+
+    #titulopar {
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/titulomobile.png");
+    }
+
+    #capa01 {
+        z-index: 10;
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/capa01mobile.png");
+    }
+
+    #capa02 {
+        z-index: 1;
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/capa03mobile.png");
+    }
+
+    #capa03 {
+        z-index: 10;
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/capa02mobile.png");
+    }
+
+    #capa04 {
+        z-index: 1;
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/capa04mobile.png");
+    }
+
+    #capa05 {
+        z-index: 10;
+        background-size: cover;
+        background-image: none;
+    }
+
+    #circle01 {
+        z-index: 2;
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/circle01mobile.png");
+    }
+
+    #circle02 {
+        z-index: 2;
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/circle02mobile.png");
+    }
+
+    #logogr {
+        z-index: 100;
+        background-size: cover;
+        background-image: url("../../images/parallax/mobile/logomobile.png");
+    }
 }
