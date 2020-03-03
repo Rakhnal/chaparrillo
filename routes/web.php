@@ -21,14 +21,16 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
-//DES15
-//Página de administrar usuario propio
+//DES15: Página Editar Perfil - SSC
 Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
 });
 Route::post('edit_us', 'EditUserController@editarUsuario');
 Route::post('edit_pass', 'EditUserController@editarPassEU');
 
+//DES16
+//Página de administrar usuarios
+Route::get('admin_usuarios',['uses' =>  'controlador_usuarios@listarUsuarios', 'as' => 'admin_usuarios']);
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración

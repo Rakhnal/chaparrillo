@@ -21,6 +21,7 @@ $(document).ready(function () {
                 document.getElementById("apell").disabled = false;
                 document.getElementById("password").disabled = false;
                 document.getElementById("profile-file-input").disabled = false;
+                document.getElementById("btnresetEU").disabled = false;
                 ActivarCampo();
             } else {
                 document.getElementById("paise").disabled = true;
@@ -31,6 +32,7 @@ $(document).ready(function () {
                 document.getElementById("password").disabled = true;
                 document.getElementById("ajusteimagen").disabled = true;
                 document.getElementById("profile-file-input").disabled = true;
+                document.getElementById("btnresetEU").disabled = true;
                 DesActivarCampo();
             }
         }
@@ -83,7 +85,7 @@ function block() {
     document.getElementById("password").disabled = true;
     document.getElementById("profile-file-input").disabled = true;
     document.getElementById("bd_edit").disabled = true;
-
+    document.getElementById("btnresetEU").disabled = true;
     DesActivarCampo();
 }
 

@@ -4,6 +4,7 @@ namespace App\Clases;
 
 use App\Clases\Auxiliares\Constantes;
 use App\Usuario;
+use App\Plaga;
 use App\Categoria;
 use App\Evento;
 
@@ -64,6 +65,15 @@ class conexion {
         return $categoria;
     }
     
+    /**
+     * 
+     * @return type
+     */
+    public static function sacarPlagas(){
+        
+        $plagas = Plaga::all();
+        
+        return $plagas;
     public static function sacarEvento($id_evento){
         
         $evento = Evento::where('id_evento',$id_evento)->first();

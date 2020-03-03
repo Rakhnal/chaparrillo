@@ -55,6 +55,69 @@ use App\Clases\conexion;
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
 
+        <!-- ******************** Ventana Agregar Usuaio *********************** -->
+        <div class="modal fade eventos" id="ventana-crear-usuario" data-backdrop="static">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            Registro de Usuario
+                        </div>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="agregarUsuario" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="form_control col-12">Email:</label>
+                                        <input type="email" name="email" class="input read w-100 text_black" value="" id="emailusers">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label class="form_control col-12">Nombre:</label>
+                                        <input type="text" name="nombre" class="w-100 text_black input" value="" id="nombreusers">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form_control col-12">Apellidos:</label>
+                                        <input type="text" name="apellidos" class=" w-100 text_black input" value="" id="apellusers">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12"><label class="form_control">Localización:</label></div>
+                                    <div class="col-6">
+                                        <input name="pais" type="text" class="text_black w-100 input" placeholder="Pais" id="paiseusers" value="">
+                                    </div>
+                                    <div class="col-6">
+                                        <input name="localidad" type="text" class="text_black w-100 input" placeholder="Localidad" id="localusers" value="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="form_control">Posición:</label>
+                                        <div id="mapaEditUsers" class="mapaEditUsers" style=" height: 200px;"></div>
+                                        <div class="row justify-content-center">
+                                            <div class="col">
+                                                <div class="row justify-content-center align-content-center align-items-center">
+                                                    <button class="btn btn-nuevo" type="button" name="btnresetEUsers" id="btnresetEUsers">Reiniciar Marcador</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="text" autocomplete="off" id="latitudInputEUsers" name="latitudInputEUsers" value="" hidden/>
+                                        <input type="text" autocomplete="off" id="longitudInputEUsers" name="longitudInputEUsers" value="" hidden/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center mb-3">
+                                <input type="submit" class="btn btn-success" id="bd_edit_users" value="Aceptar" disabled="">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- ******************** Ventana Agregar Evento *********************** -->
         <div class="modal fade eventos" id="ventana-crear" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
@@ -126,7 +189,6 @@ use App\Clases\conexion;
                 </div>
             </div>
         </div>
-
         <!------------- Pantalla modal del login-->
         <div id="login" class="modal fade" role="dialog" data-backdrop = "static">
             <div class="modal-dialog modal-dialog-centered">
@@ -421,14 +483,22 @@ use App\Clases\conexion;
                                 <input type="text" class="pl-2" id="nombreSubirDoc" name="nombreSubirDoc" placeholder="Nombre del documento" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación (opcional)"></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*">
+                                <input type="year" class="pl-2" id="anioSubirDoc" name="anioSubirDoc" placeholder="Año de publicación" length="4" pattern="^[0-9]{4}$" required>
                             </div>
-                            <label for="subirAdjuntos">
-                                <span>Adjuntar archivos</span>
-                            </label>
+                            <div class="form-group">
+                                <input type="text" class="pl-2" id="autoresSubirDoc" name="autoresSubirDoc" placeholder="Autores del documento" required>
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*" required>
+                                </div>
+                                <label for="subirAdjuntos">
+                                    <span>Adjuntar archivos</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="text-right">
@@ -459,6 +529,12 @@ use App\Clases\conexion;
                             </div>
                             <div class="form-group">
                                 <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="pl-2" id="anioEditarDoc" name="anioEditarDoc" placeholder="Año de publicación" pattern="[0-9]{4}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="pl-2" id="autoresEditarDoc" name="autoresEditarDoc" placeholder="Autores del documento" required>
                             </div>
                             <div class="form-group form-inline">
                                 <div>
@@ -516,11 +592,15 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <select id="plagaTratar" name="plagaTratar">
-                                            <option value="0"><?= Constantes::CLITRASEL ?></option>
-                                            <option value="1"><?= Constantes::POLILLASEL ?></option>
-                                            <option value="2"><?= Constantes::PSILASSEL ?></option>
-                                            <option value="3"><?= Constantes::CHINCHESEL ?></option>
-                                            <option value="4"><?= Constantes::OTRA ?></option>
+                                            <?php
+                                            $plagas = conexion::sacarPlagas();
+
+                                            foreach ($plagas as $plaga) {
+                                                ?>
+                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -644,11 +724,15 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="row justify-content-center">
                                         <select id="plagaTratar" name="plagaTratar">
-                                            <option value="0"><?= Constantes::CLITRASEL ?></option>
-                                            <option value="1"><?= Constantes::POLILLASEL ?></option>
-                                            <option value="2"><?= Constantes::PSILASSEL ?></option>
-                                            <option value="3"><?= Constantes::CHINCHESEL ?></option>
-                                            <option value="4"><?= Constantes::OTRA ?></option>
+                                            <?php
+                                            $plagasTWO = conexion::sacarPlagas();
+
+                                            foreach ($plagasTWO as $plaga) {
+                                                ?>
+                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -855,13 +939,13 @@ use App\Clases\conexion;
                     }
                     ?>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                    <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"><div class="animated-icon2"><span></span><span></span><span></span><span></span></div></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">                        
                         <ul class="nav navbar-nav ml-auto">
 
-                            <form class="form-inline my-2 my-lg-0">
+                            <form class="row form-inline my-2 my-lg-0 justify-content-center">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Buscar en la página" aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0 margin-right" type="submit" id="searchButton"></button>
                             </form>
@@ -933,7 +1017,7 @@ use App\Clases\conexion;
                                             <?php
                                             if ($user->rol == Constantes::ADMIN) {
                                                 ?>
-                                                <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
+                                                <a class="dropdown-item menu-text" href="admin_usuarios">Administrar Usuarios</a>
                                                 <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
                                                 <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
                                                 <?php
