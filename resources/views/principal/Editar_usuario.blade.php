@@ -49,7 +49,7 @@ Inicio
                                 <?php endif; ?>
                             </div>
                             <div>
-                                <input type="file" enctype="multipart/form-data" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo..." class="bwr-transparent">
+                                <input type="file" enctype="multipart/form-data" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo..." class="btn btn-nuevo">
                             </div>
                         </div>
                     </div>
@@ -85,7 +85,7 @@ Inicio
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 mb-3">
                             <label class="form_control">Posición:</label>
 
                             <div id="mapaEditUs" class="mapaEditUs"></div>
@@ -103,10 +103,10 @@ Inicio
 
                         </div>
                     </div>
-                </div>
-                <div class="col-md-12 text-center mb-3">
-                    <button type="button" class="btn btn-primary" id="editarUsuario" >Editar</button>
-                    <input type="submit" class="btn btn-success" id="bd_edit" value="Aceptar" disabled="">
+                    <div class="text-center mb-3 row justify-content-center">
+                        <input type="submit" class="btn btn-nuevo mr-3" id="bd_edit" value="Aceptar">
+                        <button type="button" class="btn btn-nuevo" id="editarUsuario" >Editar</button>
+                    </div>
                 </div>
             </form>
             <script>
@@ -125,13 +125,13 @@ Inicio
                             </div>
                             <div class="modal-body">
                                 <label class="form_control">Nueva contraseña:</label>
-                                <input type="password" name="passwed" class="text_black passwrd" id="passw" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" title="La contraseña debe tener entre 8 y 16 caracteres y al menos un dígito, una minúscula, una mayúscula y NO puede tener otros símbolos."> 
+                                <input type="password" name="passwed" class="text_black passwrd" id="passw" pattern="[A-Za-z0-9!?- ]{8,16}" title="La contraseña debe tener entre 8 y 16 caracteres y puede tener dígitos, minúsculas, mayúsculas y otros símbolos."> 
                                 <label class="form_control">Confirmar contraseña:</label>
-                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2" pattern="^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$" title="La contraseña debe tener entre 8 y 16 caracteres y al menos un dígito, una minúscula, una mayúscula y NO puede tener otros símbolos."> 
+                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2" pattern="^[A-Za-z0-9!?- ]{8,16}" title="La contraseña debe tener entre 8 y 16 caracteres y puede tener dígitos, minúsculas, mayúsculas y otros símbolos."> 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" value=" ">Cerrar</button>
-                                <input type="submit" class="btn btn-success" value="Aceptar">
+                                <button type="button" class="btn btn-nuevo" data-dismiss="modal" value=" ">Cerrar</button>
+                                <input type="submit" class="btn btn-nuevo" value="Aceptar">
                             </div>
                         </form>
                     </div>
