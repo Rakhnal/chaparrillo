@@ -61,10 +61,10 @@ class controlador_tablas extends Controller {
         $id_documento = intval($_POST["identificador"]);
         $qhp = "ok";
         $documento = DB::table('documentos')
-                        ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                        ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
-                        ->where('documentos.id_documento', $id_documento)
-                        ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
+                ->where('documentos.id_documento', $id_documento)
+                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
                 ->first();
 
 //        $datos = [
@@ -324,28 +324,28 @@ class controlador_tablas extends Controller {
         $informe = DB::table('informes')
                 ->where('id_informe', $id_informe)
                 ->first();
-        
+
         $infArray = array(
-          'id_informe' => $informe->id_informe,
-          'nombre_producto' => $informe->nombre_producto,
-          'litro_hectarea' => $informe->litro_hectarea,
-          'id_user' => $informe->id_user,
-          'aprox_dmg' => $informe->aprox_dmg,
-          'plaga_tratar' => $informe->plaga_tratar,
-          'fecha_hora' => $informe->fecha_hora,
-          'poligono' => $informe->poligono,
-          'parcela' => $informe->parcela,
-          'municipio' => $informe->municipio,
-          'comentario' => $informe->comentario,
+            'id_informe' => $informe->id_informe,
+            'nombre_producto' => $informe->nombre_producto,
+            'litro_hectarea' => $informe->litro_hectarea,
+            'id_user' => $informe->id_user,
+            'aprox_dmg' => $informe->aprox_dmg,
+            'plaga_tratar' => $informe->plaga_tratar,
+            'fecha_hora' => $informe->fecha_hora,
+            'poligono' => $informe->poligono,
+            'parcela' => $informe->parcela,
+            'municipio' => $informe->municipio,
+            'comentario' => $informe->comentario,
         );
-        
+
         return json_encode($infArray);
     }
 
     //DES18: Página para adminsitrar eventos
 
     /**
-     * 
+     * Función para mostrar todos los eventos de la bbdd.
      * @return type
      */
     public function listarEventos() {
@@ -359,16 +359,16 @@ class controlador_tablas extends Controller {
     }
 
     /**
-     * 
+     * Llamada a Ajax para cargar evento por id en ventana modal.
      * @return type
      */
     public function modificarEventos() {
         $id_evento = intval($_POST["ide"]);
 
-        $eventos = \DB::select('SELECT nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
-                . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
-                . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
-                . 'WHERE eventos.id_evento ='.$id_evento);
+        $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
+                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+                        . 'WHERE eventos.id_evento =' . $id_evento);
 
         $evento = array(
             'nombre' => $eventos[0]->nombre,
@@ -378,46 +378,43 @@ class controlador_tablas extends Controller {
             'fecha_inicio' => $eventos[0]->fecha_inicio,
             'fecha_fin' => $eventos[0]->fecha_fin,
             'latitud' => $eventos[0]->latitud,
-            'longitud' => $eventos[0]->longitud
+            'longitud' => $eventos[0]->longitud,
+            'id' => $eventos[0]->id_evento
         );
-        
+
 
         return json_encode($evento);
     }
 
     /**
-     * 
+     * Llamada Ajax para eliminar un evento por id.
      * @return type
      */
     public function eliminarEventos() {
-        $id_evento = intval($_POST['id_e']);
+        $id_evento = intval($_POST["ide"]);
 
-        $event = Evento::find($id_evento);
-        $publi = Publicacion::find($id_evento);
-        $image = Imagen::where('id_item', $id_evento)->first();
+        $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
+                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+                        . 'WHERE eventos.id_evento =' . $id_evento);
+        
+        $qhp = "ok";
 
-        $catego = DB::table('asignar_categorias')->where('id_item', '=', $id_evento)->delete();
+        $publicacion = DB::table('publicaciones')
+                ->join('documentos', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('publicaciones.id_item', $id_documento);
 
-        if ($event) {
-            $event->delete();
+        if ($publicacion) {
+            $publicacion->delete();
+        } else {
+            $qhp = "fail";
         }
-
-        $event->delete();
-        $publi->delete();
-        $image->delete();
-
-        $eventos = DB::table('eventos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
-                ->paginate(8);
-
-        return redirect('admin_event')->with('events', $eventos);
+        return $qhp;
     }
 
     /**
-     * 
-     * @param Request $req
+     * Función para agregar eventos a la bbdd.
+     * @param Request $req -> Formulario de evento
      * @return type
      */
     public function agregarEventos(Request $req) {
@@ -488,15 +485,36 @@ class controlador_tablas extends Controller {
         }
     }
 
+    /**
+     * Función para guardar en evento modificado.
+     * @param Request $req-> Formulario de evento.
+     * @return type
+     */
     public function guardarEventos(Request $req) {
 
-        $eventos = DB::table('eventos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
-                ->paginate(8);
+        $publi = Publicacion::where('id_item', $req->get('idevento'))->first();
+        $evento = Evento::where('id_evento', $publi->id_item)->first();
+        $imagen = Imagen::where('id_item', $publi->id_item)->first();
 
-        return redirect('admin_event')->with('events', $eventos);
+        $publi->nombre = $req->get('nomb');
+        $publi->descripcion = $req->get('descripcion-e');
+        $publi->editado = 1;
+
+        $evento->localizacion = $req->get('loca');
+        $evento->fecha_inicio = $req->get('feci');
+        $evento->fecha_fin = $req->get('fecf');
+        $evento->latitud = $req->get('latitudEvent');
+        $evento->longitud = $req->get('longitudEvent');
+
+        $publi->save();
+        $evento->save();
+
+        if ($req->file('portada') != null) {
+            $imagen->imagen = file_get_contents($req->file('portada'));
+            $imagen->save();
+        }
+
+        return redirect('admin_event');
     }
 
 }

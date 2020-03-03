@@ -31,11 +31,36 @@ $(document).ready(function () {
     $('#btnresetEU').on('click', resetMarkerEU);
     $('#btnreset2').on('click', resetMarker2);
     $('#btnreset3').on('click', resetMarker3);
+    
+    function PintarMapa(){
+        
+        var mapa2 = new google.maps.LatLng(document.getElementById("latitudEvent").value, document.getElementById("longitudEvent").value);
+        
+        var ColocaMapa2 = {
+            zoom: 15,
+            center: mapa2,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        
+        if (document.getElementById("map2") != null) {
+            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
+
+            marcadorEvento2 = new google.maps.Marker({
+                position: mapa2,
+                icon: "images/icons/location.svg",
+                map: MapaEvento2
+            });
+        }
+        
+        
+        $('.mapa2').html(MapaEvento2);
+    }
 
     function Sacalugar(position) {
 
         var latitud;
         var longitud;
+        
         if (null !== document.getElementById("latitudInputEU") && document.getElementById("latitudInputEU").value !== "") {
             latitud = document.getElementById("latitudInputEU").value;
             longitud = document.getElementById("longitudInputEU").value;
@@ -43,20 +68,19 @@ $(document).ready(function () {
             latitud = position.coords.latitude;
             longitud = position.coords.longitude;
         }
-        
-//        if (null !== document.getElementById("longitudEvent") && document.getElementById("latitudEvent").value !== "") {
-//            latitud = document.getElementById("latitudEvent").value;
-//            longitud = document.getElementById("longitudEvent").value;
-//        } else {
-//            latitud = position.coords.latitude;
-//            longitud = position.coords.longitude;
-//        }
 
         var mapa = new google.maps.LatLng(latitud, longitud);
+        var mapa2 = new google.maps.LatLng(document.getElementById("latitudEvent").value, document.getElementById("longitudEvent").value);
 
         var ColocaMapa = {
             zoom: 15,
             center: mapa,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        
+        var ColocaMapa2 = {
+            zoom: 15,
+            center: mapa2,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
@@ -66,17 +90,17 @@ $(document).ready(function () {
             marcadorEvento1 = new google.maps.Marker({
                 position: mapa,
                 icon: "images/icons/location.svg",
-                map: PintaMapa
+                map: MapaEvento
             });
         }
 
         if (document.getElementById("map2") != null) {
-            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa);
+            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
 
             marcadorEvento2 = new google.maps.Marker({
-                position: mapa,
+                position: mapa2,
                 icon: "images/icons/location.svg",
-                map: PintaMapa
+                map: MapaEvento2
             });
         }
 

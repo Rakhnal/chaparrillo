@@ -115,7 +115,7 @@ Administrar Eventos
                  $('#latitudEvent').val(respuesta.latitud);
                  $('#longitudEvent').val(respuesta.longitud);
                  $('#img-eventoP').attr('src','data:image/png;base64,'+ respuesta.imagen);
-
+                 $('#id_event').val(respuesta.id);
                  
             },
             statusCode: {

@@ -360,11 +360,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" class="descDocumento" placeholder="Escribe una descripción"></textarea>
-                                    </div>
-
-                                    <div class="respuesta">
-
+                                        <textarea name="descripcion-e" id="taa-event" class="descDocumento" placeholder="Escribe una descripción"></textarea>
                                     </div>
 
                                 </div>
@@ -376,13 +372,13 @@ use App\Clases\conexion;
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
 
-                                    <div id="map2" class="mapa">
+                                    <div id="map2" class="mapa" onload="">
 
                                     </div>
 
                                     <input type="hidden" name="latitudEvent" id="latitudEvent" value="">
                                     <input type="hidden" name="longitudEvent" id="longitudEvent" value="">
-
+                                    <input type="hidden" name="idevento" id="id_event" value="">
                                     <button class="btn btn-nuevo mt-2" type="button" name="btnreset3" id="btnreset3">Reiniciar Marcador</button>
 
                                 </div>
