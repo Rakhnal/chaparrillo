@@ -73,6 +73,26 @@ class controlador_usuarios extends Controller {
         return $qhp;
     }
 
+    public function Validar_u(Request $req) {
+        $id_user = $req->get('id_e');
+        $validado = $req->get('val');
+        $qhp = "ok";
+        
+        /*$usuario = \DB::select('SELECT * from usuarios WHERE id_user = '.$id_user);*/
+        
+        
+        if ($validado == 1) {
+            DB::table('usuarios')->where('id_user', $id_user)->update(['validado' => 0]);
+        } else if($validado == 0){
+            DB::table('usuarios')->where('id_user', $id_user)->update(['validado' => 1]);
+        }else {
+            $qhp = "fail";
+        }
+        $usuarios = DB::table('usuarios')
+                ->select('id_user', 'nombre', 'apellidos', 'email', 'password', 'rol', 'localidad', 'latitud', 'longitud', 'pais', 'img_user', 'validado')
+                ->paginate(8);
+        return view(Constantes::AD_USUARIOS, ['users' => $usuarios]);
+    }
     /*
       public function buscarDocumentos() {
       $id_documento = intval($_POST["identificador"]);

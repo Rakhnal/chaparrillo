@@ -57,7 +57,7 @@ Administrar Usuarios
                             <th id="ff-ed">Pais</th>
                             <th id="val-ed">Validado</th>
                             <th id="borrar-ed">Borrar</th>
-                            <th id="guardar-ed">Editar</th>
+                            <th id="guardar-ed">Editar rol</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,45 +71,50 @@ Administrar Usuarios
                                 <td><?= $usuario->email ?></td>
                                 <td><?= $usuario->localidad ?></td>
                                 <td><?= $usuario->pais ?></td>
-                                <td><?php
-                                    if ($usuario->validado == 1) {
-                                        echo '<input type="button" class="btn btn-success input" id="Validate" value="Validado">';
-                                    }else{
-                                        echo '<input type="button" class="btn btn-danger input" id="Validate" value="No validado">';
-                                    }
-                                    ?></td>
-                        <input id="id_e" name="id_e" value="<?= $usuario->id_user ?>" type="hidden">
-                        <td><input class="btn btn-eliminar" id="delete" type="submit" name="delete" value="Eliminar"></td>
-                        <td><input class="btn btn-modal blurmodal b-modify" type="button" id="b-modify" data-id="<?= $usuario->id_user ?>" data-toggle="modal" data-target="#ventana-modificar" value=""></td>
-                        </tr>
-                        <?php
-                    }
-                    ?>
+                                <td>
+                                    <form name="validarUsuario" id="filtro" action="validarUsuario" method="POST">
+                                        @csrf
+                                        <?php
+                                        if ($usuario->validado == 1 ) {
+                                            echo '<input type="submit" class="btn btn-success input" id="Validate" value="Validado">';
+                                        } else {
+                                            echo '<input type="submit" class="btn btn-danger input" id="Validate" value="No validado">';
+                                        }
+                                        ?>
+                                        <input id="id_e" name="id_e" value="<?= $usuario->id_user ?>" type="hidden">
+                                        <input id="val" name="val" value="<?= $usuario->validado ?>" type="hidden">
+                                    </form>
+                                </td>
+                                <td><input class="btn btn-eliminar" id="delete" type="submit" name="delete" value="Eliminar"></td>
+                                <td>ddddddddddddd</td>
+                                </tr>
+                            <?php
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
             <div>
-                {{$users->links() }}
+                {{  $users->links() }}
             </div>
         </div>
     </div>
     <?php
     if (isset($error)) {
-
         $error = implode(',', $error);
         ?>
         <span id="m-error" class="alert alert-danger text-center fixed-bottom"><?php echo $error; ?></span>
-<?php } ?>
+        <?php
+    }
+    ?>
 </div>
-
 <script>
-    $(document).ready(function () {
 
+    $(document).ready(function () {
         $('#m-error').hide(9000);
         $('#m-error').hide("slow");
 
         $image_parts = $req - > get('secreto');
-                $image_parts = $req - > get('secreto');
     });
 
     $(document).on("click", ".b-modify", function () {
@@ -132,10 +137,11 @@ Administrar Usuarios
                     }
                     },
                     error: function (x, xs, xt) {
-//                      window.open(JSON.stringify(x));
+//          window.open(JSON.stringify(x));
                     alert('error: ' + JSON.stringify(x) + "\n error string: " + xs + "\n error throwed: " + xt);
                     }
             });
     });
+
 </script>
 @endsection

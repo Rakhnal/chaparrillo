@@ -125,9 +125,9 @@ Inicio
                             </div>
                             <div class="modal-body">
                                 <label class="form_control">Nueva contraseña:</label>
-                                <input type="password" name="passwed" class="text_black passwrd" id="passw" pattern="[A-Za-z0-9!?- ]{8,16}" title="La contraseña debe tener entre 8 y 16 caracteres y puede tener dígitos, minúsculas, mayúsculas y otros símbolos."> 
+                                <input type="password" name="passwed" class="text_black passwrd" id="passw" pattern="[A-Za-z0-9!?-]{8,16}" title="La contraseña debe tener entre 8 y 16 caracteres y puede tener dígitos, minúsculas, mayúsculas y otros símbolos."> 
                                 <label class="form_control">Confirmar contraseña:</label>
-                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2" pattern="^[A-Za-z0-9!?- ]{8,16}" title="La contraseña debe tener entre 8 y 16 caracteres y puede tener dígitos, minúsculas, mayúsculas y otros símbolos."> 
+                                <input type="password" name="passwed2" class="text_black passwrd" id="passw2" pattern="^[A-Za-z0-9!?-]{8,16}" title="La contraseña debe tener entre 8 y 16 caracteres y puede tener dígitos, minúsculas, mayúsculas y otros símbolos."> 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-nuevo" data-dismiss="modal" value=" ">Cerrar</button>
