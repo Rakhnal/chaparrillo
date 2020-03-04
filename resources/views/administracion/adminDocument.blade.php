@@ -131,7 +131,7 @@ Administrar Documentación
             }
         });
     }
-    
+
     $(document).on("click", "#modificarDocumentos", function () {
         var id = $(this).attr("data-idMod");
         var token = '{{csrf_token()}}';
@@ -163,6 +163,21 @@ Administrar Documentación
             }
         });
     });
+
+    function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // files is a FileList of File objects. List some properties.
+        var output = [];
+        for (var i = 0, f; f = files[i]; i++) {
+            output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                    f.size, ' bytes, last modified: ',
+                    f.lastModifiedDate.toLocaleDateString(), '</li>');
+        }
+        document.getElementById('list').innerHTML = '<ul id="listaDocs">' + output.join('') + '</ul>';
+    }
+
+    document.getElementById('subirAdjuntos').addEventListener('change', handleFileSelect, false);
 
 </script>
 

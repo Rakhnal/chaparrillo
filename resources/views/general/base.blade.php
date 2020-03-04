@@ -474,7 +474,7 @@ use App\Clases\conexion;
                         </div>
                         <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
-                    <form name="formSubDoc" class="formDocs m-0" action="subirDocumento" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+                    <form name="formSubDoc" id="formSubDoc" class="formDocs m-0" action="subirDocumento" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
@@ -491,11 +491,14 @@ use App\Clases\conexion;
                             </div>
                             <div class="form-group">
                                 <div>
-                                    <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*" required>
+                                    <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos[]" accept="file_extension/*" required multiple>
                                 </div>
                                 <label for="subirAdjuntos">
                                     <span>Adjuntar archivos</span>
                                 </label>
+                            </div>
+                            <div id="previewDiv">
+                                <output id="list"></output>
                             </div>
                         </div>
                         <div class="modal-footer">

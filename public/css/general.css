@@ -577,6 +577,16 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
     color: #9EC485;
 }
 
+#previewDiv, #preview {
+    width: 100%;
+    border: none;
+}
+
+#listaDocs {
+    padding: 0px !important;
+    display: inline-grid !important;
+}
+
 /* Footer */
 
 #logochapa {
