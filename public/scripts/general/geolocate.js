@@ -36,29 +36,26 @@ $(document).ready(function () {
     $('#btnreset2').on('click', resetMarker2);
     $('#btnreset3').on('click', resetMarker3);
     
-    function PintarMapa(){
-        
-        var mapa2 = new google.maps.LatLng(document.getElementById("latitudEvent").value, document.getElementById("longitudEvent").value);
-        
-        var ColocaMapa2 = {
-            zoom: 15,
-            center: mapa2,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        
-        if (document.getElementById("map2") != null) {
-            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
-
-            marcadorEvento2 = new google.maps.Marker({
-                position: mapa2,
-                icon: "images/icons/location.svg",
-                map: MapaEvento2
-            });
-        }
-        
-        
-        $('.mapa2').html(MapaEvento2);
-    }
+//    function PintarMapa(){
+//        
+//        var mapa2 = new google.maps.LatLng(document.getElementById("latitudEvent").value, document.getElementById("longitudEvent").value);
+//        
+//        var ColocaMapa2 = {
+//            zoom: 15,
+//            center: mapa2,
+//            mapTypeId: google.maps.MapTypeId.ROADMAP
+//        };
+//        
+//        if (document.getElementById("map2") != null) {
+//            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
+//
+//            marcadorEvento2 = new google.maps.Marker({
+//                position: mapa2,
+//                icon: "images/icons/location.svg",
+//                map: MapaEvento2
+//            });
+//        }
+//    }
 
     function Sacalugar(position) {
 
@@ -246,6 +243,15 @@ $(document).ready(function () {
         $('#longitudInput').val(null);
 
         marcadorRegistro.setMap(null);
+    }
+    
+    function resetMarker2() {
+        google.maps.event.addListener(MapaEvento, "click", mapClick2);
+        
+        $('#latitud').val(null);
+        $('#longitud').val(null);
+
+        marcadorEvento1.setMap(null);
     }
     
     function resetMarker3() {

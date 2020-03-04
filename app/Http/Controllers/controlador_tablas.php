@@ -395,20 +395,24 @@ class controlador_tablas extends Controller {
      * @return type
      */
     public function eliminarEventos() {
-        $id_evento = intval($_POST["ide"]);
+        $id_evento = intval($_POST["id_e"]);
 
-        $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
-                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
-                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
-                        . 'WHERE eventos.id_evento =' . $id_evento);
-        
+        $eventos = DB::table('eventos')
+                ->where('eventos.id_evento', $id_evento);
+
         $qhp = "ok";
 
         $publicacion = DB::table('publicaciones')
-                ->join('documentos', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('publicaciones.id_item', $id_documento);
+                ->where('publicaciones.id_item', $id_evento);
 
+        $imagen = DB::table('imagenes')
+                ->where('imagenes.id_item', $id_evento);
+
+        //Borramos la imagen, el eveneto y la publicación.
         if ($publicacion) {
+
+            $imagen->delete();
+            $eventos->delete();
             $publicacion->delete();
         } else {
             $qhp = "fail";

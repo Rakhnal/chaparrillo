@@ -433,8 +433,9 @@ use App\Clases\conexion;
                                         <label>Localización:</label>
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
-
-                                    <div id="map2" class="mapa" onload="">
+                                    
+<!--                                    <button onclick="PintarMapa()">Ver Mapa</button>-->
+                                    <div id="map2" class="mapa">
 
                                     </div>
 
@@ -597,7 +598,7 @@ use App\Clases\conexion;
 
                                             foreach ($plagas as $plaga) {
                                                 ?>
-                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
                                                 <?php
                                             }
                                             ?>
@@ -729,7 +730,7 @@ use App\Clases\conexion;
 
                                             foreach ($plagasTWO as $plaga) {
                                                 ?>
-                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
                                                 <?php
                                             }
                                             ?>

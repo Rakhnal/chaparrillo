@@ -16,6 +16,7 @@ Administrar Eventos
 <link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
 <script src="scripts/general/mostrarimagenes.js"></script>
 <meta name="csrf_token" content="{{ csrf_token() }}">
+<script src="scripts/general/cargarMapa.js"></script>
 
 
 <div class="col">
@@ -54,7 +55,7 @@ Administrar Eventos
                                 <td><?= $event->fecha_inicio ?></td>
                                 <td><?= $event->fecha_fin ?></td>
                         <input id="id_e" name="id_e" value="<?= $event->id_evento ?>" type="hidden">
-                        <td><input class="btn btn-eliminar" id="delete" type="submit" name="delete" value="Eliminar"></td>
+                        <td><input class="btn btn-eliminar" data-id="<?= $event->id_evento ?>" id="delete" type="submit" name="delete" value="Eliminar"></td>
                         <td><input class="btn btn-modal blurmodal b-modify" type="button" id="b-modify" data-id="<?= $event->id_evento ?>" data-toggle="modal" data-target="#ventana-modificar"></td>
                         </tr>
                     <?php } ?>
@@ -85,6 +86,7 @@ Administrar Eventos
         <span id="m-error" class="alert alert-danger text-center fixed-bottom"><?php echo $error; ?></span>
     <?php } ?>
 </div>
+
 <script>
     $(document).ready(function () {
 
@@ -117,6 +119,8 @@ Administrar Eventos
                  $('#img-eventoP').attr('src','data:image/png;base64,'+ respuesta.imagen);
                  $('#id_event').val(respuesta.id);
                  
+                 PintarMapa(respuesta.latitud,respuesta.longitud);
+                 
             },
             statusCode: {
                 404: function () {
@@ -129,5 +133,57 @@ Administrar Eventos
             }
         });
     });
+    
+    $(document).on("click", "#delete", function () {
+        var id = $(this).attr("data-id");
+        
+        swal({
+            title: "¿Estás seguro?",
+            text: "Una vez eliminado no podrás recuperar tu documento.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        eliminarEvent(id);
+                    } else {
+                        swal("El evento no ha sido eliminado.");
+                    }
+                });
+    });
+
+    function eliminarEvent(id) {
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "id_e": id,
+            "_token": token
+        };
+        $.ajax({
+            url: "eliminarEvento",
+            data: parametros,
+            type: 'post',
+            success: function (response) {
+                if (response === "ok") {
+                    location.reload();
+                } else {
+                    swal("Error al eliminar el evento.", {
+                        icon: "error"
+                    });
+                }
+            },
+            statusCode: {
+                404: function () {
+                    swal('Página no encontrada.');
+                }
+            },
+            error: function () {
+                swal("Algo ha ido mal ", {
+                    icon: "error"
+                });
+            }
+        });
+    }
+    
 </script>
 @endsection
