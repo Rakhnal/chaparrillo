@@ -37,7 +37,6 @@ Administrar Documentación
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Descripción</th>
                             <th>Año de publicación</th>
                             <th>Autores</th>
                             <th></th>
@@ -51,7 +50,6 @@ Administrar Documentación
                             <tr>
                                 <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
-                                <td><?= $doc->descripcion ?></td>
                                 <td><?= $doc->anio ?></td>
                                 <td><?= $doc->autores ?></td>
                                 <td><form name="formEliminarDoc" id="formEliminarDoc" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" name="btnEliminar" data-id="<?= $doc->id_documento ?>" class="btn btn-eliminar" value="Eliminar"></form></td>
@@ -170,9 +168,7 @@ Administrar Documentación
         // files is a FileList of File objects. List some properties.
         var output = [];
         for (var i = 0, f; f = files[i]; i++) {
-            output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
-                    f.size, ' bytes, last modified: ',
-                    f.lastModifiedDate.toLocaleDateString(), '</li>');
+            output.push('<li>✓ <strong>', escape(f.name), '</strong></li>');
         }
         document.getElementById('list').innerHTML = '<ul id="listaDocs">' + output.join('') + '</ul>';
     }

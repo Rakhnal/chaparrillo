@@ -587,14 +587,19 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
     color: #9EC485;
 }
 
-#previewDiv, #preview {
+#previewDiv {
     width: 100%;
-    border: none;
 }
 
 #listaDocs {
+    margin: 15px 0px 0px !important;
     padding: 0px !important;
     display: inline-grid !important;
+}
+
+#listaCategorias {
+    margin: 15px 0px 0px !important;
+    padding: 0px !important;
 }
 
 /* Footer */

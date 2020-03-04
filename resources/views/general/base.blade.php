@@ -483,13 +483,15 @@ use App\Clases\conexion;
                             <div class="form-group">
                                 <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación (opcional)"></textarea>
                             </div>
-                            <div class="form-group">
-                                <input type="year" class="pl-2" id="anioSubirDoc" name="anioSubirDoc" placeholder="Año de publicación" length="4" pattern="^[0-9]{4}$" required>
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <input type="year" class="pl-2" id="anioSubirDoc" name="anioSubirDoc" placeholder="Año de publicación" length="4" pattern="^[0-9]{4}$" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <input type="text" class="pl-2" id="autoresSubirDoc" name="autoresSubirDoc" placeholder="Autores del documento" required>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="pl-2" id="autoresSubirDoc" name="autoresSubirDoc" placeholder="Autores del documento" required>
-                            </div>
-                            <div class="form-group">
+                            <div class="form-group m-0">
                                 <div>
                                     <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos[]" accept="file_extension/*" required multiple>
                                 </div>
@@ -499,6 +501,22 @@ use App\Clases\conexion;
                             </div>
                             <div id="previewDiv">
                                 <output id="list"></output>
+                            </div>
+                            <div class="form-group" id="listaCategorias">
+                                <?php
+                                $cats = conexion::sacarCategorias();
+
+                                foreach ($cats as $cat) {
+                                    ?>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" name="categorias" id="categoria<?= $cat->id_categoria ?>">
+                                        <label class="form-check-label" for="categoria<?= $cat->id_categoria ?>">
+                                            <?= $cat->nombre ?>
+                                        </label>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -598,7 +616,7 @@ use App\Clases\conexion;
 
                                             foreach ($plagas as $plaga) {
                                                 ?>
-                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
                                                 <?php
                                             }
                                             ?>
@@ -730,7 +748,7 @@ use App\Clases\conexion;
 
                                             foreach ($plagasTWO as $plaga) {
                                                 ?>
-                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
                                                 <?php
                                             }
                                             ?>
