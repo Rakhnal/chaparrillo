@@ -34,28 +34,7 @@ $(document).ready(function () {
     $('#btnreset').on('click', resetMarker);
     $('#btnresetEU').on('click', resetMarkerEU);
     $('#btnreset2').on('click', resetMarker2);
-    $('#btnreset3').on('click', resetMarker3);
     
-//    function PintarMapa(){
-//        
-//        var mapa2 = new google.maps.LatLng(document.getElementById("latitudEvent").value, document.getElementById("longitudEvent").value);
-//        
-//        var ColocaMapa2 = {
-//            zoom: 15,
-//            center: mapa2,
-//            mapTypeId: google.maps.MapTypeId.ROADMAP
-//        };
-//        
-//        if (document.getElementById("map2") != null) {
-//            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
-//
-//            marcadorEvento2 = new google.maps.Marker({
-//                position: mapa2,
-//                icon: "images/icons/location.svg",
-//                map: MapaEvento2
-//            });
-//        }
-//    }
 
     function Sacalugar(position) {
 
@@ -140,7 +119,6 @@ $(document).ready(function () {
 
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         google.maps.event.addListener(MapaEvento, "click", mapClick2);
-        google.maps.event.addListener(MapaEvento2, "click", mapClick3);
         // var vercalle = new google.maps.StreetViewPanorama(document.getElementById("map"), calle);
 
         localStorage.setItem('latitud', latitud);
@@ -183,23 +161,7 @@ $(document).ready(function () {
         google.maps.event.clearListeners(MapaEvento, 'click');
     }
     
-    function mapClick3(event) {
-
-        // get lat/lon of click
-        var clickLat = event.latLng.lat();
-        var clickLon = event.latLng.lng();
-        
-        $('#latitudEvent').val(clickLat);
-        $('#longitudEvent').val(clickLon);
-
-        marcadorEvento2 = new google.maps.Marker({
-            position: new google.maps.LatLng(clickLat, clickLon),
-            icon: "images/icons/location.svg",
-            map: MapaEvento2
-        });
-
-        google.maps.event.clearListeners(MapaEvento2, 'click');
-    }
+    
 
     function mapClickEU(event) {
 
@@ -254,14 +216,6 @@ $(document).ready(function () {
         marcadorEvento1.setMap(null);
     }
     
-    function resetMarker3() {
-        google.maps.event.addListener(MapaEvento2, "click", mapClick3);
-        
-        $('#latitudEvent').val(null);
-        $('#longitudEvent').val(null);
-
-        marcadorEvento2.setMap(null);
-    }
 
     function resetMarkerEU() {
         google.maps.event.addListener(MapaEU, "click", mapClickEU);
