@@ -14,25 +14,21 @@ $(document).ready(function () {
          */
         function desblok() {
             if (document.getElementById("nombre").disabled === true) {
-                document.getElementById("bd_edit").disabled = false;
                 document.getElementById("paise").disabled = false;
                 document.getElementById("local").disabled = false;
                 document.getElementById("nombre").disabled = false;
                 document.getElementById("apell").disabled = false;
                 document.getElementById("password").disabled = false;
                 document.getElementById("profile-file-input").disabled = false;
-                document.getElementById("btnresetEU").disabled = false;
                 ActivarCampo();
             } else {
                 document.getElementById("paise").disabled = true;
-                document.getElementById("bd_edit").disabled = true;
                 document.getElementById("local").disabled = true;
                 document.getElementById("nombre").disabled = true;
                 document.getElementById("apell").disabled = true;
                 document.getElementById("password").disabled = true;
                 document.getElementById("ajusteimagen").disabled = true;
                 document.getElementById("profile-file-input").disabled = true;
-                document.getElementById("btnresetEU").disabled = true;
                 DesActivarCampo();
             }
         }
@@ -63,8 +59,8 @@ $(document).ready(function () {
                 });
                 setTimeout(function () {
                     $(".alert").close();
-                }, 6000);
-            }, 5000);
+                }, 4000);
+            }, 3000);
         }
 
         window.alert = function (message) {
@@ -84,8 +80,6 @@ function block() {
     document.getElementById("apell").disabled = true;
     document.getElementById("password").disabled = true;
     document.getElementById("profile-file-input").disabled = true;
-    document.getElementById("bd_edit").disabled = true;
-    document.getElementById("btnresetEU").disabled = true;
     DesActivarCampo();
 }
 
@@ -96,6 +90,10 @@ function block() {
 function ActivarCampo() {
     var contenedor = document.getElementById("ajusteimagen");
     contenedor.style.display = "block";
+    var contenedor2 = document.getElementById("btnresetEU");
+    contenedor2.style.display = "block";
+    var contenedor3 = document.getElementById("bd_edit");
+    contenedor3.style.display = "";
     return true;
 }
 
@@ -106,6 +104,10 @@ function ActivarCampo() {
 function DesActivarCampo() {
     var contenedor = document.getElementById("ajusteimagen");
     contenedor.style.display = "none";
+    var contenedor2 = document.getElementById("btnresetEU");
+    contenedor2.style.display = "none";
+    var contenedor3 = document.getElementById("bd_edit");
+    contenedor3.style.display = "none";
     return true;
 }
 

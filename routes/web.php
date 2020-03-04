@@ -31,6 +31,8 @@ Route::post('edit_pass', 'EditUserController@editarPassEU');
 //DES16
 //Página de administrar usuarios
 Route::get('admin_usuarios',['uses' =>  'controlador_usuarios@listarUsuarios', 'as' => 'admin_usuarios']);
+Route::post('cam_Valid',['uses' => 'controlador_usuarios@listarUsuariosV', 'as' => 'admin_usuarios']);
+Route::post('cam_Elim', 'controlador_usuarios@eliminarusuarios');
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración

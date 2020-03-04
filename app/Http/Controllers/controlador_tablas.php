@@ -170,13 +170,15 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -230,13 +232,15 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -290,13 +294,15 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -322,7 +328,7 @@ class controlador_tablas extends Controller {
             'litro_hectarea' => $informe->litro_hectarea,
             'id_user' => $informe->id_user,
             'aprox_dmg' => $informe->aprox_dmg,
-            'plaga_tratar' => $informe->plaga_tratar,
+            'id_plaga' => $informe->id_plaga,
             'fecha_hora' => $informe->fecha_hora,
             'poligono' => $informe->poligono,
             'parcela' => $informe->parcela,
