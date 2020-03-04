@@ -111,7 +111,7 @@ use App\Clases\conexion;
                                 </div>
                             </div>
                             <div class="col-md-12 text-center mb-3">
-                                <input type="submit" class="btn btn-success" id="bd_edit_users" value="Aceptar" disabled="">
+                                <input type="submit" class="btn btn-success" id="bd_edit_users" value="Aceptar">
                             </div>
                         </form>
                     </div>
