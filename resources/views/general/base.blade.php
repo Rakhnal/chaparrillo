@@ -434,7 +434,6 @@ use App\Clases\conexion;
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
                                     
-<!--                                    <button onclick="PintarMapa()">Ver Mapa</button>-->
                                     <div id="map2" class="mapa">
 
                                     </div>
