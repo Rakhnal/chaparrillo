@@ -559,6 +559,54 @@ use App\Clases\conexion;
             </div>
         </div>
 
+        <!-- ******************** Ventana Administración Plagas *********************** -->
+        <div class="modal fade" id="modalPlagas" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            Administración de plagas
+                        </div>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row table-responsive">
+                            <table id="tablaAdminPlagas">
+                                <thead>
+                                    <tr>
+                                        <th hidden>ID</th>
+                                        <th>Nombre</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $plagas = conexion::sacarPlagas();
+
+                                    foreach ($plagas as $plaga) {
+                                        ?>
+                                        <tr>
+                                    <form action="actPlaga" name="infForm" onsubmit="return confirm('¿Quieres proceder con la acción?')" method="POST">
+                                        {{ csrf_field() }}
+                                        <td hidden><input type="number" name="idplaga"value="<?= $plaga->id_plaga ?>"/></td>
+                                        <td><input type="text" name="nomPlaga" class="cajaNormal" value="<?= $plaga->nombre_plaga ?>"/></td>
+                                        <td><input type="submit" name="delPlaga" id="delPlaga" class="btn btn-eliminar" value="."/></td>
+                                        <td><input type="submit" name="modPlaga" id="modPlaga" class="btn btn-guardar" value="."/></td>
+                                    </form>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Ventana modal para mostrar el informe -->
 
         <div class="modal fade" id="modalInforme" data-backdrop="static">
@@ -595,7 +643,7 @@ use App\Clases\conexion;
 
                                             foreach ($plagas as $plaga) {
                                                 ?>
-                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
                                                 <?php
                                             }
                                             ?>
@@ -676,7 +724,7 @@ use App\Clases\conexion;
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Comentario:</p>
-                                        <textarea class="textAreaInf" id="coment" name="coment" placeholder="Comentario del Informe" required></textarea>
+                                        <textarea class="textAreaInf" id="coment" name="coment" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -727,7 +775,7 @@ use App\Clases\conexion;
 
                                             foreach ($plagasTWO as $plaga) {
                                                 ?>
-                                                <option value="<?=$plaga->id_plaga?>"><?=$plaga->nombre_plaga?></option>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
                                                 <?php
                                             }
                                             ?>
@@ -808,7 +856,7 @@ use App\Clases\conexion;
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Comentario:</p>
-                                        <textarea class="textAreaInf" id="coment" name="coment" placeholder="Comentario del Informe" required></textarea>
+                                        <textarea class="textAreaInf" id="coment" name="coment" required></textarea>
                                     </div>
                                 </div>
                             </div>
