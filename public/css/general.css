@@ -241,6 +241,22 @@ td {
     transition: 0.3s ease-in all;
 }
 
+.btn-aniadir {
+    font-size: 0.0000000000001px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    background-color: transparent;
+
+    background-image: url('../images/icons/add.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    transition: 0.3s ease-in all;
+}
+
 .btn-modal {
     width: 30px;
     height: 30px;
@@ -275,6 +291,11 @@ td {
 
 .btn-guardar:hover {
     background-image: url('../images/icons/savehover.png');
+    transform: scale(0.95);
+}
+
+.btn-aniadir:hover {
+    background-image: url('../images/icons/addhover.png');
     transform: scale(0.95);
 }
 
@@ -752,6 +773,29 @@ and (max-device-width: 1024px) {
         transform: scale(1.5);
     }
 
+    .navbar-collapse {
+        max-height: fit-content;
+    }
+
+    .btn-eliminar, .btn-guardar, .btn-aniadir {
+        font-size: 0.0000000000001px !important;
+    }
+
+    .modal-body .btn-guardar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-body .btn-eliminar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-body .btn-aniadir {
+        width: 40px;
+        height: 40px;
+    }
+
     .margin-top-less {
         margin-top: 5px !important;
     }
@@ -759,6 +803,16 @@ and (max-device-width: 1024px) {
     .navbar-toggler-icon {
         padding-top: 15px;
         transform: scale(1.5);
+    }
+    
+    .navbar-toggler-icon:focus {
+        outline: none;
+        border: none;
+    }
+    
+    .navbar-toggler:focus {
+        outline: none;
+        border: none;
     }
 
     .close {
@@ -770,6 +824,16 @@ and (max-device-width: 1024px) {
         margin: 0 5%;
         max-width: none;
         width: 90%;
+    }
+}
+
+@media
+only screen 
+and (max-device-width: 1024px) and (orientation: landscape) {
+    
+    .navbar-collapse {
+        max-height: 91vh;
+        overflow-y: auto;
     }
 }
 
@@ -814,4 +878,14 @@ and (max-device-width: 740px) {
         margin-top: 0px !important;
     }
 
+}
+
+@media
+only screen 
+and (max-device-width: 740px) and (orientation: landscape) {
+    
+    .navbar-collapse {
+        max-height: 87vh;
+        overflow-y: auto;
+    }
 }

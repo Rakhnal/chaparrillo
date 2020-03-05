@@ -55,69 +55,6 @@ use App\Clases\conexion;
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
 
-        <!-- ******************** Ventana Agregar Usuaio *********************** -->
-        <div class="modal fade eventos" id="ventana-crear-usuario" data-backdrop="static">
-            <div class="modal-dialog modal-xxl modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title">
-                            Registro de Usuario
-                        </div>
-                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
-                    </div>
-                    <div class="modal-body">
-                        <form action="agregarUsuario" method="POST" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <label class="form_control col-12">Email:</label>
-                                        <input type="email" name="email" class="input read w-100 text_black" value="" id="emailusers">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <label class="form_control col-12">Nombre:</label>
-                                        <input type="text" name="nombre" class="w-100 text_black input" value="" id="nombreusers">
-                                    </div>
-                                    <div class="col-6">
-                                        <label class="form_control col-12">Apellidos:</label>
-                                        <input type="text" name="apellidos" class=" w-100 text_black input" value="" id="apellusers">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12"><label class="form_control">Localización:</label></div>
-                                    <div class="col-6">
-                                        <input name="pais" type="text" class="text_black w-100 input" placeholder="Pais" id="paiseusers" value="">
-                                    </div>
-                                    <div class="col-6">
-                                        <input name="localidad" type="text" class="text_black w-100 input" placeholder="Localidad" id="localusers" value="">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <label class="form_control">Posición:</label>
-                                        <div id="mapaEditUsers" class="mapaEditUsers" style=" height: 200px;"></div>
-                                        <div class="row justify-content-center">
-                                            <div class="col">
-                                                <div class="row justify-content-center align-content-center align-items-center">
-                                                    <button class="btn btn-nuevo" type="button" name="btnresetEUsers" id="btnresetEUsers">Reiniciar Marcador</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="text" autocomplete="off" id="latitudInputEUsers" name="latitudInputEUsers" value="" hidden/>
-                                        <input type="text" autocomplete="off" id="longitudInputEUsers" name="longitudInputEUsers" value="" hidden/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 text-center mb-3">
-                                <input type="submit" class="btn btn-success" id="bd_edit_users" value="Aceptar">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- ******************** Ventana Agregar Evento *********************** -->
         <div class="modal fade eventos" id="ventana-crear" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
@@ -370,6 +307,8 @@ use App\Clases\conexion;
                     <div class="modal-body">
 
                         <p>Usuario/Contraseña incorrectos</p>
+                        
+                        <p>Si se acaba de registrar espere a ser validado</p>
 
                     </div>
                 </div>
@@ -433,7 +372,7 @@ use App\Clases\conexion;
                                         <label>Localización:</label>
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
-                                    
+
                                     <div id="map2" class="mapa">
 
                                     </div>
@@ -590,7 +529,7 @@ use App\Clases\conexion;
                                     foreach ($plagas as $plaga) {
                                         ?>
                                         <tr>
-                                    <form action="actPlaga" name="infForm" onsubmit="return confirm('¿Quieres proceder con la acción?')" method="POST">
+                                    <form action="actPlaga" name="actPlagaForm" method="POST">
                                         {{ csrf_field() }}
                                         <td hidden><input type="number" name="idplaga"value="<?= $plaga->id_plaga ?>"/></td>
                                         <td><input type="text" name="nomPlaga" class="cajaNormal" value="<?= $plaga->nombre_plaga ?>"/></td>
@@ -601,6 +540,14 @@ use App\Clases\conexion;
                                     <?php
                                 }
                                 ?>
+
+                                <tr>
+                                <form action="addPlaga" name="addPlagaForm" method="POST">
+                                    {{ csrf_field() }}
+                                    <td><input type="text" name="nomPlaga" class="cajaNormal" value="" placeholder="Nombre de la nueva plaga"/></td>
+                                    <td><input type="submit" name="addPlaga" id="addPlaga" class="btn btn-aniadir" value="."/></td>
+                                </form>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
