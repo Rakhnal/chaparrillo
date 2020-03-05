@@ -8,6 +8,7 @@ use App\Evento;
 use App\Publicacion;
 use App\Imagen;
 use App\Informe;
+use App\Plaga;
 use App\Clases\Auxiliares\Constantes;
 use App\Documento;
 use Illuminate\Support\Facades\Redirect;
@@ -224,7 +225,7 @@ class controlador_tablas extends Controller {
         $informe->parcela = $parcela;
         $informe->municipio = $municipio;
         $informe->comentario = $coment;
-        $informe->plaga_tratar = $plagaTratar;
+        $informe->id_plaga = $plagaTratar;
 
         if ($userProp != "") {
             $informe->id_user = $userProp;
@@ -257,44 +258,71 @@ class controlador_tablas extends Controller {
     }
 
     /**
-     * Método que llamará a las funciones oportunas según el botón pulsado
+     * Añade la nueva plaga a BBDD
      * @return type
      */
-    public function actInforme(Request $req) {
+    public function addPlaga(Request $req) {
 
         $user = session()->get("userObj");
 
-        $modInforme = $req->get('modInforme');
-        $delInforme = $req->get('delInforme');
+        $nombre = $req->get('nomPlaga');
 
-        if (isset($modInforme)) {
+        $plaga = new Plaga();
 
-            $idinforme = $req->get('idinforme');
-            $nombre = $req->get('nombre');
-            $litrohect = $req->get('litrohect');
-            $fechahora = $req->get('fechahora');
+        $plaga->nombre_plaga = $nombre;
 
-            $plagaTratar = $req->get('plagaTratar');
-            $polParInput = $req->get('polParInput');
-            $danioAprox = $req->get('danioAprox');
+        $plaga->save();
 
-            $informe = Informe::find($idinforme);
-
-            $informe->nombre_producto = $nombre;
-            $informe->litro_hectarea = $litrohect;
-            $informe->fecha_hora = $fechahora;
-            $informe->aprox_dmg = $danioAprox;
-            $informe->poli_par = $polParInput;
-            $informe->plaga_tratar = $plagaTratar;
-
-            $informe->save();
+        // Volvemos a cargar la lista de informes
+        if ($user->rol == Constantes::ADMIN) {
+            $informes = DB::table('informes')
+                    ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->orderBy('informes.fecha_hora', 'DESC')
+                    ->paginate(8);
+        } else {
+            $informes = DB::table('informes')
+                    ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->where('informes.id_user', $user->id_user)
+                    ->orderBy('informes.fecha_hora', 'DESC')
+                    ->paginate(8);
         }
 
-        if (isset($delInforme)) {
+        return redirect('adminInformes')->with('infs', $informes);
+    }
 
-            $idinforme = $req->get('idinforme');
-            $informe = Informe::find($idinforme);
-            $informe->delete();
+    /**
+     * Borrará la plaga seleccionada
+     * @return type
+     */
+    public function actPlaga(Request $req) {
+
+        $user = session()->get("userObj");
+
+        $modPlaga = $req->get('modPlaga');
+        $delPlaga = $req->get('delPlaga');
+
+        $idplaga = $req->get('idplaga');
+        $nomPlaga = $req->get('nomPlaga');
+        
+        if (null != $modPlaga) {
+            
+            $plaga = Plaga::find($idplaga);
+            
+            $plaga->nombre_plaga = $nomPlaga;
+            
+            $plaga->save();
+            
+        }
+        
+        if (null != $delPlaga) {
+            
+            $plaga = Plaga::find($idplaga);
+            
+            $plaga->delete();
         }
 
         // Volvemos a cargar la lista de informes
@@ -316,6 +344,23 @@ class controlador_tablas extends Controller {
         }
 
         return redirect('adminInformes')->with('infs', $informes);
+    }
+
+    /**
+     * Borrará el informe seleccionado
+     * @return type
+     */
+    public function actInforme() {
+
+        $user = session()->get("userObj");
+
+        $idinforme = intval($_POST["idinforme"]);
+        $informe = Informe::find($idinforme);
+        $informe->delete();
+
+        $qhp = "ok";
+
+        return $qhp;
     }
 
     /**

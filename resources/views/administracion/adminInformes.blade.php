@@ -17,6 +17,10 @@ Administrar Informes
 
 @section('contenido')
 
+<?php
+$user = session()->get("userObj");
+?>
+
 <div class="col">
     <div class="row">
         <div class="col">
@@ -28,9 +32,15 @@ Administrar Informes
             </nav>
         </div>
         <div class="col">
-            <div class="row justify-content-end">
-                <input class="btn btn-nuevo blurmodal margin-top-less margin-right-por" type="button" id="plagasBtn" data-toggle="modal" data-target="#modalPlagas" value="Administrar Plagas">
-            </div>
+            <?php
+            if ($user->rol == Constantes::ADMIN) {
+                ?>
+                <div class="row justify-content-end">
+                    <input class="btn btn-nuevo blurmodal margin-top-less margin-right-por" type="button" id="plagasBtn" data-toggle="modal" data-target="#modalPlagas" value="Administrar Plagas">
+                </div>
+                <?php
+            }
+            ?>
         </div>
     </div>
     <div class="row" id="mainTable">
@@ -39,7 +49,6 @@ Administrar Informes
                 <table id="tablaAdminInformes">
                     <thead>
                         <tr>
-                            <th hidden>ID</th>
                             <th>Producto</th>
                             <th>Plaga a tratar</th>
                             <th>Fecha Informe</th>
@@ -53,20 +62,16 @@ Administrar Informes
                         foreach ($infs as $inf) {
                             ?>
                             <tr>
-                        <form action="actInforme" name="infForm" onsubmit="return confirm('¿Quieres proceder con la acción?')" method="POST">
-                            {{ csrf_field() }}
-                            <td hidden><input type="number" name="idinforme" value="<?= $inf->id_informe ?>"/></td>
-                            <td><?= $inf->nombre_producto ?></td>
-                            <td><?= $inf->nombre_plaga ?></td>
-                            <td><?= $inf->fecha_hora ?></td>
-                            <td><?= $inf->nombre ?> <?= $inf->apellidos ?></td>
-                            <td><input type="submit" name="delInforme" id="delInforme" class="btn btn-eliminar" value="."/></td>
-                            <td><input class="btn btn-modal blurmodal b-modify" type="button" id="b-modify" data-id="<?= $inf->id_informe ?>" data-toggle="modal" data-target="#modalInforme" value=""></td>
-                        </form>
-                        </tr>
-                        <?php
-                    }
-                    ?>
+                                <td><?= $inf->nombre_producto ?></td>
+                                <td><?= $inf->nombre_plaga ?></td>
+                                <td><?= $inf->fecha_hora ?></td>
+                                <td><?= $inf->nombre ?> <?= $inf->apellidos ?></td>
+                                <td><input class="btn btn-eliminar" data-id="<?= $inf->id_informe ?>" id="delInforme" type="submit" name="delete" value=""></td>
+                                <td><input class="btn btn-modal blurmodal b-modify" type="button" id="b-modify" data-id="<?= $inf->id_informe ?>" data-toggle="modal" data-target="#modalInforme" value=""></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>
@@ -132,6 +137,57 @@ Administrar Informes
                 }
             });
         });
+
+        $(document).on("click", "#delInforme", function () {
+            var id = $(this).attr("data-id");
+
+            swal({
+                title: "¿Estás seguro?",
+                text: "Una vez eliminado no podrás recuperar tu documento.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            eliminarInforme(id);
+                        } else {
+                            swal("El informe no ha sido eliminado.");
+                        }
+                    });
+        });
+
+        function eliminarInforme(id) {
+            var token = '{{csrf_token()}}';
+            var parametros = {
+                "idinforme": id,
+                "_token": token
+            };
+            $.ajax({
+                url: "actInforme",
+                data: parametros,
+                type: 'post',
+                success: function (response) {
+                    if (response === "ok") {
+                        location.reload();
+                    } else {
+                        swal("Error al eliminar el informe.", {
+                            icon: "error"
+                        });
+                    }
+                },
+                statusCode: {
+                    404: function () {
+                        swal('Página no encontrada.');
+                    }
+                },
+                error: function () {
+                    swal("Algo ha ido mal ", {
+                        icon: "error"
+                    });
+                }
+            });
+        }
     </script>
 
 </div>

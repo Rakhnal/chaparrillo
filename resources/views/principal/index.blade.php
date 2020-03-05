@@ -109,12 +109,17 @@ Inicio
                         <img src="images/chaparrillo/elegidas/chinche.jpg" class="plaga-img" alt="Plaga 01"/>
                     </div>
                     <div class="row justify-content-center align-items-center add-padding">
-
-                        <h2 class="bolder">Chinches</h2>
-
-                        <p>Encuadra a varios géneros y familias del Orden Hemíptera.</p>
-
-                        <p>Suelen ser un problema desde la floración (finales de marzo y primera quincena de abril) hasta el endurecimiento de la cáscara (segunda quincena de mayo)</p>
+                        <div class="col">
+                            <div class="row justify-content-center"> 
+                                <h2 class="bolder">Chinches</h2>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Encuadra a varios géneros y familias del Orden Hemíptera.</p>
+                            </div>
+                            <div class="row justify-content-center"> 
+                                <p>Suelen ser un problema desde la floración (finales de marzo y primera quincena de abril) hasta el endurecimiento de la cáscara (segunda quincena de mayo)</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -66,9 +66,11 @@ Route::get('logout', 'usercontroller@cerrarSesion');
 // DES19: Página Administrar Informes - ADC
 Route::get('adminInformes', 'controlador_tablas@listarInformes');
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
-Route::post('actInforme', 'controlador_tablas@actInforme');
+Route::post('actInforme',['as' => 'actInforme', 'uses' => 'controlador_tablas@actInforme']);
 Route::post('modificarInforme',['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
 Route::post('actPlaga', 'controlador_tablas@actPlagas');
+Route::post('addPlaga', 'controlador_tablas@addPlaga');
+Route::post('actPlaga', 'controlador_tablas@actPlaga');
 
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {

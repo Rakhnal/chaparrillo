@@ -370,6 +370,8 @@ use App\Clases\conexion;
                     <div class="modal-body">
 
                         <p>Usuario/Contraseña incorrectos</p>
+                        
+                        <p>Si se acaba de registrar espere a ser validado</p>
 
                     </div>
                 </div>
@@ -433,7 +435,7 @@ use App\Clases\conexion;
                                         <label>Localización:</label>
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
-                                    
+
                                     <div id="map2" class="mapa">
 
                                     </div>
@@ -590,7 +592,7 @@ use App\Clases\conexion;
                                     foreach ($plagas as $plaga) {
                                         ?>
                                         <tr>
-                                    <form action="actPlaga" name="infForm" onsubmit="return confirm('¿Quieres proceder con la acción?')" method="POST">
+                                    <form action="actPlaga" name="actPlagaForm" method="POST">
                                         {{ csrf_field() }}
                                         <td hidden><input type="number" name="idplaga"value="<?= $plaga->id_plaga ?>"/></td>
                                         <td><input type="text" name="nomPlaga" class="cajaNormal" value="<?= $plaga->nombre_plaga ?>"/></td>
@@ -601,6 +603,14 @@ use App\Clases\conexion;
                                     <?php
                                 }
                                 ?>
+
+                                <tr>
+                                <form action="addPlaga" name="addPlagaForm" method="POST">
+                                    {{ csrf_field() }}
+                                    <td><input type="text" name="nomPlaga" class="cajaNormal" value="" placeholder="Nombre de la nueva plaga"/></td>
+                                    <td><input type="submit" name="addPlaga" id="addPlaga" class="btn btn-aniadir" value="."/></td>
+                                </form>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

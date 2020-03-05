@@ -201,3 +201,34 @@ p {
     max-width: 150px;
     max-height: 150px;
 }
+
+
+@media
+only screen 
+and (max-device-width: 1024px) {
+    
+    .swal-modal {
+        min-width: 600px;
+        min-height: 400px;
+    }
+    
+    .swal-button {
+        font-size: 25px !important;
+    }
+    
+    .swal-title {
+        font-size: 50px !important;
+    }
+    
+    .swal-text {
+        font-size: 30px !important;
+        text-align: center;
+    }
+}
+
+@media
+only screen 
+and (max-device-width: 740px) {
+    
+    
+}
