@@ -29,7 +29,7 @@ Administrar Informes
         </div>
         <div class="col">
             <div class="row justify-content-end">
-                <input class="btn btn-nuevo blurmodal b-modify margin-top-less margin-right-por" type="button" id="b-modify" data-toggle="modal" data-target="#modalPlagas" value="Administrar Plagas">
+                <input class="btn btn-nuevo blurmodal margin-top-less margin-right-por" type="button" id="plagasBtn" data-toggle="modal" data-target="#modalPlagas" value="Administrar Plagas">
             </div>
         </div>
     </div>

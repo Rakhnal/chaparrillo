@@ -6,6 +6,7 @@ use App\Clases\Auxiliares\Constantes;
 use App\Usuario;
 use App\Plaga;
 use App\Categoria;
+use App\Evento;
 
 /* use App\Usuario;
   use App\Coche;
@@ -53,28 +54,35 @@ class conexion {
 
         $evento->save();
     }
+
     /**
      * 
      * @return type
      */
-    public static function sacarCategorias(){
-        
+    public static function sacarCategorias() {
+
         $categoria = Categoria::all();
-        
+
         return $categoria;
     }
-    
+
     /**
      * 
      * @return type
      */
-    public static function sacarPlagas(){
-        
+    public static function sacarPlagas() {
+
         $plagas = Plaga::all();
-        
+
         return $plagas;
     }
-    
+
+    public static function sacarEvento($id_evento) {
+
+        $evento = Evento::where('id_evento', $id_evento)->first();
+
+        return $evento;
+    }
 
     /**
      * Login del usuario
@@ -114,7 +122,7 @@ class conexion {
      * @return type
      */
     public static function obtenerUsuariosEspeciales() {
-        
+
         $users = \DB::select('SELECT id_user, nombre, apellidos FROM usuarios WHERE rol = ? OR rol = ?', [Constantes::ADMIN, Constantes::SWATS]);
         if ($users != null) {
             return $users;
@@ -122,7 +130,7 @@ class conexion {
             return null;
         }
     }
-    
+
     /**
      * Registro del usuario en base de datos
      * @param type $correo
@@ -146,7 +154,7 @@ class conexion {
         $user->pais = $pais;
         $user->latitud = $latitud;
         $user->longitud = $longitud;
-        
+
         $user->save();
     }
 
@@ -160,6 +168,7 @@ class conexion {
      * @param type $pais
      * @param type $img
      */
+
     public static function editUser($nombre, $apellidos, $correo, $localidad, $pais, $img, $lat, $lon) {
         $user = conexion::existeUsuario($correo);
         $user->nombre = $nombre;
@@ -168,7 +177,7 @@ class conexion {
         if ($img != "" && $img != '' && $img != null && $img != " " && $img != ' ') {
             $user->img_user = $img;
         }
-        
+
         if ($lat != "" && $lon != "" && $lat != null && $lon != null) {
             $user->latitud = $lat;
             $user->longitud = $lon;
@@ -177,7 +186,7 @@ class conexion {
         $user->pais = $pais;
         $user->save();
     }
-    
+
     /**
      * Editar la contraseña del usuario
      * @param type $correo
@@ -190,6 +199,7 @@ class conexion {
         }
         $user->save();
     }
+
     /*
      * // Buscamos a todos los usuarios en BBDD
       public static function obtenerUsuarios() {

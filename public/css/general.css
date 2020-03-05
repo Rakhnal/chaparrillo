@@ -423,7 +423,6 @@ td {
     margin-right: 15%;
     max-width: none !important;
     width: 70%;
-
 }
 
 #img-eventoP{
@@ -608,7 +607,6 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 }
 
 #logojccm {
-
     margin-right: 18%;
 
     width: 25%;
@@ -724,65 +722,104 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 
 @media
 only screen 
-and (max-device-width: 1025px) {
-    
+and (max-device-width: 1024px) {
+
     ul {
         display: flex !important;
     }
-    
-    h1, h2, h3 {
+
+    h1, h2, h3, h4 {
         font-size: 2em;
     }
-    
-    a, input {
+
+    h5 {
+        font-size: 1.1em;
+    }
+
+    a, input, span, button {
         font-size: 1.5em !important;
     }
-    
+
     p {
         font-size: 1.1em !important
     }
-    
+
     a {
         text-align: center !important;
     }
-    
+
     #imgUser {
         width: 140px !important;
         height: 140px !important;
     }
-    
+
+    #btnUser {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    #searchButton {
+        transform: scale(1.5);
+    }
+
     .margin-top-less {
         margin-top: 5px !important;
     }
-    
-}
 
+    .navbar-toggler-icon {
+        padding-top: 15px;
+        transform: scale(1.5);
+    }
+
+    .close {
+        padding: 25px;
+        transform: scale(1.5);
+    }
+
+    .modal-dialog {
+        margin: 0 5%;
+        max-width: none;
+        width: 90%;
+    }
+}
 
 @media
 only screen 
 and (max-device-width: 740px) {
 
-    h1, h2, h3 {
+    h1, h2, h3, h4 {
         font-size: 2.5em;
     }
-    
+
     a, input {
         font-size: 2em !important;
     }
-    
+
     p {
         font-size: 1.5em !important
     }
-    
+
     a {
         text-align: center !important;
     }
-    
+
     #imgUser {
         width: 120px !important;
         height: 120px !important;
     }
-    
+
+    #logoface, #logochil {
+        transform: scale(1.5);
+    }
+
+    #logojccm {
+        width: 50%;
+    }
+
+    #logouemapa, #logochapa {
+        width: 80%;
+    }
+
     .margin-top-less {
         margin-top: 0px !important;
     }

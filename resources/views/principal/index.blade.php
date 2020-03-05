@@ -56,7 +56,7 @@ Inicio
                 </div>
             </div>
         </a>
-        <a class="col-xl-3 col-md-12 tilted" href="plodia" data-tilt>
+        <a class="col-xl-3 col-md-12 tilted" href="polilla" data-tilt>
             <div class="row justify-content-center plaga-div">
                 <div class="col">
                     <div class="row justify-content-center align-items-center">

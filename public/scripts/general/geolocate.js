@@ -12,6 +12,9 @@ $(document).ready(function () {
     };
 
     var marcadorEU;
+    var marcadorEvento1;
+    var marcadorEvento2;
+
     var MapaEU;
     
     var marcadorEUsers;
@@ -20,6 +23,7 @@ $(document).ready(function () {
     var MapaRegistro;
     var marcadorRegistro;
     var MapaEvento;
+    var MapaEvento2;
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(Sacalugar, nofunciona);
@@ -29,13 +33,14 @@ $(document).ready(function () {
 
     $('#btnreset').on('click', resetMarker);
     $('#btnresetEU').on('click', resetMarkerEU);
-    $('#btnresetEUsers').on('click', resetMarkerEUsers);
-
+    $('#btnreset2').on('click', resetMarker2);
+    
 
     function Sacalugar(position) {
 
         var latitud;
         var longitud;
+        
         if (null !== document.getElementById("latitudInputEU") && document.getElementById("latitudInputEU").value !== "") {
             latitud = document.getElementById("latitudInputEU").value;
             longitud = document.getElementById("longitudInputEU").value;
@@ -45,10 +50,17 @@ $(document).ready(function () {
         }
 
         var mapa = new google.maps.LatLng(latitud, longitud);
+        var mapa2 = new google.maps.LatLng(document.getElementById("latitudEvent").value, document.getElementById("longitudEvent").value);
 
         var ColocaMapa = {
             zoom: 15,
             center: mapa,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        
+        var ColocaMapa2 = {
+            zoom: 15,
+            center: mapa2,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
@@ -58,17 +70,17 @@ $(document).ready(function () {
             marcadorEvento1 = new google.maps.Marker({
                 position: mapa,
                 icon: "images/icons/location.svg",
-                map: PintaMapa
+                map: MapaEvento
             });
         }
 
-        if (document.getElementById("map2") !== null) {
-            var PintaMapa = new google.maps.Map(document.getElementById("map2"), ColocaMapa);
+        if (document.getElementById("map2") != null) {
+            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
 
-            marca = new google.maps.Marker({
-                position: mapa,
+            marcadorEvento2 = new google.maps.Marker({
+                position: mapa2,
                 icon: "images/icons/location.svg",
-                map: PintaMapa
+                map: MapaEvento2
             });
         }
 
@@ -148,6 +160,8 @@ $(document).ready(function () {
 
         google.maps.event.clearListeners(MapaEvento, 'click');
     }
+    
+    
 
     function mapClickEU(event) {
 
@@ -192,6 +206,16 @@ $(document).ready(function () {
 
         marcadorRegistro.setMap(null);
     }
+    
+    function resetMarker2() {
+        google.maps.event.addListener(MapaEvento, "click", mapClick2);
+        
+        $('#latitud').val(null);
+        $('#longitud').val(null);
+
+        marcadorEvento1.setMap(null);
+    }
+    
 
     function resetMarkerEU() {
         google.maps.event.addListener(MapaEU, "click", mapClickEU);
