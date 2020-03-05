@@ -37,7 +37,7 @@ Route::post('cam_Elim', 'controlador_usuarios@eliminarusuarios');
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
 Route::get('admin_event',['uses' =>  'controlador_tablas@listarEventos', 'as' => 'admin_event']);
-Route::post('formevent','controlador_tablas@eliminarEventos');
+Route::post('eliminarEvento',['as' => 'eliminarEvento', 'uses' => 'controlador_tablas@eliminarEventos']);
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
 Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
 Route::post('categorias','controlador_tablas@sacarCategorias');
@@ -68,6 +68,7 @@ Route::get('adminInformes', 'controlador_tablas@listarInformes');
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
 Route::post('actInforme', 'controlador_tablas@actInforme');
 Route::post('modificarInforme',['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
+Route::post('actPlaga', 'controlador_tablas@actPlagas');
 
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {

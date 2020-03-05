@@ -422,11 +422,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" class="descDocumento" placeholder="Escribe una descripción"></textarea>
-                                    </div>
-
-                                    <div class="respuesta">
-
+                                        <textarea name="descripcion-e" id="taa-event" class="descDocumento" placeholder="Escribe una descripción"></textarea>
                                     </div>
 
                                 </div>
@@ -437,10 +433,16 @@ use App\Clases\conexion;
                                         <label>Localización:</label>
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
-
+                                    
                                     <div id="map2" class="mapa">
 
                                     </div>
+
+                                    <input type="hidden" name="latitudEvent" id="latitudEvent" value="">
+                                    <input type="hidden" name="longitudEvent" id="longitudEvent" value="">
+                                    <input type="hidden" name="idevento" id="id_event" value="">
+                                    <button class="btn btn-nuevo mt-2" type="button" name="btnreset3" id="btnreset3">Reiniciar Marcador</button>
+
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
@@ -580,6 +582,54 @@ use App\Clases\conexion;
             </div>
         </div>
 
+        <!-- ******************** Ventana Administración Plagas *********************** -->
+        <div class="modal fade" id="modalPlagas" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            Administración de plagas
+                        </div>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row table-responsive">
+                            <table id="tablaAdminPlagas">
+                                <thead>
+                                    <tr>
+                                        <th hidden>ID</th>
+                                        <th>Nombre</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $plagas = conexion::sacarPlagas();
+
+                                    foreach ($plagas as $plaga) {
+                                        ?>
+                                        <tr>
+                                    <form action="actPlaga" name="infForm" onsubmit="return confirm('¿Quieres proceder con la acción?')" method="POST">
+                                        {{ csrf_field() }}
+                                        <td hidden><input type="number" name="idplaga"value="<?= $plaga->id_plaga ?>"/></td>
+                                        <td><input type="text" name="nomPlaga" class="cajaNormal" value="<?= $plaga->nombre_plaga ?>"/></td>
+                                        <td><input type="submit" name="delPlaga" id="delPlaga" class="btn btn-eliminar" value="."/></td>
+                                        <td><input type="submit" name="modPlaga" id="modPlaga" class="btn btn-guardar" value="."/></td>
+                                    </form>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Ventana modal para mostrar el informe -->
 
         <div class="modal fade" id="modalInforme" data-backdrop="static">
@@ -697,7 +747,7 @@ use App\Clases\conexion;
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Comentario:</p>
-                                        <textarea class="textAreaInf" id="coment" name="coment" placeholder="Comentario del Informe" required></textarea>
+                                        <textarea class="textAreaInf" id="coment" name="coment" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -829,7 +879,7 @@ use App\Clases\conexion;
                                 <div class="col">
                                     <div class="row justify-content-center">
                                         <p>Comentario:</p>
-                                        <textarea class="textAreaInf" id="coment" name="coment" placeholder="Comentario del Informe" required></textarea>
+                                        <textarea class="textAreaInf" id="coment" name="coment" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -944,7 +994,7 @@ use App\Clases\conexion;
 
             <div class = "row" id = "header">
 
-                <nav class="navbar navbar-expand-lg" id="navHeader">
+                <nav class="navbar navbar-expand-xl" id="navHeader">
                     <?php
                     // En el index el logo estará posicionado por defecto en otro sitio
                     if (session()->get("actPage") == Constantes::INDEX) {
