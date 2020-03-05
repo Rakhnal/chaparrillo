@@ -17,17 +17,14 @@ Inicio
 <link href="css/editUsu/cropper.min.css" rel="stylesheet" type="text/css"/>
 <div class="col-12">
     <div class="row col-12 form_base m-auto">
-        <div class="col-12 text-center mt-2">
-            <h1>Perfil</h1>
-            <?php $seesion_user = $prin->img_user;?>
-        </div>
+        <?php $seesion_user = $prin->img_user; ?>
         <div class="row col-12">
             <form class="col-12 row" name="formulario_editUser" id="formulario_editUser" action="edit_us" method="POST">
                 @csrf
                 <div class="col-4">
                     <div class="row justify-content-center d-flex ">
                         <div id="profile-result" class="mb-2 ">
-                            <?php if ($seesion_user != '0' && $seesion_user !=null): ?>
+                            <?php if ($seesion_user != '0' && $seesion_user != null): ?>
                                 <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" class="img-circle" id="laola">  
                             <?php else : ?>
                                 <img src="images/profile-pic/default.png" class="img-circle">    
@@ -42,7 +39,7 @@ Inicio
                             <div class="ajax-response" id="loading"></div>
                             <h4 class="m-t-5 m-b-5 ellipsis text-center">Ajustar imagen</h4>                    
                             <div class="profile-pic-wraper">
-                                <?php if ($seesion_user != '0' && $seesion_user !=null): ?>
+                                <?php if ($seesion_user != '0' && $seesion_user != null): ?>
                                     <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" alt="" id="change-profile-pic" class="col-12">
                                 <?php else: ?>
                                     <img src="images/profile-pic/default.png" alt="imagen" id="change-profile-pic" class="col-12" >    
