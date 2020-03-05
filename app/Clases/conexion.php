@@ -93,6 +93,7 @@ class conexion {
     public static function existeUsuarioPass($correo, $pass) {
 
         $user = Usuario::where('email', $correo)
+                ->where('validado', 1)
                 ->first();
 
         if ($user != null) {
@@ -154,7 +155,8 @@ class conexion {
         $user->pais = $pais;
         $user->latitud = $latitud;
         $user->longitud = $longitud;
-
+        $user->validado = 0;
+        
         $user->save();
     }
 

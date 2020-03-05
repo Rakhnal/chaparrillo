@@ -21,6 +21,12 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
+//DES14: Página Agenda - RAUS
+//Ver calendario de eventos
+Route::get('agenda', function(){
+    return view('publicaciones/agenda');
+});
+
 //DES15: Página Editar Perfil - SSC
 Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
