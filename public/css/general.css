@@ -773,25 +773,29 @@ and (max-device-width: 1024px) {
         transform: scale(1.5);
     }
 
+    .navbar-collapse {
+        max-height: fit-content;
+    }
+
     .btn-eliminar, .btn-guardar, .btn-aniadir {
         font-size: 0.0000000000001px !important;
     }
-    
+
     .modal-body .btn-guardar {
         width: 40px;
         height: 40px;
     }
-    
+
     .modal-body .btn-eliminar {
         width: 40px;
         height: 40px;
     }
-    
+
     .modal-body .btn-aniadir {
         width: 40px;
         height: 40px;
     }
-    
+
     .margin-top-less {
         margin-top: 5px !important;
     }
@@ -810,6 +814,16 @@ and (max-device-width: 1024px) {
         margin: 0 5%;
         max-width: none;
         width: 90%;
+    }
+}
+
+@media
+only screen 
+and (max-device-width: 1024px) and (orientation: landscape) {
+    
+    .navbar-collapse {
+        max-height: 88vh;
+        overflow-y: auto;
     }
 }
 
@@ -854,4 +868,14 @@ and (max-device-width: 740px) {
         margin-top: 0px !important;
     }
 
+}
+
+@media
+only screen 
+and (max-device-width: 740px) and (orientation: landscape) {
+    
+    .navbar-collapse {
+        max-height: 83vh;
+        overflow-y: auto;
+    }
 }
