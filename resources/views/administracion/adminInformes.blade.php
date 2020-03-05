@@ -77,6 +77,42 @@ $user = session()->get("userObj");
                         ?>
                     </tbody>
                 </table>
+                <table id="tablaInformesExportar" hidden>
+                    <thead>
+                        <tr>
+                            <th>Plaga a tratar</th>
+                            <th>Producto</th>
+                            <th>Fecha Informe</th>
+                            <th>Usuario</th>
+                            <th>Litro por Hectarea</th>
+                            <th>Daño Aproximado (%)</th>
+                            <th>Poligono</th>
+                            <th>Parcela</th>
+                            <th>Municipio</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($infs as $inf) {
+                            ?>
+                            <tr>
+                                <td><?= $inf->nombre_plaga ?></td>
+                                <td><?= $inf->nombre_producto ?></td>
+                                <td><?= $inf->fecha_hora ?></td>
+                                <td><?= $inf->nombre ?> <?= $inf->apellidos ?></td>
+                                <td><?= $inf->litro_hectarea ?></td>
+                                <td><?= $inf->aprox_dmg ?></td>
+                                <td><?= $inf->poligono ?></td>
+                                <td><?= $inf->parcela ?></td>
+                                <td><?= $inf->municipio ?></td>
+                                <td><?= $inf->comentario ?></td>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </tbody>
+                </table>
             </div>
 
             <div class="row mt-3">  
@@ -164,7 +200,7 @@ $user = session()->get("userObj");
 
         $(document).on("click", "#exportTable", function () {
 
-            $("#tablaAdminInformes").table2excel({
+            $("#tablaInformesExportar").table2excel({
                 exclude: ".noExl", // Si hay algún tr con esta clase no lo pone en el excel
                 name: "Hoja 01",
                 filename: "Informe_Plagas", // Nombre del archivo (no poner la extensión)

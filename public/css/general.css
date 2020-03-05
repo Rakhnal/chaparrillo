@@ -804,6 +804,16 @@ and (max-device-width: 1024px) {
         padding-top: 15px;
         transform: scale(1.5);
     }
+    
+    .navbar-toggler-icon:focus {
+        outline: none;
+        border: none;
+    }
+    
+    .navbar-toggler:focus {
+        outline: none;
+        border: none;
+    }
 
     .close {
         padding: 25px;
@@ -822,7 +832,7 @@ only screen
 and (max-device-width: 1024px) and (orientation: landscape) {
     
     .navbar-collapse {
-        max-height: 88vh;
+        max-height: 91vh;
         overflow-y: auto;
     }
 }
@@ -875,7 +885,7 @@ only screen
 and (max-device-width: 740px) and (orientation: landscape) {
     
     .navbar-collapse {
-        max-height: 83vh;
+        max-height: 87vh;
         overflow-y: auto;
     }
 }
