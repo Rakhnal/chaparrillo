@@ -7,7 +7,6 @@ session()->put("actPage", Constantes::AD_INFORMES);
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
-<script src="scripts/tablas/table2CSV.js"></script>
 
 @extends('../general/base')
 
@@ -23,7 +22,7 @@ $user = session()->get("userObj");
 
 <div class="col">
     <div class="row">
-        <div class="col">
+        <div class="col-4">
             <nav>
                 <div class="breadcrumb" id="migas">
                     <div class="breadcrumb-item">Usuario</div>
@@ -32,15 +31,19 @@ $user = session()->get("userObj");
             </nav>
         </div>
         <div class="col">
-            <?php
-            if ($user->rol == Constantes::ADMIN) {
-                ?>
-                <div class="row justify-content-end">
-                    <input class="btn btn-nuevo blurmodal margin-top-less margin-right-por" type="button" id="plagasBtn" data-toggle="modal" data-target="#modalPlagas" value="Administrar Plagas">
-                </div>
+
+            <div class="row justify-content-end">
+                <input class="btn btn-nuevo margin-top-less margin-right-por" type="button" id="exportTable" value="Exportar Tabla">
                 <?php
-            }
-            ?>
+                if ($user->rol == Constantes::ADMIN) {
+                    ?>
+
+                    <input class="btn btn-nuevo blurmodal margin-top-less margin-right-por" type="button" id="plagasBtn" data-toggle="modal" data-target="#modalPlagas" value="Administrar Plagas">
+
+                    <?php
+                }
+                ?>
+            </div>
         </div>
     </div>
     <div class="row" id="mainTable">
@@ -89,6 +92,8 @@ $user = session()->get("userObj");
             </div>
         </div>
     </div>
+
+    <script src="scripts/tablas/jquery.table2excel.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -143,7 +148,7 @@ $user = session()->get("userObj");
 
             swal({
                 title: "¿Estás seguro?",
-                text: "Una vez eliminado no podrás recuperar tu documento.",
+                text: "Una vez eliminado no podrás recuperar el informe.",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true
@@ -155,6 +160,16 @@ $user = session()->get("userObj");
                             swal("El informe no ha sido eliminado.");
                         }
                     });
+        });
+
+        $(document).on("click", "#exportTable", function () {
+
+            $("#tablaAdminInformes").table2excel({
+                exclude: ".noExl", // Si hay algún tr con esta clase no lo pone en el excel
+                name: "Hoja 01",
+                filename: "Informe_Plagas", // Nombre del archivo (no poner la extensión)
+                fileext: ".xls" // Ectensión del archivo
+            });
         });
 
         function eliminarInforme(id) {
