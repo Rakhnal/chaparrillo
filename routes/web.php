@@ -68,6 +68,7 @@ Route::get('adminInformes', 'controlador_tablas@listarInformes');
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
 Route::post('actInforme', 'controlador_tablas@actInforme');
 Route::post('modificarInforme',['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
+Route::post('actPlaga', 'controlador_tablas@actPlagas');
 
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {

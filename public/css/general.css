@@ -423,7 +423,6 @@ td {
     margin-right: 15%;
     max-width: none !important;
     width: 70%;
-
 }
 
 #img-eventoP{
@@ -711,15 +710,9 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
     color: white !important;
 }
 
-@media (min-width: 768px) and (max-width: 1025px) {
-   .collapse {
-       display: none !important;
-   }
-}
-
 @media
 only screen 
-and (max-device-width: 768px) {
+and (max-device-width: 1024px) {
 
     ul {
         display: flex !important;

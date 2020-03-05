@@ -434,7 +434,6 @@ use App\Clases\conexion;
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
                                     
-<!--                                    <button onclick="PintarMapa()">Ver Mapa</button>-->
                                     <div id="map2" class="mapa">
 
                                     </div>
@@ -974,7 +973,7 @@ use App\Clases\conexion;
 
             <div class = "row" id = "header">
 
-                <nav class="navbar navbar-expand-lg" id="navHeader">
+                <nav class="navbar navbar-expand-xl" id="navHeader">
                     <?php
                     // En el index el logo estará posicionado por defecto en otro sitio
                     if (session()->get("actPage") == Constantes::INDEX) {
