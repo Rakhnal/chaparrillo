@@ -21,6 +21,12 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
+//DES14: Página Agenda - RAUS
+//Ver calendario de eventos
+Route::get('agenda', function(){
+    return view('publicaciones/agenda');
+});
+
 //DES15: Página Editar Perfil - SSC
 Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
@@ -31,8 +37,10 @@ Route::post('edit_pass', 'EditUserController@editarPassEU');
 //DES16
 //Página de administrar usuarios
 Route::get('admin_usuarios',['uses' =>  'controlador_usuarios@listarUsuarios', 'as' => 'admin_usuarios']);
-Route::post('cam_Valid',['uses' => 'controlador_usuarios@listarUsuariosV', 'as' => 'admin_usuarios']);
-Route::post('cam_Elim', 'controlador_usuarios@eliminarusuarios');
+Route::any('cam_Valid',['uses' => 'controlador_usuarios@listarUsuariosV', 'as' => 'admin_usuarios']);
+Route::any('cam_Elim', 'controlador_usuarios@eliminarusuarios');
+Route::any('cam_rol', 'controlador_usuarios@cambiar_rol');
+Route::any('validarUsuario','controlador_usuarios@Validar_u');
 
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
@@ -66,9 +74,11 @@ Route::get('logout', 'usercontroller@cerrarSesion');
 // DES19: Página Administrar Informes - ADC
 Route::get('adminInformes', 'controlador_tablas@listarInformes');
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
-Route::post('actInforme', 'controlador_tablas@actInforme');
+Route::post('actInforme',['as' => 'actInforme', 'uses' => 'controlador_tablas@actInforme']);
 Route::post('modificarInforme',['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
 Route::post('actPlaga', 'controlador_tablas@actPlagas');
+Route::post('addPlaga', 'controlador_tablas@addPlaga');
+Route::post('actPlaga', 'controlador_tablas@actPlaga');
 
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {
