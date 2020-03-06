@@ -116,7 +116,7 @@ Administrar Usuarios
                                     <form name="cam_Elim" id="eliminar_us" action="cam_Elim" method="POST">
                                         @csrf
                                         <input id="id_u" name="id_u" value="<?= $usuario->id_user ?>" type="hidden">
-                                        <input class="btn btn-eliminar" id="delete" type="submit" name="delete" value="Eliminar">
+                                        <input class="btn btn-eliminar" id="delete" type="submit" name="delete" value="">
                                     </form>
                                 </td>
                             </tr>

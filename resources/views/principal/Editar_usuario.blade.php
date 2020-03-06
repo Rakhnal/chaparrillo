@@ -45,8 +45,11 @@ Inicio
                                     <img src="images/profile-pic/default.png" alt="imagen" id="change-profile-pic" class="col-12" >    
                                 <?php endif; ?>
                             </div>
-                            <div>
-                                <input type="file" enctype="multipart/form-data" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo..." class="btn btn-nuevo">
+                            <div id="div_subir_img" class="mt-3">
+                                <input type="file" enctype="multipart/form-data" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="profile-file-input" class="btn btn-nuevo">
+                                <label for="profile-file-input">
+                                    <span>Subir imagen</span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -100,7 +103,7 @@ Inicio
 
                         </div>
                     </div>
-                    <div class="text-center mb-3 row justify-content-center">
+                    <div class="text-center mb-3 row justify-content-center resp">
                         <input type="submit" class="btn btn-nuevo mr-3" id="bd_edit" value="Aceptar">
                         <button type="button" class="btn btn-nuevo" id="editarUsuario" >Editar</button>
                     </div>

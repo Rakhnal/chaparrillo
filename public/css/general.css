@@ -566,7 +566,7 @@ textarea{
     border-bottom: 1px solid white;
 }
 
-input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos {
+input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos, input[type="file"]#profile-file-input {
     width: 0.1px;
     height: 0.1px;
     opacity: 50;
@@ -575,7 +575,7 @@ input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos {
     z-index: -1;
 }
 
-label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs {
+label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs, label[for="profile-file-input"] {
     font-size: 11pt;
     font-weight: bold;
     background-color: #78aa57;
@@ -590,7 +590,7 @@ label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs {
     transition: all .3s ease-in-out;
 }
 
-label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDocs:hover {
+label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDocs:hover, label[for="profile-file-input"]:hover {
     background-color: #8F7E4F;
 }
 

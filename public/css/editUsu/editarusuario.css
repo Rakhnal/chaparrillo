@@ -137,7 +137,38 @@ and open the template in the editor.
 .bwr-transparent{
     background-color: transparent !important;
 }
-
+#div_subir_img{
+    display: flex;
+    justify-content: center;
+}
+@media only screen and (max-device-width: 740px){
+    .col-6, .col-4, .col-8{
+        -ms-flex: 0 0 50% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }.form_control{
+            height: 50% !important;
+    }
+    input[type=submit],  input[type=text],input[type=button],  input[type=email] ,label,h4,button{
+        font-size: 3em !important;
+    }
+    span{
+        font-size: 1em !important;
+    }
+    .img-circle {
+        border-radius: 100%;
+        width: 70% !important;
+        height: 70% !important;
+        min-height: 300px !important;
+        min-width: 300px !important;
+        max-height: 300px !important;
+        max-width: 300px !important;
+    }
+    .resp{
+        margin-top: 130px;
+    }
+    
+}
 
 .dgcAlert {top: 0;position: absolute;width: 100%;display: block;height: 1000px; background: url(http://www.dgcmedia.es/recursosExternos/fondoAlert.png) repeat; text-align:center; opacity:0; display:none; z-index:999999999999999;}
 .dgcAlert .dgcVentana{width: 500px; background: white;min-height: 150px;position: relative;margin: 0 auto;color: black;padding: 10px;border-radius: 10px;}
