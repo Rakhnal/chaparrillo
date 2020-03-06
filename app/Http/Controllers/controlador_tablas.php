@@ -114,6 +114,7 @@ class controlador_tablas extends Controller {
         if (empty($publi)) {
             $publicacion = new Publicacion();
             $documento = new Documento();
+            $adjunto = new Adjunto();
 
             //dd($publicacion);
 
@@ -133,26 +134,32 @@ class controlador_tablas extends Controller {
             $documento->autores = $req->get('autoresSubirDoc');
             $documento->visible = 1;
 
+//            $file = file_get_contents($req->get('list'), true);
+//            $a1 = str_getcsv($file);
+
+            $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
+
             $publicacion->save();
 
             $publication = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
             $categorias = $req->get('categorias');
 
-            foreach ($categorias as $categoria) {
-                DB::insert('insert into asignar_categorias (id_item, id_categoria) values (?, ?)', [$publication->id_item, $categoria]);
+            if (isset($categorias)) {
+                foreach ($categorias as $categoria) {
+                    DB::insert('insert into asignar_categorias (id_item, id_categoria) values (?, ?)', [$publication->id_item, $categoria]);
+                }
             }
-
-            dd($publication->id_item);
-            $adjuntos = file_get_contents($req->file('subirAdjuntos[0]'));
-            dd($adjuntos);
-            foreach ($adjuntos as $adjunto) {
-                DB::insert('insert into adjuntos (id_documento, documento) values (?, ?)', [$publication->id_item, $adjunto]);
-            }
+//            dd($adjuntos);
+//            foreach ($adjuntos as $adjunto) {
+//                DB::insert('insert into adjuntos (id_adjunto, id_documento, documento) values (?, ?, ?)', [0, $publication->id_item, $adjunto]);
+//            }
 
             $documento->id_documento = $publication->id_item;
+            $adjunto->id_documento = $publication->id_item;
 
             $documento->save();
+            $adjunto->save();
 
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
@@ -186,7 +193,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -194,7 +201,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -250,7 +257,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -258,7 +265,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -289,7 +296,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -297,7 +304,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -319,21 +326,20 @@ class controlador_tablas extends Controller {
 
         $idplaga = $req->get('idplaga');
         $nomPlaga = $req->get('nomPlaga');
-        
+
         if (null != $modPlaga) {
-            
+
             $plaga = Plaga::find($idplaga);
-            
+
             $plaga->nombre_plaga = $nomPlaga;
-            
+
             $plaga->save();
-            
         }
-        
+
         if (null != $delPlaga) {
-            
+
             $plaga = Plaga::find($idplaga);
-            
+
             $plaga->delete();
         }
 
@@ -343,7 +349,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -351,7 +357,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);

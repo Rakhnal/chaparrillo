@@ -434,7 +434,7 @@ use App\Clases\conexion;
                             </div>
                             <div class="form-group m-0">
                                 <div>
-                                    <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos[]" accept="file_extension/*" required multiple>
+                                    <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*" required>
                                 </div>
                                 <label for="subirAdjuntos">
                                     <span>Adjuntar archivos</span>

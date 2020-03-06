@@ -168,7 +168,7 @@ Administrar Documentación
         // files is a FileList of File objects. List some properties.
         var output = [];
         for (var i = 0, f; f = files[i]; i++) {
-            output.push('<li>✓ <strong>', escape(f.name), '</strong></li>');
+            output.push('<li value="', escape(f.name), '">✓ <strong>', escape(f.name), '</strong></li>');
         }
         document.getElementById('list').innerHTML = '<ul id="listaDocs" name="listaDocs">' + output.join('') + '</ul>';
     }
