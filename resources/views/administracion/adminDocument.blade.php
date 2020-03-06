@@ -170,7 +170,7 @@ Administrar Documentación
         for (var i = 0, f; f = files[i]; i++) {
             output.push('<li>✓ <strong>', escape(f.name), '</strong></li>');
         }
-        document.getElementById('list').innerHTML = '<ul id="listaDocs">' + output.join('') + '</ul>';
+        document.getElementById('list').innerHTML = '<ul id="listaDocs" name="listaDocs">' + output.join('') + '</ul>';
     }
 
     document.getElementById('subirAdjuntos').addEventListener('change', handleFileSelect, false);

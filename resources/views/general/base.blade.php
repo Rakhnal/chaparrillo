@@ -433,7 +433,7 @@ use App\Clases\conexion;
                                         <label>Localización:</label>
                                         <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
-                                    
+
                                     <div id="map2" class="mapa">
 
                                     </div>
@@ -510,9 +510,9 @@ use App\Clases\conexion;
 
                                 foreach ($cats as $cat) {
                                     ?>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" name="categorias" id="categoria<?= $cat->id_categoria ?>">
-                                        <label class="form-check-label" for="categoria<?= $cat->id_categoria ?>">
+                                    <div class="form-check p-0 divCategorias">
+                                        <input class="form-check-input" type="checkbox" value="<?= $cat->id_categoria ?>" name="categorias[]" id="categoria<?= $cat->id_categoria ?>">
+                                        <label class="form-check-label" for="categoria<?= $cat->id_categoria ?>"><span></span>
                                             <?= $cat->nombre ?>
                                         </label>
                                     </div>

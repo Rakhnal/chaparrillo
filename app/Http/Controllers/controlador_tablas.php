@@ -113,7 +113,6 @@ class controlador_tablas extends Controller {
         if (empty($publi)) {
             $publicacion = new Publicacion();
             $documento = new Documento();
-            $adjunto = new Adjunto();
 
             //dd($publicacion);
 
@@ -128,8 +127,6 @@ class controlador_tablas extends Controller {
 
             //dd($req->file('subirAdjuntos'));
 
-            $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
-
             $documento->num_descargas = 0;
             $documento->anio = $req->get('anioSubirDoc');
             $documento->autores = $req->get('autoresSubirDoc');
@@ -139,13 +136,22 @@ class controlador_tablas extends Controller {
 
             $publication = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
-            //dd($publication->id_item);
+            $categorias = $req->get('categorias');
+
+            foreach ($categorias as $categoria) {
+                DB::insert('insert into asignar_categorias (id_item, id_categoria) values (?, ?)', [$publication->id_item, $categoria]);
+            }
+
+            dd($publication->id_item);
+            $adjuntos = file_get_contents($req->file('subirAdjuntos[0]'));
+            dd($adjuntos);
+            foreach ($adjuntos as $adjunto) {
+                DB::insert('insert into adjuntos (id_documento, documento) values (?, ?)', [$publication->id_item, $adjunto]);
+            }
 
             $documento->id_documento = $publication->id_item;
-            $adjunto->id_documento = $publication->id_item;
 
             $documento->save();
-            $adjunto->save();
 
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
