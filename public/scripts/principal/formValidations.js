@@ -8,12 +8,12 @@
 function samePasswords() {
 
     if ($('#passPpal').val() === $('#passVal').val()) {
-        
+
         $('#passPpal').css('border', 'none');
         $('#passVal').css('border', 'none');
         $('#passPpal').css('border-bottom', '1px solid white');
         $('#passVal').css('border-bottom', '1px solid white');
-        
+
     } else {
         $('#passPpal').css('border', '1px solid red');
         $('#passVal').css('border', '1px solid red');
@@ -23,9 +23,9 @@ function samePasswords() {
 
     if ($('#latitudInput').val() === null || $('#latitudInput').val() === "" || $('#longitudInput').val() === null || $('#longitudInput').val() === "") {
         toastr.error('Falta seleccionar la ubicación en el mapa', '¡Error!');
-        
+
         return false;
-        
+
     }
 
     return true;
@@ -35,12 +35,12 @@ function samePasswords() {
 function samePasswordsEU() {
 
     if ($('#passw').val() === $('#passw2').val()) {
-        
+
         $('#passw').css('border', 'none');
         $('#passw2').css('border', 'none');
         $('#passw').css('border-bottom', '1px solid white');
         $('#passw2').css('border-bottom', '1px solid white');
-        
+
     } else {
         $('#passw').css('border', '1px solid red');
         $('#passw2').css('border', '1px solid red');
@@ -50,11 +50,16 @@ function samePasswordsEU() {
     return true;
 }
 
+function googleSearch() {
+    window.location = 'http://www.google.com/search?q=site:proyectochaparrillo.es ' + $("#searchtext").val();
+    return false;
+}
+
 $(document).ready(function () {
 
-  $('.second-button').on('click', function () {
+    $('.second-button').on('click', function () {
 
-    $('.animated-icon2').toggleClass('open');
-  });
-  
+        $('.animated-icon2').toggleClass('open');
+    });
+
 });

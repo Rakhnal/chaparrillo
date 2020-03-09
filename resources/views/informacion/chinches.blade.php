@@ -18,7 +18,21 @@ Chinches
 <div class="col">
     <div class="row format-div-b">
         
-        <div class="col">
+        <div class="col-xl-6  col-md-12 no-padding">
+            <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/chinche.jpg">
+                <div class="col">
+                    <div class="row middle-height justify-content-center align-items-end">
+                        <h1 class="bolder">Chinches</h1>
+                    </div>
+
+                    <div class="row middle-height justify-content-center align-items-start">
+                        <h1>Hemíptera: Heteróptera</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-6  col-md-12">
             <div class="row justify-content-center align-items-center marg-top h20">
                 <h2 class="bolder">Descripción</h2>
             </div>
@@ -33,19 +47,6 @@ Chinches
             </div>
         </div>
         
-        <div class="col-md-6 no-padding">
-            <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/chinche.jpg">
-                <div class="col">
-                    <div class="row middle-height justify-content-center align-items-end">
-                        <h1 class="bolder">Chinches</h1>
-                    </div>
-
-                    <div class="row middle-height justify-content-center align-items-start">
-                        <h1>Hemíptera: Heteróptera</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="row format-div-lessp">
         <div class="col">

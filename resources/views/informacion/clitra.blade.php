@@ -17,7 +17,7 @@ Clitra
 
 <div class="col">
     <div class="row format-div-b">
-        <div class="col-md-6 no-padding">
+        <div class="col-xl-6  col-md-12 no-padding">
             <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/clitrar.jpg">
                 <div class="col">
                     <div class="row middle-height justify-content-center align-items-end">
@@ -25,12 +25,12 @@ Clitra
                     </div>
 
                     <div class="row middle-height justify-content-center align-items-start">
-                        <h1>Labidostomis lusitanica</h1>
+                        <h1><i>Labidostomis lusitanica</i></h1>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-xl-6  col-md-12">
             <div class="row justify-content-center marg-top">
                 <h2 class="bolder">Ciclo</h2>
             </div>
