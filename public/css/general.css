@@ -634,6 +634,8 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 #logosObs .col {
     padding: 0;
     margin: 0;
+}
+
 #previewDiv {
     width: 100%;
 }
@@ -834,7 +836,7 @@ and (max-device-width: 1024px) {
     #mapaRegistro {
         height: 500px;
     }
-    
+
     #searchButton {
         transform: scale(1.5);
     }
@@ -870,12 +872,12 @@ and (max-device-width: 1024px) {
         padding-top: 15px;
         transform: scale(1.5);
     }
-    
+
     .navbar-toggler-icon:focus {
         outline: none;
         border: none;
     }
-    
+
     .navbar-toggler:focus {
         outline: none;
         border: none;
@@ -891,7 +893,7 @@ and (max-device-width: 1024px) {
         max-width: none;
         width: 90%;
     }
-    
+
     #logosObs {
         display: none;
     }
@@ -900,7 +902,7 @@ and (max-device-width: 1024px) {
 @media
 only screen 
 and (max-device-width: 1024px) and (orientation: landscape) {
-    
+
     .navbar-collapse {
         max-height: 91vh;
         overflow-y: auto;
@@ -926,11 +928,11 @@ and (max-device-width: 740px) {
     a {
         text-align: center !important;
     }
-    
+
     #mapaRegistro {
         height: 550px;
     }
-    
+
     #imgUser {
         width: 120px !important;
         height: 120px !important;
@@ -957,7 +959,7 @@ and (max-device-width: 740px) {
 @media
 only screen 
 and (max-device-width: 740px) and (orientation: landscape) {
-    
+
     .navbar-collapse {
         max-height: 87vh;
         overflow-y: auto;
