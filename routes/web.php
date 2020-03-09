@@ -36,6 +36,10 @@ Route::any('cam_Elim', 'controlador_usuarios@eliminarusuarios');
 Route::any('cam_rol', 'controlador_usuarios@cambiar_rol');
 Route::any('validarUsuario','controlador_usuarios@Validar_u');
 
+//DES11
+//Página de administrar noticias
+Route::get('noticias',['uses' =>  'controlador_noticias@listarnoticias', 'as' => 'Noticias']);
+
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
 Route::get('admin_event',['uses' =>  'controlador_tablas@listarEventos', 'as' => 'admin_event']);

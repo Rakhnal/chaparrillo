@@ -15,7 +15,7 @@ Inicio
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/general/editar_usuario.js') }}"></script>
 <link href="css/editUsu/cropper.min.css" rel="stylesheet" type="text/css"/>
-<div class="col-12">
+<div class="col-12 mt-1">
     <div class="row col-12 form_base m-auto">
         <?php $seesion_user = $prin->img_user; ?>
         <div class="row col-12">
@@ -103,9 +103,14 @@ Inicio
 
                         </div>
                     </div>
+                    <script>
+                        function cambiarColor() {
+                            color.innerHTML = color.innerHTML == "Editar" ? "Cancelar" : "Editar";
+                        }
+                    </script>
                     <div class="text-center mb-3 row justify-content-center resp">
                         <input type="submit" class="btn btn-nuevo mr-3" id="bd_edit" value="Aceptar">
-                        <button type="button" class="btn btn-nuevo" id="editarUsuario" >Editar</button>
+                        <button type="button" class="btn btn-nuevo" id="editarUsuario" onclick="cambiarColor()"><h5 id="color">Editar</h5></button>
                     </div>
                 </div>
             </form>
