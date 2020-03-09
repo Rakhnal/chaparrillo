@@ -32,6 +32,7 @@ use App\Clases\conexion;
 
         <link rel="stylesheet" href="css/general.css" />
         <script src="scripts/general/sweetalert.min.js"></script>
+        
     </head>
     <body>
 
@@ -167,8 +168,8 @@ use App\Clases\conexion;
                                     <input id="latitud" type="hidden" name="latitud" value="">
                                     <input id="longitud" type="hidden" name="longitud" value="">
                                     <script>
-                                        $('#latitud').val(localStorage.getItem('latitud'));
-                                        $('#longitud').val(localStorage.getItem('longitud'));
+            $('#latitud').val(localStorage.getItem('latitud'));
+            $('#longitud').val(localStorage.getItem('longitud'));
                                     </script>
                                 </div>
                                 <div class="col-4">
@@ -370,7 +371,7 @@ use App\Clases\conexion;
                     <div class="modal-body">
 
                         <p>Usuario/Contraseña incorrectos</p>
-                        
+
                         <p>Si se acaba de registrar espere a ser validado</p>
 
                     </div>
@@ -900,7 +901,7 @@ use App\Clases\conexion;
                                 <div class="row justify-content-center">
                                     <h3>Centro "El Chaparrillo"</h3>
                                 </div>
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center format-div-colabs">
                                     <p class="thinner">Adscrito al Instituto Regional de Investigación y Desarrollo Agroalimentario y Forestal de Castilla-La Mancha (IRIAF), tiene como objetivo la investigación, desarrollo e innovación en el área agraria y medio ambiental. Cuenta con más de 35 años de experiencia en la investigación y extensión agraria del cultivo del pistacho, y es referencia nacional e internacional en el cultivo.</p>
                                 </div>
                                 <div class="row justify-content-center">
@@ -908,56 +909,47 @@ use App\Clases\conexion;
                                 </div>
                             </div>
                         </div>
-
+                        <br>
                         <div class="row justify-content-center">
-                            <div class="col margin-right">
-                                <div class="row justify-content-center">
-                                    <h3>ECOVALIA</h3>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <p class="thinner">Asociación sin ánimo de lucro que trabaja por y para el desarrollo de la producción y la alimentación ecológicas. Su origen se remonta a 1991. Actualmente figuran como referente a nivel nacional y su proyección internacional está en pleno crecimiento.</p>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <a href="https://www.ecovalia.org/" target="_blank">www.ecovalia.org</a>
-                                </div>
-                            </div>
                             <div class="col">
                                 <div class="row justify-content-center">
-                                    <h3>SAT Ecopistacho</h3>
+                                    <h3>Desarrolladores Web (Contacto)</h3>
                                 </div>
+
                                 <div class="row justify-content-center">
-                                    <p class="thinner">Ecopistacho, se funda en La Mancha el año 2010, como Sociedad Agraria de Transformación de fruto del pistachero, está formada por cultivadores de este fruto comprometidos en conciencia con un modelo de agricultura no agresiva. La SAT Ecopistacho posee las acreditaciones oficiales que certifican su condición ecológica. El objetivo que persigue este colectivo, es: ofrecer a la sociedad un producto natural de máxima calidad basado en el respeto por el medioambiente.</p>
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/nathaniel-lucas-olmo-58a565167/" target="_blank">Nathaniel Lucas Olmo</a>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="row justify-content-center">
-                                    <a href="http://www.ecopistacho.com/" target="_blank">www.ecopistacho.com</a>
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/rafael-%C3%A1ngel-ure%C3%B1a-sobrino-a57aa9182/" target="_blank">Rafael Angel Ureña Sobrino</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/sergio-sus%C3%ADn-cejudo-00b479161/" target="_blank">Sergio Susin Cejudo</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/%C3%A1lvaro-donoso-conde-530b22107/" target="_blank">Álvaro Donoso Conde</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col margin-right">
-                                <div class="row justify-content-center">
-                                    <h3>SAT El campo</h3>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <p class="thinner">La SAT nº516 del Campo es una sociedad agraria de transformación que se nutre las plantaciones de pistacho y de la experiencia de sus asociados. Actualmente está compuesta por 26 socios cuyas plantaciones suman alrededor de 500 hectáreas de pistacho, ubicadas en distintos municipios de la región. Cabe destacar su decidida apuesta por el pistacho ecológico que supone el 40% de su producción total.</p>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <a href="http://www.satdelcampo.es/" target="_blank">www.satdelcampo.es</a>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row justify-content-center">
-                                    <h3>SAT Pistamancha</h3>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <p class="thinner">Pistamancha tiene en la actualidad 19 socios con una superficie plantada de pistachos de algo más de 300 Has. Estas plantaciones se encuentran en distintos estados de producción y la mayoría de ellos, en proceso de reconversión a cultivo ecológico. Los socios de Pistamancha reciben de forma gratuita los consejos y el asesoramiento de aquellos socios con plantaciones más antiguas y aprovechan su experiencia evitando errores comunes en la implantación de un nuevo pistachar.</p>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <a href="https://www.pistamancha.com/" target="_blank">www.pistamancha.com</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -997,14 +989,31 @@ use App\Clases\conexion;
                     }
                     ?>
 
+                    <div class="col" id="logosObs">
+                        <div class="row">
+                            <div class="col">
+                                <img src="images/footer/logochapa.jpg" class="headerImg" id="headerChapa" alt="Logo Chaparrillo"/>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <img src="images/footer/logojccm.png" class="headerImg" id="headerJccm" alt="Logo JCCM"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <img src="images/footer/logouemapa.png" class="headerImgLarge" id="headerMapa" alt="Logo MAPA"/>
+                        </div>
+
+                    </div>
+
                     <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"><div class="animated-icon2"><span></span><span></span><span></span><span></span></div></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">                        
                         <ul class="nav navbar-nav ml-auto">
 
-                            <form class="row form-inline my-2 my-lg-0 justify-content-center">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Buscar en la página" aria-label="Search">
+                            <form class="row form-inline my-2 my-lg-0 justify-content-center" id="searchform" onsubmit="return googleSearch()" class="searchform" method="GET" action="#">
+                                <input class="form-control mr-sm-2" type="search" id="searchtext" placeholder="Buscar en la página" aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0 margin-right" type="submit" id="searchButton"></button>
                             </form>
 
