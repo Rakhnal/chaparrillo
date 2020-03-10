@@ -63,6 +63,10 @@ Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'cont
 // Subir documentos
 Route::post('subirDocumento', ['as' => 'subirDocumento', 'uses' => 'controlador_tablas@subirDocumentos']);
 
+// DES13: Página Documentación - NLO
+// Mostrar documentos
+Route::get('documentacion', ['as' => 'documentacion', 'uses' => 'controlador_publicaciones@mostrarDocumentos']);
+
 // DES21: Login/Registro - ADC
 // Login
 Route::post('login', 'usercontroller@iniciarSesion');
