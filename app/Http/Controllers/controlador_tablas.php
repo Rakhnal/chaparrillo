@@ -17,11 +17,11 @@ use Illuminate\Support\Facades\Session;
 use App\Categoria;
 
 /* Author: Nathan, Álvaro y Rafa */
-        
+
 class controlador_tablas extends Controller {
 
     //************************************************************************//
-    //DES17: Página para administrar documentación
+    //DES17: Página para administrar documentación - Autor: Nathan
     //************************************************************************//
     /**
      * Esta función lista todos los documentos de la base de datos.
@@ -33,12 +33,12 @@ class controlador_tablas extends Controller {
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
                 ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento')
                 ->paginate(8);
-        
+
         $categorias = DB::table('categorias')
                 ->join('asignar_categorias', 'asignar_categorias.id_categoria', '=', 'categorias.id_categoria')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'asignar_categorias.id_item')
                 ->select('categorias.nombre as categoria');
-        
+
         $datos = [
             'docs' => $documentos,
             'categorias' => $categorias
@@ -69,32 +69,29 @@ class controlador_tablas extends Controller {
 
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        $qhp = "ok";
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento)
-                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
-                ->first();
 
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento);
+        $documentos = DB::select('SELECT documentos.id_documento, publicaciones.nombre as nombre, descripcion, anio, autores, visible, documento FROM documentos'
+                        . 'JOIN publicaciones ON documentos.id_documento = publicaciones.id_item'
+                        . 'JOIN adjuntos ON adjuntos.id_documento = documentos.id_documento'
+                        . 'WHERE documentos.id_documento = ' . $id_documento);
 
-        if ($documento) {
-            $qhp = "ok";
-        } else {
-            $qhp = "fail";
-        }
+//        $categorias = \DB::select('SELECT asignar_categorias.id_item,categorias.nombre,asignar_categorias.id_categoria FROM asignar_categorias'
+//                        . 'JOIN publicaciones ON publicaciones.id_item = asignar_categorias.id_item'
+//                        . 'JOIN categorias ON categorias.id_categoria = asignar_categorias.id_categoria'
+//                        . 'WHERE publicaciones.id_item =' . $id_documento);
 
-        $datos = array(
-            'nombre' => $documento[0]->nombre,
-            'descripcion' => $documento[0]->descripcion,
-            'visible' => $documento[0]->visible,
-            'qhp' => $qhp
+        $documento = array(
+            'nombre' => $documentos[0]->nombre,
+            'descripcion' => $documentos[0]->descripcion,
+            'anio' => $documentos[0]->anio,
+            'autores' => $documentos[0]->autores
         );
+        
+//        $categoria = array(
+//          'categoria' => $categorias[0]->nombre  
+//        );
 
-        return json_encode($datos);
+        return json_encode($documento);
     }
 
     public function modificarDocumentos() {
@@ -191,7 +188,9 @@ class controlador_tablas extends Controller {
         }
     }
 
-    //DES19: Página Administrar Informes
+    //************************************************************************//
+    //DES19: Página Administrar Informes - Autor: Álvaro
+    //************************************************************************//
     /**
      * Mostrará los datos de la página en modo SWAT o Admin
      * @return type
@@ -423,8 +422,9 @@ class controlador_tablas extends Controller {
         return json_encode($infArray);
     }
 
-    //DES18: Página para adminsitrar eventos
-
+    //************************************************************************//
+    //DES18: Página para adminsitrar eventos - Autor: Rafa
+    //************************************************************************//
     /**
      * Función para mostrar todos los eventos de la bbdd.
      * @return type

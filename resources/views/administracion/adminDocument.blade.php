@@ -132,23 +132,21 @@ Administrar Documentación
     }
 
     $(document).on("click", "#modificarDocumentos", function () {
-        var id = $(this).attr("data-idMod");
         var token = '{{csrf_token()}}';
         var parametros = {
-            "identificador": id,
+            "identificador": $(this).attr('data-idMod'),
             "_token": token
         };
-        alert(id);
         $.ajax({
             url: "buscarDocumento",
             data: parametros,
             type: 'post',
             success: function (response) {
                 var respuesta = JSON.parse(response);
-                alert(respuesta.qhp);
                 $('#nombreEditarDoc').val(respuesta.nombre);
                 $('#descEditarDoc').val(respuesta.descripcion);
-                $('#selectVisible').val(respuesta.visible);
+                $('#anioEditarDoc').val(respuesta.anio);
+                $('#autoresEditarDoc').val(respuesta.autores);
             },
             statusCode: {
                 404: function () {

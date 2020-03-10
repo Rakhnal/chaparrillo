@@ -486,16 +486,16 @@ use App\Clases\conexion;
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" class="pl-2" id="nombreEditarDoc" name="nombreEditarDoc" placeholder="Nombre del documento" required>
+                                <input type="text" class="pl-2" id="nombreEditarDoc" name="nombreEditarDoc" placeholder="Nombre del documento" value="" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación" value=""></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="number" class="pl-2" id="anioEditarDoc" name="anioEditarDoc" placeholder="Año de publicación" pattern="[0-9]{4}" required>
+                                <input type="number" class="pl-2" id="anioEditarDoc" name="anioEditarDoc" placeholder="Año de publicación" pattern="[0-9]{4}" value="" required>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="pl-2" id="autoresEditarDoc" name="autoresEditarDoc" placeholder="Autores del documento" required>
+                                <input type="text" class="pl-2" id="autoresEditarDoc" name="autoresEditarDoc" placeholder="Autores del documento" value="" required>
                             </div>
                             <div class="form-group form-inline">
                                 <div>
@@ -510,6 +510,23 @@ use App\Clases\conexion;
                                         <option value="1">Visible</option>
                                     </select>
                                 </div>
+                            </div>
+                            <div id="previewDiv">
+                                <output id="list"></output>
+                            </div>
+                            <div class="form-group" id="modificarListaCategorias">
+                                <?php
+                                foreach ($cats as $cat) {
+                                    ?>
+                                    <div class="form-check p-0 divCategorias">
+                                        <input class="form-check-input" type="checkbox" value="<?= $cat->id_categoria ?>" name="categorias[]" id="categoria<?= $cat->id_categoria ?>">
+                                        <label class="form-check-label" for="categoria<?= $cat->id_categoria ?>"><span></span>
+                                            <?= $cat->nombre ?>
+                                        </label>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                             </div>
                         </div>
                         <div class="modal-footer">
