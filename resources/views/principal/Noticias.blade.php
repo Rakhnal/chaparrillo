@@ -2,6 +2,8 @@
 
 use App\Clases\conexion;
 use App\Clases\Auxiliares\Constantes;
+
+session()->put("actPage", Constantes::AD_NOTICIAS);
 ?>
 @extends('../general/base')
 @section('titulo')
@@ -10,105 +12,53 @@ Inicio
 @section('contenido')
 <link rel="stylesheet" type="text/css" href="css/editUsu/editarusuario.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="{{ URL::asset('scripts/general/editar_usuario.js') }}"></script>
-<link href="css/editUsu/cropper.min.css" rel="stylesheet" type="text/css"/>
-<div class="col-12 mt-1">
-    <div class="row col-12 form_base m-auto">
-        <div class="row col-12">
-            @csrf
-            <div class="col-12">
-                <a class="kicker  kicker_live width_full uppercase color_gray_ultra_dark  " href="https://elpais.com/noticias/ncov/">
-                    <span class="block text_indent">Última hora</span>
-                </a>
-                <h2 class="headline color_gray_ultra_dark font_secondary width_full  headline_md ">
-                    <a href="/sociedad/2020-03-09/ultimas-noticias-del-coronavirus-en-directo.html">Últimas noticias del coronavirus, en directo</a></h2>
-                <div class="col desktop_12 tablet_8 mobile_4">
-                    <div class="bylineuppercase color_gray_ultra_dark margin_bottom width_full">
-                        <span class=" false"><a href="https://elpais.com/autor/el_pais/a/" class="author ">El País</a></span>
-                        <span>
-                            <span class="separator">|</span>
-                            <span class="capitalize">Madrid</span>
-                        </span></div><p class="description  color_gray_medium block width_full false false">Los muertos y contagios en Madrid se duplican La Comunidad de Madrid eleva a 16 los fallecidos y 436 los contagios en la región | Al menos 907 infectados y 25 muertos en España | Las Bolsas europeas y asiáticas se desploman | Pedro Sánchez preside la reunión de la comisión de seguimiento en Sanidad | Cierran tres colegios en Euskadi</p>
-                    <div class="width_full margin_top">
-                        <div class="related_story  flex margin_bottom color_gray_ultra_dark ">
-                            <div>
-                                <span class="kicker   uppercase">
-                                    <span>ESPECIAL</span>
-                                </span>
-                                <div class="middle_dot  background_gray_ultra_dark border_round inline_block"></div> 
-                                <a href="https://elpais.com/sociedad/crisis-del-coronavirus/" class="related_story_headline">La crisis del coronavirus</a>
-                            </div>
-                        </div>
+<link href="css/noticias/noticias.css" rel="stylesheet" type="text/css"/>
+<div class="mr-1 ml-1 mt-1 row">
+    <div class="col-8 mt-1 ">
+        <?php foreach ($noticias as $noticia) { ?>
+            @csrf<?php ?>
+            <div class="mt-3 mb-3 form_base noticia_base col-12 pr-0">
+                <div class="col-8">
+                    <div class="encabezado_noticia row">
+                        <a class="categoria_noticia col-8"><span class="block"><?= $noticia->categoria; ?></span></a>
+                        <a class="fecha_noticias col-4"><?= $noticia->fecha_subida; ?></a>
+                    </div>
+                    <div class="cabecera_noticia mt-2">
+                        <h2 class="titulo_noticia">
+                            <a href=""><?= $noticia->titulo; ?></a>
+                        </h2>  
+                    </div>
+                    <div class="ml-4" id="cuerpo_noticia">
+                        <p><?= $noticia->descripcion; ?></p>
                     </div>
                 </div>
+                <div class="col-4 img_noticia pr-0">
+                    <?php if ($noticia->imagen == null || $noticia->imagen == "" || $noticia->imagen == '') {
+                        ?><img src="images/profile-pic/default.png" alt="Imagen" class="img_noticia"><?php
+                    } else {
+                        ?><img src="data:image/jpg;base64,<?php echo base64_encode($noticia->imagen); ?>" alt="Imagen" class="img_noticia">
+                    <?php } ?>
+                </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
-    <div class="row col-12 form_base m-auto mt-5">
-        <div class="row col-12">
-            @csrf
-            <div class="col-12">
-                <a class="kicker  kicker_live width_full uppercase color_gray_ultra_dark  " href="https://elpais.com/noticias/ncov/">
-                    <span class="block text_indent">Última hora</span>
-                </a>
-                <h2 class="headline color_gray_ultra_dark font_secondary width_full  headline_md ">
-                    <a href="/sociedad/2020-03-09/ultimas-noticias-del-coronavirus-en-directo.html">Últimas noticias del coronavirus, en directo</a></h2>
-                <div class="col desktop_12 tablet_8 mobile_4">
-                    <div class="bylineuppercase color_gray_ultra_dark margin_bottom width_full">
-                        <span class=" false"><a href="https://elpais.com/autor/el_pais/a/" class="author ">El País</a></span>
-                        <span>
-                            <span class="separator">|</span>
-                            <span class="capitalize">Madrid</span>
-                        </span>
-                    </div>
-                    <p class="description  color_gray_medium block width_full false false">Los muertos y contagios en Madrid se duplican La Comunidad de Madrid eleva a 16 los fallecidos y 436 los contagios en la región | Al menos 907 infectados y 25 muertos en España | Las Bolsas europeas y asiáticas se desploman | Pedro Sánchez preside la reunión de la comisión de seguimiento en Sanidad | Cierran tres colegios en Euskadi</p>
-                    <div class="width_full margin_top">
-                        <div class="related_story  flex margin_bottom color_gray_ultra_dark ">
-                            <div>
-                                <span class="kicker   uppercase">
-                                    <span>ESPECIAL</span>
-                                </span>
-                                <div class="middle_dot  background_gray_ultra_dark border_round inline_block"></div> 
-                                <a href="https://elpais.com/sociedad/crisis-del-coronavirus/" class="related_story_headline">La crisis del coronavirus</a>
-                            </div>
-                        </div>
-                    </div>
+    <div class="col-4 mt-1">
+        <?php foreach ($destacadas as $destacada) { ?>
+            <div class="mt-3 mb-3 form_base">
+                <div class="encabezado_noticia">
+                    <a class="fecha_noticias col-4"><?= $destacada->fecha_subida; ?></a>
+                    <a class="categoria_noticia col-4"><span class="block"><?= $destacada->categoria; ?></span></a>
+                </div>
+                <div class="cabecera_noticia">
+                    <h2 class="titulo_noticia">
+                        <a href=""><?= $destacada->titulo; ?></a>
+                    </h2>  
                 </div>
             </div>
-        </div>
+        <?php } ?>
     </div>
-    <div class="row col-12 form_base m-auto mt-5 mb-5">
-        <div class="row col-12">
-            @csrf
-            <div class="col-12">
-                <a class="kicker  kicker_live width_full uppercase color_gray_ultra_dark  " href="https://elpais.com/noticias/ncov/">
-                    <span class="block text_indent">Última hora</span>
-                </a>
-                <h2 class="headline color_gray_ultra_dark font_secondary width_full  headline_md ">
-                    <a href="/sociedad/2020-03-09/ultimas-noticias-del-coronavirus-en-directo.html">Últimas noticias del coronavirus, en directo</a></h2>
-                <div class="col desktop_12 tablet_8 mobile_4">
-                    <div class="bylineuppercase color_gray_ultra_dark margin_bottom width_full">
-                        <span class=" false"><a href="https://elpais.com/autor/el_pais/a/" class="author ">El País</a></span>
-                        <span>
-                            <span class="separator">|</span>
-                            <span class="capitalize">Madrid</span>
-                        </span>
-                    </div>
-                    <p class="description  color_gray_medium block width_full false false">Los muertos y contagios en Madrid se duplican La Comunidad de Madrid eleva a 16 los fallecidos y 436 los contagios en la región | Al menos 907 infectados y 25 muertos en España | Las Bolsas europeas y asiáticas se desploman | Pedro Sánchez preside la reunión de la comisión de seguimiento en Sanidad | Cierran tres colegios en Euskadi</p>
-                    <div class="width_full margin_top">
-                        <div class="related_story  flex margin_bottom color_gray_ultra_dark ">
-                            <div>
-                                <span class="kicker   uppercase">
-                                    <span>ESPECIAL</span>
-                                </span>
-                                <div class="middle_dot  background_gray_ultra_dark border_round inline_block"></div> 
-                                <a href="https://elpais.com/sociedad/crisis-del-coronavirus/" class="related_story_headline">La crisis del coronavirus</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div>
+        {{  $noticias->links() }}
     </div>
 </div>
 @endsection

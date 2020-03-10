@@ -18,9 +18,20 @@ class controlador_noticias extends Controller {
      */
     public function listarnoticias() {
         $noticias = DB::table('noticias')
-                ->select('id_noticia', 'tipo', 'enlace')
+                ->join('publicaciones','noticias.id_noticia','=','publicaciones.id_item')
+                ->join('usuarios','usuarios.id_user','=','publicaciones.id_user')
+                ->join('categorias','noticias.tipo','=','categorias.id_categoria')
+                ->join('imagenes','imagenes.id_item','=','publicaciones.id_item')
+                ->select('noticias.id_noticia','imagenes.imagen','usuarios.nombre as usuario','usuarios.apellidos','usuarios.email', 'categorias.nombre as categoria', 'noticias.enlace','publicaciones.descripcion','publicaciones.nombre as titulo','publicaciones.fecha_subida')
+                ->orderby('publicaciones.fecha_subida','desc')
                 ->paginate(8);
-        return view(Constantes::AD_NOTICIAS, ['noticias' => $noticias]);
+        $destacadas = DB::table('noticias')
+                ->join('publicaciones','noticias.id_noticia','=','publicaciones.id_item')
+                ->join('categorias','noticias.tipo','=','categorias.id_categoria')
+                ->select('noticias.id_noticia','categorias.nombre as categoria','publicaciones.nombre as titulo','publicaciones.fecha_subida')
+                ->orderby('publicaciones.fecha_subida','desc')
+                ->paginate(10);
+        return view(Constantes::AD_NOTICIAS, ['noticias' => $noticias,'destacadas'=>$destacadas]);
     }
 
 }
