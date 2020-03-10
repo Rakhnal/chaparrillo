@@ -26,6 +26,7 @@ Route::get('index', function () {
 Route::get('agenda', function(){
     return view('publicaciones/agenda');
 });
+Route::post('mostrarEventos',['as' => 'mostrarEventos', 'uses' => 'controlador_tablas@mostrarEventos']);
 
 //DES15: Página Editar Perfil - SSC
 Route::get('Editar_usuario', function () {
@@ -45,10 +46,13 @@ Route::any('validarUsuario','controlador_usuarios@Validar_u');
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
 Route::get('admin_event',['uses' =>  'controlador_tablas@listarEventos', 'as' => 'admin_event']);
+//Eliminar eventos
 Route::post('eliminarEvento',['as' => 'eliminarEvento', 'uses' => 'controlador_tablas@eliminarEventos']);
+//Agregar eventos
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
+//Llamada a ajax para cargar eventos
 Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
-Route::post('categorias','controlador_tablas@sacarCategorias');
+//Actualizar eventos
 Route::post('guardarEvento','controlador_tablas@guardarEventos');
 
 // DES17: Página Administrar Documentos - NLO

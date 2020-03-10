@@ -602,4 +602,33 @@ class controlador_tablas extends Controller {
         return redirect('admin_event');
     }
 
+    public function mostrarEventos() {
+
+        $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
+                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+        );
+
+        $array = array();
+        
+        for ($i = 0; $i < count($eventos); $i++) {
+            $evento = array(
+                'title' => $eventos[$i]->nombre,
+                'imagen' => base64_encode($eventos[$i]->imagen),
+                'descripcion' => $eventos[$i]->descripcion,
+                'localizacion' => $eventos[$i]->localizacion,
+                'start' => $eventos[$i]->fecha_inicio,
+                'end' => $eventos[$i]->fecha_fin,
+                'latitud' => $eventos[$i]->latitud,
+                'longitud' => $eventos[$i]->longitud,
+                'id' => $eventos[$i]->id_evento
+            );
+            array_push($array, $evento);
+        }
+
+
+
+        return json_encode($array);
+    }
+
 }

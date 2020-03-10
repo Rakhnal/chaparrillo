@@ -13,88 +13,100 @@ Agenda
 
 @section('contenido')
 
-<link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
-<link href='agenda/core/main.css' rel='stylesheet' />
-<link href='agenda/daygrid/main.css' rel='stylesheet' />
-<link href='agenda/list/main.css' rel='stylesheet' />
+<link href="css/agenda/agenda_style.css" type="text/css" rel="stylesheet">
+<link href='agendaJs/core/main.css' rel='stylesheet' />
+<link href='agendaJs/daygrid/main.css' rel='stylesheet' />
+<link href='agendaJs/list/main.css' rel='stylesheet' />
 <meta name="csrf_token" content="{{ csrf_token() }}">
-<script src='agenda/core/locales/es.js'></script>
-<script src='agenda/core/main.js'></script>
-<script src='agenda/interaction/main.js'></script>
-<script src='agenda/daygrid/main.js'></script>
-<script src='agenda/list/main.js'></script>
-<script src='agenda/google-calendar/main.js'></script>
+<script src='agendaJs/core/locales/es.js'></script>
+<script src='agendaJs/core/main.js'></script>
+<script src='agendaJs/interaction/main.js'></script>
+<script src='agendaJs/daygrid/main.js'></script>
+<script src='agendaJs/list/main.js'></script>
+<script src='agendaJs/google-calendar/main.js'></script>
 <script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var initialLocaleCode = 'es';
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+    $(document).ready(function () {
 
-            plugins: ['interaction', 'dayGrid', 'list', 'googleCalendar'],
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,listYear'
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "_token": token
+        };
+
+        $.ajax({
+            url: "mostrarEventos",
+            data: parametros,
+            type: "post",
+            success: function (response) {
+                var respuesta = JSON.parse(response);
+
+                var eventos = new Array();
+
+//                for (var i = 0; i < respuesta.length; i++) {
+//                    alert(respuesta[i].title);
+//                }
+
+                var calendarEl = document.getElementById('calendar');
+                var initialLocaleCode = 'es';
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                    plugins: ['interaction', 'dayGrid', 'list', 'googleCalendar'],
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,listYear'
+                    },
+                    locale: initialLocaleCode,
+                    displayEventTime: false, // don't show the time column in list view
+
+                    events: [
+                        {
+                            'title': 'Evento1',
+                            'start': '2020-03-05',
+                            'end': '2020-03-08'
+                        }
+                    ],
+
+                    // THIS KEY WON'T WORK IN PRODUCTION!!!
+                    // To make your own Google API key, follow the directions here:
+                    googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
+                    eventClick: function (arg) {
+                        // opens events in a popup window
+                        arg.jsEvent.preventDefault() // don't navigate in main tab
+                    },
+                    loading: function (bool) {
+                        document.getElementById('loading').style.display =
+                                bool ? 'block' : 'none';
+                    }
+
+                });
+
+                calendar.render();
+
             },
-            locale: initialLocaleCode,
-            displayEventTime: false, // don't show the time column in list view
 
-            events: [
-                {
-                    'title': 'Evento1',
-                    'start': '2020-03-05',
-                    'end': '2020-03-08'
+            statusCode: {
+                404: function () {
+                    alert('web not found');
                 }
-            ],
-
-            // THIS KEY WON'T WORK IN PRODUCTION!!!
-            // To make your own Google API key, follow the directions here:
-            // http://fullcalendar.io/docs/google_calendar/
-            googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
-            eventClick: function (arg) {
-                // opens events in a popup window
-                window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
-                arg.jsEvent.preventDefault() // don't navigate in main tab
             },
-            loading: function (bool) {
-                document.getElementById('loading').style.display =
-                        bool ? 'block' : 'none';
+            error: function (x, xs, xt) {
+//                window.open(JSON.stringify(x));
+                alert('error: ' + JSON.stringify(x) + "\n error string: " + xs + "\n error throwed: " + xt);
             }
-
         });
-        calendar.render();
     });
 
 </script>
-<style>
-
-    #loading {
-        display: none;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-
-    #calendar {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-</style>
 
 <div class="col">
     <div class="row">
-        <div class="col">
-            <nav>
-                <div class="breadcrumb" id="migas">
-                    <div class="breadcrumb-item">Usuario</div>
-                    <div class="breadcrumb-item active">Agenda</div>
-                </div>
-            </nav>
+        <div class="col fondo mt-2 mb-2 agend">
+            <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/agenda.jpg">
+                <h1 class="bolder">Agenda</h1>
+            </div>
         </div>
     </div>
-
     <div class="row">
         <div id='loading'>Cargando...</div>
         <div class="col-6">
@@ -114,5 +126,4 @@ Agenda
     </div>
 
 </div>
-
 @endsection
