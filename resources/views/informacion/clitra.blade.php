@@ -34,7 +34,7 @@ Clitra
             <div class="row justify-content-center marg-top">
                 <h2 class="bolder">Ciclo</h2>
             </div>
-            <div class="row add-padding center">
+            <div class="row add-padding center format-div-colabs">
                 <p>Aproximadamente en mayo los adultos se desplazan desde la maleza cercana a las plantaciones, permaneciendo en los árboles jóvenes</p>
 
                 <p>Los árboles mayores sólo son atacados cuando no encuentran árboles jóvenes de los que alimentarse</p>
