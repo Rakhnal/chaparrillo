@@ -16,6 +16,8 @@ use App\Adjunto;
 use Illuminate\Support\Facades\Session;
 use App\Categoria;
 
+/* Author: Nathan, Álvaro y Rafa */
+        
 class controlador_tablas extends Controller {
 
     //************************************************************************//
@@ -29,10 +31,20 @@ class controlador_tablas extends Controller {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
+                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento')
                 ->paginate(8);
+        
+        $categorias = DB::table('categorias')
+                ->join('asignar_categorias', 'asignar_categorias.id_categoria', '=', 'categorias.id_categoria')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'asignar_categorias.id_item')
+                ->select('categorias.nombre as categoria');
+        
+        $datos = [
+            'docs' => $documentos,
+            'categorias' => $categorias
+        ];
 
-        return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
+        return view(Constantes::AD_DOCUMENTOS, $datos);
     }
 
     /**

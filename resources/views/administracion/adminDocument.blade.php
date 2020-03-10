@@ -9,6 +9,7 @@ session()->put("actPage", Constantes::AD_DOCUMENTOS);
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
 <script type="text/javascript" src="scripts/general/modales.js"></script>
 <meta name="csrf_token" content="{{ csrf_token() }}">
+<!-- Author: Nathan -->
 
 @extends('../general/base')
 
