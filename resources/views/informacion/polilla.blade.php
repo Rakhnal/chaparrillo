@@ -36,7 +36,7 @@ Polilla de Almacen
             <div class="row justify-content-center align-items-center marg-top h20">
                 <h2 class="bolder">Descripción</h2>
             </div>
-            <div class="row add-padding center h80">
+            <div class="row add-padding center h80 format-div-colabs">
                 <p>Polilla de la familia Pyralidae con hábitos nocturnos</p>
 
                 <p>Daños en el proceso de almacenaje, cuando deposita los huevos en el hueco que ella misma genera dentro del grano de pistacho, a través de la fisura de su cáscara</p>

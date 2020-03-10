@@ -34,7 +34,7 @@ Psilas del pistacho
             <div class="row justify-content-center align-items-center marg-top h20">
                 <h2 class="bolder">Descripción</h2>
             </div>
-            <div class="row add-padding center h80">
+            <div class="row add-padding center h80 format-div-colabs">
                 <p>Hemíptero de la familia Aphalaridae</p>
 
                 <p>Conocidas también como CPP por sus siglas en inglés</p>

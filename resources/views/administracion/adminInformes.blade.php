@@ -204,7 +204,7 @@ $user = session()->get("userObj");
                 exclude: ".noExl", // Si hay algún tr con esta clase no lo pone en el excel
                 name: "Hoja 01",
                 filename: "Informe_Plagas", // Nombre del archivo (no poner la extensión)
-                fileext: ".xls" // Ectensión del archivo
+                fileext: ".xls" // Extensión del archivo
             });
         });
 

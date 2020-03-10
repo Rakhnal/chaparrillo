@@ -36,7 +36,7 @@ Chinches
             <div class="row justify-content-center align-items-center marg-top h20">
                 <h2 class="bolder">Descripción</h2>
             </div>
-            <div class="row add-padding center h80">
+            <div class="row add-padding center h80 format-div-colabs">
                 <p>Encuadra a varios géneros y familias del Orden Hemíptera</p>
 
                 <p>Suelen ser un problema desde la floración (finales de marzo y primera quincena de abril) hasta el endurecimiento de la cáscara (segunda quincena de mayo)</p>
