@@ -17,7 +17,9 @@ Agenda
 <link href='agendaJs/core/main.css' rel='stylesheet' />
 <link href='agendaJs/daygrid/main.css' rel='stylesheet' />
 <link href='agendaJs/list/main.css' rel='stylesheet' />
+<link href='css/agenda/magnific-popup.css' rel='stylesheet' />
 <meta name="csrf_token" content="{{ csrf_token() }}">
+<script src='agendaJs/jquery.magnific-popup.min.js'></script>
 <script src='agendaJs/core/locales/es.js'></script>
 <script src='agendaJs/core/main.js'></script>
 <script src='agendaJs/interaction/main.js'></script>
@@ -74,7 +76,8 @@ Agenda
                         $('#desc-agenda').html('<h4>Descripción:</h4>' + eventoMostrar.descripcion);
 
                         var tam = $('#desc-agenda').outerHeight();
-                        $('#mapaAgenda').css({ height: 'calc(350px - ' + tam + 'px)'});
+                        $('#mapaAgenda').css({height: 'calc(350px - ' + tam + 'px)'});
+                        $('#img-enlace').attr('href','data:image/png;base64,' + eventoMostrar.imagen);
 
                         PintarMapa(eventoMostrar.latitud, eventoMostrar.longitud);
 
@@ -102,6 +105,25 @@ Agenda
 
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.image-popup-no-margins').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            closeBtnInside: false,
+            fixedContentPos: true,
+            mainClass: 'mfp-no-margins mfp-with-zoom',
+            image: {
+                verticalFit: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300
+            }
+        });
+    });
+</script>
+
 <div class="col">
     <div class="row">
         <div class="col fondo mb-2 agend">
@@ -112,15 +134,17 @@ Agenda
     </div>
     <div class="row">
         <div id='loading'>Cargando...</div>
-        <div class="col-6">
+        <div class="col-xl-6 col-md-12">
             <div class="mb-3" id="calendar">
 
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-xl-6 col-md-12">
             <div id="muestraEvento">
                 <div class="info-event">
-                    <img src="" id="img-agenda" alt="Portada evento" class="img-fluid">
+                    <a id="img-enlace" class="image-popup-no-margins" href="">
+                        <img src="" id="img-agenda" alt="Portada evento" class="img-fluid image-popup-no-margins">
+                    </a>
                     <div class="textoAgenda">
                         <div id="nomb-event" ></div>
                         <div id="localizacion" ></div>
