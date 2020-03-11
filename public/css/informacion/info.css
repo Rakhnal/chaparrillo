@@ -115,9 +115,55 @@ p {
     height: 100%;
 }
 
+.faq {
+    margin-top: 20px;
+}
+
+.faq p {
+    margin: 0 5%;
+    text-align: justify;
+    width: fit-content;
+}
+
+#newFaq {
+    
+    margin-top: 25px;
+    right: 25px;
+    
+    width: 50px;
+    height: 50px;
+    
+    position: relative;
+    float: right;
+}
+
+#delFaq {
+    position: absolute;
+    margin-left: 20px;
+}
+
+#respFaq {
+    width: 100%;
+}
+
+#addFaqBtn {
+    margin-top: 15px;
+}
+
+.margin-left-right {
+    margin: 0px 30px;
+}
+
 @media
 only screen 
 and (max-device-width: 1024px) {
+    
+    #newFaq {
+        transform: scale(1.5);
+        
+        right: 50px;
+    }
+    
     .diff-height {
         min-height: 450px;
     }
@@ -131,7 +177,7 @@ and (max-device-width: 1024px) and (orientation: landscape) {
 
 @media
 only screen 
-and (max-device-width: 740px) {
+and (max-device-width: 740px) {    
     .diff-height {
         min-height: 450px;
     }

@@ -337,7 +337,7 @@ td {
 
 #main {
     width: 100%;
-    min-height: calc(100% - 100px);
+    min-height: calc(100% - 230px);
     margin: 0;
     padding: 0;
 }

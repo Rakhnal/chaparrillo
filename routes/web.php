@@ -88,6 +88,10 @@ Route::post('actPlaga', 'controlador_tablas@actPlagas');
 Route::post('addPlaga', 'controlador_tablas@addPlaga');
 Route::post('actPlaga', 'controlador_tablas@actPlaga');
 
+// DES20: Página FAQs
+Route::post('delFaq', 'controlador_tablas@delFaq');
+Route::post('addFaq', 'controlador_tablas@addFaq');
+
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {
     return view('informacion/proyecto');
@@ -111,4 +115,9 @@ Route::get('psilas', function () {
 // DES09: Página Chinches
 Route::get('chinches', function () {
     return view('informacion/chinches');
+});
+
+// DES20: Página FAQs
+Route::get('faqs', function () {
+    return view('informacion/faqs');
 });

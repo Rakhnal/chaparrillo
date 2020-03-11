@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Adjunto;
 use Illuminate\Support\Facades\Session;
 use App\Categoria;
+use App\Faq;
 
 /* Author: Nathan, Álvaro y Rafa */
 
@@ -602,6 +603,41 @@ class controlador_tablas extends Controller {
         return redirect('admin_event');
     }
 
+    /**
+     * Añade la nueva FAQ a BBDD
+     * @param Request $req
+     * @return type
+     */
+    public function addFaq(Request $req) {
+
+        $pregunta = $req->get('pregFaq');
+        $respuesta = $req->get('respFaq');
+
+        $faq = new Faq();
+
+        $faq->pregunta = $pregunta;
+        $faq->respuesta = $respuesta;
+
+        $faq->save();
+        
+        return view(Constantes::FAQS);
+    }
+
+    /**
+     * Elimina la FAQ de BBDD
+     * @param Request $req
+     */
+    public function delFaq(Request $req) {
+        
+        $idfaq = $req->get('idfaq');
+        
+        $faq = Faq::find($idfaq);
+        
+        $faq->delete();
+        
+        return view(Constantes::FAQS);
+    }
+    
     public function mostrarEventos() {
 
         $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
