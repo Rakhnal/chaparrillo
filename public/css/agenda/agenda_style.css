@@ -25,7 +25,7 @@ and open the template in the editor.
 }
 
 #img-agenda{
-    width: 150px;
+    width: 250px;
     height: 150px;
 }
 
@@ -42,8 +42,22 @@ and open the template in the editor.
     margin-top: 15px;
 }
 
-.textoAgenda{
-    position: absolute;
-    left: 30%;
-    top: 1%;
+
+.fc-event-container{
+    cursor: pointer;
+}
+
+@media
+only screen 
+and (max-device-width: 740px) {
+
+    .fc-title{
+        font-size: 0.9em !important;
+    }
+
+    #muestraEvento{
+        margin-top: 100px;
+    }
+    
+
 }

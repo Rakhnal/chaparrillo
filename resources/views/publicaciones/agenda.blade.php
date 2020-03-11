@@ -17,7 +17,9 @@ Agenda
 <link href='agendaJs/core/main.css' rel='stylesheet' />
 <link href='agendaJs/daygrid/main.css' rel='stylesheet' />
 <link href='agendaJs/list/main.css' rel='stylesheet' />
+<link href='css/agenda/magnific-popup.css' rel='stylesheet' />
 <meta name="csrf_token" content="{{ csrf_token() }}">
+<script src='agendaJs/jquery.magnific-popup.min.js'></script>
 <script src='agendaJs/core/locales/es.js'></script>
 <script src='agendaJs/core/main.js'></script>
 <script src='agendaJs/interaction/main.js'></script>
@@ -28,6 +30,7 @@ Agenda
 <script>
 
     $(document).ready(function () {
+        $('#img-agenda').hide();
 
         var token = '{{csrf_token()}}';
         var parametros = {
@@ -59,7 +62,7 @@ Agenda
                     googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
                     eventClick: function (arg) {
                         // opens events in a popup window
-
+                        $('#img-agenda').show();
                         arg.jsEvent.preventDefault() // don't navigate in main tab
 
                         for (var i = 0; i < respuesta.length; i++) {
@@ -67,14 +70,14 @@ Agenda
                                 var eventoMostrar = respuesta[i];
                             }
                         }
-                        $('.fc-event-container').css('cursor', 'crosshair');
                         $('#img-agenda').attr('src', 'data:image/png;base64,' + eventoMostrar.imagen);
                         $('#nomb-event').html('<h4>Evento:</h4> ' + eventoMostrar.title);
                         $('#localizacion').html('<h4>Localización:</h4> ' + eventoMostrar.localizacion);
                         $('#desc-agenda').html('<h4>Descripción:</h4>' + eventoMostrar.descripcion);
 
                         var tam = $('#desc-agenda').outerHeight();
-                        $('#mapaAgenda').css({ height: 'calc(350px - ' + tam + 'px)'});
+                        $('#mapaAgenda').css({height: 'calc(350px - ' + tam + 'px)'});
+                        $('#img-enlace').attr('href', 'data:image/png;base64,' + eventoMostrar.imagen);
 
                         PintarMapa(eventoMostrar.latitud, eventoMostrar.longitud);
 
@@ -102,37 +105,65 @@ Agenda
 
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.image-popup-no-margins').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            closeBtnInside: false,
+            fixedContentPos: true,
+            mainClass: 'mfp-no-margins mfp-with-zoom',
+            image: {
+                verticalFit: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300
+            }
+        });
+    });
+</script>
+
 <div class="col">
-    <div class="row">
-        <div class="col fondo mb-2 agend">
-            <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/agenda.jpg">
-                <h1 class="bolder">Agenda</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row mt-3">
         <div id='loading'>Cargando...</div>
-        <div class="col-6">
+        <div class="col-xl-6 col-md-12">
             <div class="mb-3" id="calendar">
 
             </div>
         </div>
-        <div class="col-6">
-            <div id="muestraEvento">
-                <div class="info-event">
-                    <img src="" id="img-agenda" alt="Portada evento" class="img-fluid">
-                    <div class="textoAgenda">
-                        <div id="nomb-event" ></div>
-                        <div id="localizacion" ></div>
+        <div class="col-xl-6 col-md-12">
+            <div id="muestraEvento" class="row">
+                <div class="col">
+                    <div class="info-event row">
+                        <div class="col">
+                            <div class="row justify-content-center">
+                                <a id="img-enlace" class="image-popup-no-margins" href="">
+                                    <img src="" id="img-agenda" alt="Portada evento" class="img-fluid image-popup-no-margins">
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="textoAgenda col">
+                            <div class="row">
+                                <div id="nomb-event" ></div>
+                            </div>
+                            <div class="row">
+                                <div id="localizacion" ></div>
+                            </div>
+
+                        </div>
+
                     </div>
+                    <div id="desc-agenda" class="desc-agenda mt-3">
 
-                </div>
-                <div id="desc-agenda" class="desc-agenda">
+                    </div>
+                    <div id="mapaAgenda" class="">
 
+                    </div>
                 </div>
-                <div id="mapaAgenda" class="">
 
-                </div>
             </div>
         </div>
     </div>
