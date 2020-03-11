@@ -15,19 +15,16 @@ Inicio
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/general/editar_usuario.js') }}"></script>
 <link href="css/editUsu/cropper.min.css" rel="stylesheet" type="text/css"/>
-<div class="col-12">
+<div class="col-12 mt-1">
     <div class="row col-12 form_base m-auto">
-        <div class="col-12 text-center mt-2">
-            <h1>Perfil</h1>
-            <?php $seesion_user = $prin->img_user;?>
-        </div>
+        <?php $seesion_user = $prin->img_user; ?>
         <div class="row col-12">
             <form class="col-12 row" name="formulario_editUser" id="formulario_editUser" action="edit_us" method="POST">
                 @csrf
                 <div class="col-4">
                     <div class="row justify-content-center d-flex ">
                         <div id="profile-result" class="mb-2 ">
-                            <?php if ($seesion_user != '0' && $seesion_user !=null): ?>
+                            <?php if ($seesion_user != '0' && $seesion_user != null): ?>
                                 <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" class="img-circle" id="laola">  
                             <?php else : ?>
                                 <img src="images/profile-pic/default.png" class="img-circle">    
@@ -42,14 +39,17 @@ Inicio
                             <div class="ajax-response" id="loading"></div>
                             <h4 class="m-t-5 m-b-5 ellipsis text-center">Ajustar imagen</h4>                    
                             <div class="profile-pic-wraper">
-                                <?php if ($seesion_user != '0' && $seesion_user !=null): ?>
+                                <?php if ($seesion_user != '0' && $seesion_user != null): ?>
                                     <img src="data:image/jpg;base64,<?php echo base64_encode($seesion_user); ?>" alt="" id="change-profile-pic" class="col-12">
                                 <?php else: ?>
                                     <img src="images/profile-pic/default.png" alt="imagen" id="change-profile-pic" class="col-12" >    
                                 <?php endif; ?>
                             </div>
-                            <div>
-                                <input type="file" enctype="multipart/form-data" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="Archivo..." class="btn btn-nuevo">
+                            <div id="div_subir_img" class="mt-3">
+                                <input type="file" enctype="multipart/form-data" accept="image/*" id="profile-file-input" onchange="loadFile(event)" value="Archivo..." name="profile-file-input" class="btn btn-nuevo">
+                                <label for="profile-file-input">
+                                    <span>Subir imagen</span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -103,9 +103,14 @@ Inicio
 
                         </div>
                     </div>
-                    <div class="text-center mb-3 row justify-content-center">
+                    <script>
+                        function cambiarColor() {
+                            color.innerHTML = color.innerHTML == "Editar" ? "Cancelar" : "Editar";
+                        }
+                    </script>
+                    <div class="text-center mb-3 row justify-content-center resp">
                         <input type="submit" class="btn btn-nuevo mr-3" id="bd_edit" value="Aceptar">
-                        <button type="button" class="btn btn-nuevo" id="editarUsuario" >Editar</button>
+                        <button type="button" class="btn btn-nuevo" id="editarUsuario" onclick="cambiarColor()"><h5 id="color">Editar</h5></button>
                     </div>
                 </div>
             </form>

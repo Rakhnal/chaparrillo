@@ -26,6 +26,7 @@ Route::get('index', function () {
 Route::get('agenda', function(){
     return view('publicaciones/agenda');
 });
+Route::post('mostrarEventos',['as' => 'mostrarEventos', 'uses' => 'controlador_tablas@mostrarEventos']);
 
 //DES15: Página Editar Perfil - SSC
 Route::get('Editar_usuario', function () {
@@ -42,13 +43,20 @@ Route::any('cam_Elim', 'controlador_usuarios@eliminarusuarios');
 Route::any('cam_rol', 'controlador_usuarios@cambiar_rol');
 Route::any('validarUsuario','controlador_usuarios@Validar_u');
 
+//DES11
+//Página de administrar noticias
+Route::get('noticias',['uses' =>  'controlador_noticias@listarnoticias', 'as' => 'Noticias']);
+
 // DES18: Página Administrar Eventos - RAUS
 // Página Administración
 Route::get('admin_event',['uses' =>  'controlador_tablas@listarEventos', 'as' => 'admin_event']);
+//Eliminar eventos
 Route::post('eliminarEvento',['as' => 'eliminarEvento', 'uses' => 'controlador_tablas@eliminarEventos']);
+//Agregar eventos
 Route::post('agregarEvento','controlador_tablas@agregarEventos');
+//Llamada a ajax para cargar eventos
 Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
-Route::post('categorias','controlador_tablas@sacarCategorias');
+//Actualizar eventos
 Route::post('guardarEvento','controlador_tablas@guardarEventos');
 
 // DES17: Página Administrar Documentos - NLO
@@ -84,6 +92,10 @@ Route::post('actPlaga', 'controlador_tablas@actPlagas');
 Route::post('addPlaga', 'controlador_tablas@addPlaga');
 Route::post('actPlaga', 'controlador_tablas@actPlaga');
 
+// DES20: Página FAQs
+Route::post('delFaq', 'controlador_tablas@delFaq');
+Route::post('addFaq', 'controlador_tablas@addFaq');
+
 // DES04: Página Proyecto - ADC
 Route::get('proyecto', function () {
     return view('informacion/proyecto');
@@ -107,4 +119,9 @@ Route::get('psilas', function () {
 // DES09: Página Chinches
 Route::get('chinches', function () {
     return view('informacion/chinches');
+});
+
+// DES20: Página FAQs
+Route::get('faqs', function () {
+    return view('informacion/faqs');
 });

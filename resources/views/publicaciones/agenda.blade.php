@@ -13,106 +13,153 @@ Agenda
 
 @section('contenido')
 
-<link href="css/administracion/admin_style.css" type="text/css" rel="stylesheet">
-<link href='agenda/core/main.css' rel='stylesheet' />
-<link href='agenda/daygrid/main.css' rel='stylesheet' />
-<link href='agenda/list/main.css' rel='stylesheet' />
+<link href="css/agenda/agenda_style.css" type="text/css" rel="stylesheet">
+<link href='agendaJs/core/main.css' rel='stylesheet' />
+<link href='agendaJs/daygrid/main.css' rel='stylesheet' />
+<link href='agendaJs/list/main.css' rel='stylesheet' />
+<link href='css/agenda/magnific-popup.css' rel='stylesheet' />
 <meta name="csrf_token" content="{{ csrf_token() }}">
-<script src='agenda/core/locales/es.js'></script>
-<script src='agenda/core/main.js'></script>
-<script src='agenda/interaction/main.js'></script>
-<script src='agenda/daygrid/main.js'></script>
-<script src='agenda/list/main.js'></script>
-<script src='agenda/google-calendar/main.js'></script>
+<script src='agendaJs/jquery.magnific-popup.min.js'></script>
+<script src='agendaJs/core/locales/es.js'></script>
+<script src='agendaJs/core/main.js'></script>
+<script src='agendaJs/interaction/main.js'></script>
+<script src='agendaJs/daygrid/main.js'></script>
+<script src='agendaJs/list/main.js'></script>
+<script src='agendaJs/google-calendar/main.js'></script>
+<script src="scripts/general/cargarMapa.js"></script>
 <script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar');
-        var initialLocaleCode = 'es';
-        var calendar = new FullCalendar.Calendar(calendarEl, {
+    $(document).ready(function () {
 
-            plugins: ['interaction', 'dayGrid', 'list', 'googleCalendar'],
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'dayGridMonth,listYear'
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "_token": token
+        };
+        $.ajax({
+            url: "mostrarEventos",
+            data: parametros,
+            type: "post",
+            success: function (response) {
+                var respuesta = JSON.parse(response);
+                var calendarEl = document.getElementById('calendar');
+                var initialLocaleCode = 'es';
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                    plugins: ['interaction', 'dayGrid', 'list', 'googleCalendar'],
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,listYear'
+                    },
+                    locale: initialLocaleCode,
+                    displayEventTime: false, // don't show the time column in list view
+
+                    events: respuesta,
+                    eventColor: '#8F7E4F',
+                    // THIS KEY WON'T WORK IN PRODUCTION!!!
+                    // To make your own Google API key, follow the directions here:
+                    googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
+                    eventClick: function (arg) {
+                        // opens events in a popup window
+
+                        arg.jsEvent.preventDefault() // don't navigate in main tab
+
+                        for (var i = 0; i < respuesta.length; i++) {
+                            if (arg.event.title == respuesta[i].title) {
+                                var eventoMostrar = respuesta[i];
+                            }
+                        }
+                        $('.fc-event-container').css('cursor', 'crosshair');
+                        $('#img-agenda').attr('src', 'data:image/png;base64,' + eventoMostrar.imagen);
+                        $('#nomb-event').html('<h4>Evento:</h4> ' + eventoMostrar.title);
+                        $('#localizacion').html('<h4>Localización:</h4> ' + eventoMostrar.localizacion);
+                        $('#desc-agenda').html('<h4>Descripción:</h4>' + eventoMostrar.descripcion);
+
+                        var tam = $('#desc-agenda').outerHeight();
+                        $('#mapaAgenda').css({height: 'calc(350px - ' + tam + 'px)'});
+                        $('#img-enlace').attr('href','data:image/png;base64,' + eventoMostrar.imagen);
+
+                        PintarMapa(eventoMostrar.latitud, eventoMostrar.longitud);
+
+                    },
+                    loading: function (bool) {
+                        document.getElementById('loading').style.display =
+                                bool ? 'block' : 'none';
+                    }
+
+                });
+                calendar.render();
             },
-            locale: initialLocaleCode,
-            displayEventTime: false, // don't show the time column in list view
-
-            events: [
-                {
-                    'title': 'Evento1',
-                    'start': '2020-03-05',
-                    'end': '2020-03-08'
+            statusCode: {
+                404: function () {
+                    alert('web not found');
                 }
-            ],
-
-            // THIS KEY WON'T WORK IN PRODUCTION!!!
-            // To make your own Google API key, follow the directions here:
-            // http://fullcalendar.io/docs/google_calendar/
-            googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
-            eventClick: function (arg) {
-                // opens events in a popup window
-                window.open(arg.event.url, 'google-calendar-event', 'width=700,height=600');
-                arg.jsEvent.preventDefault() // don't navigate in main tab
             },
-            loading: function (bool) {
-                document.getElementById('loading').style.display =
-                        bool ? 'block' : 'none';
+            error: function (x, xs, xt) {
+//                window.open(JSON.stringify(x));
+                alert('error: ' + JSON.stringify(x) + "\n error string: " + xs + "\n error throwed: " + xt);
             }
-
         });
-        calendar.render();
     });
 
+
 </script>
-<style>
 
-    #loading {
-        display: none;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-
-    #calendar {
-        max-width: 900px;
-        margin: 0 auto;
-    }
-
-</style>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.image-popup-no-margins').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            closeBtnInside: false,
+            fixedContentPos: true,
+            mainClass: 'mfp-no-margins mfp-with-zoom',
+            image: {
+                verticalFit: true
+            },
+            zoom: {
+                enabled: true,
+                duration: 300
+            }
+        });
+    });
+</script>
 
 <div class="col">
     <div class="row">
-        <div class="col">
-            <nav>
-                <div class="breadcrumb" id="migas">
-                    <div class="breadcrumb-item">Usuario</div>
-                    <div class="breadcrumb-item active">Agenda</div>
-                </div>
-            </nav>
+        <div class="col fondo mb-2 agend">
+            <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/agenda.jpg">
+                <h1 class="bolder">Agenda</h1>
+            </div>
         </div>
     </div>
-
     <div class="row">
         <div id='loading'>Cargando...</div>
-        <div class="col-6">
+        <div class="col-xl-6 col-md-12">
             <div class="mb-3" id="calendar">
 
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-xl-6 col-md-12">
             <div id="muestraEvento">
+                <div class="info-event">
+                    <a id="img-enlace" class="image-popup-no-margins" href="">
+                        <img src="" id="img-agenda" alt="Portada evento" class="img-fluid image-popup-no-margins">
+                    </a>
+                    <div class="textoAgenda">
+                        <div id="nomb-event" ></div>
+                        <div id="localizacion" ></div>
+                    </div>
 
+                </div>
+                <div id="desc-agenda" class="desc-agenda">
+
+                </div>
+                <div id="mapaAgenda" class="">
+
+                </div>
             </div>
-        </div>
-
-        <div id="respuesta">
-
         </div>
     </div>
 
 </div>
-
 @endsection

@@ -31,3 +31,33 @@ and open the template in the editor.
     transition: all 0.3s ease;
     outline: none;
 }
+
+@media only screen and (max-device-width: 740px) {
+    input[type=submit] {
+        font-size: 1em !important;
+    }
+    .img-circle {
+        border-radius: 100%;
+        width: 20% !important;
+        height: 20% !important;
+        min-height: 50px !important;
+        min-width: 50px !important;
+        max-height: 50px !important;
+        max-width: 50px !important;
+    }
+}
+
+@media only screen and (max-device-width: 740px) and (orientation: landscape) {
+    input[type=submit] {
+        font-size: 1em !important;
+    }
+    .img-circle {
+        border-radius: 100%;
+        width: 20% !important;
+        height: 20% !important;
+        min-height: 60px !important;
+        min-width: 60px !important;
+        max-height: 60px !important;
+        max-width: 60px !important;
+    }
+}
