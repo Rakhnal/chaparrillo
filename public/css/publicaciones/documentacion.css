@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+/* 
+    Created on : 11-mar-2020, 8:57:42
+    Author     : Nathan
+*/
+
+.divDocumento {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.iconitos {
+    width: 17px;
+}
+
+.docNombre {
+    font-size: 16pt;
+}
+
+.docAnio {
+    font-size: 13pt;
+}
+
+.docAutores {
+    font-size: 13pt;
+}
+
+#selectCategoria {
+    width: 200px !important;
+    padding-left: 10px !important;
+    color: white;
+    height: 35px;
+    border: 1px solid white;
+    background-color: #8F7E4F;
+}
