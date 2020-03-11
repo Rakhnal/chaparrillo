@@ -47,3 +47,22 @@ and open the template in the editor.
     left: 30%;
     top: 1%;
 }
+
+@media
+only screen 
+and (max-device-width: 740px) {
+
+    .fc-title{
+        font-size: 0.9em !important;
+    }
+
+    #muestraEvento{
+        margin-top: 100px;
+    }
+
+    .textoAgenda{
+        position: absolute;
+        left: 25%;
+        top: 15%;
+    }
+}
