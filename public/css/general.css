@@ -594,7 +594,7 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
     background-color: #8F7E4F;
 }
 
-#selectVisible, #selectSubirAutor {
+#selectVisible {
     width: 150px !important;
     color: white;
     height: 35px;
