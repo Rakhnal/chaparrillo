@@ -9,6 +9,7 @@ session()->put("actPage", Constantes::AD_DOCUMENTOS);
 <link rel="stylesheet" type="text/css" href="css/administracion/admin_style.css">
 <script type="text/javascript" src="scripts/general/modales.js"></script>
 <meta name="csrf_token" content="{{ csrf_token() }}">
+<!-- Author: Nathan -->
 
 @extends('../general/base')
 
@@ -37,7 +38,6 @@ Administrar Documentación
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>Descripción</th>
                             <th>Año de publicación</th>
                             <th>Autores</th>
                             <th></th>
@@ -51,7 +51,6 @@ Administrar Documentación
                             <tr>
                                 <td><?= $doc->id_documento ?></td>
                                 <td><?= $doc->nombre ?></td>
-                                <td><?= $doc->descripcion ?></td>
                                 <td><?= $doc->anio ?></td>
                                 <td><?= $doc->autores ?></td>
                                 <td><form name="formEliminarDoc" id="formEliminarDoc" action="eliminarDocumento" method="POST">{{ csrf_field() }}<input type="button" id="eliminarDocumentos" name="btnEliminar" data-id="<?= $doc->id_documento ?>" class="btn btn-eliminar" value="Eliminar"></form></td>
@@ -131,25 +130,23 @@ Administrar Documentación
             }
         });
     }
-    
+
     $(document).on("click", "#modificarDocumentos", function () {
-        var id = $(this).attr("data-idMod");
         var token = '{{csrf_token()}}';
         var parametros = {
-            "identificador": id,
+            "identificador": $(this).attr('data-idMod'),
             "_token": token
         };
-        alert(id);
         $.ajax({
             url: "buscarDocumento",
             data: parametros,
             type: 'post',
             success: function (response) {
                 var respuesta = JSON.parse(response);
-                alert(respuesta.qhp);
                 $('#nombreEditarDoc').val(respuesta.nombre);
                 $('#descEditarDoc').val(respuesta.descripcion);
-                $('#selectVisible').val(respuesta.visible);
+                $('#anioEditarDoc').val(respuesta.anio);
+                $('#autoresEditarDoc').val(respuesta.autores);
             },
             statusCode: {
                 404: function () {
@@ -163,6 +160,19 @@ Administrar Documentación
             }
         });
     });
+
+    function handleFileSelect(evt) {
+        var files = evt.target.files; // FileList object
+
+        // files is a FileList of File objects. List some properties.
+        var output = [];
+        for (var i = 0, f; f = files[i]; i++) {
+            output.push('<li value="', escape(f.name), '">✓ <strong>', escape(f.name), '</strong></li>');
+        }
+        document.getElementById('list').innerHTML = '<ul id="listaDocs" name="listaDocs">' + output.join('') + '</ul>';
+    }
+
+    document.getElementById('subirAdjuntos').addEventListener('change', handleFileSelect, false);
 
 </script>
 

@@ -7,6 +7,7 @@ use App\Usuario;
 use App\Plaga;
 use App\Categoria;
 use App\Evento;
+use App\Faq;
 
 /* use App\Usuario;
   use App\Coche;
@@ -127,6 +128,20 @@ class conexion {
         $users = \DB::select('SELECT id_user, nombre, apellidos FROM usuarios WHERE rol = ? OR rol = ?', [Constantes::ADMIN, Constantes::SWATS]);
         if ($users != null) {
             return $users;
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * Obtiene todas las preguntas frecuentes de BBDD
+     * @return type
+     */
+    public static function obtenerFaqs() {
+
+        $faqs = Faq::all();
+        if ($faqs != null) {
+            return $faqs;
         } else {
             return null;
         }

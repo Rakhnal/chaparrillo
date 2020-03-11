@@ -15,11 +15,14 @@ use Illuminate\Support\Facades\Redirect;
 use App\Adjunto;
 use Illuminate\Support\Facades\Session;
 use App\Categoria;
+use App\Faq;
+
+/* Author: Nathan, Álvaro y Rafa */
 
 class controlador_tablas extends Controller {
 
     //************************************************************************//
-    //DES17: Página para administrar documentación
+    //DES17: Página para administrar documentación - Autor: Nathan
     //************************************************************************//
     /**
      * Esta función lista todos los documentos de la base de datos.
@@ -29,10 +32,20 @@ class controlador_tablas extends Controller {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
+                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento')
                 ->paginate(8);
 
-        return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
+        $categorias = DB::table('categorias')
+                ->join('asignar_categorias', 'asignar_categorias.id_categoria', '=', 'categorias.id_categoria')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'asignar_categorias.id_item')
+                ->select('categorias.nombre as categoria');
+
+        $datos = [
+            'docs' => $documentos,
+            'categorias' => $categorias
+        ];
+
+        return view(Constantes::AD_DOCUMENTOS, $datos);
     }
 
     /**
@@ -57,32 +70,29 @@ class controlador_tablas extends Controller {
 
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        $qhp = "ok";
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->join('adjuntos', 'adjuntos.id_documento', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento)
-                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'publicaciones.fecha_subida', 'publicaciones.visible', 'publicaciones.tipo', 'documentos.visible', 'documentos.num_descargas', 'adjuntos.documento')
-                ->first();
 
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento);
+        $documentos = DB::select('SELECT documentos.id_documento, publicaciones.nombre as nombre, descripcion, anio, autores, visible, documento FROM documentos'
+                        . 'JOIN publicaciones ON documentos.id_documento = publicaciones.id_item'
+                        . 'JOIN adjuntos ON adjuntos.id_documento = documentos.id_documento'
+                        . 'WHERE documentos.id_documento = ' . $id_documento);
 
-        if ($documento) {
-            $qhp = "ok";
-        } else {
-            $qhp = "fail";
-        }
+//        $categorias = \DB::select('SELECT asignar_categorias.id_item,categorias.nombre,asignar_categorias.id_categoria FROM asignar_categorias'
+//                        . 'JOIN publicaciones ON publicaciones.id_item = asignar_categorias.id_item'
+//                        . 'JOIN categorias ON categorias.id_categoria = asignar_categorias.id_categoria'
+//                        . 'WHERE publicaciones.id_item =' . $id_documento);
 
-        $datos = array(
-            'nombre' => $documento[0]->nombre,
-            'descripcion' => $documento[0]->descripcion,
-            'visible' => $documento[0]->visible,
-            'qhp' => $qhp
+        $documento = array(
+            'nombre' => $documentos[0]->nombre,
+            'descripcion' => $documentos[0]->descripcion,
+            'anio' => $documentos[0]->anio,
+            'autores' => $documentos[0]->autores
         );
+        
+//        $categoria = array(
+//          'categoria' => $categorias[0]->nombre  
+//        );
 
-        return json_encode($datos);
+        return json_encode($documento);
     }
 
     public function modificarDocumentos() {
@@ -129,18 +139,31 @@ class controlador_tablas extends Controller {
 
             //dd($req->file('subirAdjuntos'));
 
-            $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
-
             $documento->num_descargas = 0;
             $documento->anio = $req->get('anioSubirDoc');
             $documento->autores = $req->get('autoresSubirDoc');
             $documento->visible = 1;
 
+//            $file = file_get_contents($req->get('list'), true);
+//            $a1 = str_getcsv($file);
+
+            $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
+
             $publicacion->save();
 
             $publication = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
-            //dd($publication->id_item);
+            $categorias = $req->get('categorias');
+
+            if (isset($categorias)) {
+                foreach ($categorias as $categoria) {
+                    DB::insert('insert into asignar_categorias (id_item, id_categoria) values (?, ?)', [$publication->id_item, $categoria]);
+                }
+            }
+//            dd($adjuntos);
+//            foreach ($adjuntos as $adjunto) {
+//                DB::insert('insert into adjuntos (id_adjunto, id_documento, documento) values (?, ?, ?)', [0, $publication->id_item, $adjunto]);
+//            }
 
             $documento->id_documento = $publication->id_item;
             $adjunto->id_documento = $publication->id_item;
@@ -166,7 +189,9 @@ class controlador_tablas extends Controller {
         }
     }
 
-    //DES19: Página Administrar Informes
+    //************************************************************************//
+    //DES19: Página Administrar Informes - Autor: Álvaro
+    //************************************************************************//
     /**
      * Mostrará los datos de la página en modo SWAT o Admin
      * @return type
@@ -180,7 +205,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -188,7 +213,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -244,7 +269,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -252,7 +277,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -283,7 +308,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -291,7 +316,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -313,21 +338,20 @@ class controlador_tablas extends Controller {
 
         $idplaga = $req->get('idplaga');
         $nomPlaga = $req->get('nomPlaga');
-        
+
         if (null != $modPlaga) {
-            
+
             $plaga = Plaga::find($idplaga);
-            
+
             $plaga->nombre_plaga = $nomPlaga;
-            
+
             $plaga->save();
-            
         }
-        
+
         if (null != $delPlaga) {
-            
+
             $plaga = Plaga::find($idplaga);
-            
+
             $plaga->delete();
         }
 
@@ -337,7 +361,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
@@ -345,7 +369,7 @@ class controlador_tablas extends Controller {
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
                     ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
                     ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
-                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario' )
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -399,8 +423,9 @@ class controlador_tablas extends Controller {
         return json_encode($infArray);
     }
 
-    //DES18: Página para adminsitrar eventos
-
+    //************************************************************************//
+    //DES18: Página para adminsitrar eventos - Autor: Rafa
+    //************************************************************************//
     /**
      * Función para mostrar todos los eventos de la bbdd.
      * @return type
@@ -576,6 +601,70 @@ class controlador_tablas extends Controller {
         }
 
         return redirect('admin_event');
+    }
+
+    /**
+     * Añade la nueva FAQ a BBDD
+     * @param Request $req
+     * @return type
+     */
+    public function addFaq(Request $req) {
+
+        $pregunta = $req->get('pregFaq');
+        $respuesta = $req->get('respFaq');
+
+        $faq = new Faq();
+
+        $faq->pregunta = $pregunta;
+        $faq->respuesta = $respuesta;
+
+        $faq->save();
+        
+        return view(Constantes::FAQS);
+    }
+
+    /**
+     * Elimina la FAQ de BBDD
+     * @param Request $req
+     */
+    public function delFaq(Request $req) {
+        
+        $idfaq = $req->get('idfaq');
+        
+        $faq = Faq::find($idfaq);
+        
+        $faq->delete();
+        
+        return view(Constantes::FAQS);
+    }
+    
+    public function mostrarEventos() {
+
+        $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
+                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+        );
+
+        $array = array();
+        
+        for ($i = 0; $i < count($eventos); $i++) {
+            $evento = array(
+                'title' => $eventos[$i]->nombre,
+                'imagen' => base64_encode($eventos[$i]->imagen),
+                'descripcion' => $eventos[$i]->descripcion,
+                'localizacion' => $eventos[$i]->localizacion,
+                'start' => $eventos[$i]->fecha_inicio,
+                'end' => $eventos[$i]->fecha_fin,
+                'latitud' => $eventos[$i]->latitud,
+                'longitud' => $eventos[$i]->longitud,
+                'id' => $eventos[$i]->id_evento
+            );
+            array_push($array, $evento);
+        }
+
+
+
+        return json_encode($array);
     }
 
 }

@@ -17,7 +17,7 @@ Psilas del pistacho
 
 <div class="col">
     <div class="row format-div-b">
-        <div class="col-md-6 no-padding">
+        <div class="col-xl-6  col-md-12 no-padding">
             <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/psilas.jpg">
                 <div class="col">
                     <div class="row middle-height justify-content-center align-items-end">
@@ -25,16 +25,16 @@ Psilas del pistacho
                     </div>
 
                     <div class="row middle-height justify-content-center align-items-start">
-                        <h1>Labidostomis lusitanica</h1>
+                        <h1><i>Agonoscena</i> sp.</h1>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col">
+        <div class="col-xl-6  col-md-12">
             <div class="row justify-content-center align-items-center marg-top h20">
                 <h2 class="bolder">Descripción</h2>
             </div>
-            <div class="row add-padding center h80">
+            <div class="row add-padding center h80 format-div-colabs">
                 <p>Hemíptero de la familia Aphalaridae</p>
 
                 <p>Conocidas también como CPP por sus siglas en inglés</p>

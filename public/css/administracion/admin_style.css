@@ -5,11 +5,15 @@ and open the template in the editor.
 */
 /* 
     Created on : 29-ene-2020, 11:54:31
-    Author     : rafa
+    Author     : rafa y nathan
 */
 
 body {
     transition: none !important;
+}
+
+#main {
+    min-height: calc(100% - 100px) !important;
 }
 
 select {
@@ -230,5 +234,12 @@ and (max-device-width: 1024px) {
 only screen 
 and (max-device-width: 740px) {
     
+    #plagasBtn {
+        transform: scale(0.8);
+    }
+    
+    #exportTable {
+        transform: scale(0.8);
+    }
     
 }
