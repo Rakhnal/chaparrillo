@@ -21,6 +21,20 @@ function PintarMapa(latitud, longitud) {
 
     if (document.getElementById("map2") != null) {
         MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
+        
+
+        marcadorEvento2 = new google.maps.Marker({
+            position: mapa2,
+            icon: "images/icons/location.svg",
+            map: MapaEvento2
+        });
+
+        google.maps.event.addListener(MapaEvento2, "click", mapClick3);
+    }
+    
+    if (document.getElementById("mapaAgenda") != null) {
+        MapaEvento2 = new google.maps.Map(document.getElementById("mapaAgenda"), ColocaMapa2);
+        
 
         marcadorEvento2 = new google.maps.Marker({
             position: mapa2,

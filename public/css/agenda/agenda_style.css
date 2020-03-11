@@ -23,3 +23,27 @@ and open the template in the editor.
     max-width: 900px;
     margin: 0 auto;
 }
+
+#img-agenda{
+    width: 150px;
+    height: 150px;
+}
+
+.fc-unthemed .fc-list-item:hover td{
+    background: #8F7E4F !important;
+}
+
+.fc-button-primary {
+    background-color: rgba(82, 117, 59, 0.98) !important;
+    border-color: #fff !important;;
+}
+
+#mapaAgenda{
+    margin-top: 15px;
+}
+
+.textoAgenda{
+    position: absolute;
+    left: 30%;
+    top: 1%;
+}
