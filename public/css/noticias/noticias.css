@@ -12,7 +12,103 @@ and open the template in the editor.
     display: inline-flex !important;
 }
 .img_noticia{
-    height: 300px !important;
+    height: 100% !important;
     width: 100% !important;
     display: block;
+    border: none !important;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-radius: 0px 5px 5px 0px;
+}
+.destacadas{
+    width: 105%!important;
+}
+.titulo_noticia{
+    color: white;
+    display: block;
+    font-size: 1rem;
+    background-clip: padding-box;
+    background-color: rgba(92, 79, 43, 0.6) !important;
+    border-color: white !important;
+    border-style: solid !important;
+    border-width: thin !important;
+    border-radius: 5px !important;
+    box-shadow: 0px 0px 3px 0px black;
+}
+.icon{
+    width: 30px;
+    height: 30px;
+}
+.btn-no-destacada {
+    font-size: 0.0000000000001px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    background-image: url(../../images/icons/king.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 0.3s ease-in all;
+}
+.btn-no-destacada:hover {
+    font-size: 0.0000000000001px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    background-image: url('../../images/icons/king_full.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 0.3s ease-in all;
+}
+.btn-destacada {
+    font-size: 0.0000000000001px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    background-image: url(../../images/icons/king_full.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 0.3s ease-in all;
+}
+.btn-destacada:hover {
+    font-size: 0.0000000000001px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    background-image: url(../../images/icons/king.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: 0.3s ease-in all;
+}
+
+
+.contenedor{
+    width:90px;
+    height:240px;
+    position:fixed;
+    right:0px;
+    bottom:0px;
+}
+.botonF1{
+    width:60px;
+    height:60px;
+    border-radius:100%;
+    background-color:#4cd213 !important;
+    right:0;
+    bottom:0;
+    position:absolute;
+    margin-right:16px;
+    margin-bottom:16px;
+    outline:none;
+    color:#FFF;
+    font-size:36px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition:.3s;  
+    border-color: white !important;
+    border-style: solid !important;
+    border-width: thin !important;
 }
