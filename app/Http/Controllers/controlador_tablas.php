@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Redirect;
 use App\Adjunto;
 use Illuminate\Support\Facades\Session;
 use App\Categoria;
+use App\Faq;
 
 /* Author: Nathan, Álvaro y Rafa */
-        
+
 class controlador_tablas extends Controller {
 
     //************************************************************************//
@@ -33,12 +34,12 @@ class controlador_tablas extends Controller {
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
                 ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento')
                 ->paginate(8);
-        
+
         $categorias = DB::table('categorias')
                 ->join('asignar_categorias', 'asignar_categorias.id_categoria', '=', 'categorias.id_categoria')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'asignar_categorias.id_item')
                 ->select('categorias.nombre as categoria');
-        
+
         $datos = [
             'docs' => $documentos,
             'categorias' => $categorias
@@ -602,4 +603,39 @@ class controlador_tablas extends Controller {
         return redirect('admin_event');
     }
 
+    /**
+     * Añade la nueva FAQ a BBDD
+     * @param Request $req
+     * @return type
+     */
+    public function addFaq(Request $req) {
+
+        $pregunta = $req->get('pregFaq');
+        $respuesta = $req->get('respFaq');
+
+        $faq = new Faq();
+
+        $faq->pregunta = $pregunta;
+        $faq->respuesta = $respuesta;
+
+        $faq->save();
+        
+        return view(Constantes::FAQS);
+    }
+
+    /**
+     * Elimina la FAQ de BBDD
+     * @param Request $req
+     */
+    public function delFaq(Request $req) {
+        
+        $idfaq = $req->get('idfaq');
+        
+        $faq = Faq::find($idfaq);
+        
+        $faq->delete();
+        
+        return view(Constantes::FAQS);
+    }
+    
 }

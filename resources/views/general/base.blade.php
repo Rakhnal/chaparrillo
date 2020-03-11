@@ -32,7 +32,7 @@ use App\Clases\conexion;
 
         <link rel="stylesheet" href="css/general.css" />
         <script src="scripts/general/sweetalert.min.js"></script>
-        
+
     </head>
     <body>
 
@@ -105,8 +105,8 @@ use App\Clases\conexion;
                                     <input id="latitud" type="hidden" name="latitud" value="">
                                     <input id="longitud" type="hidden" name="longitud" value="">
                                     <script>
-            $('#latitud').val(localStorage.getItem('latitud'));
-            $('#longitud').val(localStorage.getItem('longitud'));
+                                        $('#latitud').val(localStorage.getItem('latitud'));
+                                        $('#longitud').val(localStorage.getItem('longitud'));
                                     </script>
                                 </div>
                                 <div class="col-4">
@@ -309,7 +309,7 @@ use App\Clases\conexion;
 
                         <p>Usuario/Contraseña incorrectos</p>
 
-                        <p>Si se acaba de registrar espere a ser validado</p>
+                        <p>Si se acaba de registrar espere a ser validado o contacte con un administrador</p>
 
                     </div>
                 </div>
@@ -573,6 +573,39 @@ use App\Clases\conexion;
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ******************** Ventana Administración Faqs *********************** -->
+        <div class="modal fade" id="modalFaq" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            Administración de Faqs
+                        </div>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="addFaq" name="addFaqForm" method="POST">
+                            {{ csrf_field() }}
+                            <div class="row margin-left-right">
+                                <p>Pregunta:</p>
+                                <input type="text" name="pregFaq" class="cajaNormal" value=""/>
+                            </div>
+
+                            <div class="row margin-left-right">
+                                <p>Respuesta:</p>
+                                <textarea name="respFaq" id="respFaq"></textarea>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <input type="submit" name="addFaqBtn" id="addFaqBtn" class="btn btn-guardar" value="."/>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1074,7 +1107,7 @@ use App\Clases\conexion;
 
             <?php
             // Agregar aquí las páginas donde no se quiera mostrar el footer
-            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES) {
+            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES && session()->get("actPage") != Constantes::AD_USUARIOS) {
                 ?>
 
                 <div class="row footer font-small blue pt-4">
@@ -1122,7 +1155,7 @@ use App\Clases\conexion;
                         <div class="row justify-content-center almost-full-height">
                             <div class="col">
                                 <div class="row justify-content-center align-content-center align-items-center full-height">
-                                    <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
+                                    <a href="faqs">
                                         <h5>FAQs</h5>
                                     </a>
                                 </div>
