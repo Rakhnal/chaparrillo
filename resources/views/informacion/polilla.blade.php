@@ -17,22 +17,8 @@ Polilla de Almacen
 
 <div class="col">
     <div class="row format-div-b">
-        
-        <div class="col">
-            <div class="row justify-content-center align-items-center marg-top h20">
-                <h2 class="bolder">Descripción</h2>
-            </div>
-            <div class="row add-padding center h80">
-                <p>Polilla de la familia Pyralidae con hábitos nocturnos</p>
 
-                <p>Daños en el proceso de almacenaje, cuando deposita los huevos en el hueco que ella misma genera dentro del grano de pistacho, a través de la fisura de su cáscara</p>
-
-                <p>Pueden ser observadas revoloteando alrededor de fuentes de luz y llegan a tener hasta cinco generaciones anuales, con una duración de unos 40-45 días cada una de ellas</p>
-                
-            </div>
-        </div>
-        
-        <div class="col-md-6 no-padding">
+        <div class="col-xl-6  col-md-12 no-padding">
             <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/plodia.jpg">
                 <div class="col">
                     <div class="row middle-height justify-content-center align-items-end">
@@ -40,11 +26,26 @@ Polilla de Almacen
                     </div>
 
                     <div class="row middle-height justify-content-center align-items-start">
-                        <h1>Plodia interpunctella</h1>
+                        <h1><i>Plodia interpunctella</i></h1>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-xl-6  col-md-12">
+            <div class="row justify-content-center align-items-center marg-top h20">
+                <h2 class="bolder">Descripción</h2>
+            </div>
+            <div class="row add-padding center h80 format-div-colabs">
+                <p>Polilla de la familia Pyralidae con hábitos nocturnos</p>
+
+                <p>Daños en el proceso de almacenaje, cuando deposita los huevos en el hueco que ella misma genera dentro del grano de pistacho, a través de la fisura de su cáscara</p>
+
+                <p>Pueden ser observadas revoloteando alrededor de fuentes de luz y llegan a tener hasta cinco generaciones anuales, con una duración de unos 40-45 días cada una de ellas</p>
+
+            </div>
+        </div>
+        
     </div>
     <div class="row format-div-lessp">
         <div class="col">

@@ -4,7 +4,10 @@ namespace App\Clases;
 
 use App\Clases\Auxiliares\Constantes;
 use App\Usuario;
+use App\Plaga;
 use App\Categoria;
+use App\Evento;
+use App\Faq;
 
 /* use App\Usuario;
   use App\Coche;
@@ -52,17 +55,35 @@ class conexion {
 
         $evento->save();
     }
+
     /**
      * 
      * @return type
      */
-    public static function sacarCategorias(){
-        
+    public static function sacarCategorias() {
+
         $categoria = Categoria::all();
-        
+
         return $categoria;
     }
-    
+
+    /**
+     * 
+     * @return type
+     */
+    public static function sacarPlagas() {
+
+        $plagas = Plaga::all();
+
+        return $plagas;
+    }
+
+    public static function sacarEvento($id_evento) {
+
+        $evento = Evento::where('id_evento', $id_evento)->first();
+
+        return $evento;
+    }
 
     /**
      * Login del usuario
@@ -73,6 +94,7 @@ class conexion {
     public static function existeUsuarioPass($correo, $pass) {
 
         $user = Usuario::where('email', $correo)
+                ->where('validado', 1)
                 ->first();
 
         if ($user != null) {
@@ -92,6 +114,34 @@ class conexion {
                 ->first();
         if ($user != null) {
             return $user;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Coge los usuarios de BBDD que son Admin o SWATS
+     * @return type
+     */
+    public static function obtenerUsuariosEspeciales() {
+
+        $users = \DB::select('SELECT id_user, nombre, apellidos FROM usuarios WHERE rol = ? OR rol = ?', [Constantes::ADMIN, Constantes::SWATS]);
+        if ($users != null) {
+            return $users;
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * Obtiene todas las preguntas frecuentes de BBDD
+     * @return type
+     */
+    public static function obtenerFaqs() {
+
+        $faqs = Faq::all();
+        if ($faqs != null) {
+            return $faqs;
         } else {
             return null;
         }
@@ -120,6 +170,7 @@ class conexion {
         $user->pais = $pais;
         $user->latitud = $latitud;
         $user->longitud = $longitud;
+        $user->validado = 0;
         
         $user->save();
     }
@@ -134,18 +185,35 @@ class conexion {
      * @param type $pais
      * @param type $img
      */
-    public static function editUser($nombre, $apellidos, $correo, $pass, $localidad, $pais, $img) {
 
+    public static function editUser($nombre, $apellidos, $correo, $localidad, $pais, $img, $lat, $lon) {
         $user = conexion::existeUsuario($correo);
         $user->nombre = $nombre;
         $user->apellidos = $apellidos;
         $user->email = $correo;
-        if ($pass != null || $pass != '') {
-            $user->password = $pass;
+        if ($img != "" && $img != '' && $img != null && $img != " " && $img != ' ') {
+            $user->img_user = $img;
+        }
+
+        if ($lat != "" && $lon != "" && $lat != null && $lon != null) {
+            $user->latitud = $lat;
+            $user->longitud = $lon;
         }
         $user->localidad = $localidad;
         $user->pais = $pais;
-        $user->img_user = $img;
+        $user->save();
+    }
+
+    /**
+     * Editar la contraseña del usuario
+     * @param type $correo
+     * @param type $pass
+     */
+    public static function editPass($correo, $pass) {
+        $user = conexion::existeUsuario($correo);
+        if ($pass != null && $pass != '' && $pass != ' ') {
+            $user->password = $pass;
+        }
         $user->save();
     }
 

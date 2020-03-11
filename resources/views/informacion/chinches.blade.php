@@ -18,22 +18,7 @@ Chinches
 <div class="col">
     <div class="row format-div-b">
         
-        <div class="col">
-            <div class="row justify-content-center align-items-center marg-top h20">
-                <h2 class="bolder">Descripción</h2>
-            </div>
-            <div class="row add-padding center h80">
-                <p>Encuadra a varios géneros y familias del Orden Hemíptera</p>
-
-                <p>Suelen ser un problema desde la floración (finales de marzo y primera quincena de abril) hasta el endurecimiento de la cáscara (segunda quincena de mayo)</p>
-
-                <p>Producen daños en el epicarpio (lesión del epicarpio), cuando introducen su estilete en esa parte exterior del fruto para alimentarse de su savia</p>
-                
-                <p>El resultado es un ennegrecimiento posterior de los frutos, el tejido dañado se vuelve marrón, el fruto se arruga, se necrosa y, finalmente, se cae. En el interior aparece una pequeña mancha negra de forma irregular que señala por dónde el insecto ha introducido su aparato bucal chupador</p>
-            </div>
-        </div>
-        
-        <div class="col-md-6 no-padding">
+        <div class="col-xl-6  col-md-12 no-padding">
             <div class="row h-100 parallax justify-content-center align-items-center" data-parallax="scroll" data-image-src="images/chaparrillo/elegidas/chinche.jpg">
                 <div class="col">
                     <div class="row middle-height justify-content-center align-items-end">
@@ -46,6 +31,22 @@ Chinches
                 </div>
             </div>
         </div>
+        
+        <div class="col-xl-6  col-md-12">
+            <div class="row justify-content-center align-items-center marg-top h20">
+                <h2 class="bolder">Descripción</h2>
+            </div>
+            <div class="row add-padding center h80 format-div-colabs">
+                <p>Encuadra a varios géneros y familias del Orden Hemíptera</p>
+
+                <p>Suelen ser un problema desde la floración (finales de marzo y primera quincena de abril) hasta el endurecimiento de la cáscara (segunda quincena de mayo)</p>
+
+                <p>Producen daños en el epicarpio (lesión del epicarpio), cuando introducen su estilete en esa parte exterior del fruto para alimentarse de su savia</p>
+                
+                <p>El resultado es un ennegrecimiento posterior de los frutos, el tejido dañado se vuelve marrón, el fruto se arruga, se necrosa y, finalmente, se cae. En el interior aparece una pequeña mancha negra de forma irregular que señala por dónde el insecto ha introducido su aparato bucal chupador</p>
+            </div>
+        </div>
+        
     </div>
     <div class="row format-div-lessp">
         <div class="col">

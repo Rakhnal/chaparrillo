@@ -26,7 +26,7 @@ body {
     background-color: #78aa57;
 
     transition: 1s ease-in all;
-    
+
     overflow: hidden;
 }
 
@@ -64,7 +64,7 @@ td {
 
 .imgLogo {
     transition: 0.5s ease-in all;
-    
+
     vertical-align: middle;
     width: 75px;
     height: 75px;
@@ -166,9 +166,9 @@ td {
 }
 
 .footer {
-    
+
     border-top: 1px solid white;
-    
+
     width: 100%;
     height: fit-content;
     background-color: rgba(82, 117, 59, 0.98);
@@ -209,39 +209,79 @@ td {
 }
 
 .btn-eliminar {
-    
+
     font-size: 0.0000000000001px;
-    
+
     width: 30px;
     height: 30px;
-    
+
     border: none;
     background-color: transparent;
-    
+
     background-image: url('../images/icons/delete.png');
     background-size: cover;
     background-repeat: no-repeat;
+
+    transition: 0.3s ease-in all;
 }
 
 .btn-guardar {
-    
     font-size: 0.0000000000001px;
-    
+
     width: 30px;
     height: 30px;
-    
+
     border: none;
     background-color: transparent;
-    
+
     background-image: url('../images/icons/save.png');
     background-size: cover;
     background-repeat: no-repeat;
+
+    transition: 0.3s ease-in all;
+}
+
+.btn-aniadir {
+    font-size: 0.0000000000001px;
+
+    width: 35px;
+    height: 35px;
+
+    border: none;
+    background-color: transparent;
+
+    background-image: url('../images/icons/add.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    transition: 0.3s ease-in all;
+}
+
+.btn-modal {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    background-color: transparent;
+
+    background-image: url('../images/icons/modal.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    transition: 0.3s ease-in all;
 }
 
 .btn-nuevo {
     background: none;
     border: 1px solid white !important;
     border-radius: 0px !important;
+
+    transition: 0.4s ease-in all;
+}
+
+.btn-modal:hover {
+    background-image: url('../images/icons/modalh.png');
+    transform: scale(0.95);
 }
 
 .btn-eliminar:hover {
@@ -254,6 +294,11 @@ td {
     transform: scale(0.95);
 }
 
+.btn-aniadir:hover {
+    background-image: url('../images/icons/addhover.png');
+    transform: scale(0.95);
+}
+
 .btn-nuevo:hover {
     border: 2px solid white !important;
 }
@@ -262,8 +307,16 @@ td {
     padding: 40px;
 }
 
+.margin-top-less {
+    margin-top: 15px;
+}
+
 .margin-top {
     margin-top: 25px;
+}
+
+.margin-right-por {
+    margin-right: 6%;
 }
 
 #searchButton {
@@ -284,7 +337,7 @@ td {
 
 #main {
     width: 100%;
-    min-height: calc(100% - 100px);
+    min-height: calc(100% - 230px);
     margin: 0;
     padding: 0;
 }
@@ -293,7 +346,7 @@ td {
     margin-top: 20px;
     margin-bottom: 20px;
     width: 100%;
-    height: 80%;
+    height: 400px;
 }
 
 #header {
@@ -322,9 +375,9 @@ td {
 
 
 #imgUser {
-    
+
     border-radius: 50%;
-    
+
     width: 40px;
     height: 40px;
 
@@ -372,7 +425,7 @@ td {
     background-color: transparent !important;
 }
 
-.modal input[type=text], .modal input[type=password], .modal input[type=email] {
+.modal input[type=text], .modal input[type=password], .modal input[type=email], .modal input[type=number], .modal input[type=year] {
     width: 100%;
     height: 100%;
     padding-top: 20px;
@@ -391,7 +444,11 @@ td {
     margin-right: 15%;
     max-width: none !important;
     width: 70%;
-    
+}
+
+#img-eventoP{
+    width: 100%;
+    height: 350px;
 }
 
 .categ{
@@ -481,18 +538,18 @@ select:-webkit-autofill:focus {
 
 .mapa{
     width: 100%;
-    height: 300px;
+    height: 350px;
 }
 
 #img-portada{
-    width: 230px;
-    height: 300px;
+    width: 100%;
+    height: 350px;
 
 }
 
 .thumb{
-    width: 230px; 
-    height: 300px;
+    width: 100%; 
+    height: 350px;
     border: 1px solid #fff;
     margin: 10px 5px 0 0;
 }
@@ -509,7 +566,7 @@ textarea{
     border-bottom: 1px solid white;
 }
 
-input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos {
+input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos, input[type="file"]#profile-file-input {
     width: 0.1px;
     height: 0.1px;
     opacity: 50;
@@ -518,7 +575,7 @@ input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos {
     z-index: -1;
 }
 
-label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs {
+label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs, label[for="profile-file-input"] {
     font-size: 11pt;
     font-weight: bold;
     background-color: #78aa57;
@@ -533,12 +590,12 @@ label[for="subirAdjuntos"], label[for="editarAdjuntos"], .validarDocs {
     transition: all .3s ease-in-out;
 }
 
-label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDocs:hover {
+label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDocs:hover, label[for="profile-file-input"]:hover {
     background-color: #8F7E4F;
 }
 
 #selectVisible {
-    width: 150px;
+    width: 150px !important;
     color: white;
     height: 35px;
     border: 1px solid white;
@@ -546,8 +603,72 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 
 }
 
-.modal input[type=text]::placeholder, .modal input[type=password]::placeholder, .modal input[type=email]::placeholder, .descDocumento::placeholder {
+.modal input[type=text]::placeholder, .modal input[type=password]::placeholder, .modal input[type=email]::placeholder, .modal input[type=number]::placeholder, .modal input[type=year]::placeholder, .descDocumento::placeholder {
     color: #9EC485;
+}
+
+.headerImgLarge {
+    width: 100%;
+    height: 25px;
+}
+
+.no-margins-paddings {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+#headerJccm {
+    width: 50%;
+    height: 25px;
+}
+
+#headerChapa {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 25px;
+}
+
+#logosObs .col {
+    padding: 0;
+    margin: 0;
+}
+
+#previewDiv {
+    width: 100%;
+}
+
+#listaDocs {
+    margin: 15px 0px 0px !important;
+    padding: 0px !important;
+    display: inline-grid !important;
+}
+
+#listaCategorias {
+    margin: 15px 0px 0px !important;
+    padding: 0px !important;
+}
+
+.divCategorias input[type="checkbox"] {
+    display: none;
+}
+
+.divCategorias input[type="checkbox"] + label span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    background: url(../images/icons/checkbox-uncheck.png);
+    background-size: cover;
+    cursor: pointer;
+}
+
+.divCategorias input[type="checkbox"]:checked + label span {
+    background: url(../images/icons/checkbox-check.png);
+    background-size: cover;
 }
 
 /* Footer */
@@ -561,7 +682,6 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 }
 
 #logojccm {
-
     margin-right: 18%;
 
     width: 25%;
@@ -590,4 +710,258 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 
 .full-height {
     height: 100%;
+}
+
+/* Menú Hamburguesa*/
+
+
+.animated-icon2 {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+
+.animated-icon2 span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+
+.animated-icon2 span {
+    background: #e3f2fd;
+}
+
+.animated-icon2 span:nth-child(1) {
+    top: 0px;
+}
+
+.animated-icon2 span:nth-child(2), .animated-icon2 span:nth-child(3) {
+    top: 10px;
+}
+
+.animated-icon2 span:nth-child(4) {
+    top: 20px;
+}
+
+.animated-icon2.open span:nth-child(1) {
+    top: 11px;
+    width: 0%;
+    left: 50%;
+}
+
+.animated-icon2.open span:nth-child(2) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.animated-icon2.open span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.animated-icon2.open span:nth-child(4) {
+    top: 11px;
+    width: 0%;
+    left: 50%;
+}
+
+.form-inline input{
+    color: white !important;
+}
+
+@media
+only screen 
+and (max-device-width: 1024px) {
+
+    ul {
+        display: flex !important;
+    }
+
+    h1, h2, h3, h4 {
+        font-size: 2em;
+    }
+
+    h5 {
+        font-size: 1.1em;
+    }
+
+    a, input, span, button {
+        font-size: 1.5em !important;
+    }
+
+    p {
+        font-size: 1.1em !important
+    }
+
+    a {
+        text-align: center !important;
+    }
+
+    #imgUser {
+        width: 140px !important;
+        height: 140px !important;
+    }
+
+    #btnUser {
+        width: 70px !important;
+        height: 70px !important;
+    }
+
+    #mapaRegistro {
+        height: 500px;
+    }
+
+    #searchButton {
+        transform: scale(1.5);
+    }
+
+    .navbar-collapse {
+        max-height: fit-content;
+    }
+
+    .btn-eliminar, .btn-guardar, .btn-aniadir {
+        font-size: 0.0000000000001px !important;
+    }
+
+    .modal-body .btn-guardar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-body .btn-eliminar {
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-body .btn-aniadir {
+        width: 40px;
+        height: 40px;
+    }
+
+    .margin-top-less {
+        margin-top: 5px !important;
+    }
+
+    .navbar-toggler-icon {
+        padding-top: 15px;
+        transform: scale(1.5);
+    }
+
+    .navbar-toggler-icon:focus {
+        outline: none;
+        border: none;
+    }
+
+    .navbar-toggler:focus {
+        outline: none;
+        border: none;
+    }
+
+    .close {
+        padding: 25px;
+        transform: scale(1.5);
+    }
+
+    .modal-dialog {
+        margin: 0 5%;
+        max-width: none;
+        width: 90%;
+    }
+
+    #logosObs {
+        display: none;
+    }
+}
+
+@media
+only screen 
+and (max-device-width: 1024px) and (orientation: landscape) {
+
+    .navbar-collapse {
+        max-height: 91vh;
+        overflow-y: auto;
+    }
+}
+
+@media
+only screen 
+and (max-device-width: 740px) {
+
+    h1, h2, h3, h4 {
+        font-size: 2.5em;
+    }
+
+    a, input {
+        font-size: 2em !important;
+    }
+
+    p {
+        font-size: 1.5em !important
+    }
+
+    a {
+        text-align: center !important;
+    }
+
+    #mapaRegistro {
+        height: 550px;
+    }
+
+    #imgUser {
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    #logoface, #logochil {
+        transform: scale(1.5);
+    }
+
+    #logojccm {
+        width: 50%;
+    }
+
+    #logouemapa, #logochapa {
+        width: 80%;
+    }
+
+    .margin-top-less {
+        margin-top: 0px !important;
+    }
+
+}
+
+@media
+only screen 
+and (max-device-width: 740px) and (orientation: landscape) {
+
+    .navbar-collapse {
+        max-height: 87vh;
+        overflow-y: auto;
+    }
 }

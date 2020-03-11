@@ -11,11 +11,14 @@ $(document).ready(function () {
         "preventDuplicates": true
     };
 
-    var marcadorRegistro;
     var marcadorEvento1;
+    var marcadorEvento2;
+
 
     var MapaRegistro;
+    var marcadorRegistro;
     var MapaEvento;
+    var MapaEvento2;
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(Sacalugar, nofunciona);
@@ -24,12 +27,20 @@ $(document).ready(function () {
     }
 
     $('#btnreset').on('click', resetMarker);
+    $('#btnresetEU').on('click', resetMarkerEU);
     $('#btnreset2').on('click', resetMarker2);
 
+
     function Sacalugar(position) {
-        var latitud = position.coords.latitude;
-        var longitud = position.coords.longitude;
+
+        var latitud;
+        var longitud;
+
+        latitud = position.coords.latitude;
+        longitud = position.coords.longitude;
+
         var mapa = new google.maps.LatLng(latitud, longitud);
+        var mapa2 = new google.maps.LatLng(document.getElementById("latitudEvent").value, document.getElementById("longitudEvent").value);
 
         var ColocaMapa = {
             zoom: 15,
@@ -37,27 +48,33 @@ $(document).ready(function () {
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
-        if (document.getElementById("map") != null) {
+        var ColocaMapa2 = {
+            zoom: 15,
+            center: mapa2,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        if (document.getElementById("map") !== null) {
             MapaEvento = new google.maps.Map(document.getElementById("map"), ColocaMapa);
 
             marcadorEvento1 = new google.maps.Marker({
                 position: mapa,
                 icon: "images/icons/location.svg",
-                map: PintaMapa
+                map: MapaEvento
             });
         }
 
         if (document.getElementById("map2") != null) {
-            var PintaMapa = new google.maps.Map(document.getElementById("map2"), ColocaMapa);
+            MapaEvento2 = new google.maps.Map(document.getElementById("map2"), ColocaMapa2);
 
-            var marca = new google.maps.Marker({
-                position: mapa,
+            marcadorEvento2 = new google.maps.Marker({
+                position: mapa2,
                 icon: "images/icons/location.svg",
-                map: PintaMapa
+                map: MapaEvento2
             });
         }
 
-        if (document.getElementById("mapaRegistro") != null) {
+        if (document.getElementById("mapaRegistro") !== null) {
             MapaRegistro = new google.maps.Map(document.getElementById("mapaRegistro"), ColocaMapa);
 
             marcadorRegistro = new google.maps.Marker({
@@ -67,10 +84,12 @@ $(document).ready(function () {
             });
         }
 
+
+
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
         google.maps.event.addListener(MapaEvento, "click", mapClick2);
         // var vercalle = new google.maps.StreetViewPanorama(document.getElementById("map"), calle);
-        
+
         localStorage.setItem('latitud', latitud);
         localStorage.setItem('longitud', longitud);
     }
@@ -80,7 +99,7 @@ $(document).ready(function () {
         // get lat/lon of click
         var clickLat = event.latLng.lat();
         var clickLon = event.latLng.lng();
-        
+
         $('#latitudInput').val(clickLat);
         $('#longitudInput').val(clickLon);
 
@@ -92,13 +111,13 @@ $(document).ready(function () {
 
         google.maps.event.clearListeners(MapaRegistro, 'click');
     }
-    
+
     function mapClick2(event) {
 
         // get lat/lon of click
         var clickLat = event.latLng.lat();
         var clickLon = event.latLng.lng();
-        
+
         $('#latitud').val(clickLat);
         $('#longitud').val(clickLon);
 
@@ -114,21 +133,23 @@ $(document).ready(function () {
     // Reinicia el marcador del mapa de Registro
     function resetMarker() {
         google.maps.event.addListener(MapaRegistro, "click", mapClick);
-        
+
         $('#latitudInput').val(null);
         $('#longitudInput').val(null);
 
         marcadorRegistro.setMap(null);
     }
-    
+
     function resetMarker2() {
         google.maps.event.addListener(MapaEvento, "click", mapClick2);
-        
+
         $('#latitud').val(null);
         $('#longitud').val(null);
 
         marcadorEvento1.setMap(null);
     }
+
+
 
     function nofunciona(position) {
         toastr.error('No tienes activado la geolocalización, algunas características dejarán de funcionar', '¡Error!');

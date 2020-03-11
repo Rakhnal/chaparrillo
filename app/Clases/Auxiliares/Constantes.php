@@ -24,12 +24,14 @@ class Constantes {
     const CHINCHES = "informacion/chinches";
     const FAQS = "informacion/faqs";
     const FORO = "foro";
-    const DOCUMENTACION = "documentacion";
+    const DOCUMENTACION = "publicaciones/documentacion";
     const AGENDA = "agenda";
     const AD_EVENTOS = "administracion/admin_eventos";
     const AD_DOCUMENTOS = "administracion/adminDocument";
     const AD_INFORMES = "administracion/adminInformes";
+    const AD_USUARIOS = "administracion/admin_usuarios";
     const ED_USUARIO = "principal/Editar_usuario";
+    const AD_NOTICIAS = "principal/Noticias";
     
     // Roles
     const NORMAL = "0";
@@ -41,4 +43,12 @@ class Constantes {
     const EVENTO = 1;
     const DOCUMENTO = 2;
     const COMENTARIOS = 3;
+    
+    // Select de Plagas
+    const CLITRASEL = "Clitra";
+    const PSILASSEL = "Psilas del Pistacho";
+    const POLILLASEL = "Polilla de Almacen";
+    const CHINCHESEL = "Chinches";
+    const OTRA = "Otra";
+    
 }

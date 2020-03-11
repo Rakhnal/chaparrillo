@@ -32,6 +32,7 @@ use App\Clases\conexion;
 
         <link rel="stylesheet" href="css/general.css" />
         <script src="scripts/general/sweetalert.min.js"></script>
+
     </head>
     <body>
 
@@ -71,7 +72,7 @@ use App\Clases\conexion;
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
-                                        <label>Nombre:</label>
+                                        <label>Evento:</label>
                                         <input name="nomb" type="text" class="form-control" placeholder="Nombre del evento" required>
                                     </div>
                                     <div class="form-group">
@@ -84,7 +85,7 @@ use App\Clases\conexion;
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" name="descrip"rows="5" cols="20" placeholder="Escribe una descripción"></textarea>
+                                        <textarea id="taa-eventA" name="descrip" class="descDocumento" placeholder="Escribe una descripción"></textarea>
                                     </div>
                                 </div>
 
@@ -95,24 +96,12 @@ use App\Clases\conexion;
                                         <input name="loca" type="text" class="form-control" placeholder="Localización" required>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label>Categoría:</label>
-                                        <select name="catego[]" class="categ" multiple>
-                                            <?php
-                                            $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca) {
-                                                ?>
-                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-
                                     <div id="map" class="mapa">
 
                                     </div>
-                                    
-                                    <button class="btn btn-nuevo" type="button" name="btnreset2" id="btnreset2">Reiniciar Marcador</button>
-                                    
+
+                                    <button class="btn btn-nuevo mt-2" type="button" name="btnreset2" id="btnreset2">Reiniciar Marcador</button>
+
                                     <input id="latitud" type="hidden" name="latitud" value="">
                                     <input id="longitud" type="hidden" name="longitud" value="">
                                     <script>
@@ -129,7 +118,7 @@ use App\Clases\conexion;
 
                                     </div>
                                     <div class="text-center mt-4">
-                                        <input type="submit" name="add" class="btn btn-primary" value="Agregar">
+                                        <input type="submit" name="add" class="btn btnAdd" value="Agregar">
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +127,6 @@ use App\Clases\conexion;
                 </div>
             </div>
         </div>
-
         <!------------- Pantalla modal del login-->
         <div id="login" class="modal fade" role="dialog" data-backdrop = "static">
             <div class="modal-dialog modal-dialog-centered">
@@ -321,6 +309,8 @@ use App\Clases\conexion;
 
                         <p>Usuario/Contraseña incorrectos</p>
 
+                        <p>Si se acaba de registrar espere a ser validado o contacte con un administrador</p>
+
                     </div>
                 </div>
             </div>
@@ -344,13 +334,6 @@ use App\Clases\conexion;
         </div>
 
         <!-- *************** Ventana Modificar Evento ******************** -->
-        <?php
-        $evento = session()->get('event_select');
-        //echo $evento->nombre.'hola';
-        if(!empty($evento)){
-        session()->forget('event_select');
-        //echo $evento->nombre;
-        ?>
         <div class="modal fade eventos" id="ventana-modificar" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
                 <div class="modal-content">
@@ -367,49 +350,39 @@ use App\Clases\conexion;
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label>Nombre:</label>
-                                        <input name="nomb" type="text" value="<?php echo $evento->nombre; ?>" class="form-control" placeholder="Nombre del evento" required>
+                                        <input name="nomb" id="nomb-e" type="text" value="" class="form-control" placeholder="Nombre del evento" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha inicio</label>
-                                        <input name="feci" type="date" value="<?php echo $evento->fecha_inicio ?>" class="form-control"  required>
+                                        <input name="feci" id="feci-e" type="date" value="" class="form-control"  required>
                                     </div>
                                     <div class="form-group">
                                         <label>Fecha fin:</label>
-                                        <input name="fecf" type="date" value="<?php echo $evento->fecha_fin ?>" class="form-control" required>
+                                        <input name="fecf" id="fecf-e" type="date" value="" class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Descripción:</label>
-                                        <textarea id="taa-event" rows="5" cols="20" placeholder="Escribe una descripción"><?php echo $evento->descripcion  ?></textarea>
-                                    </div>
-
-                                    <div class="respuesta">
-
+                                        <textarea name="descripcion-e" id="taa-event" class="descDocumento" placeholder="Escribe una descripción"></textarea>
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="col-4">
 
                                     <div class="form-group">
                                         <label>Localización:</label>
-                                        <input name="loca" type="text" value="<?php echo $evento->localizacion ?>" class="form-control" placeholder="Localización" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Categoría:</label>
-                                        <select class="categ" multiple>
-                                            <?php
-                                            $categoria = conexion::sacarCategorias();
-                                            foreach ($categoria as $ca) {
-                                                ?>
-                                                <option value="<?php echo $ca->id_categoria ?>"><?php echo $ca->nombre ?></option>
-                                            <?php } ?>
-                                        </select>
+                                        <input name="loca" id="localM-e" type="text" value="" class="form-control" placeholder="Localización" required>
                                     </div>
 
                                     <div id="map2" class="mapa">
 
                                     </div>
+
+                                    <input type="hidden" name="latitudEvent" id="latitudEvent" value="">
+                                    <input type="hidden" name="longitudEvent" id="longitudEvent" value="">
+                                    <input type="hidden" name="idevento" id="id_event" value="">
+                                    <button class="btn btn-nuevo mt-2" type="button" name="btnreset3" id="btnreset3">Reiniciar Marcador</button>
+
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
@@ -417,12 +390,12 @@ use App\Clases\conexion;
                                         <input id="imgEvento2" name="portada" type="file" accept="image/*" class="form-control-file" >
                                     </div>
                                     <div id="img-portada2">
-                                        <?php if ($evento->imagen != null) { ?>
-                                            <img src="data:image/jpg;base64,<?php echo base64_encode($evento->imagen); ?>" alt="Portada evento" class="img-fluid img-ev">
-                                        <?php } ?>
+
+                                        <img src="" id="img-eventoP" alt="Portada evento" class="img-fluid">
+
                                     </div>
                                     <div class="text-center mt-4">
-                                        <input type="submit" name="add" class="btn btn-primary" value="Guardar">
+                                        <input type="submit" name="add" class="btn btnAdd" value="Guardar">
                                     </div>
                                 </div>
                             </div>
@@ -431,7 +404,7 @@ use App\Clases\conexion;
                 </div>
             </div>
         </div>
-        <?php } ?>
+
         <!-- Ventana modal para subir documentación -->
 
         <div class="modal fade" id="modalSubirDocumento" data-backdrop="static">
@@ -443,21 +416,50 @@ use App\Clases\conexion;
                         </div>
                         <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
                     </div>
-                    <form name="formSubDoc" class="formDocs m-0" action="subirDocumento" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+                    <form name="formSubDoc" id="formSubDoc" class="formDocs m-0" action="subirDocumento" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
                                 <input type="text" class="pl-2" id="nombreSubirDoc" name="nombreSubirDoc" placeholder="Nombre del documento" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" id="descSubirDoc" name="descSubirDoc" placeholder="Descripción de la documentación (opcional)"></textarea>
                             </div>
-                            <div class="form-group">
-                                <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*">
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <input type="year" class="pl-2" id="anioSubirDoc" name="anioSubirDoc" placeholder="Año de publicación" length="4" pattern="^[0-9]{4}$" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <input type="text" class="pl-2" id="autoresSubirDoc" name="autoresSubirDoc" placeholder="Autores del documento" required>
+                                </div>
                             </div>
-                            <label for="subirAdjuntos">
-                                <span>Adjuntar archivos</span>
-                            </label>
+                            <div class="form-group m-0">
+                                <div>
+                                    <input type="file" class="btn p-0 form-control-file" id="subirAdjuntos" name="subirAdjuntos" accept="file_extension/*" required>
+                                </div>
+                                <label for="subirAdjuntos">
+                                    <span>Adjuntar archivos</span>
+                                </label>
+                            </div>
+                            <div id="previewDiv">
+                                <output id="list"></output>
+                            </div>
+                            <div class="form-group" id="listaCategorias">
+                                <?php
+                                $cats = conexion::sacarCategorias();
+
+                                foreach ($cats as $cat) {
+                                    ?>
+                                    <div class="form-check p-0 divCategorias">
+                                        <input class="form-check-input" type="checkbox" value="<?= $cat->id_categoria ?>" name="categorias[]" id="categoria<?= $cat->id_categoria ?>">
+                                        <label class="form-check-label" for="categoria<?= $cat->id_categoria ?>"><span></span>
+                                            <?= $cat->nombre ?>
+                                        </label>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="text-right">
@@ -484,10 +486,16 @@ use App\Clases\conexion;
                         {{ csrf_field() }}
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="text" class="pl-2" id="nombreEditarDoc" name="nombreEditarDoc" placeholder="Nombre del documento" required>
+                                <input type="text" class="pl-2" id="nombreEditarDoc" name="nombreEditarDoc" placeholder="Nombre del documento" value="" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación"></textarea>
+                                <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación" value=""></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="pl-2" id="anioEditarDoc" name="anioEditarDoc" placeholder="Año de publicación" pattern="[0-9]{4}" value="" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="pl-2" id="autoresEditarDoc" name="autoresEditarDoc" placeholder="Autores del documento" value="" required>
                             </div>
                             <div class="form-group form-inline">
                                 <div>
@@ -503,6 +511,23 @@ use App\Clases\conexion;
                                     </select>
                                 </div>
                             </div>
+                            <div id="previewDiv">
+                                <output id="list"></output>
+                            </div>
+                            <div class="form-group" id="modificarListaCategorias">
+                                <?php
+                                foreach ($cats as $cat) {
+                                    ?>
+                                    <div class="form-check p-0 divCategorias">
+                                        <input class="form-check-input" type="checkbox" value="<?= $cat->id_categoria ?>" name="categorias[]" id="categoria<?= $cat->id_categoria ?>">
+                                        <label class="form-check-label" for="categoria<?= $cat->id_categoria ?>"><span></span>
+                                            <?= $cat->nombre ?>
+                                        </label>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <div class="text-right">
@@ -514,9 +539,98 @@ use App\Clases\conexion;
             </div>
         </div>
 
-        <!-- Ventana modal para añadir un nuevo informe -->
+        <!-- ******************** Ventana Administración Plagas *********************** -->
+        <div class="modal fade" id="modalPlagas" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            Administración de plagas
+                        </div>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
 
-        <div class="modal fade" id="modalNuevoInforme" data-backdrop="static">
+                        <div class="row table-responsive">
+                            <table id="tablaAdminPlagas">
+                                <thead>
+                                    <tr>
+                                        <th hidden>ID</th>
+                                        <th>Nombre</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $plagas = conexion::sacarPlagas();
+
+                                    foreach ($plagas as $plaga) {
+                                        ?>
+                                        <tr>
+                                    <form action="actPlaga" name="actPlagaForm" method="POST">
+                                        {{ csrf_field() }}
+                                        <td hidden><input type="number" name="idplaga"value="<?= $plaga->id_plaga ?>"/></td>
+                                        <td><input type="text" name="nomPlaga" class="cajaNormal" value="<?= $plaga->nombre_plaga ?>"/></td>
+                                        <td><input type="submit" name="delPlaga" id="delPlaga" class="btn btn-eliminar" value="."/></td>
+                                        <td><input type="submit" name="modPlaga" id="modPlaga" class="btn btn-guardar" value="."/></td>
+                                    </form>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+
+                                <tr>
+                                <form action="addPlaga" name="addPlagaForm" method="POST">
+                                    {{ csrf_field() }}
+                                    <td><input type="text" name="nomPlaga" class="cajaNormal" value="" placeholder="Nombre de la nueva plaga"/></td>
+                                    <td><input type="submit" name="addPlaga" id="addPlaga" class="btn btn-aniadir" value="."/></td>
+                                </form>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ******************** Ventana Administración Faqs *********************** -->
+        <div class="modal fade" id="modalFaq" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            Administración de Faqs
+                        </div>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+
+                        <form action="addFaq" name="addFaqForm" method="POST">
+                            {{ csrf_field() }}
+                            <div class="row margin-left-right">
+                                <p>Pregunta:</p>
+                                <input type="text" name="pregFaq" class="cajaNormal" value=""/>
+                            </div>
+
+                            <div class="row margin-left-right">
+                                <p>Respuesta:</p>
+                                <textarea name="respFaq" id="respFaq"></textarea>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <input type="submit" name="addFaqBtn" id="addFaqBtn" class="btn btn-guardar" value="."/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ventana modal para mostrar el informe -->
+
+        <div class="modal fade" id="modalInforme" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header align-items-center">
@@ -527,6 +641,8 @@ use App\Clases\conexion;
                     </div>
                     <form name="formNewInforme" action="newInforme" method="POST">
                         {{ csrf_field() }}
+                        <input type="number" hidden id="idInforme">
+
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col">
@@ -542,26 +658,42 @@ use App\Clases\conexion;
                                         <p>Plaga a tratar:</p>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <input type="text" class="cajaNormal" autocomplete="off" id="plagaTratar" name="plagaTratar" required>
+                                        <select id="plagaTratar" name="plagaTratar">
+                                            <?php
+                                            $plagas = conexion::sacarPlagas();
+
+                                            foreach ($plagas as $plaga) {
+                                                ?>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center">
-                                        <p>Polígono y parcela:</p>
-                                        <input type="text" class="cajaNormal" autocomplete="off" id="polParInput" name="polParInput" required>
+                                        <p>Polígono:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="polInput" name="polInput" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="row justify-content-center">
-                                        <p>Daño aproximado (%):</p>
-                                        <input type="number" class="cajaNormal" max="100" min="1" id="danioAprox" name="danioAprox" required>
+                                        <p>Parcela:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="parInput" name="parInput" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Municipio:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="munInput" name="munInput" required>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center">
@@ -576,6 +708,48 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Daño aproximado (%):</p>
+                                        <input type="number" class="cajaNormal" max="100" min="1" id="danioAprox" name="danioAprox" required>
+                                    </div>
+                                    <?php
+                                    if ($user != null) {
+                                        if ($user->rol == Constantes::ADMIN) {
+
+                                            $usuarios = conexion::obtenerUsuariosEspeciales();
+                                            ?>
+                                            <div class="row justify-content-center">
+                                                <p>Usuario Informe:</p>
+
+                                                <select name="userProp" id="userProp">
+                                                    <option value="" selected></option>
+
+                                                    <?php
+                                                    foreach ($usuarios as $usuario) {
+                                                        ?>
+                                                        <option value="<?= $usuario->id_user ?>"><?= $usuario->nombre ?> <?= $usuario->apellidos ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+
+                                            </div>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Comentario:</p>
+                                        <textarea class="textAreaInf" id="coment" name="coment" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row justify-content-center">
                                 <input type="submit" class="btn btn-guardar margin-top" id="btnNewInforme" name="btnNewInforme" value="">
                             </div>
@@ -599,6 +773,8 @@ use App\Clases\conexion;
                     </div>
                     <form name="formNewInforme" action="newInforme" method="POST">
                         {{ csrf_field() }}
+                        <input type="number" hidden id="idInforme">
+
                         <div class="modal-body">
                             <div class="row justify-content-center">
                                 <div class="col">
@@ -614,7 +790,17 @@ use App\Clases\conexion;
                                         <p>Plaga a tratar:</p>
                                     </div>
                                     <div class="row justify-content-center">
-                                        <input type="text" class="cajaNormal" autocomplete="off" id="plagaTratar" name="plagaTratar" required>
+                                        <select id="plagaTratar" name="plagaTratar">
+                                            <?php
+                                            $plagasTWO = conexion::sacarPlagas();
+
+                                            foreach ($plagasTWO as $plaga) {
+                                                ?>
+                                                <option value="<?= $plaga->id_plaga ?>"><?= $plaga->nombre_plaga ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -622,14 +808,20 @@ use App\Clases\conexion;
                             <div class="row justify-content-center">
                                 <div class="col">
                                     <div class="row justify-content-center">
-                                        <p>Polígono y parcela:</p>
-                                        <input type="text" class="cajaNormal" autocomplete="off" id="polParInput" name="polParInput" required>
+                                        <p>Polígono:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="polInput" name="polInput" required>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="row justify-content-center">
-                                        <p>Daño aproximado (%):</p>
-                                        <input type="number" class="cajaNormal" max="100" min="1" id="danioAprox" name="danioAprox" required>
+                                        <p>Parcela:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="parInput" name="parInput" required>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Municipio:</p>
+                                        <input type="text" class="cajaNormal" autocomplete="off" id="munInput" name="munInput" required>
                                     </div>
                                 </div>
                             </div>
@@ -648,6 +840,48 @@ use App\Clases\conexion;
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Daño aproximado (%):</p>
+                                        <input type="number" class="cajaNormal" max="100" min="1" id="danioAprox" name="danioAprox" required>
+                                    </div>
+                                    <?php
+                                    if ($user != null) {
+                                        if ($user->rol == Constantes::ADMIN) {
+
+                                            $usuarios = conexion::obtenerUsuariosEspeciales();
+                                            ?>
+                                            <div class="row justify-content-center">
+                                                <p>Usuario Informe:</p>
+
+                                                <select name="userProp">
+                                                    <option value="" selected></option>
+
+                                                    <?php
+                                                    foreach ($usuarios as $usuario) {
+                                                        ?>
+                                                        <option value="<?= $usuario->id_user ?>"><?= $usuario->nombre ?> <?= $usuario->apellidos ?></option>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </select>
+
+                                            </div>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <p>Comentario:</p>
+                                        <textarea class="textAreaInf" id="coment" name="coment" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row justify-content-center">
                                 <input type="submit" class="btn btn-guardar margin-top" id="btnNewInforme" name="btnNewInforme" value="">
                             </div>
@@ -675,7 +909,7 @@ use App\Clases\conexion;
                                 <div class="row justify-content-center">
                                     <h3>Centro "El Chaparrillo"</h3>
                                 </div>
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center format-div-colabs">
                                     <p class="thinner">Adscrito al Instituto Regional de Investigación y Desarrollo Agroalimentario y Forestal de Castilla-La Mancha (IRIAF), tiene como objetivo la investigación, desarrollo e innovación en el área agraria y medio ambiental. Cuenta con más de 35 años de experiencia en la investigación y extensión agraria del cultivo del pistacho, y es referencia nacional e internacional en el cultivo.</p>
                                 </div>
                                 <div class="row justify-content-center">
@@ -683,56 +917,47 @@ use App\Clases\conexion;
                                 </div>
                             </div>
                         </div>
-
+                        <br>
                         <div class="row justify-content-center">
-                            <div class="col margin-right">
-                                <div class="row justify-content-center">
-                                    <h3>ECOVALIA</h3>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <p class="thinner">Asociación sin ánimo de lucro que trabaja por y para el desarrollo de la producción y la alimentación ecológicas. Su origen se remonta a 1991. Actualmente figuran como referente a nivel nacional y su proyección internacional está en pleno crecimiento.</p>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <a href="https://www.ecovalia.org/" target="_blank">www.ecovalia.org</a>
-                                </div>
-                            </div>
                             <div class="col">
                                 <div class="row justify-content-center">
-                                    <h3>SAT Ecopistacho</h3>
+                                    <h3>Desarrolladores Web (Contacto)</h3>
                                 </div>
+
                                 <div class="row justify-content-center">
-                                    <p class="thinner">Ecopistacho, se funda en La Mancha el año 2010, como Sociedad Agraria de Transformación de fruto del pistachero, está formada por cultivadores de este fruto comprometidos en conciencia con un modelo de agricultura no agresiva. La SAT Ecopistacho posee las acreditaciones oficiales que certifican su condición ecológica. El objetivo que persigue este colectivo, es: ofrecer a la sociedad un producto natural de máxima calidad basado en el respeto por el medioambiente.</p>
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/nathaniel-lucas-olmo-58a565167/" target="_blank">Nathaniel Lucas Olmo</a>
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <div class="row justify-content-center">
-                                    <a href="http://www.ecopistacho.com/" target="_blank">www.ecopistacho.com</a>
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/rafael-%C3%A1ngel-ure%C3%B1a-sobrino-a57aa9182/" target="_blank">Rafael Angel Ureña Sobrino</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/sergio-sus%C3%ADn-cejudo-00b479161/" target="_blank">Sergio Susin Cejudo</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col">
+                                        <div class="row justify-content-center">
+                                            <a href="https://www.linkedin.com/in/%C3%A1lvaro-donoso-conde-530b22107/" target="_blank">Álvaro Donoso Conde</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col margin-right">
-                                <div class="row justify-content-center">
-                                    <h3>SAT El campo</h3>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <p class="thinner">La SAT nº516 del Campo es una sociedad agraria de transformación que se nutre las plantaciones de pistacho y de la experiencia de sus asociados. Actualmente está compuesta por 26 socios cuyas plantaciones suman alrededor de 500 hectáreas de pistacho, ubicadas en distintos municipios de la región. Cabe destacar su decidida apuesta por el pistacho ecológico que supone el 40% de su producción total.</p>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <a href="http://www.satdelcampo.es/" target="_blank">www.satdelcampo.es</a>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row justify-content-center">
-                                    <h3>SAT Pistamancha</h3>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <p class="thinner">Pistamancha tiene en la actualidad 19 socios con una superficie plantada de pistachos de algo más de 300 Has. Estas plantaciones se encuentran en distintos estados de producción y la mayoría de ellos, en proceso de reconversión a cultivo ecológico. Los socios de Pistamancha reciben de forma gratuita los consejos y el asesoramiento de aquellos socios con plantaciones más antiguas y aprovechan su experiencia evitando errores comunes en la implantación de un nuevo pistachar.</p>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <a href="https://www.pistamancha.com/" target="_blank">www.pistamancha.com</a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -758,7 +983,7 @@ use App\Clases\conexion;
 
             <div class = "row" id = "header">
 
-                <nav class="navbar navbar-expand-lg" id="navHeader">
+                <nav class="navbar navbar-expand-xl" id="navHeader">
                     <?php
                     // En el index el logo estará posicionado por defecto en otro sitio
                     if (session()->get("actPage") == Constantes::INDEX) {
@@ -772,14 +997,31 @@ use App\Clases\conexion;
                     }
                     ?>
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                    <div class="col" id="logosObs">
+                        <div class="row">
+                            <div class="col">
+                                <img src="images/footer/logochapa.jpg" class="headerImg" id="headerChapa" alt="Logo Chaparrillo"/>
+                            </div>
+                            <div class="col">
+                                <div class="row justify-content-center">
+                                    <img src="images/footer/logojccm.png" class="headerImg" id="headerJccm" alt="Logo JCCM"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <img src="images/footer/logouemapa.png" class="headerImgLarge" id="headerMapa" alt="Logo MAPA"/>
+                        </div>
+
+                    </div>
+
+                    <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"><div class="animated-icon2"><span></span><span></span><span></span><span></span></div></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">                        
                         <ul class="nav navbar-nav ml-auto">
 
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Buscar en la página" aria-label="Search">
+                            <form class="row form-inline my-2 my-lg-0 justify-content-center" id="searchform" onsubmit="return googleSearch()" class="searchform" method="GET" action="#">
+                                <input class="form-control mr-sm-2" type="search" id="searchtext" placeholder="Buscar en la página" aria-label="Search">
                                 <button class="btn btn-outline-success my-2 my-sm-0 margin-right" type="submit" id="searchButton"></button>
                             </form>
 
@@ -850,7 +1092,7 @@ use App\Clases\conexion;
                                             <?php
                                             if ($user->rol == Constantes::ADMIN) {
                                                 ?>
-                                                <a class="dropdown-item menu-text" href="#">Administrar Usuarios</a>
+                                                <a class="dropdown-item menu-text" href="admin_usuarios">Administrar Usuarios</a>
                                                 <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
                                                 <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
                                                 <?php
@@ -882,7 +1124,7 @@ use App\Clases\conexion;
 
             <?php
             // Agregar aquí las páginas donde no se quiera mostrar el footer
-            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES) {
+            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES && session()->get("actPage") != Constantes::AD_USUARIOS) {
                 ?>
 
                 <div class="row footer font-small blue pt-4">
@@ -930,7 +1172,7 @@ use App\Clases\conexion;
                         <div class="row justify-content-center almost-full-height">
                             <div class="col">
                                 <div class="row justify-content-center align-content-center align-items-center full-height">
-                                    <a href="https://www.facebook.com/Centro-Agrario-El-Chaparrillo-289847297876695/?ref=br_rs" target="_blank">
+                                    <a href="faqs">
                                         <h5>FAQs</h5>
                                     </a>
                                 </div>

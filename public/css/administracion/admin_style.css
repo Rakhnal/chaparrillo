@@ -5,15 +5,37 @@ and open the template in the editor.
 */
 /* 
     Created on : 29-ene-2020, 11:54:31
-    Author     : rafa
+    Author     : rafa y nathan
 */
 
 body {
     transition: none !important;
 }
 
+#main {
+    min-height: calc(100% - 100px) !important;
+}
+
+select {
+    width: 90% !important;
+    height: 28px;
+    
+    background: transparent;
+    border: 1px solid white;
+}
+
+select option {
+    background: white;
+    color: black;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
 #migas {
     background: none;
+}
+
+.form-control{
+    color: white !important;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
@@ -70,7 +92,7 @@ p {
     background: none;
 }
 
-#events, #tablaAdminDocument, #tablaAdminInformes {
+#events, #tablaAdminDocument, #tablaAdminInformes, #tablaAdminPlagas {
     width: 100%;
 }
 
@@ -86,9 +108,14 @@ p {
 
 .cajaNormal {
     height: 30px !important;
-    width: 70% !important;
+    width: 90% !important;
     border: 1px solid white !important;
     padding: 5px !important;
+}
+
+.textAreaInf {
+    width: 90% !important;
+    height: 100px;
 }
 
 #formEliminarDoc {
@@ -177,4 +204,42 @@ p {
 .img-ev{
     max-width: 150px;
     max-height: 150px;
+}
+
+
+@media
+only screen 
+and (max-device-width: 1024px) {
+    
+    .swal-modal {
+        min-width: 600px;
+        min-height: 400px;
+    }
+    
+    .swal-button {
+        font-size: 25px !important;
+    }
+    
+    .swal-title {
+        font-size: 50px !important;
+    }
+    
+    .swal-text {
+        font-size: 30px !important;
+        text-align: center;
+    }
+}
+
+@media
+only screen 
+and (max-device-width: 740px) {
+    
+    #plagasBtn {
+        transform: scale(0.8);
+    }
+    
+    #exportTable {
+        transform: scale(0.8);
+    }
+    
 }

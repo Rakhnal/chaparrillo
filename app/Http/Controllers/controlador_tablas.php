@@ -8,15 +8,21 @@ use App\Evento;
 use App\Publicacion;
 use App\Imagen;
 use App\Informe;
+use App\Plaga;
 use App\Clases\Auxiliares\Constantes;
 use App\Documento;
 use Illuminate\Support\Facades\Redirect;
 use App\Adjunto;
+use Illuminate\Support\Facades\Session;
+use App\Categoria;
+use App\Faq;
+
+/* Author: Nathan, Álvaro y Rafa */
 
 class controlador_tablas extends Controller {
 
     //************************************************************************//
-    //DES17: Página para administrar documentación
+    //DES17: Página para administrar documentación - Autor: Nathan
     //************************************************************************//
     /**
      * Esta función lista todos los documentos de la base de datos.
@@ -26,10 +32,20 @@ class controlador_tablas extends Controller {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento')
                 ->paginate(8);
 
-        return view(Constantes::AD_DOCUMENTOS, ['docs' => $documentos]);
+        $categorias = DB::table('categorias')
+                ->join('asignar_categorias', 'asignar_categorias.id_categoria', '=', 'categorias.id_categoria')
+                ->join('publicaciones', 'publicaciones.id_item', '=', 'asignar_categorias.id_item')
+                ->select('categorias.nombre as categoria');
+
+        $datos = [
+            'docs' => $documentos,
+            'categorias' => $categorias
+        ];
+
+        return view(Constantes::AD_DOCUMENTOS, $datos);
     }
 
     /**
@@ -38,16 +54,14 @@ class controlador_tablas extends Controller {
      */
     public function eliminarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento);
+        $qhp = "ok";
 
-        if ($documento) {
-            $publicacion = Publicacion::find($id_documento);
+        $publicacion = DB::table('publicaciones')
+                ->join('documentos', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                ->where('publicaciones.id_item', $id_documento);
+
+        if ($publicacion) {
             $publicacion->delete();
-            $documento->delete();
-            $qhp = "ok";
         } else {
             $qhp = "fail";
         }
@@ -56,32 +70,29 @@ class controlador_tablas extends Controller {
 
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
-        $qhp = "ok";
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento)
-                ->select('*')
-                ->first();
 
-//        $datos = [
-//            'id_documento' => $documento->id_documento,
-//            'nombre' => $documento->nombre,
-//            'descripcion' => $documento->descripcion,
-//            'visible' => $documento->visible
-//            
-//        ];
+        $documentos = DB::select('SELECT documentos.id_documento, publicaciones.nombre as nombre, descripcion, anio, autores, visible, documento FROM documentos'
+                        . 'JOIN publicaciones ON documentos.id_documento = publicaciones.id_item'
+                        . 'JOIN adjuntos ON adjuntos.id_documento = documentos.id_documento'
+                        . 'WHERE documentos.id_documento = ' . $id_documento);
 
+//        $categorias = \DB::select('SELECT asignar_categorias.id_item,categorias.nombre,asignar_categorias.id_categoria FROM asignar_categorias'
+//                        . 'JOIN publicaciones ON publicaciones.id_item = asignar_categorias.id_item'
+//                        . 'JOIN categorias ON categorias.id_categoria = asignar_categorias.id_categoria'
+//                        . 'WHERE publicaciones.id_item =' . $id_documento);
 
-        if ($documento) {
-            if ($session->has('docSession')) {
-                $session->forget('docSession');
-            }
-            $session->put('docSession', $documento);
-        } else {
-            $qhp = "fail";
-        }
+        $documento = array(
+            'nombre' => $documentos[0]->nombre,
+            'descripcion' => $documentos[0]->descripcion,
+            'anio' => $documentos[0]->anio,
+            'autores' => $documentos[0]->autores
+        );
+        
+//        $categoria = array(
+//          'categoria' => $categorias[0]->nombre  
+//        );
 
-        return $qhp;
+        return json_encode($documento);
     }
 
     public function modificarDocumentos() {
@@ -89,8 +100,7 @@ class controlador_tablas extends Controller {
         $documento = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->where('documentos.id_documento', $id_documento)
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible')
-                ->first();
+                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible');
 
         if ($documento) {
             $qhp = "ok";
@@ -129,16 +139,31 @@ class controlador_tablas extends Controller {
 
             //dd($req->file('subirAdjuntos'));
 
-            $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
-
             $documento->num_descargas = 0;
+            $documento->anio = $req->get('anioSubirDoc');
+            $documento->autores = $req->get('autoresSubirDoc');
             $documento->visible = 1;
+
+//            $file = file_get_contents($req->get('list'), true);
+//            $a1 = str_getcsv($file);
+
+            $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
 
             $publicacion->save();
 
             $publication = Publicacion::where('nombre', $req->get('nombreSubirDoc'))->first();
 
-            //dd($publication->id_item);
+            $categorias = $req->get('categorias');
+
+            if (isset($categorias)) {
+                foreach ($categorias as $categoria) {
+                    DB::insert('insert into asignar_categorias (id_item, id_categoria) values (?, ?)', [$publication->id_item, $categoria]);
+                }
+            }
+//            dd($adjuntos);
+//            foreach ($adjuntos as $adjunto) {
+//                DB::insert('insert into adjuntos (id_adjunto, id_documento, documento) values (?, ?, ?)', [0, $publication->id_item, $adjunto]);
+//            }
 
             $documento->id_documento = $publication->id_item;
             $adjunto->id_documento = $publication->id_item;
@@ -149,7 +174,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
                     ->paginate(8);
 
             return redirect('adminDocument')->with('docs', $documentos);
@@ -157,14 +182,16 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
                     ->paginate(8);
 
-            return Redirect::route('adminDocument', ['docs' => $documentos, 'error' => 'Error']);
+            return Redirect::route('adminDocument', ['docs' => $documentos]);
         }
     }
 
-    //DES19: Página Administrar Informes
+    //************************************************************************//
+    //DES19: Página Administrar Informes - Autor: Álvaro
+    //************************************************************************//
     /**
      * Mostrará los datos de la página en modo SWAT o Admin
      * @return type
@@ -176,13 +203,17 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -204,7 +235,11 @@ class controlador_tablas extends Controller {
         $fechahora = $req->get('fechaInforme');
 
         $plagaTratar = $req->get('plagaTratar');
-        $polParInput = $req->get('polParInput');
+        $poligono = $req->get('polInput');
+        $parcela = $req->get('parInput');
+        $userProp = $req->get('userProp');
+        $municipio = $req->get('munInput');
+        $coment = $req->get('coment');
         $danioAprox = $req->get('danioAprox');
 
         $informe = new Informe();
@@ -213,9 +248,18 @@ class controlador_tablas extends Controller {
         $informe->litro_hectarea = $litrohect;
         $informe->fecha_hora = $fechahora;
         $informe->aprox_dmg = $danioAprox;
-        $informe->poli_par = $polParInput;
-        $informe->plaga_tratar = $plagaTratar;
-        $informe->id_user = $user->id_user;
+        $informe->poligono = $poligono;
+        $informe->parcela = $parcela;
+        $informe->municipio = $municipio;
+        $informe->comentario = $coment;
+        $informe->id_plaga = $plagaTratar;
+
+        if ($userProp != "") {
+            $informe->id_user = $userProp;
+        } else {
+            $informe->id_user = $user->id_user;
+        }
+
 
         $informe->save();
 
@@ -223,13 +267,17 @@ class controlador_tablas extends Controller {
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -239,57 +287,36 @@ class controlador_tablas extends Controller {
     }
 
     /**
-     * Método que llamará a las funciones oportunas según el botón pulsado
+     * Añade la nueva plaga a BBDD
      * @return type
      */
-    public function actInforme(Request $req) {
+    public function addPlaga(Request $req) {
 
         $user = session()->get("userObj");
 
-        $modInforme = $req->get('modInforme');
-        $delInforme = $req->get('delInforme');
+        $nombre = $req->get('nomPlaga');
 
-        if (isset($modInforme)) {
+        $plaga = new Plaga();
 
-            $idinforme = $req->get('idinforme');
-            $nombre = $req->get('nombre');
-            $litrohect = $req->get('litrohect');
-            $fechahora = $req->get('fechahora');
+        $plaga->nombre_plaga = $nombre;
 
-            $plagaTratar = $req->get('plagaTratar');
-            $polParInput = $req->get('polParInput');
-            $danioAprox = $req->get('danioAprox');
-
-            $informe = Informe::find($idinforme);
-
-            $informe->nombre_producto = $nombre;
-            $informe->litro_hectarea = $litrohect;
-            $informe->fecha_hora = $fechahora;
-            $informe->aprox_dmg = $danioAprox;
-            $informe->poli_par = $polParInput;
-            $informe->plaga_tratar = $plagaTratar;
-
-            $informe->save();
-        }
-
-        if (isset($delInforme)) {
-
-            $idinforme = $req->get('idinforme');
-            $informe = Informe::find($idinforme);
-            $informe->delete();
-        }
+        $plaga->save();
 
         // Volvemos a cargar la lista de informes
         if ($user->rol == Constantes::ADMIN) {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
         } else {
             $informes = DB::table('informes')
                     ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
-                    ->select('informes.id_informe', 'informes.aprox_dmg', 'informes.poli_par', 'informes.plaga_tratar', 'informes.nombre_producto', 'informes.litro_hectarea', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
                     ->where('informes.id_user', $user->id_user)
                     ->orderBy('informes.fecha_hora', 'DESC')
                     ->paginate(8);
@@ -298,7 +325,111 @@ class controlador_tablas extends Controller {
         return redirect('adminInformes')->with('infs', $informes);
     }
 
-    //DES18: Página para adminsitrar eventos
+    /**
+     * Borrará la plaga seleccionada
+     * @return type
+     */
+    public function actPlaga(Request $req) {
+
+        $user = session()->get("userObj");
+
+        $modPlaga = $req->get('modPlaga');
+        $delPlaga = $req->get('delPlaga');
+
+        $idplaga = $req->get('idplaga');
+        $nomPlaga = $req->get('nomPlaga');
+
+        if (null != $modPlaga) {
+
+            $plaga = Plaga::find($idplaga);
+
+            $plaga->nombre_plaga = $nomPlaga;
+
+            $plaga->save();
+        }
+
+        if (null != $delPlaga) {
+
+            $plaga = Plaga::find($idplaga);
+
+            $plaga->delete();
+        }
+
+        // Volvemos a cargar la lista de informes
+        if ($user->rol == Constantes::ADMIN) {
+            $informes = DB::table('informes')
+                    ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
+                    ->orderBy('informes.fecha_hora', 'DESC')
+                    ->paginate(8);
+        } else {
+            $informes = DB::table('informes')
+                    ->join('usuarios', 'informes.id_user', '=', 'usuarios.id_user')
+                    ->join('plagas', 'informes.id_plaga', '=', 'plagas.id_plaga')
+                    ->select('informes.id_informe', 'plagas.nombre_plaga', 'informes.nombre_producto', 'informes.fecha_hora', 'usuarios.nombre', 'usuarios.apellidos', 'informes.litro_hectarea'
+                            , 'informes.aprox_dmg', 'informes.poligono', 'informes.parcela', 'informes.municipio', 'informes.comentario')
+                    ->where('informes.id_user', $user->id_user)
+                    ->orderBy('informes.fecha_hora', 'DESC')
+                    ->paginate(8);
+        }
+
+        return redirect('adminInformes')->with('infs', $informes);
+    }
+
+    /**
+     * Borrará el informe seleccionado
+     * @return type
+     */
+    public function actInforme() {
+
+        $user = session()->get("userObj");
+
+        $idinforme = intval($_POST["idinforme"]);
+        $informe = Informe::find($idinforme);
+        $informe->delete();
+
+        $qhp = "ok";
+
+        return $qhp;
+    }
+
+    /**
+     * Llamada desde Ajax para devolver los datos del informe pulsado
+     * @return string
+     */
+    public function modificarInformes() {
+        $id_informe = intval($_POST["ide"]);
+
+        $informe = DB::table('informes')
+                ->where('id_informe', $id_informe)
+                ->first();
+
+        $infArray = array(
+            'id_informe' => $informe->id_informe,
+            'nombre_producto' => $informe->nombre_producto,
+            'litro_hectarea' => $informe->litro_hectarea,
+            'id_user' => $informe->id_user,
+            'aprox_dmg' => $informe->aprox_dmg,
+            'id_plaga' => $informe->id_plaga,
+            'fecha_hora' => $informe->fecha_hora,
+            'poligono' => $informe->poligono,
+            'parcela' => $informe->parcela,
+            'municipio' => $informe->municipio,
+            'comentario' => $informe->comentario,
+        );
+
+        return json_encode($infArray);
+    }
+
+    //************************************************************************//
+    //DES18: Página para adminsitrar eventos - Autor: Rafa
+    //************************************************************************//
+    /**
+     * Función para mostrar todos los eventos de la bbdd.
+     * @return type
+     */
     public function listarEventos() {
         $eventos = DB::table('eventos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
@@ -309,60 +440,67 @@ class controlador_tablas extends Controller {
         return view(Constantes::AD_EVENTOS, ['events' => $eventos]);
     }
 
+    /**
+     * Llamada a Ajax para cargar evento por id en ventana modal.
+     * @return type
+     */
     public function modificarEventos() {
         $id_evento = intval($_POST["ide"]);
 
+        $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
+                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+                        . 'WHERE eventos.id_evento =' . $id_evento);
+
+        $evento = array(
+            'nombre' => $eventos[0]->nombre,
+            'imagen' => base64_encode($eventos[0]->imagen),
+            'descripcion' => $eventos[0]->descripcion,
+            'localizacion' => $eventos[0]->localizacion,
+            'fecha_inicio' => $eventos[0]->fecha_inicio,
+            'fecha_fin' => $eventos[0]->fecha_fin,
+            'latitud' => $eventos[0]->latitud,
+            'longitud' => $eventos[0]->longitud,
+            'id' => $eventos[0]->id_evento
+        );
+
+
+        return json_encode($evento);
+    }
+
+    /**
+     * Llamada Ajax para eliminar un evento por id.
+     * @return type
+     */
+    public function eliminarEventos() {
+        $id_evento = intval($_POST["id_e"]);
+
         $eventos = DB::table('eventos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('nombre', 'imagen', 'descripcion', 'localizacion', 'fecha_inicio', 'fecha_fin')
-                ->where('eventos.id_evento', $id_evento)
-                ->first();
+                ->where('eventos.id_evento', $id_evento);
 
+        $qhp = "ok";
 
-        if (!empty($eventos)) {
-            $qhp = "ok";
-            session()->put('event_select', $eventos);
+        $publicacion = DB::table('publicaciones')
+                ->where('publicaciones.id_item', $id_evento);
+
+        $imagen = DB::table('imagenes')
+                ->where('imagenes.id_item', $id_evento);
+
+        //Borramos la imagen, el eveneto y la publicación.
+        if ($publicacion) {
+
+            $imagen->delete();
+            $eventos->delete();
+            $publicacion->delete();
         } else {
             $qhp = "fail";
         }
-
         return $qhp;
     }
 
     /**
-     * 
-     * @return type
-     */
-    public function eliminarEventos() {
-        $id_evento = intval($_POST['id_e']);
-
-        $event = Evento::find($id_evento);
-        $publi = Publicacion::find($id_evento);
-        $image = Imagen::where('id_item', $id_evento)->first();
-
-        $catego = DB::table('asignar_categorias')->where('id_item', '=', $id_evento)->delete();
-
-        if ($event) {
-            $event->delete();
-        }
-
-        $event->delete();
-        $publi->delete();
-        $image->delete();
-
-        $eventos = DB::table('eventos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
-                ->paginate(8);
-
-        return redirect('admin_event')->with('events', $eventos);
-    }
-
-    /**
-     * 
-     * @param Request $req
+     * Función para agregar eventos a la bbdd.
+     * @param Request $req -> Formulario de evento
      * @return type
      */
     public function agregarEventos(Request $req) {
@@ -407,15 +545,6 @@ class controlador_tablas extends Controller {
             $image->save();
             $evento->save();
 
-            for ($i = 0; $i < count($categ); $i++) {
-                $ca = $categ[$i];
-
-                $categorias = DB::table('asignar_categorias')->insert(
-                        ['id_item' => $publication->id_item, 'id_categoria' => $ca]
-                );
-            }
-
-
             $eventos = DB::table('eventos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
                     ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
@@ -442,15 +571,100 @@ class controlador_tablas extends Controller {
         }
     }
 
+    /**
+     * Función para guardar en evento modificado.
+     * @param Request $req-> Formulario de evento.
+     * @return type
+     */
     public function guardarEventos(Request $req) {
 
-        $eventos = DB::table('eventos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'eventos.id_evento')
-                ->join('imagenes', 'imagenes.id_item', '=', 'eventos.id_evento')
-                ->select('eventos.id_evento', 'imagen', 'nombre', 'localizacion', 'fecha_subida', 'fecha_inicio', 'fecha_fin')
-                ->paginate(8);
+        $publi = Publicacion::where('id_item', $req->get('idevento'))->first();
+        $evento = Evento::where('id_evento', $publi->id_item)->first();
+        $imagen = Imagen::where('id_item', $publi->id_item)->first();
 
-        return redirect('admin_event')->with('events', $eventos);
+        $publi->nombre = $req->get('nomb');
+        $publi->descripcion = $req->get('descripcion-e');
+        $publi->editado = 1;
+
+        $evento->localizacion = $req->get('loca');
+        $evento->fecha_inicio = $req->get('feci');
+        $evento->fecha_fin = $req->get('fecf');
+        $evento->latitud = $req->get('latitudEvent');
+        $evento->longitud = $req->get('longitudEvent');
+
+        $publi->save();
+        $evento->save();
+
+        if ($req->file('portada') != null) {
+            $imagen->imagen = file_get_contents($req->file('portada'));
+            $imagen->save();
+        }
+
+        return redirect('admin_event');
+    }
+
+    /**
+     * Añade la nueva FAQ a BBDD
+     * @param Request $req
+     * @return type
+     */
+    public function addFaq(Request $req) {
+
+        $pregunta = $req->get('pregFaq');
+        $respuesta = $req->get('respFaq');
+
+        $faq = new Faq();
+
+        $faq->pregunta = $pregunta;
+        $faq->respuesta = $respuesta;
+
+        $faq->save();
+        
+        return view(Constantes::FAQS);
+    }
+
+    /**
+     * Elimina la FAQ de BBDD
+     * @param Request $req
+     */
+    public function delFaq(Request $req) {
+        
+        $idfaq = $req->get('idfaq');
+        
+        $faq = Faq::find($idfaq);
+        
+        $faq->delete();
+        
+        return view(Constantes::FAQS);
+    }
+    
+    public function mostrarEventos() {
+
+        $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
+                        . 'JOIN publicaciones ON eventos.id_evento = publicaciones.id_item '
+                        . 'JOIN imagenes ON imagenes.id_item = eventos.id_evento '
+        );
+
+        $array = array();
+        
+        for ($i = 0; $i < count($eventos); $i++) {
+            $evento = array(
+                'title' => $eventos[$i]->nombre,
+                'imagen' => base64_encode($eventos[$i]->imagen),
+                'descripcion' => $eventos[$i]->descripcion,
+                'localizacion' => $eventos[$i]->localizacion,
+                'start' => $eventos[$i]->fecha_inicio,
+                'end' => $eventos[$i]->fecha_fin,
+                'latitud' => $eventos[$i]->latitud,
+                'longitud' => $eventos[$i]->longitud,
+                'id' => $eventos[$i]->id_evento
+            );
+            array_push($array, $evento);
+        }
+
+
+
+        return json_encode($array);
     }
 
 }
