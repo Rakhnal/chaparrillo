@@ -14,6 +14,7 @@ Inicio
 <link rel="stylesheet" type="text/css" href="css/editUsu/editarusuario.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ URL::asset('scripts/general/editar_usuario.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('scripts/general/mapa_edit.js') }}"></script>
 <link href="css/editUsu/cropper.min.css" rel="stylesheet" type="text/css"/>
 <div class="col-12 mt-1">
     <div class="row col-12 form_base m-auto">
