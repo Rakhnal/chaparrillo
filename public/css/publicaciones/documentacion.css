@@ -7,24 +7,28 @@
 
 .divDocumento {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    border: 3px solid white;
 }
 
 .iconitos {
-    width: 17px;
+    height: fit-content;
 }
 
 .docNombre {
     font-size: 16pt;
     padding: 10px;
+}
+
+.enlaceDocumento {
     transition: 0.3s ease-in all;
     background-color: rgba(82, 117, 59, 0.98);
     cursor: pointer;
+    width: 90%;
+    border: 1px solid white;
+    border-radius: 20px;
 }
 
-.docNombre:hover {
+.enlaceDocumento:hover {
     background-color: #8F7E4F;
 }
 
