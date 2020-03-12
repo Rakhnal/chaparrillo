@@ -75,12 +75,7 @@ $(document).ready(function () {
 
         if (document.getElementById("mapaRegistro") !== null) {
             MapaRegistro = new google.maps.Map(document.getElementById("mapaRegistro"), ColocaMapa);
-
-            marcadorRegistro = new google.maps.Marker({
-                position: mapa,
-                icon: "images/icons/location.svg",
-                map: PintaMapa
-            });
+            
         }
 
 
