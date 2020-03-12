@@ -25,7 +25,7 @@ class Constantes {
     const FAQS = "informacion/faqs";
     const FORO = "foro";
     const DOCUMENTACION = "publicaciones/documentacion";
-    const AGENDA = "agenda";
+    const AGENDA = "publicaciones/agenda";
     const AD_EVENTOS = "administracion/admin_eventos";
     const AD_DOCUMENTOS = "administracion/adminDocument";
     const AD_INFORMES = "administracion/adminInformes";
