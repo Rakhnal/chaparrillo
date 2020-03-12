@@ -27,7 +27,6 @@ $(document).ready(function () {
     }
 
     $('#btnreset').on('click', resetMarker);
-    $('#btnresetEU').on('click', resetMarkerEU);
     $('#btnreset2').on('click', resetMarker2);
 
 
