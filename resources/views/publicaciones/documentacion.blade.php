@@ -21,17 +21,8 @@ Documentación
 @section('contenido')
 
 <div class="col">
-    <div class="row">
-        <div class="col">
-            <nav>
-                <div class="breadcrumb" id="migas">
-                    <div class="breadcrumb-item active">Documentación</div>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <div class="row mb-5">
-        <div class="col">
+    <div class="row mt-5 mb-5">
+        <div class="col d-flex justify-content-end">
             <select id="selectCategoria">
                 <option value="todas">Todas las categorías</option>
                 <?php
@@ -50,25 +41,27 @@ Documentación
         <?php
         foreach ($docs as $doc) {
             ?>
-            <div class="col-4 divDocumento mb-5">
+            <div class="col-xl-4 col-md-12 divDocumento">
                 <div class="row">
-                    <div class="col text-center">
-                        <span class="docNombre"><?= $doc->nombre ?></span>
+                    <div class="col text-center docNombre">
+                        <?= $doc->nombre ?>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <span class="docFechaSubida">Subido en <?= $doc->fecha_subida ?></span>
+                <div class="p-5">
+                    <div class="row">
+                        <div class="col text-center">
+                            <span class="docFechaSubida">Subido en <?= $doc->fecha_subida ?></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row mt-3">
-                    <div class="col-6 p-0 text-center">
-                        <img src="images/icons/calendar.png" class="iconitos">
-                        <span class="docAnio"><?= $doc->anio ?></span>
-                    </div>
-                    <div class="col-6 p-0 text-center">
-                        <img src="images/icons/face-id.png" class="iconitos">
-                        <span class="docAutores"><?= $doc->autores ?></span>
+                    <div class="row mt-3">
+                        <div class="col-6 p-0 text-center">
+                            <img src="images/icons/calendar.png" class="iconitos">
+                            <span class="docAnio"><?= $doc->anio ?></span>
+                        </div>
+                        <div class="col-6 p-0 text-center">
+                            <img src="images/icons/face-id.png" class="iconitos">
+                            <span class="docAutores"><?= $doc->autores ?></span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ class controlador_publicaciones extends Controller {
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
                 ->select('documentos.id_documento as id_documento', 'publicaciones.nombre as nombre', 'publicaciones.descripcion as descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento')
-                ->paginate(12);
+                ->paginate(9);
         
         $categorias = DB::table('categorias')
                 ->join('asignar_categorias', 'asignar_categorias.id_categoria', '=', 'categorias.id_categoria')
