@@ -74,6 +74,8 @@ Route::post('subirDocumento', ['as' => 'subirDocumento', 'uses' => 'controlador_
 // DES13: Página Documentación - NLO
 // Mostrar documentos
 Route::get('documentacion', ['as' => 'documentacion', 'uses' => 'controlador_publicaciones@mostrarDocumentos']);
+// Mostrar documentos filtrados
+Route::any('mostrarDocsFiltrados', ['as' => 'mostrarDocsFiltrados', 'uses' => 'controlador_publicaciones@mostrarDocumentosFiltrados']);
 
 // DES21: Login/Registro - ADC
 // Login
