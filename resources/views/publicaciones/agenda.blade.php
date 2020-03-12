@@ -27,8 +27,9 @@ Agenda
 <script src='agendaJs/list/main.js'></script>
 <script src='agendaJs/google-calendar/main.js'></script>
 <script src="scripts/general/cargarMapa.js"></script>
-<script>
 
+<script>
+//Script para mostrar agenda
     $(document).ready(function () {
         $('#img-agenda').hide();
 
