@@ -982,7 +982,11 @@ use App\Clases\conexion;
         <div id="blur" class="container-fluid">
 
             <div class = "row" id = "header">
-
+                <?php
+                //Para quitar el menú de navegación de las páginas de error
+                if(session()->get("actPage") != Constantes::ERROR516){
+                    
+                ?>
                 <nav class="navbar navbar-expand-xl" id="navHeader">
                     <?php
                     // En el index el logo estará posicionado por defecto en otro sitio
@@ -1116,6 +1120,7 @@ use App\Clases\conexion;
                         </ul>
                     </div>
                 </nav>
+                <?php } ?>
             </div>
 
             <div class = "row" id = "main">
@@ -1124,7 +1129,7 @@ use App\Clases\conexion;
 
             <?php
             // Agregar aquí las páginas donde no se quiera mostrar el footer
-            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES && session()->get("actPage") != Constantes::AD_USUARIOS) {
+            if (session()->get("actPage") != Constantes::AD_EVENTOS && session()->get("actPage") != Constantes::AD_DOCUMENTOS && session()->get("actPage") != Constantes::ED_USUARIO && session()->get("actPage") != Constantes::AD_INFORMES && session()->get("actPage") != Constantes::AD_USUARIOS && session()->get("actPage") != Constantes::ERROR516) {
                 ?>
 
                 <div class="row footer font-small blue pt-4">

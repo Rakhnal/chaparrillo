@@ -51,4 +51,7 @@ class Constantes {
     const CHINCHESEL = "Chinches";
     const OTRA = "Otra";
     
+    //Errores
+    
+    const ERROR516 = "errors/516";
 }
