@@ -52,7 +52,7 @@ $user = session()->get("userObj");
                     ?>
                 </div>
                 <div class="row justify-content-center">
-                    <p><?= $faq->respuesta ?></p>
+                    <h5><?= $faq->respuesta ?></h5>
                 </div>
             </div>
         </div>

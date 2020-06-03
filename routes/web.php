@@ -10,9 +10,10 @@
   | contains the "web" middleware group. Now create something great!
   |
  */
-
-// DES03: Página Index - ADC
-// Página principal
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////// DES03: Página Index - ADC ////////////////////////////////////
+///////////////////////////////////////// Página principal //////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 Route::get('/', function () {
     return view('principal/index');
 });
@@ -21,47 +22,71 @@ Route::get('index', function () {
     return view('principal/index');
 });
 
-//DES14: Página Agenda - RAUS
-//Ver calendario de eventos
-Route::get('agenda', function(){
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// ///////////////////////////////// DES14: Página Agenda - RAUS ////////////////////////////////////
+//////////////////////////////////// Ver calendario de eventos //////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::get('agenda', function() {
     return view('publicaciones/agenda');
 });
-Route::post('mostrarEventos',['as' => 'mostrarEventos', 'uses' => 'controlador_tablas@mostrarEventos']);
+Route::post('mostrarEventos', ['as' => 'mostrarEventos', 'uses' => 'controlador_tablas@mostrarEventos']);
 
-//DES15: Página Editar Perfil - SSC
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////// DES15: Página Editar Perfil - SSC //////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Route::get('Editar_usuario', function () {
     return view('principal/Editar_usuario');
 });
 Route::post('edit_us', 'EditUserController@editarUsuario');
 Route::post('edit_pass', 'EditUserController@editarPassEU');
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////// DES16:Página de administrar usuarios /////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//DES16
-//Página de administrar usuarios
-Route::get('admin_usuarios',['uses' =>  'controlador_usuarios@listarUsuarios', 'as' => 'admin_usuarios']);
-Route::any('cam_Valid',['uses' => 'controlador_usuarios@listarUsuariosV', 'as' => 'admin_usuarios']);
+Route::group(['middleware' => ['checkrol']], function () {
+
+    Route::get('admin_usuarios', ['uses' => 'controlador_usuarios@listarUsuarios', 'as' => 'admin_usuarios']);
+});
+
+Route::any('cam_Valid', ['uses' => 'controlador_usuarios@listarUsuariosV', 'as' => 'admin_usuarios']);
 Route::any('cam_Elim', 'controlador_usuarios@eliminarusuarios');
 Route::any('cam_rol', 'controlador_usuarios@cambiar_rol');
-Route::any('validarUsuario','controlador_usuarios@Validar_u');
+Route::any('validarUsuario', 'controlador_usuarios@Validar_u');
 
-//DES11
-//Página de administrar noticias
-Route::get('noticias',['uses' =>  'controlador_noticias@listarnoticias', 'as' => 'Noticias']);
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////// DES11:Página de administrar noticias /////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// DES18: Página Administrar Eventos - RAUS
-// Página Administración
-Route::get('admin_event',['uses' =>  'controlador_tablas@listarEventos', 'as' => 'admin_event']);
+Route::get('noticias', ['uses' => 'controlador_noticias@listarnoticias', 'as' => 'Noticias']);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////// DES18: Página Administrar Eventos - RAUS/////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::group(['middleware' => ['checkrol']], function () {
+
+    Route::get('admin_event', ['uses' => 'controlador_tablas@listarEventos', 'as' => 'admin_event']);
+});
+
 //Eliminar eventos
-Route::post('eliminarEvento',['as' => 'eliminarEvento', 'uses' => 'controlador_tablas@eliminarEventos']);
+Route::post('eliminarEvento', ['as' => 'eliminarEvento', 'uses' => 'controlador_tablas@eliminarEventos']);
 //Agregar eventos
-Route::post('agregarEvento','controlador_tablas@agregarEventos');
+Route::post('agregarEvento', 'controlador_tablas@agregarEventos');
 //Llamada a ajax para cargar eventos
-Route::post('modificarEvento',['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
+Route::post('modificarEvento', ['as' => 'modificarEvento', 'uses' => 'controlador_tablas@modificarEventos']);
 //Actualizar eventos
-Route::post('guardarEvento','controlador_tablas@guardarEventos');
+Route::post('guardarEvento', 'controlador_tablas@guardarEventos');
 
-// DES17: Página Administrar Documentos - NLO
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////// DES17: Página Administrar Documentos - NLO ///////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 // Listar documentos
-Route::get('adminDocument', ['as' => 'adminDocument', 'uses' => 'controlador_tablas@listarDocumentos']);
+Route::group(['middleware' => ['checkrol']], function () {
+
+    Route::get('adminDocument', ['as' => 'adminDocument', 'uses' => 'controlador_tablas@listarDocumentos']);
+});
+
 // Eliminar documentos
 Route::post('eliminarDocumento', ['as' => 'eliminarDocumento', 'uses' => 'controlador_tablas@eliminarDocumentos']);
 // Buscar documentos
@@ -85,11 +110,17 @@ Route::post('registro', 'usercontroller@registrarUsuario');
 // Cerrar sesión
 Route::get('logout', 'usercontroller@cerrarSesion');
 
-// DES19: Página Administrar Informes - ADC
-Route::get('adminInformes', 'controlador_tablas@listarInformes');
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////// DES19: Página Administrar Informes - ADC ///////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+Route::group(['middleware' => ['checkrol2']], function () {
+
+    Route::get('adminInformes', 'controlador_tablas@listarInformes');
+});
+
 Route::post('newInforme', 'controlador_tablas@agregarInforme');
-Route::post('actInforme',['as' => 'actInforme', 'uses' => 'controlador_tablas@actInforme']);
-Route::post('modificarInforme',['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
+Route::post('actInforme', ['as' => 'actInforme', 'uses' => 'controlador_tablas@actInforme']);
+Route::post('modificarInforme', ['as' => 'modificarInforme', 'uses' => 'controlador_tablas@modificarInformes']);
 Route::post('actPlaga', 'controlador_tablas@actPlagas');
 Route::post('addPlaga', 'controlador_tablas@addPlaga');
 Route::post('actPlaga', 'controlador_tablas@actPlaga');
@@ -126,4 +157,11 @@ Route::get('chinches', function () {
 // DES20: Página FAQs
 Route::get('faqs', function () {
     return view('informacion/faqs');
+});
+
+
+//Errores
+//516 no tiene permiso para acceder a esa ruta
+Route::get('errors', function() {
+    return view('errors/516');
 });

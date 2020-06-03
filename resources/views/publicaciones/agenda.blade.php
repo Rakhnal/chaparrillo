@@ -19,14 +19,54 @@ Agenda
 <link href='agendaJs/list/main.css' rel='stylesheet' />
 <link href='css/agenda/magnific-popup.css' rel='stylesheet' />
 <meta name="csrf_token" content="{{ csrf_token() }}">
-<script src='agendaJs/jquery.magnific-popup.min.js'></script>
-<script src='agendaJs/core/locales/es.js'></script>
-<script src='agendaJs/core/main.js'></script>
-<script src='agendaJs/interaction/main.js'></script>
-<script src='agendaJs/daygrid/main.js'></script>
-<script src='agendaJs/list/main.js'></script>
-<script src='agendaJs/google-calendar/main.js'></script>
-<script src="scripts/general/cargarMapa.js"></script>
+
+
+
+<div class="col">
+    <div class="row mt-3">
+        <div id='loading'>Cargando...</div>
+        <div class="col-xl-6 col-md-12">
+            <div class="mb-3" id="calendar">
+
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12">
+            <div id="muestraEvento" class="row">
+                <div class="col">
+                    <div class="info-event row">
+                        <div class="col">
+                            <div class="row justify-content-center">
+                                <a id="img-enlace" class="image-popup-no-margins" href="">
+                                    <img src="" id="img-agenda" alt="Portada evento" class="img-fluid image-popup-no-margins">
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="textoAgenda col">
+                            <div class="row">
+                                <div id="nomb-event" ></div>
+                            </div>
+                            <div class="row">
+                                <div id="localizacion" ></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div id="desc-agenda" class="desc-agenda mt-3">
+
+                    </div>
+                    <div id="mapaAgenda" class="">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <script>
 //Script para mostrar agenda
@@ -124,50 +164,13 @@ Agenda
         });
     });
 </script>
+<script src='agendaJs/jquery.magnific-popup.min.js'></script>
+<script src='agendaJs/core/locales/es.js'></script>
+<script src='agendaJs/core/main.js'></script>
+<script src='agendaJs/interaction/main.js'></script>
+<script src='agendaJs/daygrid/main.js'></script>
+<script src='agendaJs/list/main.js'></script>
+<script src='agendaJs/google-calendar/main.js'></script>
+<script src="scripts/general/cargarMapa.js"></script>
 
-<div class="col">
-    <div class="row mt-3">
-        <div id='loading'>Cargando...</div>
-        <div class="col-xl-6 col-md-12">
-            <div class="mb-3" id="calendar">
-
-            </div>
-        </div>
-        <div class="col-xl-6 col-md-12">
-            <div id="muestraEvento" class="row">
-                <div class="col">
-                    <div class="info-event row">
-                        <div class="col">
-                            <div class="row justify-content-center">
-                                <a id="img-enlace" class="image-popup-no-margins" href="">
-                                    <img src="" id="img-agenda" alt="Portada evento" class="img-fluid image-popup-no-margins">
-                                </a>
-                            </div>
-
-                        </div>
-
-                        <div class="textoAgenda col">
-                            <div class="row">
-                                <div id="nomb-event" ></div>
-                            </div>
-                            <div class="row">
-                                <div id="localizacion" ></div>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div id="desc-agenda" class="desc-agenda mt-3">
-
-                    </div>
-                    <div id="mapaAgenda" class="">
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-</div>
 @endsection
