@@ -485,11 +485,14 @@ use App\Clases\conexion;
                     <form name="formEditDoc" class="formDocs m-0" action="modificarDocumento" method="POST">
                         {{ csrf_field() }}
                         <div class="modal-body">
+                            <div class="form-group oculto">
+                                <input type="text" id="idEditarDoc" name="idEditarDoc" placeholder="ID" value="">
+                            </div>
                             <div class="form-group">
                                 <input type="text" class="pl-2" id="nombreEditarDoc" name="nombreEditarDoc" placeholder="Nombre del documento" value="" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="pl-2 descDocumento" name="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación" value=""></textarea>
+                                <textarea class="pl-2 descDocumento" id="descEditarDoc" name="descEditarDoc" placeholder="Descripción de la documentación" value=""></textarea>
                             </div>
                             <div class="form-group">
                                 <input type="number" class="pl-2" id="anioEditarDoc" name="anioEditarDoc" placeholder="Año de publicación" pattern="[0-9]{4}" value="" required>
@@ -497,9 +500,9 @@ use App\Clases\conexion;
                             <div class="form-group">
                                 <input type="text" class="pl-2" id="autoresEditarDoc" name="autoresEditarDoc" placeholder="Autores del documento" value="" required>
                             </div>
-                            <div class="form-group form-inline">
+                            <div class="form-group form-inline m-0">
                                 <div>
-                                    <input class="btn p-0" id="editarAdjuntos" name="editarAdjuntos" type="file">
+                                    <input type="file" class="btn p-0 form-control-file" id="editarAdjuntos" name="editarAdjuntos" accept="file_extension/*">
                                 </div>
                                 <label for="editarAdjuntos">
                                     <span>Adjuntar archivos</span>
@@ -511,15 +514,15 @@ use App\Clases\conexion;
                                     </select>
                                 </div>
                             </div>
-                            <div id="previewDiv">
-                                <output id="list"></output>
+                            <div id="previewDivEditar">
+                                <output id="listEditar"></output>
                             </div>
                             <div class="form-group" id="modificarListaCategorias">
                                 <?php
                                 foreach ($cats as $cat) {
                                     ?>
                                     <div class="form-check p-0 divCategorias">
-                                        <input class="form-check-input" type="checkbox" value="<?= $cat->id_categoria ?>" name="categorias[]" id="categoria<?= $cat->id_categoria ?>">
+                                        <input class="form-check-input" type="checkbox" value="<?= $cat->id_categoria ?>" name="editCategorias[]" id="editCategoria<?= $cat->id_categoria ?>">
                                         <label class="form-check-label" for="categoria<?= $cat->id_categoria ?>"><span></span>
                                             <?= $cat->nombre ?>
                                         </label>

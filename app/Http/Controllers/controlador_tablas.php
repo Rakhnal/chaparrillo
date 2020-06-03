@@ -32,7 +32,7 @@ class controlador_tablas extends Controller {
         $documentos = DB::table('documentos')
                 ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                 ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento')
+                ->select('documentos.id_documento', 'publicaciones.nombre', 'publicaciones.descripcion', 'fecha_subida', 'visible', 'tipo', 'num_descargas', 'anio', 'autores', 'documento', 'nombre_doc')
                 ->paginate(8);
 
         $categorias = DB::table('categorias')
@@ -68,46 +68,87 @@ class controlador_tablas extends Controller {
         return $qhp;
     }
 
+    /**
+     * Esta función muestra en una ventana modal la información del documento
+     * que se quiere modificar.
+     */
     public function buscarDocumentos() {
         $id_documento = intval($_POST["identificador"]);
 
-        $documentos = DB::select('SELECT documentos.id_documento, publicaciones.nombre as nombre, descripcion, anio, autores, visible, documento FROM documentos'
-                        . 'JOIN publicaciones ON documentos.id_documento = publicaciones.id_item'
-                        . 'JOIN adjuntos ON adjuntos.id_documento = documentos.id_documento'
+        $documentos = DB::select('SELECT publicaciones.id_item as id_item, publicaciones.nombre as nombre, publicaciones.descripcion as descripcion, '
+                        . 'anio, autores, documento, nombre_doc, visible FROM documentos '
+                        . 'JOIN publicaciones ON documentos.id_documento = publicaciones.id_item '
+                        . 'JOIN adjuntos ON documentos.id_documento = adjuntos.id_documento '
                         . 'WHERE documentos.id_documento = ' . $id_documento);
 
-//        $categorias = \DB::select('SELECT asignar_categorias.id_item,categorias.nombre,asignar_categorias.id_categoria FROM asignar_categorias'
-//                        . 'JOIN publicaciones ON publicaciones.id_item = asignar_categorias.id_item'
-//                        . 'JOIN categorias ON categorias.id_categoria = asignar_categorias.id_categoria'
-//                        . 'WHERE publicaciones.id_item =' . $id_documento);
+        $categorias = DB::select('SELECT asignar_categorias.id_item as item, categorias.nombre as nombre, asignar_categorias.id_categoria as id_categoria FROM asignar_categorias '
+                        . 'JOIN publicaciones ON publicaciones.id_item = asignar_categorias.id_item '
+                        . 'JOIN categorias ON categorias.id_categoria = asignar_categorias.id_categoria '
+                        . 'WHERE publicaciones.id_item =' . $id_documento);
+
+        $totalCategorias = DB::select('SELECT id_categoria FROM categorias');
+
+        $cats = [];
+        foreach ($categorias as $categoria) {
+            $categoria = array(
+                $cats[] = $categoria->id_categoria
+            );
+        }
 
         $documento = array(
+            'id_item' => $documentos[0]->id_item,
             'nombre' => $documentos[0]->nombre,
             'descripcion' => $documentos[0]->descripcion,
             'anio' => $documentos[0]->anio,
-            'autores' => $documentos[0]->autores
+            'autores' => $documentos[0]->autores,
+            'documento' => base64_encode($documentos[0]->documento),
+            'nombre_doc' => $documentos[0]->nombre_doc,
+            'visible' => $documentos[0]->visible,
+            'categorias' => $cats,
+            'totalCategorias' => $totalCategorias
         );
-        
-//        $categoria = array(
-//          'categoria' => $categorias[0]->nombre  
-//        );
 
-        return json_encode($documento);
+        echo json_encode($documento);
     }
 
-    public function modificarDocumentos() {
-        $id_documento = intval($_POST["identificador"]);
-        $documento = DB::table('documentos')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
-                ->where('documentos.id_documento', $id_documento)
-                ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible');
+    /**
+     * Esta función permite al administrador guardar los cambios realizados.
+     * @param Request $req
+     * @return type
+     */
+    public function modificarDocumentos(Request $req) {
+        $id_documento = $req->get('idEditarDoc');
 
-        if ($documento) {
-            $qhp = "ok";
-        } else {
-            $qhp = "fail";
+        $publicacion = Publicacion::where('id_item', $id_documento)->first();
+        $documento = Documento::where('id_documento', $id_documento)->first();
+        $adjunto = Adjunto::where('id_documento', $id_documento)->first();
+
+        $publicacion->nombre = $req->get('nombreEditarDoc');
+        $publicacion->descripcion = $req->get('descEditarDoc');
+        $publicacion->editado = 1;
+
+        $documento->anio = $req->get('anioEditarDoc');
+        $documento->autores = $req->get('autoresEditarDoc');
+        $documento->visible = $req->get('selectVisible');
+
+        $publicacion->save();
+        $documento->save();
+
+//        dd($req->file('editarAdjuntos'));
+        
+        if ($req->file('editarAdjuntos') != null) {
+            // Eliminamos el adjunto que hay subido.
+            $adjun = DB::table('adjuntos')
+                            ->where('adjuntos.id_documento', $id_documento)->first();
+            $adjun->delete();
+            // Subimos el nuevo.
+            $adjunto->documento = file_get_contents($req->file('editarAdjuntos'));
+            $nombreDocumento = $req->file('editarAdjuntos');
+            $adjunto->nombre_doc = $nombreDocumento->getClientOriginalName();
+            $adjunto->save();
         }
-        return $qhp;
+
+        return redirect('adminDocument');
     }
 
     /**
@@ -148,6 +189,8 @@ class controlador_tablas extends Controller {
 //            $a1 = str_getcsv($file);
 
             $adjunto->documento = file_get_contents($req->file('subirAdjuntos'));
+            $nombreDocumento = $req->file('subirAdjuntos');
+            $adjunto->nombre_doc = $nombreDocumento->getClientOriginalName();
 
             $publicacion->save();
 
@@ -174,7 +217,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento', 'nombre_doc')
                     ->paginate(8);
 
             return redirect('adminDocument')->with('docs', $documentos);
@@ -182,7 +225,7 @@ class controlador_tablas extends Controller {
             $documentos = DB::table('documentos')
                     ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
                     ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
-                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento')
+                    ->select('documentos.id_documento', 'nombre', 'descripcion', 'fecha_subida', 'visible', 'likes', 'views', 'tipo', 'visible', 'num_descargas', 'anio', 'autores', 'documento', 'nombre_doc')
                     ->paginate(8);
 
             return Redirect::route('adminDocument', ['docs' => $documentos]);
@@ -619,7 +662,7 @@ class controlador_tablas extends Controller {
         $faq->respuesta = $respuesta;
 
         $faq->save();
-        
+
         return view(Constantes::FAQS);
     }
 
@@ -628,16 +671,16 @@ class controlador_tablas extends Controller {
      * @param Request $req
      */
     public function delFaq(Request $req) {
-        
+
         $idfaq = $req->get('idfaq');
-        
+
         $faq = Faq::find($idfaq);
-        
+
         $faq->delete();
-        
+
         return view(Constantes::FAQS);
     }
-    
+
     public function mostrarEventos() {
 
         $eventos = \DB::select('SELECT id_evento,nombre,descripcion,localizacion,latitud,longitud,fecha_inicio,fecha_fin,imagen FROM eventos '
@@ -646,7 +689,7 @@ class controlador_tablas extends Controller {
         );
 
         $array = array();
-        
+
         for ($i = 0; $i < count($eventos); $i++) {
             $evento = array(
                 'title' => $eventos[$i]->nombre,

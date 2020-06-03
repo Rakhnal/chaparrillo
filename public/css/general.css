@@ -566,7 +566,7 @@ textarea{
     border-bottom: 1px solid white;
 }
 
-input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos, input[type="file"]#profile-file-input {
+input[type="file"]#subirAdjuntos, input[type="file"]#editarAdjuntos, input[type="file"]#profile-file-input, .oculto {
     width: 0.1px;
     height: 0.1px;
     opacity: 50;
@@ -636,17 +636,17 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
     margin: 0;
 }
 
-#previewDiv {
+#previewDiv, #previewDivEditar {
     width: 100%;
 }
 
-#listaDocs {
+#listaDocs, #listaDocsEditar {
     margin: 15px 0px 0px !important;
     padding: 0px !important;
     display: inline-grid !important;
 }
 
-#listaCategorias {
+#listaCategorias, #modificarListaCategorias {
     margin: 15px 0px 0px !important;
     padding: 0px !important;
 }
