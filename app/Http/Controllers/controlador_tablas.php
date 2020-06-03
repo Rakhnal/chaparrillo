@@ -547,6 +547,7 @@ class controlador_tablas extends Controller {
      * @return type
      */
     public function agregarEventos(Request $req) {
+        set_time_limit(0);//Solución agregar eventos
         $user = session()->get("userObj");
 
         $publi = Publicacion::where('nombre', $req->get('nomb'))->first();
@@ -577,8 +578,6 @@ class controlador_tablas extends Controller {
             $evento->latitud = $req->get('latitud');
 
             $publicacion->save();
-
-            $categ = $req->get('catego');
 
             $publication = Publicacion::where('nombre', $req->get('nomb'))->first();
 
