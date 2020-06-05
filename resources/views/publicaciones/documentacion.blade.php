@@ -43,10 +43,12 @@ Documentación
     </div>
     <div class="row">
         <?php
+        $docs = session()->get('mostrar');
+
         foreach ($docs as $doc) {
             ?>
             <div class="col-xl-4 col-md-12 divDocumento p-0 mb-5">
-                <a class="enlaceDocumento blurmodal" data-toggle="modal" data-target="#modalVerDocumento" >
+                <a class="enlaceDocumento blurmodal" data-toggle="modal" data-target="#modalVerDocumento" id="mostrarDocumento" name="mostrarDocumento" data-id="<?= $doc->id_documento ?>">
                     <div class="row">
                         <div class="col text-center docNombre">
                             <?= $doc->nombre ?>
@@ -88,32 +90,39 @@ Documentación
     </div>
 </div>
 
-@endsection
+<script>
 
-<div class="modal fade" id="modalVerDocumento" data-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header align-items-center">
-                <div class="modal-title">
-                    <?= $doc->nombre ?>
-                </div>
-                <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
-            </div>
-            <div class="modal-body">
-                <div class="row p-2">
-                    <div class="col-6">
-                        <img src="images/icons/calendar.png" class="iconitos">
-                        <span><?= $doc->anio ?></span>
-                    </div>
-                    <div class="col-6 d-flex justify-content-end">
-                        <img src="images/icons/face-id.png" class="iconitos">
-                        <span><?= $doc->autores ?></span>
-                    </div>
-                </div>
-                <div class="row p-2">
-                    <div class="col"><?= $doc->descripcion ?></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    $(document).on("click", "#mostrarDocumento", function () {
+        var token = '{{csrf_token()}}';
+        var parametros = {
+            "identificador": $(this).attr('data-id'),
+            "_token": token
+        };
+        alert(parametros);
+        $.ajax({
+            url: "buscarDocumento",
+            data: parametros,
+            type: 'post',
+            success: function (response) {
+                var respuesta = JSON.parse(response);
+                $('#nombreEditarDoc').val(respuesta.nombre);
+                $('#descEditarDoc').val(respuesta.descripcion);
+                $('#anioEditarDoc').val(respuesta.anio);
+                $('#autoresEditarDoc').val(respuesta.autores);
+            },
+            statusCode: {
+                404: function () {
+                    swal('Página no encontrada.');
+                }
+            },
+            error: function () {
+                swal("Algo ha ido mal :/", {
+                    icon: "error"
+                });
+            }
+        });
+    });
+
+</script>
+
+@endsection

@@ -542,6 +542,35 @@ use App\Clases\conexion;
             </div>
         </div>
 
+        <!-- ********************** Ventana Mostrar Documentos ************************* -->
+
+        <div class="modal fade" id="modalVerDocumento" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header align-items-center">
+                        <div class="modal-title" id="mostrarNombre" name="mostrarNombre">
+                        </div>
+                        <span class="btn salir" data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row p-2">
+                            <div class="col-6">
+                                <img src="images/icons/calendar.png" class="iconitos">
+                                <span id="mostrarAnio" name="mostrarAnio"></span>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <img src="images/icons/face-id.png" class="iconitos">
+                                <span id="mostrarAutores" name="mostrarAutores"></span>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col" id="mostrarDesc" name="mostrarDesc"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ******************** Ventana Administración Plagas *********************** -->
         <div class="modal fade" id="modalPlagas" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
