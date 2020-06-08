@@ -23,7 +23,7 @@ Documentación
 <div class="col">
     <div class="row mt-5 mb-5">
         <div class="col d-flex justify-content-end">
-            <form name="filtro" id="filtro" action="mostrarDocsFiltrados" method="POST">
+            <form name="filtro" id="filtro" action="documentacion" method="POST">
                 @csrf
                 <select name="selectCategoria" id="selectCategoria" onchange="this.form.submit();">
                     <option value="null" disabled selected>Selecciona una categoría</option>
@@ -43,8 +43,6 @@ Documentación
     </div>
     <div class="row">
         <?php
-        $docs = session()->get('mostrar');
-
         foreach ($docs as $doc) {
             ?>
             <div class="col-xl-4 col-md-12 divDocumento p-0 mb-5">
@@ -98,17 +96,17 @@ Documentación
             "identificador": $(this).attr('data-id'),
             "_token": token
         };
-        alert(parametros);
         $.ajax({
-            url: "buscarDocumento",
+            url: "mostrarDocumento",
             data: parametros,
             type: 'post',
             success: function (response) {
+//                alert(response);
                 var respuesta = JSON.parse(response);
-                $('#nombreEditarDoc').val(respuesta.nombre);
-                $('#descEditarDoc').val(respuesta.descripcion);
-                $('#anioEditarDoc').val(respuesta.anio);
-                $('#autoresEditarDoc').val(respuesta.autores);
+                $('#mostrarNombre').html(respuesta.nombre);
+                $('#mostrarAnio').html(respuesta.anio);
+                $('#mostrarAutores').html(respuesta.autores);
+                $('#mostrarDesc').html(respuesta.descripcion);
             },
             statusCode: {
                 404: function () {

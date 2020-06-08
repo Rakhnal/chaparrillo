@@ -23,6 +23,13 @@ Route::get('index', function () {
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// DES13: Página Documentación - NLO /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Mostrar documento seleccionado en la ventana modal
+Route::any('mostrarDocumento', ['as' => 'mostrarDocumento', 'uses' => 'controlador_publicaciones@recogerDatos']);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 // ///////////////////////////////// DES14: Página Agenda - RAUS ////////////////////////////////////
 //////////////////////////////////// Ver calendario de eventos //////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,10 +104,8 @@ Route::post('modificarDocumento', ['as' => 'modificarDocumento', 'uses' => 'cont
 Route::post('subirDocumento', ['as' => 'subirDocumento', 'uses' => 'controlador_tablas@subirDocumentos']);
 
 // DES13: Página Documentación - NLO
-// Mostrar documentos
-Route::get('documentacion', ['as' => 'documentacion', 'uses' => 'controlador_publicaciones@mostrarDocumentos']);
-// Mostrar documentos filtrados
-Route::any('mostrarDocsFiltrados', ['as' => 'mostrarDocsFiltrados', 'uses' => 'controlador_publicaciones@mostrarDocumentosFiltrados']);
+// Mostrar documentos (filtrados y sin filtrar)
+Route::any('documentacion', ['as' => 'documentacion', 'uses' => 'controlador_publicaciones@mostrarDocumentos']);
 
 // DES21: Login/Registro - ADC
 // Login
