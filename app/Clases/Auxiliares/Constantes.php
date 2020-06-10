@@ -23,6 +23,7 @@ class Constantes {
     const PSILAS = "informacion/psilas";
     const CHINCHES = "informacion/chinches";
     const FAQS = "informacion/faqs";
+    const CULTIVO_CLM = "informacion/cultivo_clm";
     const FORO = "foro";
     const DOCUMENTACION = "publicaciones/documentacion";
     const AGENDA = "publicaciones/agenda";

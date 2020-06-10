@@ -1068,7 +1068,7 @@ use App\Clases\conexion;
                                 <a class="nav-link menu-text" href="proyecto">Proyecto</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link menu-text" href="cultivos">Cultivo en CLM</a>
+                                <a class="nav-link menu-text" href="cultivo_clm">Cultivo en CLM</a>
                             </li>
 
                             <div class="dropdown-container">

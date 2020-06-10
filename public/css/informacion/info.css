@@ -125,6 +125,18 @@ p {
     width: fit-content;
 }
 
+.pie-texto {
+    font-size: 10pt;
+}
+
+.patrones_variedades {
+    display: block;
+}
+
+.fotos_lista {
+    height: 250px;
+}
+
 #newFaq {
     
     margin-top: 25px;

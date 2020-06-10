@@ -159,6 +159,11 @@ Route::get('chinches', function () {
     return view('informacion/chinches');
 });
 
+// DES10: Página Cultivo en CLM - NLO
+Route::get('cultivo_clm', function () {
+    return view('informacion/cultivo_clm');
+});
+
 // DES20: Página FAQs
 Route::get('faqs', function () {
     return view('informacion/faqs');
