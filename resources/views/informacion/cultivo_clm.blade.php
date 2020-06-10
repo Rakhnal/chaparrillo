@@ -68,19 +68,23 @@ Cultivo en CLM
                     </div>
                     <div class="row format-div-colabs">
                         <p>Entre las diferentes variedades de pistachero que pueden resultar interesantes para Castilla La Mancha pueden destacarse:</p>
-                        <ul>
-                            <li class="patrones_variedades">- Kerman</li>
-                            <img src="images/chaparrillo/elegidas/kerman.jpg" class="fotos_lista mb-3" alt="Kerman">
-                            <li class="patrones_variedades">- Larnaka</li>
-                            <img src="images/chaparrillo/elegidas/larnaka.jpg" class="fotos_lista mb-3" alt="Larnaka">
-                            <li class="patrones_variedades">- Avdat</li>
-                            <img src="images/chaparrillo/elegidas/avdat.jpg" class="fotos_lista mb-3" alt="Avdat">
-                            <li class="patrones_variedades">- Sirora</li>
-                            <img src="images/chaparrillo/elegidas/sirora.jpg" class="fotos_lista mb-3" alt="Sirora">
-                            <li class="patrones_variedades">- Peter (masculina)</li>
-                            <img src="images/chaparrillo/elegidas/peter.jpg" class="fotos_lista mb-3" alt="Peter">
-                            <li class="patrones_variedades">- C-Especial (masculina)</li>
-                            <img src="images/chaparrillo/elegidas/c-especial.jpg" class="fotos_lista mb-3" alt="C-Especial">
+                        <ul class="d-flex w-100 lista-clm">
+                            <div class="col-12 col-md-6">
+                                <li class="patrones_variedades">- Kerman</li>
+                                <img src="images/chaparrillo/elegidas/kerman.jpg" class="fotos_lista mb-3" alt="Kerman">
+                                <li class="patrones_variedades">- Larnaka</li>
+                                <img src="images/chaparrillo/elegidas/larnaka.jpg" class="fotos_lista mb-3" alt="Larnaka">
+                                <li class="patrones_variedades">- Avdat</li>
+                                <img src="images/chaparrillo/elegidas/avdat.jpg" class="fotos_lista mb-3" alt="Avdat">
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <li class="patrones_variedades">- Sirora</li>
+                                <img src="images/chaparrillo/elegidas/sirora.jpg" class="fotos_lista mb-3" alt="Sirora">
+                                <li class="patrones_variedades">- Peter (masculina)</li>
+                                <img src="images/chaparrillo/elegidas/peter.jpg" class="fotos_lista mb-3" alt="Peter">
+                                <li class="patrones_variedades">- C-Especial (masculina)</li>
+                                <img src="images/chaparrillo/elegidas/c-especial.jpg" class="fotos_lista mb-3" alt="C-Especial">
+                            </div>
                         </ul>
                     </div>
                 </div>

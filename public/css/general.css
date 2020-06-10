@@ -799,9 +799,9 @@ label[for="subirAdjuntos"]:hover, label[for="editarAdjuntos"]:hover, .validarDoc
 only screen 
 and (max-device-width: 1024px) {
 
-    ul {
-        display: flex !important;
-    }
+    /*    ul {
+            display: flex !important;
+        }*/
 
     h1, h2, h3, h4 {
         font-size: 2em;
@@ -952,6 +952,10 @@ and (max-device-width: 740px) {
 
     .margin-top-less {
         margin-top: 0px !important;
+    }
+
+    .lista-clm {
+        flex-direction: column;
     }
 
 }
