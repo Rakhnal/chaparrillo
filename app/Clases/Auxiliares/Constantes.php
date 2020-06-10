@@ -25,6 +25,7 @@ class Constantes {
     const FAQS = "informacion/faqs";
     const FORO = "publicaciones/foro";
     const VERFORO = "publicaciones/verForo";
+    const CULTIVO_CLM = "informacion/cultivo_clm";
     const DOCUMENTACION = "publicaciones/documentacion";
     const AGENDA = "publicaciones/agenda";
     const AD_EVENTOS = "administracion/admin_eventos";

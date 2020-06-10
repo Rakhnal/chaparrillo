@@ -137,16 +137,32 @@ Administrar Documentación
             "identificador": $(this).attr('data-idMod'),
             "_token": token
         };
+//        alert($(this).attr('data-idMod'));
         $.ajax({
             url: "buscarDocumento",
             data: parametros,
-            type: 'post',
+            type: "post",
             success: function (response) {
+                alert(response);
                 var respuesta = JSON.parse(response);
+                $('#idEditarDoc').val(respuesta.id_item);
                 $('#nombreEditarDoc').val(respuesta.nombre);
-                $('#descEditarDoc').val(respuesta.descripcion);
+                $('textarea#descEditarDoc').val(respuesta.descripcion);
                 $('#anioEditarDoc').val(respuesta.anio);
                 $('#autoresEditarDoc').val(respuesta.autores);
+                $('#editarAdjuntos').attr('src', 'data:image/png;base64,' + respuesta.documento);
+                $('#adjuntoEditado').val(respuesta.nombre_doc);
+                $('#selectVisible').val(respuesta.visible);
+                for (var i = 0; i < respuesta.categorias.length; i++) {
+                    $('#editCategoria' + respuesta.categorias[i]).prop("checked", true);
+                }
+//                for (var i = 0; i < respuesta.categorias.length; i++) {
+//                    if (respuesta.categorias[i].prop("checked", this.checked)) {
+//                        $('#editCategoria' + respuesta.categorias[i]).prop("checked", true);
+//                    } else {
+//                        $('#editCategoria' + respuesta.categorias[i]).prop("checked", false);
+//                    }
+//                }
             },
             statusCode: {
                 404: function () {
@@ -167,12 +183,25 @@ Administrar Documentación
         // files is a FileList of File objects. List some properties.
         var output = [];
         for (var i = 0, f; f = files[i]; i++) {
-            output.push('<li value="', escape(f.name), '">✓ <strong>', escape(f.name), '</strong></li>');
+            output.push('<li id="adjuntoSubido" name="adjuntoSubido" value="', escape(f.name), '">✓ <strong>', escape(f.name), '</strong></li>');
         }
         document.getElementById('list').innerHTML = '<ul id="listaDocs" name="listaDocs">' + output.join('') + '</ul>';
     }
 
     document.getElementById('subirAdjuntos').addEventListener('change', handleFileSelect, false);
+
+    function handleFileSelect2(evt) {
+        var files = evt.target.files; // FileList object
+
+        // files is a FileList of File objects. List some properties.
+        var output = [];
+        for (var i = 0, f; f = files[i]; i++) {
+            output.push('<li id="adjuntoEditado" name="adjuntoEditado" value="', escape(f.name), '">✓ <strong>', escape(f.name), '</strong></li>');
+        }
+        document.getElementById('listEditar').innerHTML = '<ul id="listaDocsEditar" name="listaDocsEditar">' + output.join('') + '</ul>';
+    }
+
+    document.getElementById('editarAdjuntos').addEventListener('change', handleFileSelect2, false);
 
 </script>
 

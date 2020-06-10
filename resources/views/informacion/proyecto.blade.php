@@ -86,7 +86,7 @@ Proyecto
                     <div class="row">
                         <div class="col diff-height">
                             <div class="row justify-content-center align-items-center image-div">
-                                <img src="images/chaparrillo/logos/logoelcampo.png" class="colab-img" alt="Logo SAT El Campo"/>
+                                <img src="images/chaparrillo/logos/image005.jpg" class="colab-img" alt="Logo SAT El Campo"/>
                             </div>
                             <div class="row justify-content-center">
                                 <h3>SAT El campo</h3>
