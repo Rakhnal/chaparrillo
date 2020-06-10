@@ -23,7 +23,8 @@ class Constantes {
     const PSILAS = "informacion/psilas";
     const CHINCHES = "informacion/chinches";
     const FAQS = "informacion/faqs";
-    const FORO = "foro";
+    const FORO = "publicaciones/foro";
+    const VERFORO = "publicaciones/verForo";
     const DOCUMENTACION = "publicaciones/documentacion";
     const AGENDA = "publicaciones/agenda";
     const AD_EVENTOS = "administracion/admin_eventos";
@@ -42,7 +43,8 @@ class Constantes {
     const NOTICIA = 0;
     const EVENTO = 1;
     const DOCUMENTO = 2;
-    const COMENTARIOS = 3;
+    const TEMA = 3;
+    const COMENTARIO = 4;
     
     // Select de Plagas
     const CLITRASEL = "Clitra";

@@ -5,16 +5,21 @@ use App\Clases\Auxiliares\Constantes;
 
 session()->put("actPage", Constantes::AD_NOTICIAS);
 $user = session()->get("userObj");
-$rol = $user->rol;
+if (session()->has("userObj")) {
+    $rol = $user->rol;
+} else {
+    $rol = 0;
+}
 ?>
 @extends('../general/base')
 @section('titulo')
-Inicio
+Noticias
 @endsection
 @section('contenido')
 <link rel="stylesheet" type="text/css" href="css/editUsu/editarusuario.css" />
 <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <link href="css/noticias/noticias.css" rel="stylesheet" type="text/css"/>
+
 <div class="mr-1 ml-1 mt-1 row">
     <div class="contenedor">
         <button class="botonF1">
@@ -43,7 +48,7 @@ Inicio
                         </h2>  
                     </div>
                     <div class="ml-4" id="cuerpo_noticia">
-                        <p><?= $noticia->descripcion; ?></p>
+                        <p class="overflow-hidden"><?= $noticia->descripcion; ?></p>
                     </div>
                 </div>
                 <div class="col-4 img_noticia pr-0">

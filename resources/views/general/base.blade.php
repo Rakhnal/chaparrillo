@@ -56,6 +56,43 @@ use App\Clases\conexion;
         <!-- ******************************************************************* -->
         <!-- ******************************************************************* -->
 
+        <!-- ******************** Ventana Crear Foro *************************** -->
+        <div class="modal fade eventos" id="ventanaCrearForo" data-backdrop="static">
+            <div class="modal-dialog modal-xxl modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="modal-title">
+                            Crear Tema
+                        </div>
+                        <span data-dismiss="modal"><button class="close clear white-color salir">&times;</button></span>
+                    </div>
+                    <div class="modal-body">
+                        <form action="crearForo" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label>Tema del foro:</label>
+                                        <input name="tema" id="tema-f" type="text" value="" class="form-control" placeholder="Nombre del tema" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descripción del tema:</label>
+                                        <textarea name="descripcion-t" id="taa-foro" class="descDocumento" placeholder="Escribe una descripción"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="text-center mt-4">
+                                        <input type="submit" name="add" class="btn btnAdd" value="Guardar">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- ******************** Ventana Agregar Evento *********************** -->
         <div class="modal fade eventos" id="ventana-crear" data-backdrop="static">
             <div class="modal-dialog modal-xxl modal-dialog-centered">
@@ -984,142 +1021,141 @@ use App\Clases\conexion;
             <div class = "row" id = "header">
                 <?php
                 //Para quitar el menú de navegación de las páginas de error
-                if(session()->get("actPage") != Constantes::ERROR516){
-                    
-                ?>
-                <nav class="navbar navbar-expand-xl" id="navHeader">
-                    <?php
-                    // En el index el logo estará posicionado por defecto en otro sitio
-                    if (session()->get("actPage") == Constantes::INDEX) {
-                        ?>
-                        <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo hidden" id="imgLogo" alt="Logo principal"/></a>
-                        <?php
-                    } else {
-                        ?>
-                        <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo" id="imgLogo" alt="Logo principal"/></a>
-                        <?php
-                    }
+                if (session()->get("actPage") != Constantes::ERROR516) {
                     ?>
-
-                    <div class="col" id="logosObs">
-                        <div class="row">
-                            <div class="col">
-                                <img src="images/footer/logochapa.jpg" class="headerImg" id="headerChapa" alt="Logo Chaparrillo"/>
-                            </div>
-                            <div class="col">
-                                <div class="row justify-content-center">
-                                    <img src="images/footer/logojccm.png" class="headerImg" id="headerJccm" alt="Logo JCCM"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <img src="images/footer/logouemapa.png" class="headerImgLarge" id="headerMapa" alt="Logo MAPA"/>
-                        </div>
-
-                    </div>
-
-                    <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"><div class="animated-icon2"><span></span><span></span><span></span><span></span></div></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown">                        
-                        <ul class="nav navbar-nav ml-auto">
-
-                            <form class="row form-inline my-2 my-lg-0 justify-content-center" id="searchform" onsubmit="return googleSearch()" class="searchform" method="GET" action="#">
-                                <input class="form-control mr-sm-2" type="search" id="searchtext" placeholder="Buscar en la página" aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0 margin-right" type="submit" id="searchButton"></button>
-                            </form>
-
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="index">Inicio</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="proyecto">Proyecto</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="cultivos">Cultivo en CLM</a>
-                            </li>
-
-                            <div class="dropdown-container">
-                                <a class="nav-link menu-text" href="#" id="ddListar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Plagas del Proyecto
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="ddListar">
-                                    <a class="dropdown-item menu-text" href="clitra">Clitra</a>
-                                    <a class="dropdown-item menu-text" href="polilla">Polilla de Almacén</a>
-                                    <a class="dropdown-item menu-text" href="psilas">Psilas del Pistacho</a>
-                                    <a class="dropdown-item menu-text" href="chinches">Chinches</a>
-                                </div>
-                            </div>
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="lugares">Lugares de Trabajo</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="noticias">Noticias</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="foro">Foro</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="documentacion">Documentación</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link menu-text" href="agenda">Agenda</a>
-                            </li>
-
-                            <?php
-                            if ($user == null) {
-                                ?>
-                                <li class="nav-item">
-                                    <button type="button" class="blurmodal" data-toggle="modal" data-target="#login" id="btnUser"></button>
-                                </li>
-                                <?php
-                            } else {
-                                ?>
-                                <li class="nav-item">
-                                    <div class="dropdown-container">
-                                        <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <?php
-                                            if ($user->img_user != null) {
-                                                ?>
-                                                <img src="data:image/jpeg;base64,<?php echo base64_encode($user->img_user); ?>" alt="Imagen de perfil" id="imgUser"/>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                <img src="images/profile-pic/default.png" alt="Imagen por defecto" id="imgUser"/>
-                                                <?php
-                                            }
-                                            ?>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
-
-                                            <a class="dropdown-item menu-text" href="Editar_usuario">Perfil</a>
-                                            <?php
-                                            if ($user->rol == Constantes::ADMIN) {
-                                                ?>
-                                                <a class="dropdown-item menu-text" href="admin_usuarios">Administrar Usuarios</a>
-                                                <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
-                                                <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
-                                                <?php
-                                            }
-                                            ?>
-                                            <?php
-                                            if ($user->rol == Constantes::ADMIN || $user->rol == Constantes::SWATS) {
-                                                ?>
-                                                <a class="dropdown-item menu-text" href="adminInformes">Administrar Informes</a>
-                                                <?php
-                                            }
-                                            ?>
-                                            <!--a class="dropdown-item menu-text" href="#">Mensajes</a-->
-                                            <a class="dropdown-item menu-text" href="logout">Cerrar Sesión</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <?php
-                            }
+                    <nav class="navbar navbar-expand-xl" id="navHeader">
+                        <?php
+                        // En el index el logo estará posicionado por defecto en otro sitio
+                        if (session()->get("actPage") == Constantes::INDEX) {
                             ?>
-                        </ul>
-                    </div>
-                </nav>
+                            <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo hidden" id="imgLogo" alt="Logo principal"/></a>
+                            <?php
+                        } else {
+                            ?>
+                            <a class="navbar-brand" href="index"><img src="images/logo.svg" class="imgLogo" id="imgLogo" alt="Logo principal"/></a>
+                            <?php
+                        }
+                        ?>
+
+                        <div class="col" id="logosObs">
+                            <div class="row">
+                                <div class="col">
+                                    <img src="images/footer/logochapa.jpg" class="headerImg" id="headerChapa" alt="Logo Chaparrillo"/>
+                                </div>
+                                <div class="col">
+                                    <div class="row justify-content-center">
+                                        <img src="images/footer/logojccm.png" class="headerImg" id="headerJccm" alt="Logo JCCM"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <img src="images/footer/logouemapa.png" class="headerImgLarge" id="headerMapa" alt="Logo MAPA"/>
+                            </div>
+
+                        </div>
+
+                        <button class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"><div class="animated-icon2"><span></span><span></span><span></span><span></span></div></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNavDropdown">                        
+                            <ul class="nav navbar-nav ml-auto">
+
+                                <form class="row form-inline my-2 my-lg-0 justify-content-center" id="searchform" onsubmit="return googleSearch()" class="searchform" method="GET" action="#">
+                                    <input class="form-control mr-sm-2" type="search" id="searchtext" placeholder="Buscar en la página" aria-label="Search">
+                                    <button class="btn btn-outline-success my-2 my-sm-0 margin-right" type="submit" id="searchButton"></button>
+                                </form>
+
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="index">Inicio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="proyecto">Proyecto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="cultivos">Cultivo en CLM</a>
+                                </li>
+
+                                <div class="dropdown-container">
+                                    <a class="nav-link menu-text" href="#" id="ddListar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Plagas del Proyecto
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="ddListar">
+                                        <a class="dropdown-item menu-text" href="clitra">Clitra</a>
+                                        <a class="dropdown-item menu-text" href="polilla">Polilla de Almacén</a>
+                                        <a class="dropdown-item menu-text" href="psilas">Psilas del Pistacho</a>
+                                        <a class="dropdown-item menu-text" href="chinches">Chinches</a>
+                                    </div>
+                                </div>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="lugares">Lugares de Trabajo</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="noticias">Noticias</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="foro">Foro</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="documentacion">Documentación</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link menu-text" href="agenda">Agenda</a>
+                                </li>
+
+                                <?php
+                                if ($user == null) {
+                                    ?>
+                                    <li class="nav-item">
+                                        <button type="button" class="blurmodal" data-toggle="modal" data-target="#login" id="btnUser"></button>
+                                    </li>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <li class="nav-item">
+                                        <div class="dropdown-container">
+                                            <a class="nav-link" href="#" id="ddPerfil" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <?php
+                                                if ($user->img_user != null) {
+                                                    ?>
+                                                    <img src="data:image/jpeg;base64,<?php echo base64_encode($user->img_user); ?>" alt="Imagen de perfil" id="imgUser"/>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <img src="images/profile-pic/default.png" alt="Imagen por defecto" id="imgUser"/>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="ddPerfil">
+
+                                                <a class="dropdown-item menu-text" href="Editar_usuario">Perfil</a>
+                                                <?php
+                                                if ($user->rol == Constantes::ADMIN) {
+                                                    ?>
+                                                    <a class="dropdown-item menu-text" href="admin_usuarios">Administrar Usuarios</a>
+                                                    <a class="dropdown-item menu-text" href="adminDocument">Administrar Documentación</a>
+                                                    <a class="dropdown-item menu-text" href="admin_event">Administrar Eventos</a>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <?php
+                                                if ($user->rol == Constantes::ADMIN || $user->rol == Constantes::SWATS) {
+                                                    ?>
+                                                    <a class="dropdown-item menu-text" href="adminInformes">Administrar Informes</a>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <!--a class="dropdown-item menu-text" href="#">Mensajes</a-->
+                                                <a class="dropdown-item menu-text" href="logout">Cerrar Sesión</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                    </nav>
                 <?php } ?>
             </div>
 
