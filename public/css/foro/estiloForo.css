@@ -1,0 +1,90 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27-may-2020, 12:30:01
+    Author     : the_d
+*/
+
+#foro{
+    width: 100%;
+}
+
+.btnAdd {
+    height: 40px;
+    background-color: #78AA57;
+    border: 1px solid white !important;
+    border-radius: 5px !important;
+    transition: all .3s ease-in-out !important;
+}
+
+.btnAdd:hover {
+    background-color: #8F7E4F;
+}
+
+.page-item {
+    background-color: transparent;
+}
+
+.page-link {
+    background-color: #8F7E4F !important;
+    border: 1px solid white !important;
+    color: white !important;
+}
+
+.page-link:hover {
+    background-color: #82703F !important;
+}
+
+.page-item.active .page-link {
+    background-color: #78AA57 !important;
+}
+
+.page-item.active .page-link:hover {
+    background-color: #689B46 !important;
+}
+
+.table-responsive {
+    overflow-y: hidden;
+}
+
+.centered {
+    text-align: center;
+}
+
+.coment{
+    margin-bottom: 10px;
+    border: 2px solid white;
+}
+
+.img-coment{
+    width: 200px;
+    height: 200px;
+}
+
+.bot{
+    margin-top: 9%; 
+}
+
+.respuestas{
+    background-color: darkgreen;
+}
+
+.comentarForo{
+    display: block;
+    width: 50vw;
+    color: #9EC485;
+    margin: 0px;
+    padding: 0px;
+}
+
+.text{
+    display: inline;
+}
+
+.user-coment{
+    display: grid;
+    border-right: 2px solid white;
+}

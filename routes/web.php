@@ -47,6 +47,7 @@ Route::get('Editar_usuario', function () {
 });
 Route::post('edit_us', 'EditUserController@editarUsuario');
 Route::post('edit_pass', 'EditUserController@editarPassEU');
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////// DES16:Página de administrar usuarios /////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -169,6 +170,22 @@ Route::get('faqs', function () {
     return view('informacion/faqs');
 });
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////// DES30: Página Foro - RAUS ///////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Route::get('foro', function(){
+//    return view('publicaciones/foro');
+//});
+
+Route::get('foro', ['as' => 'foro', 'uses' => 'controlador_foro@listarForo']);
+
+Route::post('crearForo', ['as'=> 'crearForo', 'uses' => 'controlador_foro@crearTemaForo']);
+
+Route::any('verForo', ['as'=> 'verForo', 'uses' => 'controlador_foro@verTemaForo']);
+
+Route::post('comentarTema','controlador_foro@crearComentarioTema');
 
 //Errores
 //516 no tiene permiso para acceder a esa ruta
