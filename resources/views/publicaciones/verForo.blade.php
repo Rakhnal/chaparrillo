@@ -44,41 +44,59 @@ Foro
             </div>
         </div>
 
-        <?php
-        session()->put("tema", $tema->id_item);
-        
-        foreach ($coment as $co) {
-            ?>
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <table id="coment" class="table-responsive">
+                    <thead>
+                        <tr>
+                            <th id="img-user">Imagen</th>
+                            <th id="nombre-user">Creado</th>
+                            <th id="coment">Comentario</th>
+                            <th id="borrar"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        session()->put("tema", $tema->id_item);
 
-            <div class="col-xl-12  col-md-12 h-100 coment">
-                <div class="row ml-4">
-
-                    <img src="data:image/jpg;base64,<?php echo base64_encode($co->img_user); ?>" alt="Imagen usuario" class="img-fluid img-coment">
-
-                    <div class="user-coment">
-                        <span class="ml-2 mr-2 mt-2 bot">Fecha: <?php echo $co->fecha_subida; ?></span>
-                        <span class="ml-2 mr-2 bot">Escrito por: <?php echo $co->nombre; ?></span>  
-                    </div>
-
-                    <h3 class="ml-1"><?php echo $co->descripcion; ?></h3>
-                    
-                </div>
+                        foreach ($coment as $co) {
+                            ?>
+                            <tr>
+                                <td><img src="data:image/jpg;base64,<?php echo base64_encode($co->img_user); ?>" alt="Imagen usuario" class="img-fluid img-coment"></td>
+                                <td style="display: grid;"><span class="ml-2 mr-2 mt-2 bot">Fecha: <?php echo $co->fecha_subida; ?></span><span class="ml-2 mr-2 bot">Escrito por: <?php echo $co->nombre; ?></span> </td>
+                                <td><?php echo $co->descripcion; ?></td>
+                        <input type="hidden" name="id_publi" value="<?= $co->id_item ?>">
+                        <?php
+                        if (session()->has('userObj')) {
+                            $user = session()->get('userObj');
+                            ?>
+                        <td><?php if ($user->id_user == $co->id_user) { ?>
+                            
+                            <form name="borrarComentario" action="borrarComentarioTema" method="POST" enctype="multipart/form-data">
+                                {{ csrf_field() }} 
+                                <input name="id_itemb" type="hidden" value="<?=$co->id_item; ?>">
+                                <input type="submit" name="borrar-coment" class="btn btnAdd mt-2" value="Borrar">
+                            </form>
+                        </td>
+                                <?php } ?>
+                            </tr>
+                        <?php }
+                    } ?>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <?php if (session()->has("userObj")) { ?>
+                        <form name="formucomentario" action="comentarTema" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <td colspan="3"><textarea id="taa-coment" name="comentario" class="comentarForo" required="" placeholder="Escribe un comentario"></textarea></td>
+                            <td><input type="submit" name="env-coment" class="btn btnAdd mt-2" value="Enviar"></td>
+                        </form>
+                        <?php } ?>
+                        </tr>
+                        </tfoot>
+                </table>
             </div>
-        <?php } ?>
-
-        <?php if (session()->has("userObj")) { ?>
-            <div class="col-xl-12  col-md-12 ">
-                <div class="row justify-content-center">
-                    <form name="formucomentario" action="comentarTema" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <textarea id="taa-coment" name="comentario" class="comentarForo" required="" placeholder="Escribe un comentario"></textarea>
-
-                        <input type="submit" name="env-coment" class="btn btnAdd mt-2" value="Enviar">
-                    </form>
-                </div>
-            </div>
-        <?php } ?>
-
+        </div>
     </div>
 
 
