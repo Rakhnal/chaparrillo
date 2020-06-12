@@ -187,6 +187,10 @@ Route::any('verForo', ['as'=> 'verForo', 'uses' => 'controlador_foro@verTemaForo
 
 Route::post('comentarTema','controlador_foro@crearComentarioTema');
 
+Route::post('borrarTema','controlador_foro@borrarTema');
+
+Route::post('borrarComentarioTema','controlador_foro@borrarComentarioTema');
+
 //Errores
 //516 no tiene permiso para acceder a esa ruta
 Route::get('errors', function() {

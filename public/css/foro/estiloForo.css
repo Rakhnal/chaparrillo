@@ -73,11 +73,12 @@ and open the template in the editor.
 }
 
 .comentarForo{
-    display: block;
     width: 50vw;
-    color: #9EC485;
+    color: #fff;
+    background-color: #9EC485;
     margin: 0px;
     padding: 0px;
+    justify-content: center;
 }
 
 .text{
