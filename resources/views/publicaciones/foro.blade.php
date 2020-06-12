@@ -60,22 +60,38 @@ Foro
                         </tr>
                     </thead>
                     <?php
+                    $i = 0;
                     foreach ($coment as $co) {
                         ?>
+                        <tbody>
+                            <tr align="center">
                         <form action="verForo" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <tbody>
-                                <tr align="center">
-
-                                    <td align="left"><?= $co->nombre ?></td>
-                                    <td><?= $co->fecha_subida ?></td>
-                                    <td><?= $co->views ?></td>
-                                    <td><button type="submit" name="ver" class="btn btnAdd" value="<?= $co->id_item ?>" >Entrar</button></td>
-
-                                </tr>
-                            </tbody>
+                            <td align="left"><?= $co->nombre ?></td>
+                            <td><?= $ultco[$i] ?></td>
+                            <td><?= $cant[$i] ?></td>
+                            <td><button type="submit" name="ver" class="btn btnAdd" value="<?= $co->id_item ?>" >Entrar</button></td>
                         </form>
-                    <?php } ?>
+                        <?php
+                        if (session()->has('userObj')) {
+                            $user = session()->get('userObj');
+                            if ($user->id_user == $co->id_user) {
+                                ?>
+                                <td>
+                                    <form action="borrarTema" method="POST" enctype="multipart/form-data">
+                                        {{ csrf_field() }}
+                                        <button type="submit" name="borrar" class="btn btnAdd" value="<?= $co->id_item ?>" >Borrar</button>
+                                    </form>
+                                </td>
+                            <?php }
+                        } ?>
+                        </tr>
+                        </tbody>
+
+                        <?php
+                        $i++;
+                    }
+                    ?>
                 </table>
             </div>
         </div>

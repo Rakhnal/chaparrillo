@@ -33,8 +33,12 @@ class usercontroller extends Controller {
                 'noexiste' => true
             ];
         }
-
-        return view(session()->get("actPage"), $datos);
+        
+        if (session()->get('actPage') == Constantes::FORO || session()->get('actPage') == Constantes::VERFORO ) {
+            return redirect('foro');
+        } else {
+            return view(session()->get("actPage"), $datos);
+        }
     }
 
     /**
@@ -44,7 +48,7 @@ class usercontroller extends Controller {
      */
     public function cerrarSesion(Request $req) {
         session()->forget("userObj");
-        
+
         return view(Constantes::INDEX);
     }
 
@@ -80,4 +84,5 @@ class usercontroller extends Controller {
 
         return view(session()->get("actPage"), $datos);
     }
+
 }

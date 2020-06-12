@@ -14,16 +14,38 @@ class controlador_foro extends Controller
         
         $comentarios = Publicacion::where('tipo', '=', 3)->paginate(8);
 
+        $i = 0;
+        
+        foreach ($comentarios as $co){
+            
+            $canti = DB::table('publicaciones')
+                    ->join('respuestas','publicaciones.id_item','=','respuestas.id_respuesta')
+                    ->where('publicaciones.tipo','=',4)
+                    ->where('respuestas.id_tema','=',$co->id_item)
+                    ->count('publicaciones.id_item');
+            
+            $cant[$i] = $canti;
+            
+            $ultFech = DB::table('publicaciones')
+                    ->join('respuestas','publicaciones.id_item','=','respuestas.id_respuesta')
+                    ->where('publicaciones.tipo','=',4)
+                    ->where('respuestas.id_tema','=',$co->id_item)
+                    ->max('publicaciones.fecha_subida');
+            
+            if($cant[$i] == 0){
+                $ultFech = 0;
+            }
+            
+            $ultFecha[$i] = $ultFech;
+            
+            $i++;
+        }
+        
                 
-
-        $categorias = DB::table('categorias')
-                ->join('asignar_categorias', 'asignar_categorias.id_categoria', '=', 'categorias.id_categoria')
-                ->join('publicaciones', 'publicaciones.id_item', '=', 'asignar_categorias.id_item')
-                ->select('categorias.nombre as categoria');
-
         $datos = [
             'coment' => $comentarios,
-            'categorias' => $categorias
+            'cant' => $cant,
+            'ultco' => $ultFecha
         ];
 
         return view(Constantes::FORO, $datos);
@@ -108,35 +130,38 @@ class controlador_foro extends Controller
         
         $respuesta->save();
         
-        $id_actual = session()->get('id_actual');
+        return redirect('verForo');
         
-        $tema = DB::table('publicaciones')
-                ->where('publicaciones.id_item','=',$id_actual)
-                ->first();
+    }
+    
+    public function borrarComentarioTema(Request $req){
         
-        $comentarios = DB::table('publicaciones')
-                ->join('respuestas','publicaciones.id_item','=','respuestas.id_respuesta')
-                ->join('usuarios','publicaciones.id_user','=','usuarios.id_user')
-                ->where('publicaciones.tipo','=', 4)
-                ->where('respuestas.id_tema','=', $id_actual)
-                ->get();
-                
+        $id_coment = $req->get('id_itemb');
+        
+        $respuesta = DB::table('respuestas')
+            ->where('respuestas.id_respuesta','=',$id_coment)
+            ->delete();
+        
+        $publi = Publicacion::find($id_coment);
+        
+        $publi->delete();
+        
+        return redirect('verForo');
+    }
+    
+    public function borrarTema(Request $req){
+        $id_tema = $req->get('borrar');
+        
+        $coments = DB::table('respuestas')
+                ->where('respuestas.id_tema','=',$id_tema)
+                ->delete();
+        
+        $publi = Publicacion::find($id_tema);
+        
+        $publi->delete();
 
-        $respuestas = DB::table('publicaciones')
-                ->join('respuestas','publicaciones.id_item','=','respuestas.id_origen')
-                ->where('respuestas.id_origen','!=',$id_actual)
-                ->where('respuestas.id_tema','=',$id_actual)
-                ->get();
         
-        $datos = [
-          'coment' => $comentarios,
-            'tema' => $tema,
-            'respu' =>$respuestas
-        ];
-        
-        session()->forget('id_actual');
-        
-        return view(Constantes::VERFORO,$datos);
+        return redirect('foro');
         
     }
 }
