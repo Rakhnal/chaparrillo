@@ -8,6 +8,7 @@ use App\Plaga;
 use App\Categoria;
 use App\Evento;
 use App\Faq;
+use Illuminate\Support\Facades\DB;
 
 /* use App\Usuario;
   use App\Coche;
@@ -65,6 +66,17 @@ class conexion {
         $categoria = Categoria::all();
 
         return $categoria;
+    }
+    
+    public static function sacarDocumentos() {
+        
+        $documentos = DB::table('documentos')
+                    ->join('publicaciones', 'publicaciones.id_item', '=', 'documentos.id_documento')
+                    ->join('adjuntos', 'adjuntos.id_documento', '=', 'publicaciones.id_item')
+                    ->select('documentos.id_documento as id_documento', 'publicaciones.nombre as nombre', 'publicaciones.descripcion as descripcion', 'fecha_subida', 'visible', 'tipo', 'anio', 'autores', 'documento')
+                    ->paginate(9);
+        
+        return $documentos;
     }
 
     /**
