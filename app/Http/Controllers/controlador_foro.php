@@ -130,7 +130,31 @@ class controlador_foro extends Controller
         
         $respuesta->save();
         
-        return redirect('verForo');
+        $tema = DB::table('publicaciones')
+                ->where('publicaciones.id_item','=',$tema1)
+                ->first();
+        
+        $comentarios = DB::table('publicaciones')
+                ->join('respuestas','publicaciones.id_item','=','respuestas.id_respuesta')
+                ->join('usuarios','publicaciones.id_user','=','usuarios.id_user')
+                ->where('publicaciones.tipo','=', 4)
+                ->where('respuestas.id_tema','=', $tema1)
+                ->get();
+                
+
+        $respuestas = DB::table('publicaciones')
+                ->join('respuestas','publicaciones.id_item','=','respuestas.id_origen')
+                ->where('respuestas.id_origen','!=',$tema1)
+                ->where('respuestas.id_tema','=',$tema1)
+                ->get();
+        
+        $datos = [
+          'coment' => $comentarios,
+            'tema' => $tema,
+            'respu' =>$respuestas
+        ];
+        
+        return view(Constantes::VERFORO,$datos);
         
     }
     
