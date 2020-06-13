@@ -170,7 +170,7 @@ class controlador_foro extends Controller
         
         $publi->delete();
         
-        return redirect('verForo');
+        return redirect('foro');
     }
     
     public function borrarTema(Request $req){
