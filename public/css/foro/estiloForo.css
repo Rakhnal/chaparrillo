@@ -14,7 +14,7 @@ and open the template in the editor.
 
 .btnAdd {
     height: 40px;
-    background-color: #78AA57;
+    background-color: rgba(82, 117, 59, 0.98);
     border: 1px solid white !important;
     border-radius: 5px !important;
     transition: all .3s ease-in-out !important;
@@ -88,4 +88,28 @@ and open the template in the editor.
 .user-coment{
     display: grid;
     border-right: 2px solid white;
+}
+
+.nombre-tema {
+    font-size: 15pt;
+}
+
+.filas-foro:nth-child(even) {
+    background: rgb(143, 126, 79);
+}
+
+.filas-foro:nth-child(odd) {
+    background: rgb(120, 170, 87);
+}
+
+.cabecera-foro {
+    background: rgba(82, 117, 59, 0.98);
+}
+
+.cabecera-foro th {
+    padding: 14px 0px;
+}
+
+.filas-foro td {
+    padding: 12px 0px 12px 10px;
 }

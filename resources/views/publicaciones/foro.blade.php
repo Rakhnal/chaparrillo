@@ -52,22 +52,22 @@ Foro
             <div class="row table-responsive" id="tab-foro">
                 <table id="foro">
                     <thead>
-                        <tr align="center">
+                        <tr align="center" class="cabecera-foro">
                             <th id="tema">Tema</th>
                             <th id="ultComent">Último comentario</th>
                             <th id="respuesta">Respuestas</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <?php
-                    $i = 0;
-                    foreach ($coment as $co) {
-                        ?>
-                        <tbody>
-                            <tr align="center">
+                    <tbody>
+                        <?php
+                        $i = 0;
+                        foreach ($coment as $co) {
+                            ?>
+                        <tr class="filas-foro" align="center">
                         <form action="verForo" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
-                            <td align="left"><?= $co->nombre ?></td>
+                            <td align="left" class="nombre-tema"><?= $co->nombre ?></td>
                             <td><?= $ultco[$i] ?></td>
                             <td><?= $cant[$i] ?></td>
                             <td><button type="submit" name="ver" class="btn btnAdd" value="<?= $co->id_item ?>" >Entrar</button></td>
@@ -84,14 +84,15 @@ Foro
                                     </form>
                                 </td>
                             <?php }
-                        } ?>
+                        }
+                        ?>
                         </tr>
-                        </tbody>
 
                         <?php
                         $i++;
                     }
                     ?>
+                    </tbody>
                 </table>
             </div>
         </div>
