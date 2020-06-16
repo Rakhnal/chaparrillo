@@ -166,6 +166,11 @@ p {
     margin: 0px 30px;
 }
 
+.mapaLugares{
+    width: 90vw;
+    height: 80vh;
+}
+
 @media
 only screen 
 and (max-device-width: 1024px) {

@@ -708,5 +708,23 @@ class controlador_tablas extends Controller {
 
         return json_encode($array);
     }
+    
+    public function mostrarSats(){
+        
+        $sats = \DB::select('SELECT latitud,longitud FROM usuarios WHERE usuarios.rol = 2');
+        
+        $array = array();
+        
+        for ($i = 0; $i < count($sats); $i++) {
+            $sat = array(
+                'latitud' => $sats[$i]->latitud,
+                'longitud' => $sats[$i]->longitud
+
+            );
+            array_push($array, $sat);
+        }     
+        
+        return view(Constantes::LUGARTRABAJO,$array);
+    }
 
 }
