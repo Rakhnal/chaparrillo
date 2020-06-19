@@ -18,43 +18,10 @@ Lugares de trabajo
 <link rel="stylesheet" href="css/informacion/info.css" />
 <script type="text/javascript" src="scripts/principal/index.js"></script>
 <script src="scripts/general/mapajax.js"></script>
-<script>
-    $(document).ready(function () {
-
-        var token = '{{csrf_token()}}';
-        var parametros = {
-            "ide": $(this).attr('data-id'),
-            "_token": token
-        };
-
-        $.ajax({
-            url: "lugares",
-            data: parametros,
-            type: "get",
-            success: function (response) {
-                var respuesta = JSON.parse(response);
-                
-                
-
-            },
-            statusCode: {
-                404: function () {
-                    alert('web not found');
-                }
-            },
-            error: function (x, xs, xt) {
-//                window.open(JSON.stringify(x));
-                alert('error: ' + JSON.stringify(x) + "\n error string: " + xs + "\n error throwed: " + xt);
-            }
-        });
-        
-        PintarMapa(0,0);
-
-    });
 
 
 
-</script>
+
 
 <div class="col">
     <div class="row">
@@ -68,7 +35,7 @@ Lugares de trabajo
     <div class="row">
         <div class="col mt-2">
             <div class="row justify-content-center">
-                <h1>Aquí podrás ver a dondé se encuentran nuestros socios</h1>
+                <h1>Aquí podrás ver donde se encuentran nuestros socios</h1>
             </div>
 
         </div>
@@ -78,7 +45,14 @@ Lugares de trabajo
     <div class="row">
         <div class="col mt-3">
             <div class="row justify-content-center">
-                <div id="mapalugar" class="mapaLugares"></div>
+<?php
+$j = 0;
+foreach ($sats as $sat) {
+
+    echo '<div id="mapaLugar' . $j . '" class="mapaLugares"></div>';
+    $j++;
+}
+?>
             </div>
 
         </div>
@@ -86,6 +60,24 @@ Lugares de trabajo
     </div>
 
 </div>
+
+<script>
+    $(document).ready(function () {
+
+<?php
+//dd($sats);
+$i = 0;
+foreach ($sats as $sat) {
+    ?>
+            PintarMapa(<?= $sat->latitud ?>,<?= $sat->longitud ?>,<?= $i ?>);
+    <?php
+    $i++;
+}
+?>
+    });
+
+
+</script>
 
 
 

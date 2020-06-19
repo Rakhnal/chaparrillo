@@ -711,20 +711,14 @@ class controlador_tablas extends Controller {
     
     public function mostrarSats(){
         
-        $sats = \DB::select('SELECT latitud,longitud FROM usuarios WHERE usuarios.rol = 2');
-        
-        $array = array();
-        
-        for ($i = 0; $i < count($sats); $i++) {
-            $sat = array(
-                'latitud' => $sats[$i]->latitud,
-                'longitud' => $sats[$i]->longitud
+        $sats = DB::table('usuarios')
+                ->where('usuarios.rol','=',2)
+                ->get();
 
-            );
-            array_push($array, $sat);
-        }     
-        
-        return view(Constantes::LUGARTRABAJO,$array);
+        $sat = [
+            'sats'=>$sats
+        ];
+        return view(Constantes::LUGARTRABAJO,$sat);
     }
 
 }
