@@ -35,6 +35,7 @@ class Constantes {
     const ED_USUARIO = "principal/Editar_usuario";
     const AD_NOTICIAS = "principal/Noticias";
     const LUGARTRABAJO = "informacion/lugares_trabajo";
+    const LUGARESMAPA = "informacion/lugares_mapa";
     
     // Roles
     const NORMAL = "0";

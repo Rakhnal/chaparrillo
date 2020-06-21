@@ -7,18 +7,18 @@
 var MapaEvento2;
 
 
-function PintarMapa(latitud, longitud, num) {
+function PintarMapa(latitud, longitud) {
 
     var mapa2 = new google.maps.LatLng(latitud, longitud);
     
     var ColocaMapa3 = {
-        zoom: 3,
+        zoom: 10,
         center: mapa2,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     
-    if (document.getElementById("mapalugar"+num) !== null) {
-        MapaEvento2 = new google.maps.Map(document.getElementById("mapalugar"+num), ColocaMapa3);
+    if (document.getElementById("mapalugar") !== null) {
+        MapaEvento2 = new google.maps.Map(document.getElementById("mapalugar"), ColocaMapa3);
         
 
         marcadorEvento2 = new google.maps.Marker({

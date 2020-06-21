@@ -718,7 +718,23 @@ class controlador_tablas extends Controller {
         $sat = [
             'sats'=>$sats
         ];
+        
         return view(Constantes::LUGARTRABAJO,$sat);
+    }
+    
+    public function verMapa(Request $req){
+        
+        $id_user = $req->iduser;
+        
+        $sat = DB::table('usuarios')
+                ->where('usuarios.id_user','=',$id_user)
+                ->first();
+        
+        $posi = [
+          'sat'=>$sat  
+        ];
+        
+        return view(Constantes::LUGARESMAPA,$posi);
     }
 
 }

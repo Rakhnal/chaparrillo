@@ -17,10 +17,6 @@ Lugares de trabajo
 
 <link rel="stylesheet" href="css/informacion/info.css" />
 <script type="text/javascript" src="scripts/principal/index.js"></script>
-<script src="scripts/general/mapajax.js"></script>
-
-
-
 
 
 <div class="col">
@@ -35,50 +31,50 @@ Lugares de trabajo
     <div class="row">
         <div class="col mt-2">
             <div class="row justify-content-center">
-                <h1>Aquí podrás ver donde se encuentran nuestros socios</h1>
+                <h3>Lista de colaboradores</h3>
             </div>
 
         </div>
 
     </div>
 
-    <div class="row">
-        <div class="col mt-3">
+    <div class="row" id="tablalugar">
+        <div class="col">
             <div class="row justify-content-center">
-<?php
-$j = 0;
-foreach ($sats as $sat) {
+                <table id="colabola">
+                    <thead>
+                        <tr>
+                            <th id="nombre-sat">Nombre</th>
+                            <th id="apellidos-sat">Apellidos</th>
+                            <th id="localizacion-sat">Localización</th>
+                            <th id="buscar"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        foreach ($sats as $sat) {
+                            ?>
+                            <tr>
 
-    echo '<div id="mapaLugar' . $j . '" class="mapaLugares"></div>';
-    $j++;
-}
-?>
+                                <td><?php echo $sat->nombre; ?></td>
+                                <td><?php echo $sat->apellidos; ?></td>
+                                <td><?php echo $sat->localidad; ?></td>
+                        <form action="verSat" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <input name="iduser" type="hidden" value="<?= $sat->id_user; ?>">
+                            <td><button class="btn btn-modal b-modify" type="submit" id="b-sat"></button></td>
+                        </form>
+
+                        </tr>
+                    <?php } ?>
+
+                    </tbody>
+
+                </table>
             </div>
-
         </div>
-
     </div>
 
 </div>
-
-<script>
-    $(document).ready(function () {
-
-<?php
-//dd($sats);
-$i = 0;
-foreach ($sats as $sat) {
-    ?>
-            PintarMapa(<?= $sat->latitud ?>,<?= $sat->longitud ?>,<?= $i ?>);
-    <?php
-    $i++;
-}
-?>
-    });
-
-
-</script>
-
-
 
 @endsection
