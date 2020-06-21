@@ -18,11 +18,11 @@ class usercontroller extends Controller {
         $correo = $req->get('correo');
         $pass = $req->get('pass');
 
-        // Comprobamos que existe el usuario y que la constraseña es correcta
+// Comprobamos que existe el usuario y que la constraseña es correcta
         $user = conexion::existeUsuarioPass($correo, $pass);
 
         if ($user != null) {
-            // Insertamos al usuario en sesión
+// Insertamos al usuario en sesión
             session()->put("userObj", $user);
 
             $datos = [
@@ -33,9 +33,15 @@ class usercontroller extends Controller {
                 'noexiste' => true
             ];
         }
-        
-        if (session()->get('actPage') == Constantes::FORO || session()->get('actPage') == Constantes::VERFORO ) {
+
+        if (session()->get('actPage') == Constantes::FORO || session()->get('actPage') == Constantes::VERFORO) {
             return redirect('foro');
+        }
+        if (session()->get('actPage') == Constantes::DOCUMENTACION) {
+            return redirect('documentacion');
+        }
+        if (session()->get('actPage') == Constantes::NOTICIA) {
+            return redirect('noticias');
         } else {
             return view(session()->get("actPage"), $datos);
         }
@@ -69,7 +75,7 @@ class usercontroller extends Controller {
 
         $user = conexion::existeUsuario($correo);
 
-        // Si no está ya registrado
+// Si no está ya registrado
         if ($user == null) {
             conexion::addUser($correo, $pass, $apellidos, $name, $localidad, $pais, $latitud, $longitud);
 

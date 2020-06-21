@@ -30,7 +30,8 @@ and open the template in the editor.
 }
 
 .fc-unthemed .fc-list-item:hover td{
-    background: #8F7E4F !important;
+    background: #669249 !important;
+    cursor: pointer;
 }
 
 .fc-button-primary {

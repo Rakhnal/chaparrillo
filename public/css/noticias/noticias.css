@@ -8,21 +8,17 @@ and open the template in the editor.
     Author     : daw205
 */
 .noticia_base{
-    height: 300px;
     display: inline-flex !important;
 }
 .img_noticia{
     height: 100% !important;
     width: 100% !important;
-    display: block;
+    display: block !important;
     border: none !important;
     border-bottom-color: currentcolor;
     border-bottom-style: none;
     border-bottom-width: medium;
     border-radius: 0px 5px 5px 0px;
-}
-.destacadas{
-    width: 105%!important;
 }
 .titulo_noticia{
     color: white;
