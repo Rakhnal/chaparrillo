@@ -166,6 +166,28 @@ p {
     margin: 0px 30px;
 }
 
+.mapaLugares{
+    width: 90vw;
+    height: 80vh;
+}
+
+#colabola{
+    width: 80vw;
+    overflow-x: no-display;
+}
+
+.btnAdd {
+    height: 40px;
+    background-color: #78AA57;
+    border: 1px solid white !important;
+    border-radius: 5px !important;
+    transition: all .3s ease-in-out !important;
+}
+
+.btnAdd:hover {
+    background-color: #8F7E4F;
+}
+
 @media
 only screen 
 and (max-device-width: 1024px) {
