@@ -104,9 +104,9 @@ Administrar Usuarios
                                                 echo '<option value="1">Administrador</option>';
                                             }
                                             if ($usuario->rol == 2) {
-                                                echo '<option value="2" selected="">Swath</option>';
+                                                echo '<option value="2" selected="">Sat</option>';
                                             } else {
-                                                echo '<option value="2">Swath</option>';
+                                                echo '<option value="2">Sat</option>';
                                             }
                                             ?>
                                         </select>

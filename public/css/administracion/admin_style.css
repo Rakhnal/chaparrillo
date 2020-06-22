@@ -242,4 +242,12 @@ and (max-device-width: 740px) {
         transform: scale(0.8);
     }
     
+    #mainTable{
+        transform: scale(0.8);
+    }
+    
+    #validate{
+        transform: scale(0.8);
+    }
+    
 }
