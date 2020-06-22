@@ -37,6 +37,9 @@ class usercontroller extends Controller {
         if (session()->get('actPage') == Constantes::DOCUMENTACION) {
             return redirect('documentacion');
         }
+        if (session()->get('actPage') == Constantes::LUGARTRABAJO || session()->get('actPage') == Constantes::LUGARESMAPA) {
+            return redirect('lugares');
+        }
         if (session()->get('actPage') == Constantes::AD_NOTICIAS) {
             return redirect('noticias');
         }
