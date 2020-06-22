@@ -5,11 +5,6 @@ use App\Clases\Auxiliares\Constantes;
 
 session()->put("actPage", Constantes::AD_NOTICIAS);
 $user = session()->get("userObj");
-if (session()->has("userObj")) {
-    $rol = $user->rol;
-} else {
-    $rol = 0;
-}
 ?>
 @extends('../general/base')
 @section('titulo')

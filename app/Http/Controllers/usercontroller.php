@@ -34,14 +34,11 @@ class usercontroller extends Controller {
             ];
         }
 
-        if (session()->get('actPage') == Constantes::FORO || session()->get('actPage') == Constantes::VERFORO) {
-            return redirect('foro');
-        }
         if (session()->get('actPage') == Constantes::DOCUMENTACION) {
             return redirect('documentacion');
         }
-        if (session()->get('actPage') == Constantes::NOTICIA) {
-            return redirect('noticias');
+        if (session()->get('actPage') == Constantes::FORO || session()->get('actPage') == Constantes::VERFORO) {
+            return redirect('foro');
         } else {
             return view(session()->get("actPage"), $datos);
         }
